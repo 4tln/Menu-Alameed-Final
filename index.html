@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#5b3939">
+  <title>فطائر العميد</title>
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="فطائر العميد">
+
+</head>
+<body>
+  <header class="hero">
+    
+    
+    <div class="hero-content">
+      <img class="logo" src="logo.jpg" alt="شعار فطائر العميد">
+      <h1>فطائر العميد</h1>
+      <p>اطلب بكل سهولة عبر واتساب</p>
+      <div class="quick-actions">
+        <a class="quick-btn" href="tel:0536261408">📞 اتصل بنا</a>
+        <a class="quick-btn" href="https://maps.app.goo.gl/ZZFg28YHeSM6QWU2A?g_st=ic" target="_blank" rel="noopener">📍 موقعنا</a>
+        <button class="quick-btn" id="shareBtn" type="button">↗ مشاركة</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="sticky-tools">
+    <label class="search-box">
+      <span>🔎</span>
+      <input id="searchInput" type="search" placeholder="ابحث عن صنف..." autocomplete="off">
+    </label>
+    <nav id="categoryTabs" class="category-tabs" aria-label="أقسام المنيو"></nav>
+  </div>
+
+  <main id="menuArea" class="menu-area"></main>
+
+  <button id="cartBar" class="cart-bar" type="button">
+    <span>🛒 السلة <b id="cartCount">0</b></span>
+    <span><b id="cartTotal">0</b> ريال</span>
+  </button>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="cartModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="sheet" role="dialog" aria-modal="true" aria-label="سلة الطلب">
+      <header class="sheet-header">
+        <h2>سلة الطلب</h2>
+        <button type="button" class="icon-btn" data-close-modal>×</button>
+      </header>
+
+      <div id="cartItems" class="cart-items"></div>
+
+      <div class="cart-summary">
+        <span>الإجمالي</span>
+        <strong><span id="sheetTotal">0</span> ريال</strong>
+      </div>
+
+      <button id="clearCartBtn" class="danger-btn" type="button">إفراغ السلة</button>
+
+      <div class="order-box">
+        <h3>نوع الطلب</h3>
+        <div class="order-types">
+          <label><input type="radio" name="orderType" value="استلام" checked> استلام</label>
+          <label><input type="radio" name="orderType" value="توصيل"> توصيل</label>
+        </div>
+
+        <label class="field-label" for="phoneInput">رقم الجوال *</label>
+        <input id="phoneInput" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="05XXXXXXXX">
+
+        <div id="locationWrap" hidden>
+          <label class="field-label" for="locationInput">المكان *</label>
+          <input id="locationInput" class="field" type="text" placeholder="مثال: حي الروضة">
+        </div>
+
+        <label class="field-label" for="notesInput">ملاحظات الطلب</label>
+        <textarea id="notesInput" class="field" rows="3" placeholder="مثال: بدون شطة"></textarea>
+
+        <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب عبر واتساب</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="menu-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
