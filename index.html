@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#5b3939">
   <title>فطائر العميد</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynhZJOtYB2qGAn3pG3p1pC1Q1A0=" crossorigin="">
   <link rel="stylesheet" href="style.css">
 
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -34,13 +35,11 @@
     <strong>📍 موقع المطعم والعميل</strong>
     <span id="mapStatus">موقع المطعم ظاهر على الخريطة</span>
   </div>
-  <iframe
-    id="mapFrame"
-    title="خريطة موقع مطعم فطائر العميد"
-    src="https://maps.google.com/maps?q=%D9%85%D8%B7%D8%B9%D9%85%20%D8%A7%D9%84%D8%B9%D9%85%D9%8A%D8%AF%2C%201671%2C%20%D8%A7%D9%84%D8%AF%D8%A7%D8%A6%D8%B1%2083847&z=16&output=embed"
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
+  <div id="map" role="application" aria-label="خريطة موقع مطعم فطائر العميد وموقع العميل"></div>
+  <div id="deliveryInfo" class="delivery-info" hidden>
+    <span>المسافة: <strong id="distanceText">—</strong></span>
+    <span>رسوم التوصيل: <strong id="deliveryFeeText">—</strong></span>
+  </div>
 </section>
 
 
@@ -106,6 +105,7 @@
     </section>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="menu-data.js"></script>
   <script src="script.js"></script>
 </body>

@@ -40,22 +40,120 @@ const locationStatus = document.getElementById("locationStatus");
 const locationStatusIcon = document.getElementById("locationStatusIcon");
 const locationStatusText = document.getElementById("locationStatusText");
 const retryLocationBtn = document.getElementById("retryLocationBtn");
-const mapFrame = document.getElementById("mapFrame");
 const mapStatus = document.getElementById("mapStatus");
-const RESTAURANT_MAP_DESTINATION = "مطعم العميد, 1671, الدائر 83847";
+const deliveryInfo = document.getElementById("deliveryInfo");
+const distanceText = document.getElementById("distanceText");
+const deliveryFeeText = document.getElementById("deliveryFeeText");
+
+// موقع المطعم الثابت - الدائر، جازان
+const RESTAURANT_LOCATION = {
+  latitude: 17.3392252,
+  longitude: 43.1311069,
+  name: "فطائر العميد"
+};
+const DELIVERY_RATE_PER_KM = 3;
+const DELIVERY_LIMIT_KM = 15;
+
+let map;
+let restaurantMarker;
+let customerMarker;
+let distanceLine;
+let deliveryDistanceKm = null;
+let deliveryFee = null;
+let deliveryFeeByRestaurant = false;
+
+function initMap(){
+  if(!window.L || map) return;
+
+  map = L.map("map", {zoomControl: true}).setView(
+    [RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude],
+    16
+  );
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  restaurantMarker = L.marker([
+    RESTAURANT_LOCATION.latitude,
+    RESTAURANT_LOCATION.longitude
+  ]).addTo(map).bindPopup("📍 موقع مطعم فطائر العميد").openPopup();
+
+  if(mapStatus) mapStatus.textContent = "موقع المطعم ثابت على الخريطة";
+}
+
+function calculateDistanceKm(lat1, lon1, lat2, lon2){
+  const earthRadiusKm = 6371;
+  const toRad = value => value * Math.PI / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2
+    + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2))
+    * Math.sin(dLon / 2) ** 2;
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function updateDeliveryCalculation(latitude, longitude){
+  deliveryDistanceKm = calculateDistanceKm(
+    RESTAURANT_LOCATION.latitude,
+    RESTAURANT_LOCATION.longitude,
+    latitude,
+    longitude
+  );
+
+  deliveryFeeByRestaurant = deliveryDistanceKm > DELIVERY_LIMIT_KM;
+  deliveryFee = deliveryFeeByRestaurant
+    ? null
+    : Math.ceil(deliveryDistanceKm * DELIVERY_RATE_PER_KM);
+
+  deliveryInfo.hidden = false;
+  distanceText.textContent = `${deliveryDistanceKm.toFixed(1)} كم`;
+  deliveryFeeText.textContent = deliveryFeeByRestaurant
+    ? "يحددها المطعم"
+    : `${money(deliveryFee)} ريال`;
+}
 
 function showRestaurantOnMap(){
-  if(!mapFrame) return;
-  mapFrame.src = `https://maps.google.com/maps?q=${encodeURIComponent(RESTAURANT_MAP_DESTINATION)}&z=16&output=embed`;
-  if(mapStatus) mapStatus.textContent = "موقع المطعم ظاهر على الخريطة";
+  initMap();
+  if(!map) return;
+  map.setView([RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude], 16);
+  if(customerMarker){ map.removeLayer(customerMarker); customerMarker = null; }
+  if(distanceLine){ map.removeLayer(distanceLine); distanceLine = null; }
+  deliveryInfo.hidden = true;
+  deliveryDistanceKm = null;
+  deliveryFee = null;
+  deliveryFeeByRestaurant = false;
+  if(mapStatus) mapStatus.textContent = "موقع المطعم ثابت على الخريطة";
 }
 
 function showCustomerAndRestaurantOnMap(latitude, longitude){
-  if(!mapFrame) return;
-  const origin = `${latitude},${longitude}`;
-  mapFrame.src = `https://maps.google.com/maps?saddr=${encodeURIComponent(origin)}&daddr=${encodeURIComponent(RESTAURANT_MAP_DESTINATION)}&output=embed`;
-  if(mapStatus) mapStatus.textContent = "تم إظهار موقعك وموقع المطعم ✅";
+  initMap();
+  if(!map) return;
+
+  if(customerMarker) map.removeLayer(customerMarker);
+  if(distanceLine) map.removeLayer(distanceLine);
+
+  customerMarker = L.marker([latitude, longitude])
+    .addTo(map)
+    .bindPopup("📍 موقع العميل");
+
+  distanceLine = L.polyline([
+    [RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude],
+    [latitude, longitude]
+  ], {dashArray: "8 8", weight: 4}).addTo(map);
+
+  const bounds = L.latLngBounds([
+    [RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude],
+    [latitude, longitude]
+  ]);
+  map.fitBounds(bounds, {padding: [35, 35], maxZoom: 16});
+  updateDeliveryCalculation(latitude, longitude);
+
+  if(mapStatus) mapStatus.textContent = "تم تحديد موقعك وحساب المسافة ✅";
 }
+
+window.addEventListener("DOMContentLoaded", initMap);
 
 phoneInput.value = localStorage.getItem(PHONE_KEY) || "";
 phoneInput.addEventListener("input", () => {
@@ -378,6 +476,10 @@ function sendOrder(){
     lines.push("", "📍 موقع العميل:");
     if(customerLocation.address) lines.push(customerLocation.address);
     lines.push(customerLocation.link);
+    lines.push(`📏 المسافة: ${deliveryDistanceKm.toFixed(1)} كم`);
+    lines.push(deliveryFeeByRestaurant
+      ? "🚚 رسوم التوصيل: يحددها المطعم"
+      : `🚚 رسوم التوصيل: ${money(deliveryFee)} ريال`);
   }
 
   lines.push("", "🍽️ الطلبات:");
@@ -389,7 +491,12 @@ function sendOrder(){
     lines.push(`• تأمين الصحن ×${info.depositQty}`);
   }
 
-  lines.push("", `💰 الإجمالي: ${money(info.total)} ريال`);
+  lines.push("", `💰 إجمالي الطلب: ${money(info.total)} ريال`);
+  if(orderType === "توصيل" && !deliveryFeeByRestaurant){
+    lines.push(`💵 الإجمالي مع التوصيل: ${money(info.total + deliveryFee)} ريال`);
+  }else if(orderType === "توصيل"){
+    lines.push("💵 الإجمالي النهائي: يحدده المطعم بعد تحديد رسوم التوصيل");
+  }
   lines.push("", "📝 الملاحظات:", notes || "لا توجد");
 
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
