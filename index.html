@@ -24,8 +24,8 @@
       <p>اطلب بكل سهولة عبر واتساب</p>
       <div class="quick-actions">
         <a class="quick-btn" href="tel:0536261408">📞 اتصل بنا</a>
-        <button class="quick-btn" id="refreshBtn" type="button" aria-label="تحديث الصفحة">🔄</button>
         <button class="quick-btn" id="shareBtn" type="button">↗ مشاركة</button>
+        <button class="quick-btn" id="refreshBtn" type="button" aria-label="تحديث الصفحة"><span class="ios-spinner"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span> تحديث الصفحة</button>
       </div>
     </div>
   </header>
@@ -109,7 +109,13 @@
   <script src="script.js"></script>
 
 <script>
-document.getElementById('refreshBtn')?.addEventListener('click',()=>location.reload());
+const refreshBtn = document.getElementById('refreshBtn');
+refreshBtn?.addEventListener('click', () => {
+  refreshBtn.classList.add('is-refreshing');
+  refreshBtn.setAttribute('aria-busy', 'true');
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  window.setTimeout(() => window.location.reload(), 650);
+});
 </script>
 
 </body>

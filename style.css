@@ -423,3 +423,58 @@ button{cursor:pointer}
 .leaflet-control-attribution{padding:0 5px;color:#333;background:rgba(255,255,255,.8);font-size:10px}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover{text-decoration:underline}
 .leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:right;border-radius:12px;background:#fff;box-shadow:0 3px 14px rgba(0,0,0,.25)}.leaflet-popup-content{margin:13px 20px;line-height:1.4}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;transform:rotate(45deg);background:#fff;box-shadow:3px 3px 15px rgba(0,0,0,.2)}.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent}
 .leaflet-fade-anim .leaflet-popup{opacity:0;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{transform-origin:0 0}.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}
+
+/* iOS-style activity indicator inside the refresh button */
+.ios-spinner{
+  display:inline-block;
+  position:relative;
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  vertical-align:middle;
+  margin-left:6px;
+}
+.ios-spinner i{
+  position:absolute;
+  left:8px;
+  top:1px;
+  width:2px;
+  height:6px;
+  background:#fff;
+  border-radius:999px;
+  transform-origin:1px 8px;
+  opacity:.18;
+  animation:iosSpinnerPulse 1s linear infinite;
+  will-change:opacity;
+}
+.ios-spinner i:nth-child(1){transform:rotate(0deg);animation-delay:-.9167s}
+.ios-spinner i:nth-child(2){transform:rotate(30deg);animation-delay:-.8333s}
+.ios-spinner i:nth-child(3){transform:rotate(60deg);animation-delay:-.75s}
+.ios-spinner i:nth-child(4){transform:rotate(90deg);animation-delay:-.6667s}
+.ios-spinner i:nth-child(5){transform:rotate(120deg);animation-delay:-.5833s}
+.ios-spinner i:nth-child(6){transform:rotate(150deg);animation-delay:-.5s}
+.ios-spinner i:nth-child(7){transform:rotate(180deg);animation-delay:-.4167s}
+.ios-spinner i:nth-child(8){transform:rotate(210deg);animation-delay:-.3333s}
+.ios-spinner i:nth-child(9){transform:rotate(240deg);animation-delay:-.25s}
+.ios-spinner i:nth-child(10){transform:rotate(270deg);animation-delay:-.1667s}
+.ios-spinner i:nth-child(11){transform:rotate(300deg);animation-delay:-.0833s}
+.ios-spinner i:nth-child(12){transform:rotate(330deg);animation-delay:0s}
+@keyframes iosSpinnerPulse{
+  0%{opacity:1}
+  8.33%{opacity:.92}
+  16.66%{opacity:.82}
+  25%{opacity:.72}
+  33.33%{opacity:.62}
+  41.66%{opacity:.52}
+  50%{opacity:.43}
+  58.33%{opacity:.35}
+  66.66%{opacity:.28}
+  75%{opacity:.23}
+  83.33%{opacity:.19}
+  91.66%,100%{opacity:.15}
+}
+#refreshBtn{display:inline-flex;align-items:center;justify-content:center;gap:0}
+#refreshBtn.is-refreshing{pointer-events:none}
+@media (prefers-reduced-motion:reduce){
+  .ios-spinner i{animation-duration:1.6s}
+}
