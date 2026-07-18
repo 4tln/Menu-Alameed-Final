@@ -25,6 +25,24 @@ const notesInput = document.getElementById("notesInput");
 const sendOrderBtn = document.getElementById("sendOrderBtn");
 const toast = document.getElementById("toast");
 
+const PHONE_KEY="alameed_phone";
+let autoLocationLink="";
+phoneInput.value=localStorage.getItem(PHONE_KEY)||"";
+phoneInput.addEventListener("input",()=>localStorage.setItem(PHONE_KEY,phoneInput.value));
+
+function requestLocation(){
+ if(!navigator.geolocation)return;
+ showToast("جارٍ تحديد موقعك...");
+ navigator.geolocation.getCurrentPosition(p=>{
+   autoLocationLink=`https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;
+   if(locationInput) locationInput.value=autoLocationLink;
+   showToast("تم تحديد الموقع");
+ },()=>showToast("تعذر تحديد الموقع"));
+}
+window.addEventListener("load",requestLocation);
+let lastSend=0;
+
+
 function loadCart(){
   try{
     const value = JSON.parse(localStorage.getItem(CART_KEY));
@@ -217,7 +235,7 @@ function sendOrder(){
 
   const orderType = selectedOrderType();
   const phone = phoneInput.value.replace(/\s/g,"");
-  const location = locationInput.value.trim();
+  const location = autoLocationLink || locationInput.value.trim();
   const notes = notesInput.value.trim();
 
   if(!phone){
@@ -232,12 +250,15 @@ function sendOrder(){
     return;
   }
 
+  if(orderType==="توصيل" && !autoLocationLink){ alert("يرجى السماح بالوصول للموقع."); return; }
+
   if(orderType === "توصيل" && !location){
     alert("يرجى إدخال مكان التوصيل.");
     locationInput.focus();
     return;
   }
 
+  if(Date.now()-lastSend<30000){alert("انتظر 30 ثانية قبل إرسال طلب جديد.");return;} lastSend=Date.now();
   if(!confirm("هل تريد إرسال الطلب إلى واتساب المطعم؟")) return;
 
   const info = totals();
