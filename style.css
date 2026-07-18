@@ -342,3 +342,35 @@ button{cursor:pointer}
   padding:11px;
   font-weight:900;
 }
+
+
+.site-map{
+  margin:16px;
+  border:1px solid #ded4c8;
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+}
+.site-map-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 14px;
+  background:#f8f2eb;
+}
+.site-map-head span{
+  font-size:13px;
+  color:#176b3a;
+  font-weight:800;
+}
+.site-map iframe{
+  display:block;
+  width:100%;
+  height:280px;
+  border:0;
+}
+@media(max-width:520px){
+  .site-map-head{align-items:flex-start;flex-direction:column}
+  .site-map iframe{height:250px}
+}

@@ -40,6 +40,22 @@ const locationStatus = document.getElementById("locationStatus");
 const locationStatusIcon = document.getElementById("locationStatusIcon");
 const locationStatusText = document.getElementById("locationStatusText");
 const retryLocationBtn = document.getElementById("retryLocationBtn");
+const mapFrame = document.getElementById("mapFrame");
+const mapStatus = document.getElementById("mapStatus");
+const RESTAURANT_MAP_DESTINATION = "مطعم العميد, 1671, الدائر 83847";
+
+function showRestaurantOnMap(){
+  if(!mapFrame) return;
+  mapFrame.src = `https://maps.google.com/maps?q=${encodeURIComponent(RESTAURANT_MAP_DESTINATION)}&z=16&output=embed`;
+  if(mapStatus) mapStatus.textContent = "موقع المطعم ظاهر على الخريطة";
+}
+
+function showCustomerAndRestaurantOnMap(latitude, longitude){
+  if(!mapFrame) return;
+  const origin = `${latitude},${longitude}`;
+  mapFrame.src = `https://maps.google.com/maps?saddr=${encodeURIComponent(origin)}&daddr=${encodeURIComponent(RESTAURANT_MAP_DESTINATION)}&output=embed`;
+  if(mapStatus) mapStatus.textContent = "تم إظهار موقعك وموقع المطعم ✅";
+}
 
 phoneInput.value = localStorage.getItem(PHONE_KEY) || "";
 phoneInput.addEventListener("input", () => {
@@ -89,6 +105,7 @@ function requestLocation(){
     customerLocation = {link, latitude, longitude, address: ""};
     locationInput.value = link;
     setLocationStatus("success", "تم تحديد موقعك بنجاح");
+    showCustomerAndRestaurantOnMap(latitude, longitude);
 
     const address = await getLocationName(latitude, longitude);
     if(address){
@@ -100,6 +117,7 @@ function requestLocation(){
       ? "لم يتم السماح بالوصول للموقع"
       : "تعذر تحديد الموقع، حاول مرة أخرى";
     setLocationStatus("error", message);
+    showRestaurantOnMap();
   }, {
     enableHighAccuracy: true,
     timeout: 12000,
