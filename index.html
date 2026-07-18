@@ -110,11 +110,16 @@
 
 <script>
 const refreshBtn = document.getElementById('refreshBtn');
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 refreshBtn?.addEventListener('click', () => {
+  if (refreshBtn.classList.contains('is-refreshing')) return;
   refreshBtn.classList.add('is-refreshing');
   refreshBtn.setAttribute('aria-busy', 'true');
   window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  window.setTimeout(() => window.location.reload(), 650);
+  window.setTimeout(() => {
+    window.scrollTo(0, 0);
+    window.location.reload();
+  }, 850);
 });
 </script>
 

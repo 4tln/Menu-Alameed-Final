@@ -424,7 +424,7 @@ button{cursor:pointer}
 .leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:right;border-radius:12px;background:#fff;box-shadow:0 3px 14px rgba(0,0,0,.25)}.leaflet-popup-content{margin:13px 20px;line-height:1.4}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;transform:rotate(45deg);background:#fff;box-shadow:3px 3px 15px rgba(0,0,0,.2)}.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent}
 .leaflet-fade-anim .leaflet-popup{opacity:0;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{transform-origin:0 0}.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}
 
-/* iOS-style activity indicator inside the refresh button */
+/* iOS-style activity indicator: ثابت افتراضياً ويتحرك فقط عند الضغط */
 .ios-spinner{
   display:inline-block;
   position:relative;
@@ -443,22 +443,23 @@ button{cursor:pointer}
   background:#fff;
   border-radius:999px;
   transform-origin:1px 8px;
-  opacity:.18;
-  animation:iosSpinnerPulse 1s linear infinite;
+  opacity:.16;
+  animation:none;
   will-change:opacity;
 }
-.ios-spinner i:nth-child(1){transform:rotate(0deg);animation-delay:-.9167s}
-.ios-spinner i:nth-child(2){transform:rotate(30deg);animation-delay:-.8333s}
-.ios-spinner i:nth-child(3){transform:rotate(60deg);animation-delay:-.75s}
-.ios-spinner i:nth-child(4){transform:rotate(90deg);animation-delay:-.6667s}
-.ios-spinner i:nth-child(5){transform:rotate(120deg);animation-delay:-.5833s}
-.ios-spinner i:nth-child(6){transform:rotate(150deg);animation-delay:-.5s}
-.ios-spinner i:nth-child(7){transform:rotate(180deg);animation-delay:-.4167s}
-.ios-spinner i:nth-child(8){transform:rotate(210deg);animation-delay:-.3333s}
-.ios-spinner i:nth-child(9){transform:rotate(240deg);animation-delay:-.25s}
-.ios-spinner i:nth-child(10){transform:rotate(270deg);animation-delay:-.1667s}
-.ios-spinner i:nth-child(11){transform:rotate(300deg);animation-delay:-.0833s}
-.ios-spinner i:nth-child(12){transform:rotate(330deg);animation-delay:0s}
+.ios-spinner i:nth-child(1){transform:rotate(0deg);opacity:1}
+.ios-spinner i:nth-child(2){transform:rotate(30deg);opacity:.90}
+.ios-spinner i:nth-child(3){transform:rotate(60deg);opacity:.80}
+.ios-spinner i:nth-child(4){transform:rotate(90deg);opacity:.70}
+.ios-spinner i:nth-child(5){transform:rotate(120deg);opacity:.60}
+.ios-spinner i:nth-child(6){transform:rotate(150deg);opacity:.50}
+.ios-spinner i:nth-child(7){transform:rotate(180deg);opacity:.42}
+.ios-spinner i:nth-child(8){transform:rotate(210deg);opacity:.35}
+.ios-spinner i:nth-child(9){transform:rotate(240deg);opacity:.29}
+.ios-spinner i:nth-child(10){transform:rotate(270deg);opacity:.24}
+.ios-spinner i:nth-child(11){transform:rotate(300deg);opacity:.20}
+.ios-spinner i:nth-child(12){transform:rotate(330deg);opacity:.16}
+
 @keyframes iosSpinnerPulse{
   0%{opacity:1}
   8.33%{opacity:.92}
@@ -475,6 +476,21 @@ button{cursor:pointer}
 }
 #refreshBtn{display:inline-flex;align-items:center;justify-content:center;gap:0}
 #refreshBtn.is-refreshing{pointer-events:none}
+#refreshBtn.is-refreshing .ios-spinner i{
+  animation:iosSpinnerPulse 1s linear infinite;
+}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(1){animation-delay:-.9167s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(2){animation-delay:-.8333s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(3){animation-delay:-.75s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(4){animation-delay:-.6667s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(5){animation-delay:-.5833s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(6){animation-delay:-.5s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(7){animation-delay:-.4167s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(8){animation-delay:-.3333s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(9){animation-delay:-.25s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(10){animation-delay:-.1667s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(11){animation-delay:-.0833s}
+#refreshBtn.is-refreshing .ios-spinner i:nth-child(12){animation-delay:0s}
 @media (prefers-reduced-motion:reduce){
-  .ios-spinner i{animation-duration:1.6s}
+  #refreshBtn.is-refreshing .ios-spinner i{animation-duration:1.6s}
 }
