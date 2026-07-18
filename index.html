@@ -75,8 +75,13 @@
         <input id="phoneInput" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="05XXXXXXXX">
 
         <div id="locationWrap" hidden>
-          <label class="field-label" for="locationInput">المكان *</label>
-          <input id="locationInput" class="field" type="text" placeholder="مثال: حي الروضة">
+          <label class="field-label">موقع التوصيل *</label>
+          <div id="locationStatus" class="location-status loading" role="status">
+            <span id="locationStatusIcon">⏳</span>
+            <span id="locationStatusText">جارٍ تحديد موقعك...</span>
+          </div>
+          <button id="retryLocationBtn" class="retry-location-btn" type="button" hidden>📍 إعادة تحديد الموقع</button>
+          <input id="locationInput" type="hidden">
         </div>
 
         <label class="field-label" for="notesInput">ملاحظات الطلب</label>

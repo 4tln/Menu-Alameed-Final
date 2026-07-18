@@ -317,3 +317,28 @@ button{cursor:pointer}
 @media(min-width:720px){
   .sheet{left:50%;right:auto;transform:translateX(-50%);width:640px}
 }
+
+.location-status{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:100%;
+  border-radius:13px;
+  padding:13px;
+  font-weight:800;
+  border:1px solid #ded4c8;
+  background:#f8f2eb;
+}
+.location-status.loading{color:#765c32;background:#fff8e8;border-color:#ead5a1}
+.location-status.success{color:#176b3a;background:#edf9f1;border-color:#a9dbb9}
+.location-status.error{color:#a5272d;background:#fff0f0;border-color:#e1aaaa}
+.retry-location-btn{
+  width:100%;
+  margin-top:8px;
+  border:1px solid var(--brand);
+  color:var(--brand);
+  background:#fff;
+  border-radius:12px;
+  padding:11px;
+  font-weight:900;
+}

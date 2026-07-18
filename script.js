@@ -25,23 +25,90 @@ const notesInput = document.getElementById("notesInput");
 const sendOrderBtn = document.getElementById("sendOrderBtn");
 const toast = document.getElementById("toast");
 
-const PHONE_KEY="alameed_phone";
-let autoLocationLink="";
-phoneInput.value=localStorage.getItem(PHONE_KEY)||"";
-phoneInput.addEventListener("input",()=>localStorage.setItem(PHONE_KEY,phoneInput.value));
+const PHONE_KEY = "alameed_phone";
+const SEND_DELAY_MS = 30000;
+
+let customerLocation = {
+  link: "",
+  latitude: null,
+  longitude: null,
+  address: ""
+};
+let lastSend = 0;
+
+const locationStatus = document.getElementById("locationStatus");
+const locationStatusIcon = document.getElementById("locationStatusIcon");
+const locationStatusText = document.getElementById("locationStatusText");
+const retryLocationBtn = document.getElementById("retryLocationBtn");
+
+phoneInput.value = localStorage.getItem(PHONE_KEY) || "";
+phoneInput.addEventListener("input", () => {
+  const cleanPhone = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+  phoneInput.value = cleanPhone;
+  localStorage.setItem(PHONE_KEY, cleanPhone);
+});
+
+function setLocationStatus(type, text){
+  locationStatus.className = `location-status ${type}`;
+  locationStatusIcon.textContent = type === "success" ? "✅" : type === "error" ? "❌" : "⏳";
+  locationStatusText.textContent = text;
+  retryLocationBtn.hidden = type !== "error";
+}
+
+async function getLocationName(latitude, longitude){
+  try{
+    const endpoint = new URL("https://api.bigdatacloud.net/data/reverse-geocode-client");
+    endpoint.searchParams.set("latitude", latitude);
+    endpoint.searchParams.set("longitude", longitude);
+    endpoint.searchParams.set("localityLanguage", "ar");
+
+    const response = await fetch(endpoint.toString());
+    if(!response.ok) return "";
+    const data = await response.json();
+
+    const district = data.locality || data.localityInfo?.administrative?.[4]?.name || "";
+    const city = data.city || data.principalSubdivision || "";
+    return [...new Set([district, city].filter(Boolean))].join(" - ");
+  }catch{
+    return "";
+  }
+}
 
 function requestLocation(){
- if(!navigator.geolocation)return;
- showToast("جارٍ تحديد موقعك...");
- navigator.geolocation.getCurrentPosition(p=>{
-   autoLocationLink=`https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;
-   if(locationInput) locationInput.value=autoLocationLink;
-   showToast("تم تحديد الموقع");
- },()=>showToast("تعذر تحديد الموقع"));
-}
-window.addEventListener("load",requestLocation);
-let lastSend=0;
+  if(!navigator.geolocation){
+    setLocationStatus("error", "جهازك لا يدعم تحديد الموقع");
+    return;
+  }
 
+  setLocationStatus("loading", "جارٍ تحديد موقعك...");
+
+  navigator.geolocation.getCurrentPosition(async position => {
+    const {latitude, longitude} = position.coords;
+    const link = `https://maps.google.com/?q=${latitude},${longitude}`;
+
+    customerLocation = {link, latitude, longitude, address: ""};
+    locationInput.value = link;
+    setLocationStatus("success", "تم تحديد موقعك بنجاح");
+
+    const address = await getLocationName(latitude, longitude);
+    if(address){
+      customerLocation.address = address;
+      setLocationStatus("success", address);
+    }
+  }, error => {
+    const message = error.code === 1
+      ? "لم يتم السماح بالوصول للموقع"
+      : "تعذر تحديد الموقع، حاول مرة أخرى";
+    setLocationStatus("error", message);
+  }, {
+    enableHighAccuracy: true,
+    timeout: 12000,
+    maximumAge: 60000
+  });
+}
+
+retryLocationBtn.addEventListener("click", requestLocation);
+window.addEventListener("load", requestLocation);
 
 function loadCart(){
   try{
@@ -227,6 +294,19 @@ function validatePhone(phone){
   return /^05\d{8}$/.test(phone);
 }
 
+function generateOrderNumber(){
+  const datePart = new Date().toISOString().slice(5,10).replace("-", "");
+  const randomPart = Math.floor(1000 + Math.random() * 9000);
+  return `${datePart}${randomPart}`;
+}
+
+function formatOrderDate(){
+  return new Intl.DateTimeFormat("ar-SA", {
+    dateStyle: "short",
+    timeStyle: "short"
+  }).format(new Date());
+}
+
 function sendOrder(){
   if(!cart.length){
     alert("لا يمكن إرسال الطلب، السلة فارغة.");
@@ -234,8 +314,7 @@ function sendOrder(){
   }
 
   const orderType = selectedOrderType();
-  const phone = phoneInput.value.replace(/\s/g,"");
-  const location = autoLocationLink || locationInput.value.trim();
+  const phone = phoneInput.value.replace(/\D/g, "");
   const notes = notesInput.value.trim();
 
   if(!phone){
@@ -250,40 +329,53 @@ function sendOrder(){
     return;
   }
 
-  if(orderType==="توصيل" && !autoLocationLink){ alert("يرجى السماح بالوصول للموقع."); return; }
-
-  if(orderType === "توصيل" && !location){
-    alert("يرجى إدخال مكان التوصيل.");
-    locationInput.focus();
+  if(orderType === "توصيل" && !customerLocation.link){
+    alert("يرجى السماح بالوصول للموقع ثم إعادة المحاولة.");
+    locationWrap.hidden = false;
+    requestLocation();
     return;
   }
 
-  if(Date.now()-lastSend<30000){alert("انتظر 30 ثانية قبل إرسال طلب جديد.");return;} lastSend=Date.now();
+  const remaining = SEND_DELAY_MS - (Date.now() - lastSend);
+  if(remaining > 0){
+    alert(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد.`);
+    return;
+  }
+
   if(!confirm("هل تريد إرسال الطلب إلى واتساب المطعم؟")) return;
 
+  lastSend = Date.now();
   const info = totals();
+  const orderNumber = generateOrderNumber();
   const lines = [
-    "طلب جديد - فطائر العميد",
+    `📦 طلب جديد #${orderNumber}`,
     "",
-    `نوع الطلب: ${orderType}`,
-    `رقم الجوال: ${phone}`
+    `🕒 ${formatOrderDate()}`,
+    "",
+    `${orderType === "توصيل" ? "🚚" : "🏪"} نوع الطلب: ${orderType}`,
+    `📞 رقم الجوال: ${phone}`
   ];
 
-  if(orderType === "توصيل") lines.push(`المكان: ${location}`);
+  if(orderType === "توصيل"){
+    lines.push("", "📍 موقع العميل:");
+    if(customerLocation.address) lines.push(customerLocation.address);
+    lines.push(customerLocation.link);
+  }
 
-  lines.push("","الطلبات:");
+  lines.push("", "🍽️ الطلبات:");
   cart.forEach(item => {
-    lines.push(`${item.qty} - ${item.name} ${item.size}`);
+    lines.push(`• ${item.name} ${item.size} ×${item.qty}`);
   });
 
   if(info.depositQty > 0){
-    lines.push(`${info.depositQty} - تأمين الصحن (${money(PLATE_DEPOSIT)} ريال للصحن)`);
+    lines.push(`• تأمين الصحن ×${info.depositQty}`);
   }
 
-  lines.push("",`الإجمالي: ${money(info.total)} ريال`,"","الملاحظات:",notes || "لا توجد");
+  lines.push("", `💰 الإجمالي: ${money(info.total)} ريال`);
+  lines.push("", "📝 الملاحظات:", notes || "لا توجد");
 
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
-  window.open(url,"_blank","noopener");
+  window.open(url, "_blank", "noopener");
 }
 
 categoryTabs.addEventListener("click", event => {
@@ -330,8 +422,10 @@ clearCartBtn.addEventListener("click",() => {
 });
 
 document.querySelectorAll('input[name="orderType"]').forEach(input => {
-  input.addEventListener("change",() => {
-    locationWrap.hidden = selectedOrderType() !== "توصيل";
+  input.addEventListener("change", () => {
+    const isDelivery = selectedOrderType() === "توصيل";
+    locationWrap.hidden = !isDelivery;
+    if(isDelivery && !customerLocation.link) requestLocation();
   });
 });
 
