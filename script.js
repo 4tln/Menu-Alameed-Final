@@ -62,24 +62,68 @@ let deliveryDistanceKm = null;
 let deliveryFee = null;
 let deliveryFeeByRestaurant = false;
 
-function initMap(){
-  if(!window.L || map) return;
+function refreshMapSize(){
+  if(!map) return;
+  requestAnimationFrame(() => {
+    map.invalidateSize({pan: false, animate: false});
+    setTimeout(() => map && map.invalidateSize({pan: false, animate: false}), 250);
+  });
+}
 
-  map = L.map("map", {zoomControl: true}).setView(
+function initMap(){
+  if(map){
+    refreshMapSize();
+    return;
+  }
+
+  if(!window.L){
+    if(mapStatus) mapStatus.textContent = "جارٍ تحميل الخريطة...";
+    setTimeout(initMap, 500);
+    return;
+  }
+
+  map = L.map("map", {
+    zoomControl: true,
+    attributionControl: true,
+    preferCanvas: true
+  }).setView(
     [RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude],
     16
   );
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
+    crossOrigin: true,
+    updateWhenIdle: false,
+    keepBuffer: 4,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map);
+  });
 
-  restaurantMarker = L.marker([
+  let tileErrors = 0;
+  tiles.on("tileerror", event => {
+    tileErrors += 1;
+    const tile = event.tile;
+    if(tile && tileErrors <= 12){
+      const original = tile.src;
+      setTimeout(() => {
+        if(tile && !tile.complete) tile.src = original.split("?")[0] + `?retry=${Date.now()}`;
+      }, 700);
+    }
+  });
+  tiles.addTo(map);
+
+  restaurantMarker = L.circleMarker([
     RESTAURANT_LOCATION.latitude,
     RESTAURANT_LOCATION.longitude
-  ]).addTo(map).bindPopup("📍 موقع مطعم فطائر العميد").openPopup();
+  ], {
+    radius: 9,
+    weight: 3,
+    color: "#7a1f1f",
+    fillColor: "#ffffff",
+    fillOpacity: 1
+  }).addTo(map).bindPopup("📍 موقع مطعم فطائر العميد").openPopup();
 
+  refreshMapSize();
   if(mapStatus) mapStatus.textContent = "موقع المطعم ثابت على الخريطة";
 }
 
@@ -134,9 +178,13 @@ function showCustomerAndRestaurantOnMap(latitude, longitude){
   if(customerMarker) map.removeLayer(customerMarker);
   if(distanceLine) map.removeLayer(distanceLine);
 
-  customerMarker = L.marker([latitude, longitude])
-    .addTo(map)
-    .bindPopup("📍 موقع العميل");
+  customerMarker = L.circleMarker([latitude, longitude], {
+    radius: 9,
+    weight: 3,
+    color: "#176b3a",
+    fillColor: "#ffffff",
+    fillOpacity: 1
+  }).addTo(map).bindPopup("📍 موقع العميل");
 
   distanceLine = L.polyline([
     [RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude],
@@ -154,6 +202,10 @@ function showCustomerAndRestaurantOnMap(latitude, longitude){
 }
 
 window.addEventListener("DOMContentLoaded", initMap);
+window.addEventListener("load", refreshMapSize);
+window.addEventListener("resize", refreshMapSize);
+window.addEventListener("orientationchange", () => setTimeout(refreshMapSize, 350));
+window.addEventListener("pageshow", refreshMapSize);
 
 phoneInput.value = localStorage.getItem(PHONE_KEY) || "";
 phoneInput.addEventListener("input", () => {
