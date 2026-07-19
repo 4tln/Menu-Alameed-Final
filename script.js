@@ -59,6 +59,7 @@ const COUNTER_API_BASE = "https://api.counterapi.dev/v1";
 const COUNTER_NAMESPACE = "fataer-alameed-menu-2026";
 const POPULAR_THRESHOLD = 25;
 const VISITOR_MARK_KEY = "alameed_visitor_counted_v1";
+const VISITOR_CACHE_KEY = "alameed_visitor_count_cache_v1";
 const visitorCount = document.getElementById("visitorCount");
 const productOrderCounts = Object.create(null);
 
@@ -91,6 +92,13 @@ async function counterRequest(name, action = ""){
 
 async function initVisitorCounter(){
   if(!visitorCount) return;
+
+  // اعرض آخر رقم محفوظ فورًا حتى لا يختفي أثناء التحديث أو عند ضعف الشبكة.
+  const cachedValue = Number(localStorage.getItem(VISITOR_CACHE_KEY));
+  if(Number.isFinite(cachedValue) && cachedValue >= 0){
+    visitorCount.textContent = money(cachedValue);
+  }
+
   try{
     let value;
     if(!localStorage.getItem(VISITOR_MARK_KEY)){
@@ -99,9 +107,16 @@ async function initVisitorCounter(){
     }else{
       value = await counterRequest("visitors");
     }
-    visitorCount.textContent = money(value);
+
+    if(Number.isFinite(value) && value >= 0){
+      localStorage.setItem(VISITOR_CACHE_KEY, String(value));
+      visitorCount.textContent = money(value);
+    }
   }catch{
-    visitorCount.textContent = "—";
+    // عند تعذر خدمة العداد نبقي الرقم المحفوظ بدل إظهار الشرطة.
+    if(!(Number.isFinite(cachedValue) && cachedValue >= 0)){
+      visitorCount.textContent = "0";
+    }
   }
 }
 
