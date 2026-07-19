@@ -534,3 +534,64 @@ button{cursor:pointer}
 .item-card.is-popular{
   border-color:#e2b96f;
 }
+
+/* سلة مدمجة: الخريطة تظهر داخل السلة فقط عند اختيار التوصيل */
+body.modal-open{overflow:hidden}
+.sheet{
+  height:min(96dvh,900px);
+  max-height:96dvh;
+  overflow:hidden;
+  display:grid;
+  grid-template-rows:auto minmax(70px,1fr) auto auto auto;
+  gap:8px;
+}
+.cart-items{
+  min-height:0;
+  overflow:auto;
+  overscroll-behavior:contain;
+  padding-left:2px;
+}
+.cart-summary{margin:4px 0}
+.order-box{
+  margin-top:0;
+  padding-top:8px;
+  max-height:58dvh;
+  overflow:auto;
+  overscroll-behavior:contain;
+}
+.order-box h3{margin-bottom:6px}
+.order-types{margin-bottom:7px}
+.order-types label{padding:9px}
+.field-label{margin:7px 0 4px}
+.field{padding:10px}
+.whatsapp-btn{margin-top:9px;padding:12px}
+.location-status{padding:9px}
+.retry-location-btn{padding:9px}
+
+.cart-map{
+  margin:8px 0 0;
+  border-radius:13px;
+}
+.cart-map .site-map-head{
+  padding:7px 9px;
+  gap:6px;
+}
+.cart-map .site-map-head strong{font-size:13px}
+.cart-map .site-map-head span{font-size:11px}
+.cart-map #map{height:145px}
+.cart-map .delivery-info{
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  padding:6px 8px;
+}
+.cart-map .delivery-info span{padding:6px;font-size:12px}
+
+@media(max-width:520px){
+  .sheet{padding:12px;height:98dvh;max-height:98dvh;border-radius:22px 22px 0 0}
+  .sheet-header{top:-12px;padding:4px 0 6px}
+  .cart-item{padding:8px}
+  .cart-map #map{height:130px}
+  .cart-map .site-map-head{align-items:center;flex-direction:row}
+  .cart-map .delivery-info{grid-template-columns:1fr 1fr}
+  #notesInput{min-height:48px;max-height:58px}
+}

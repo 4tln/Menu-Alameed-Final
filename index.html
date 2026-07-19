@@ -30,19 +30,6 @@
       </div>
     </div>
   </header>
-<section class="site-map" aria-label="خريطة المطعم والعميل">
-  <div class="site-map-head">
-    <strong>📍 موقع المطعم والعميل</strong>
-    <span id="mapStatus">موقع المطعم ظاهر على الخريطة</span>
-  </div>
-  <div id="map" role="application" aria-label="خريطة موقع مطعم فطائر العميد وموقع العميل"></div>
-  <div id="deliveryInfo" class="delivery-info" hidden>
-    <span>المسافة: <strong id="distanceText">—</strong></span>
-    <span>رسوم التوصيل: <strong id="deliveryFeeText">—</strong></span>
-  </div>
-</section>
-
-
   <div class="sticky-tools">
     <label class="search-box">
       <span>🔎</span>
@@ -95,6 +82,18 @@
           </div>
           <button id="retryLocationBtn" class="retry-location-btn" type="button" hidden>📍 إعادة تحديد الموقع</button>
           <input id="locationInput" type="hidden">
+
+          <section class="site-map cart-map" aria-label="خريطة المطعم والعميل">
+            <div class="site-map-head">
+              <strong>📍 موقع المطعم والعميل</strong>
+              <span id="mapStatus">جارٍ تجهيز الخريطة...</span>
+            </div>
+            <div id="map" role="application" aria-label="خريطة موقع مطعم فطائر العميد وموقع العميل"></div>
+            <div id="deliveryInfo" class="delivery-info" hidden>
+              <span>المسافة: <strong id="distanceText">—</strong></span>
+              <span>رسوم التوصيل: <strong id="deliveryFeeText">—</strong></span>
+            </div>
+          </section>
         </div>
 
         <label class="field-label" for="notesInput">ملاحظات الطلب</label>

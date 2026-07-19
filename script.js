@@ -301,11 +301,11 @@ function showCustomerAndRestaurantOnMap(latitude, longitude){
   if(mapStatus) mapStatus.textContent = "تم تحديد موقعك وحساب المسافة ✅";
 }
 
-window.addEventListener("DOMContentLoaded", initMap);
-window.addEventListener("load", refreshMapSize);
 window.addEventListener("resize", refreshMapSize);
 window.addEventListener("orientationchange", () => setTimeout(refreshMapSize, 350));
-window.addEventListener("pageshow", refreshMapSize);
+window.addEventListener("pageshow", () => {
+  if(selectedOrderType() === "توصيل") refreshMapSize();
+});
 
 phoneInput.value = localStorage.getItem(PHONE_KEY) || "";
 phoneInput.addEventListener("input", () => {
@@ -541,12 +541,18 @@ function openCart(){
   renderCart();
   cartModal.classList.add("open");
   cartModal.setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
+  if(selectedOrderType() === "توصيل"){
+    initMap();
+    setTimeout(refreshMapSize, 80);
+  }
   document.body.style.overflow = "hidden";
 }
 
 function closeCart(){
   cartModal.classList.remove("open");
   cartModal.setAttribute("aria-hidden","true");
+  document.body.classList.remove("modal-open");
   document.body.style.overflow = "";
 }
 
@@ -706,7 +712,12 @@ document.querySelectorAll('input[name="orderType"]').forEach(input => {
   input.addEventListener("change", () => {
     const isDelivery = selectedOrderType() === "توصيل";
     locationWrap.hidden = !isDelivery;
-    if(isDelivery && !customerLocation.link) requestLocation();
+    if(isDelivery){
+      initMap();
+      setTimeout(refreshMapSize, 80);
+      if(!customerLocation.link) requestLocation();
+      else showCustomerAndRestaurantOnMap(customerLocation.latitude, customerLocation.longitude);
+    }
   });
 });
 
