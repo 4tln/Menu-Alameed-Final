@@ -494,3 +494,43 @@ button{cursor:pointer}
 @media (prefers-reduced-motion:reduce){
   #refreshBtn.is-refreshing .ios-spinner i{animation-duration:1.6s}
 }
+
+
+/* عداد الزوار وشارة الأكثر طلبًا */
+.visitor-counter{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin:0 0 14px;
+  padding:7px 12px;
+  border:1px solid rgba(255,255,255,.38);
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  color:#fff;
+  font-weight:800;
+  backdrop-filter:blur(8px);
+}
+.item-card-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:11px;
+}
+.item-card-head .item-name{margin-bottom:0}
+.popular-badge{
+  flex:none;
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#fff0d6;
+  color:#9a4d00;
+  border:1px solid #f0c98a;
+  font-size:12px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.item-card.is-popular{
+  border-color:#e2b96f;
+}

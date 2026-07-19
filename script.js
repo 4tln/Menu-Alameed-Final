@@ -54,6 +54,77 @@ const RESTAURANT_LOCATION = {
 const DELIVERY_RATE_PER_KM = 3;
 const DELIVERY_LIMIT_KM = 15;
 
+// عدادات عامة تعمل على الموقع المنشور
+const COUNTER_API_BASE = "https://api.counterapi.dev/v1";
+const COUNTER_NAMESPACE = "fataer-alameed-menu-2026";
+const POPULAR_THRESHOLD = 25;
+const VISITOR_MARK_KEY = "alameed_visitor_counted_v1";
+const visitorCount = document.getElementById("visitorCount");
+const productOrderCounts = Object.create(null);
+
+function counterValue(data){
+  const candidates = [data?.count, data?.value, data?.data?.count, data?.data?.value];
+  const found = candidates.find(value => Number.isFinite(Number(value)));
+  return found === undefined ? 0 : Number(found);
+}
+
+function counterNameForProduct(name){
+  let hash = 2166136261;
+  for(const char of name){
+    hash ^= char.codePointAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `product-${(hash >>> 0).toString(36)}`;
+}
+
+async function counterRequest(name, action = ""){
+  const safeName = encodeURIComponent(name);
+  const suffix = action ? `/${action}` : "";
+  const response = await fetch(`${COUNTER_API_BASE}/${COUNTER_NAMESPACE}/${safeName}${suffix}`, {
+    method: "GET",
+    mode: "cors",
+    cache: "no-store"
+  });
+  if(!response.ok) throw new Error("counter unavailable");
+  return counterValue(await response.json());
+}
+
+async function initVisitorCounter(){
+  if(!visitorCount) return;
+  try{
+    let value;
+    if(!localStorage.getItem(VISITOR_MARK_KEY)){
+      value = await counterRequest("visitors", "up");
+      localStorage.setItem(VISITOR_MARK_KEY, "1");
+    }else{
+      value = await counterRequest("visitors");
+    }
+    visitorCount.textContent = money(value);
+  }catch{
+    visitorCount.textContent = "—";
+  }
+}
+
+function allProductNames(){
+  return [...new Set(window.MENU_DATA.flatMap(section => section.items.map(item => item.name)))];
+}
+
+async function loadProductOrderCounts(){
+  await Promise.allSettled(allProductNames().map(async name => {
+    productOrderCounts[name] = await counterRequest(counterNameForProduct(name));
+  }));
+  renderMenu();
+}
+
+function registerOrderedProducts(){
+  const orderedNames = [...new Set(cart.map(item => item.name))];
+  orderedNames.forEach(name => {
+    productOrderCounts[name] = (productOrderCounts[name] || 0) + 1;
+    counterRequest(counterNameForProduct(name), "up").catch(() => {});
+  });
+  renderMenu();
+}
+
 let map;
 let restaurantMarker;
 let customerMarker;
@@ -329,8 +400,11 @@ function renderMenu(){
       <h2 class="category-title">${escapeHtml(section.category)}</h2>
       <div class="items-grid">
         ${section.items.map(item => `
-          <article class="item-card">
-            <div class="item-name">${escapeHtml(item.name)}</div>
+          <article class="item-card ${Number(productOrderCounts[item.name] || 0) >= POPULAR_THRESHOLD ? "is-popular" : ""}">
+            <div class="item-card-head">
+              <div class="item-name">${escapeHtml(item.name)}</div>
+              ${Number(productOrderCounts[item.name] || 0) >= POPULAR_THRESHOLD ? '<span class="popular-badge">🔥 الأكثر طلبًا</span>' : ''}
+            </div>
             <div class="variant-grid">
               ${item.variants.map(variant => `
                 <button type="button" class="variant-btn"
@@ -551,6 +625,7 @@ function sendOrder(){
   }
   lines.push("", "📝 الملاحظات:", notes || "لا توجد");
 
+  registerOrderedProducts();
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
   window.open(url, "_blank", "noopener");
 }
@@ -622,3 +697,5 @@ document.getElementById("shareBtn").addEventListener("click",async () => {
 renderTabs();
 renderMenu();
 updateCartUI();
+initVisitorCounter();
+loadProductOrderCounts();
