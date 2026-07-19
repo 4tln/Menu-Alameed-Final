@@ -44,6 +44,7 @@ const mapStatus = document.getElementById("mapStatus");
 const deliveryInfo = document.getElementById("deliveryInfo");
 const distanceText = document.getElementById("distanceText");
 const deliveryFeeText = document.getElementById("deliveryFeeText");
+const deliveryDurationText = document.getElementById("deliveryDurationText");
 
 // موقع المطعم الثابت - الدائر، جازان
 const RESTAURANT_LOCATION = {
@@ -161,6 +162,8 @@ let distanceLine;
 let deliveryDistanceKm = null;
 let deliveryFee = null;
 let deliveryFeeByRestaurant = false;
+let deliveryDurationMinutes = null;
+let routeRequestId = 0;
 
 function refreshMapSize(){
   if(!map) return;
@@ -238,13 +241,11 @@ function calculateDistanceKm(lat1, lon1, lat2, lon2){
   return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function updateDeliveryCalculation(latitude, longitude){
-  deliveryDistanceKm = calculateDistanceKm(
-    RESTAURANT_LOCATION.latitude,
-    RESTAURANT_LOCATION.longitude,
-    latitude,
-    longitude
-  );
+function applyDeliveryCalculation(distanceKm, durationSeconds = null){
+  deliveryDistanceKm = distanceKm;
+  deliveryDurationMinutes = Number.isFinite(durationSeconds)
+    ? Math.max(1, Math.ceil(durationSeconds / 60))
+    : null;
 
   deliveryFeeByRestaurant = deliveryDistanceKm > DELIVERY_LIMIT_KM;
   deliveryFee = deliveryFeeByRestaurant
@@ -253,9 +254,37 @@ function updateDeliveryCalculation(latitude, longitude){
 
   deliveryInfo.hidden = false;
   distanceText.textContent = `${deliveryDistanceKm.toFixed(1)} كم`;
+  if(deliveryDurationText){
+    deliveryDurationText.textContent = deliveryDurationMinutes === null
+      ? "غير متاحة"
+      : `${deliveryDurationMinutes} دقيقة`;
+  }
   deliveryFeeText.textContent = deliveryFeeByRestaurant
     ? "يحددها المطعم"
     : `${money(deliveryFee)} ريال`;
+}
+
+async function fetchDrivingRoute(latitude, longitude){
+  const requestId = ++routeRequestId;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 12000);
+  const from = `${RESTAURANT_LOCATION.longitude},${RESTAURANT_LOCATION.latitude}`;
+  const to = `${longitude},${latitude}`;
+  const url = `https://router.project-osrm.org/route/v1/driving/${from};${to}?overview=full&geometries=geojson&steps=false&alternatives=false`;
+
+  try{
+    const response = await fetch(url, {signal: controller.signal, cache: "no-store"});
+    if(!response.ok) throw new Error("route service unavailable");
+    const data = await response.json();
+    const route = data?.routes?.[0];
+    if(requestId !== routeRequestId) return null;
+    if(!route || !Number.isFinite(route.distance) || !Number.isFinite(route.duration)){
+      throw new Error("invalid route");
+    }
+    return route;
+  }finally{
+    clearTimeout(timeoutId);
+  }
 }
 
 function showRestaurantOnMap(){
@@ -268,10 +297,13 @@ function showRestaurantOnMap(){
   deliveryDistanceKm = null;
   deliveryFee = null;
   deliveryFeeByRestaurant = false;
+  deliveryDurationMinutes = null;
+  routeRequestId += 1;
+  if(deliveryDurationText) deliveryDurationText.textContent = "—";
   if(mapStatus) mapStatus.textContent = "موقع المطعم ثابت على الخريطة";
 }
 
-function showCustomerAndRestaurantOnMap(latitude, longitude){
+async function showCustomerAndRestaurantOnMap(latitude, longitude){
   initMap();
   if(!map) return;
 
@@ -286,19 +318,43 @@ function showCustomerAndRestaurantOnMap(latitude, longitude){
     fillOpacity: 1
   }).addTo(map).bindPopup("📍 موقع العميل");
 
-  distanceLine = L.polyline([
-    [RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude],
-    [latitude, longitude]
-  ], {dashArray: "8 8", weight: 4}).addTo(map);
+  deliveryInfo.hidden = false;
+  distanceText.textContent = "جارٍ الحساب...";
+  if(deliveryDurationText) deliveryDurationText.textContent = "جارٍ الحساب...";
+  deliveryFeeText.textContent = "جارٍ الحساب...";
+  if(mapStatus) mapStatus.textContent = "جارٍ حساب المسار الفعلي عبر الشوارع...";
 
-  const bounds = L.latLngBounds([
-    [RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude],
-    [latitude, longitude]
-  ]);
-  map.fitBounds(bounds, {padding: [35, 35], maxZoom: 16});
-  updateDeliveryCalculation(latitude, longitude);
+  try{
+    const route = await fetchDrivingRoute(latitude, longitude);
+    if(!route) return;
 
-  if(mapStatus) mapStatus.textContent = "تم تحديد موقعك وحساب المسافة ✅";
+    const routeLatLngs = route.geometry.coordinates.map(([lon, lat]) => [lat, lon]);
+    distanceLine = L.polyline(routeLatLngs, {
+      weight: 5,
+      opacity: 0.9,
+      lineJoin: "round",
+      lineCap: "round"
+    }).addTo(map);
+
+    map.fitBounds(distanceLine.getBounds(), {padding: [25, 25], maxZoom: 16});
+    applyDeliveryCalculation(route.distance / 1000, route.duration);
+    if(mapStatus) mapStatus.textContent = "تم حساب المسار الفعلي عبر الشوارع ✅";
+  }catch(error){
+    // احتياط مؤقت عند تعذر خدمة الطرق: نعرض مسافة تقريبية ولا نحسب مدة وصول وهمية.
+    const directDistance = calculateDistanceKm(
+      RESTAURANT_LOCATION.latitude,
+      RESTAURANT_LOCATION.longitude,
+      latitude,
+      longitude
+    );
+    distanceLine = L.polyline([
+      [RESTAURANT_LOCATION.latitude, RESTAURANT_LOCATION.longitude],
+      [latitude, longitude]
+    ], {dashArray: "8 8", weight: 4}).addTo(map);
+    map.fitBounds(distanceLine.getBounds(), {padding: [25, 25], maxZoom: 16});
+    applyDeliveryCalculation(directDistance, null);
+    if(mapStatus) mapStatus.textContent = "تعذر حساب الطرق الآن؛ المسافة المعروضة تقريبية";
+  }
 }
 
 window.addEventListener("resize", refreshMapSize);
@@ -637,7 +693,10 @@ function sendOrder(){
     lines.push("", "📍 موقع العميل:");
     if(customerLocation.address) lines.push(customerLocation.address);
     lines.push(customerLocation.link);
-    lines.push(`📏 المسافة: ${deliveryDistanceKm.toFixed(1)} كم`);
+    lines.push(`📏 المسافة عبر الشوارع: ${deliveryDistanceKm.toFixed(1)} كم`);
+    if(deliveryDurationMinutes !== null){
+      lines.push(`⏱️ مدة الوصول التقريبية: ${deliveryDurationMinutes} دقيقة`);
+    }
     lines.push(deliveryFeeByRestaurant
       ? "🚚 رسوم التوصيل: يحددها المطعم"
       : `🚚 رسوم التوصيل: ${money(deliveryFee)} ريال`);

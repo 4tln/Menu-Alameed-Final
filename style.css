@@ -206,13 +206,13 @@ button{cursor:pointer}
 .sheet{
   position:absolute;
   left:0;right:0;bottom:0;
-  max-height:92vh;
+  max-height:96vh;
   overflow:auto;
   background:#fff;
   border-radius:26px 26px 0 0;
-  padding:18px;
+  padding:12px;
 }
-.sheet-header{
+.sheet-header{font-size:14px;
   position:sticky;
   top:-18px;
   z-index:2;
@@ -588,10 +588,21 @@ body.modal-open{overflow:hidden}
 
 @media(max-width:520px){
   .sheet{padding:12px;height:98dvh;max-height:98dvh;border-radius:22px 22px 0 0}
-  .sheet-header{top:-12px;padding:4px 0 6px}
+  .sheet-header{font-size:14px;top:-12px;padding:4px 0 6px}
   .cart-item{padding:8px}
   .cart-map #map{height:130px}
   .cart-map .site-map-head{align-items:center;flex-direction:row}
   .cart-map .delivery-info{grid-template-columns:1fr 1fr}
   #notesInput{min-height:48px;max-height:58px}
+}
+
+@media(max-width:600px){
+.sheet{padding:10px!important;}
+.sheet-header h2{font-size:18px!important;margin:4px 0;}
+.cart-item{padding:8px!important;}
+button,input,select,textarea{font-size:14px!important;}
+.order-type,.delivery-section,.customer-section{gap:6px!important;}
+.site-map #map{height:170px!important;}
+.site-map{margin:8px!important;}
+.delivery-info span{padding:6px!important;font-size:13px;}
 }
