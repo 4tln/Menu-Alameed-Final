@@ -606,3 +606,18 @@ button,input,select,textarea{font-size:14px!important;}
 .site-map{margin:8px!important;}
 .delivery-info span{padding:6px!important;font-size:13px;}
 }
+
+/* compact cart */
+.cart-items{gap:6px}
+.cart-item{
+padding:8px;
+border-radius:10px;
+grid-template-columns:auto 1fr;
+align-items:center;
+gap:8px;
+}
+.qty-controls{gap:4px}
+.qty-btn{width:28px;height:28px;border-radius:8px;font-size:18px}
+.cart-item h4{font-size:15px;margin:0 0 2px}
+.cart-item small{font-size:12px}
+.remove-btn{font-size:12px}
