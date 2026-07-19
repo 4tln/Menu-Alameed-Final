@@ -191,12 +191,12 @@ function initMap(){
     16
   );
 
-  const tiles = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+  const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     crossOrigin: true,
     updateWhenIdle: false,
     keepBuffer: 4,
-    attribution:'&copy; Esri World Imagery'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   });
 
   let tileErrors = 0;
