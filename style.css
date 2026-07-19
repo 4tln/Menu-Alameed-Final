@@ -534,3 +534,10 @@ button{cursor:pointer}
 .item-card.is-popular{
   border-color:#e2b96f;
 }
+
+.site-map{max-width:850px;margin:14px auto;padding:0 12px;}
+#map{
+height:260px !important;
+border-radius:16px;
+overflow:hidden;
+}
