@@ -59,7 +59,7 @@ const COUNTER_API_BASE = "https://api.counterapi.dev/v1";
 const COUNTER_NAMESPACE = "fataer-alameed-menu-2026";
 const POPULAR_THRESHOLD = 25;
 const VISITOR_MARK_KEY = "alameed_visitor_counted_v1";
-const VISITOR_CACHE_KEY = "alameed_visitor_count_cache_v1";
+const VISITOR_CACHE_KEY = "alameed_visitor_last_value_v1";
 const visitorCount = document.getElementById("visitorCount");
 const productOrderCounts = Object.create(null);
 
@@ -78,22 +78,38 @@ function counterNameForProduct(name){
   return `product-${(hash >>> 0).toString(36)}`;
 }
 
-async function counterRequest(name, action = ""){
+async function counterRequest(name, action = "", attempt = 1){
   const safeName = encodeURIComponent(name);
   const suffix = action ? `/${action}` : "";
-  const response = await fetch(`${COUNTER_API_BASE}/${COUNTER_NAMESPACE}/${safeName}${suffix}`, {
-    method: "GET",
-    mode: "cors",
-    cache: "no-store"
-  });
-  if(!response.ok) throw new Error("counter unavailable");
-  return counterValue(await response.json());
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 7000);
+
+  try{
+    const response = await fetch(`${COUNTER_API_BASE}/${COUNTER_NAMESPACE}/${safeName}${suffix}`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-store",
+      signal: controller.signal,
+      headers: { "Accept": "application/json" }
+    });
+    if(!response.ok) throw new Error("counter unavailable");
+    const value = counterValue(await response.json());
+    if(!Number.isFinite(value)) throw new Error("invalid counter value");
+    return value;
+  }catch(error){
+    if(attempt < 3){
+      await new Promise(resolve => setTimeout(resolve, 900 * attempt));
+      return counterRequest(name, action, attempt + 1);
+    }
+    throw error;
+  }finally{
+    clearTimeout(timeoutId);
+  }
 }
 
 async function initVisitorCounter(){
   if(!visitorCount) return;
 
-  // اعرض آخر رقم محفوظ فورًا حتى لا يختفي أثناء التحديث أو عند ضعف الشبكة.
   const cachedValue = Number(localStorage.getItem(VISITOR_CACHE_KEY));
   if(Number.isFinite(cachedValue) && cachedValue >= 0){
     visitorCount.textContent = money(cachedValue);
@@ -108,14 +124,12 @@ async function initVisitorCounter(){
       value = await counterRequest("visitors");
     }
 
-    if(Number.isFinite(value) && value >= 0){
-      localStorage.setItem(VISITOR_CACHE_KEY, String(value));
-      visitorCount.textContent = money(value);
-    }
+    localStorage.setItem(VISITOR_CACHE_KEY, String(value));
+    visitorCount.textContent = money(value);
   }catch{
-    // عند تعذر خدمة العداد نبقي الرقم المحفوظ بدل إظهار الشرطة.
+    // لا نمسح الرقم عند تعطل خدمة العداد أو حظرها في بعض المتصفحات.
     if(!(Number.isFinite(cachedValue) && cachedValue >= 0)){
-      visitorCount.textContent = "0";
+      visitorCount.textContent = "غير متاح مؤقتًا";
     }
   }
 }
