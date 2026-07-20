@@ -40,11 +40,11 @@ const locationStatus = document.getElementById("locationStatus");
 const locationStatusIcon = document.getElementById("locationStatusIcon");
 const locationStatusText = document.getElementById("locationStatusText");
 const retryLocationBtn = document.getElementById("retryLocationBtn");
-const mapStatus = document.getElementById("mapStatus");
-const deliveryInfo = document.getElementById("deliveryInfo");
-const distanceText = document.getElementById("distanceText");
-const deliveryFeeText = document.getElementById("deliveryFeeText");
-const deliveryDurationText = document.getElementById("deliveryDurationText");
+const mapStatus = null;
+const deliveryInfo=null;
+const distanceText=null;
+const deliveryFeeText=null;
+const deliveryDurationText=null;
 
 // موقع المطعم الثابت - الدائر، جازان
 const RESTAURANT_LOCATION = {
@@ -402,7 +402,7 @@ function requestLocation(){
     return;
   }
 
-  setLocationStatus("loading", "جارٍ تحديد موقعك...");
+  setLocationStatus("loading", "حدد موقعك من خرائط الجوال وأرسله إذا طلبه المطعم");
 
   navigator.geolocation.getCurrentPosition(async position => {
     const {latitude, longitude} = position.coords;

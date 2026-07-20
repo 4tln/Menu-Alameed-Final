@@ -75,6 +75,7 @@
         <input id="phoneInput" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="05XXXXXXXX">
 
         <div id="locationWrap" hidden>
+          <div class="location-status"><span>🚚</span><span>يتم تحديد رسوم التوصيل من قبل المطعم بعد استلام الطلب.</span></div>
           <label class="field-label">موقع التوصيل *</label>
           <div id="locationStatus" class="location-status loading" role="status">
             <span id="locationStatusIcon">⏳</span>
@@ -83,18 +84,7 @@
           <button id="retryLocationBtn" class="retry-location-btn" type="button" hidden>📍 إعادة تحديد الموقع</button>
           <input id="locationInput" type="hidden">
 
-          <section class="site-map cart-map" aria-label="خريطة المطعم والعميل">
-            <div class="site-map-head">
-              <strong>📍 موقع المطعم والعميل</strong>
-              <span id="mapStatus">جارٍ تجهيز الخريطة...</span>
-            </div>
-            <div id="map" role="application" aria-label="خريطة موقع مطعم فطائر العميد وموقع العميل"></div>
-            <div id="deliveryInfo" class="delivery-info" hidden>
-              <span>المسافة: <strong id="distanceText">—</strong></span>
-              <span>المدة: <strong id="deliveryDurationText">—</strong></span>
-              <span>رسوم التوصيل: <strong id="deliveryFeeText">—</strong></span>
-            </div>
-          </section>
+          
         </div>
 
         <label class="field-label" for="notesInput">ملاحظات الطلب</label>
