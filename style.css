@@ -805,3 +805,64 @@ gap:8px;
  overflow-y:auto;
 }
 .cart-product-icon{display:none!important;}
+
+.cart-product-info h4{white-space:normal!important;overflow:visible!important;text-overflow:unset!important;}
+
+/* ===== الواجهة الرئيسية المصغرة - النموذج الأول ===== */
+.hero{
+  min-height:230px;
+}
+.hero-content{
+  width:min(94%,680px);
+  padding:14px 12px 12px;
+}
+.logo{
+  width:76px;
+  height:76px;
+  border-radius:18px;
+  border-width:3px;
+}
+.hero h1{
+  margin:7px 0 2px;
+  font-size:25px;
+  line-height:1.2;
+}
+.hero p{
+  margin:0 0 8px;
+  font-size:14px;
+  line-height:1.35;
+}
+.visitor-counter{
+  gap:4px;
+  margin:0 0 8px;
+  padding:5px 10px;
+  font-size:13px;
+}
+.quick-actions{
+  gap:7px;
+}
+.quick-btn{
+  padding:7px 11px;
+  font-size:13px;
+  min-height:34px;
+}
+#refreshBtn{
+  font-size:12px;
+  padding:6px 10px;
+}
+#refreshBtn .ios-spinner{
+  transform:scale(.82);
+  margin-inline-end:1px;
+}
+
+@media (max-width:600px){
+  .hero{min-height:218px}
+  .hero-content{padding:12px 10px 10px}
+  .logo{width:70px;height:70px;border-radius:16px}
+  .hero h1{font-size:23px;margin-top:6px}
+  .hero p{font-size:13px;margin-bottom:7px}
+  .visitor-counter{font-size:12px;padding:5px 9px;margin-bottom:7px}
+  .quick-actions{gap:6px}
+  .quick-btn{font-size:12px;padding:6px 10px;min-height:32px}
+  #refreshBtn{font-size:11px;padding:5px 9px}
+}

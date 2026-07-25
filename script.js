@@ -543,70 +543,6 @@ function lammaQty(){
 }
 
 function totals(){
-  const depositQty = lammaQty();
-  return {
-    count: cart.reduce((sum,item) => sum + item.qty,0),
-    depositQty,
-    depositTotal: depositQty * PLATE_DEPOSIT,
-    total: cart.reduce((sum,item) => sum + item.qty * item.price,0) + (depositQty * PLATE_DEPOSIT)
-  };
-}
-
-function updateCartUI(){
-  const info = totals();
-  cartCount.textContent = info.count;
-  cartTotal.textContent = money(info.total);
-  sheetTotal.textContent = money(info.total);
-  if(sheetCount) sheetCount.textContent = info.count;
-}
-
-function cartItemIcon(name){
-  if(/بيبسي|ديو|سفن|ميرندا|حمضيات|مشروب|عصير/.test(name)) return "🥤";
-  if(/كنافة/.test(name)) return "🍮";
-  if(/عريكة/.test(name)) return "🥣";
-  if(/لمة|صحن/.test(name)) return "🍽️";
-  return "🥧";
-}
-
-function renderCart(){
-  if(!cart.length){
-    cartItems.innerHTML = '<div class="empty-state">السلة فارغة</div>';
-  }else{
-    cartItems.innerHTML = cart.map(item => `
-      <article class="cart-item cart-row">
-        <div class="cart-product-icon" aria-hidden="true">${cartItemIcon(item.name)}</div>
-        <div class="cart-product-info">
-          <h4>${escapeHtml(item.name)}</h4>
-          <small>${escapeHtml(item.size)}</small>
-          <span class="unit-price">${money(item.price)}  ر.س</span>
-        </div>
-        <div class="qty-controls" aria-label="تعديل الكمية">
-          <button class="qty-btn" data-change="-1" data-key="${escapeHtml(item.key)}" type="button" aria-label="إنقاص الكمية">−</button>
-          <strong>${item.qty}</strong>
-          <button class="qty-btn" data-change="1" data-key="${escapeHtml(item.key)}" type="button" aria-label="زيادة الكمية">+</button>
-        </div>
-        <div class="cart-line-total">${money(item.qty * item.price)}  ر.س</div>
-        <button class="remove-btn" data-remove="${escapeHtml(item.key)}" type="button" aria-label="حذف ${escapeHtml(item.name)}">🗑</button>
-      </article>
-    `).join("");
-
-    const depositQty = lammaQty();
-    if(depositQty > 0){
-      cartItems.insertAdjacentHTML("beforeend", `
-        <article class="cart-item cart-row deposit-row">
-          <div class="cart-product-icon" aria-hidden="true">🍽️</div>
-          <div class="cart-product-info">
-            <h4>تأمين الصحن</h4>
-            <small>يضاف تلقائيًا مع صحن اللمة</small>
-            <span class="unit-price">${money(PLATE_DEPOSIT)}  ر.س</span>
-          </div>
-          <div class="qty-controls deposit-qty"><strong>${depositQty}</strong></div>
-          <div class="cart-line-total">${money(depositQty * PLATE_DEPOSIT)}  ر.س</div>
-          <span class="auto-badge">تلقائي</span>
-        </article>
-      `);
-    }
-  }
   updateCartUI();
 }
 
@@ -734,7 +670,7 @@ categoryTabs.addEventListener("click", event => {
   searchInput.value = "";
   renderTabs();
   renderMenu();
-  window.scrollTo({top: document.getElementById("menuArea").offsetTop-10, behavior:"smooth"});
+  window.scrollTo({top: document.getElementById("menuArea").offsetTop-70, behavior:"smooth"});
 });
 
 menuArea.addEventListener("click", event => {
