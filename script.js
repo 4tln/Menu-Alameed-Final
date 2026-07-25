@@ -734,6 +734,7 @@ categoryTabs.addEventListener("click", event => {
   searchInput.value = "";
   renderTabs();
   renderMenu();
+  window.scrollTo({top: document.getElementById("menuArea").offsetTop-10, behavior:"smooth"});
 });
 
 menuArea.addEventListener("click", event => {
