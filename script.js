@@ -262,7 +262,7 @@ function applyDeliveryCalculation(distanceKm, durationSeconds = null){
   }
   deliveryFeeText.textContent = deliveryFeeByRestaurant
     ? "يحددها المطعم"
-    : `${money(deliveryFee)} ريال`;
+    : `${money(deliveryFee)}  ر.س`;
 }
 
 async function fetchDrivingRoute(latitude, longitude){
@@ -498,7 +498,7 @@ function renderMenu(){
                   data-size="${escapeHtml(variant.size)}"
                   data-price="${variant.price}">
                   <span>${escapeHtml(variant.size)}</span>
-                  <span class="price">${money(variant.price)} ريال</span>
+                  <span class="price">${money(variant.price)}  ر.س</span>
                 </button>
               `).join("")}
             </div>
@@ -578,14 +578,14 @@ function renderCart(){
         <div class="cart-product-info">
           <h4>${escapeHtml(item.name)}</h4>
           <small>${escapeHtml(item.size)}</small>
-          <span class="unit-price">${money(item.price)} ريال</span>
+          <span class="unit-price">${money(item.price)}  ر.س</span>
         </div>
         <div class="qty-controls" aria-label="تعديل الكمية">
           <button class="qty-btn" data-change="-1" data-key="${escapeHtml(item.key)}" type="button" aria-label="إنقاص الكمية">−</button>
           <strong>${item.qty}</strong>
           <button class="qty-btn" data-change="1" data-key="${escapeHtml(item.key)}" type="button" aria-label="زيادة الكمية">+</button>
         </div>
-        <div class="cart-line-total">${money(item.qty * item.price)} ريال</div>
+        <div class="cart-line-total">${money(item.qty * item.price)}  ر.س</div>
         <button class="remove-btn" data-remove="${escapeHtml(item.key)}" type="button" aria-label="حذف ${escapeHtml(item.name)}">🗑</button>
       </article>
     `).join("");
@@ -598,10 +598,10 @@ function renderCart(){
           <div class="cart-product-info">
             <h4>تأمين الصحن</h4>
             <small>يضاف تلقائيًا مع صحن اللمة</small>
-            <span class="unit-price">${money(PLATE_DEPOSIT)} ريال</span>
+            <span class="unit-price">${money(PLATE_DEPOSIT)}  ر.س</span>
           </div>
           <div class="qty-controls deposit-qty"><strong>${depositQty}</strong></div>
-          <div class="cart-line-total">${money(depositQty * PLATE_DEPOSIT)} ريال</div>
+          <div class="cart-line-total">${money(depositQty * PLATE_DEPOSIT)}  ر.س</div>
           <span class="auto-badge">تلقائي</span>
         </article>
       `);

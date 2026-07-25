@@ -796,3 +796,12 @@ gap:8px;
   .cart-summary-pro{padding:10px !important}
   .summary-meta small{display:none}
 }
+
+
+/* fixes */
+.cart-items{
+ display:block !important;
+ max-height:45vh;
+ overflow-y:auto;
+}
+.cart-product-icon{display:none!important;}
