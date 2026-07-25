@@ -698,43 +698,28 @@ function sendOrder(){
   const info = totals();
   const orderNumber = generateOrderNumber();
   const lines = [
-    `📦 طلب جديد #${orderNumber}`,
+    "📦 طلب جديد",
     "",
-    `🕒 ${formatOrderDate()}`,
-    "",
-    `${orderType === "توصيل" ? "🚚" : "🏪"} نوع الطلب: ${orderType}`,
-    `📞 رقم الجوال: ${phone}`
+    `${orderType === "توصيل" ? "🚚" : "🏪"} ${orderType}`,
+    `📞 ${phone}`
   ];
 
   if(orderType === "توصيل"){
-    lines.push("", "📍 موقع العميل:");
-    if(customerLocation.address) lines.push(customerLocation.address);
-    lines.push(customerLocation.link);
-    lines.push(`📏 المسافة عبر الشوارع: ${deliveryDistanceKm.toFixed(1)} كم`);
-    if(deliveryDurationMinutes !== null){
-      lines.push(`⏱️ مدة الوصول التقريبية: ${deliveryDurationMinutes} دقيقة`);
-    }
-    lines.push(deliveryFeeByRestaurant
-      ? "🚚 رسوم التوصيل: يحددها المطعم"
-      : `🚚 رسوم التوصيل: ${money(deliveryFee)} ريال`);
+    lines.push(`📍 ${customerLocation.address || customerLocation.link}`);
   }
 
-  lines.push("", "🍽️ الطلبات:");
+  lines.push("");
   cart.forEach(item => {
-    lines.push(`• ${item.name} ${item.size} ×${item.qty}`);
+    lines.push(`• ${item.name}${item.size ? " "+item.size : ""} ×${item.qty}`);
   });
 
   if(info.depositQty > 0){
     lines.push(`• تأمين الصحن ×${info.depositQty}`);
   }
 
-  lines.push("", `💰 إجمالي الطلب: ${money(info.total)} ريال`);
-  if(orderType === "توصيل" && !deliveryFeeByRestaurant){
-    lines.push(`💵 الإجمالي مع التوصيل: ${money(info.total + deliveryFee)} ريال`);
-  }else if(orderType === "توصيل"){
-    lines.push("💵 الإجمالي النهائي: يحدده المطعم بعد تحديد رسوم التوصيل");
+  if(notes){
+    lines.push("",`📝 ${notes}`);
   }
-  lines.push("", "📝 الملاحظات:", notes || "لا توجد");
 
   registerOrderedProducts();
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
