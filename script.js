@@ -449,7 +449,7 @@ function saveCart(){
 }
 
 function money(value){
-  return Number(value).toLocaleString("ar-SA");
+  return Number(value).toLocaleString("en-US");
 }
 
 function escapeHtml(value){
@@ -543,6 +543,63 @@ function lammaQty(){
 }
 
 function totals(){
+  const itemQty = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+  const productsTotal = cart.reduce((sum, item) => {
+    return sum + (Number(item.price || 0) * Number(item.qty || 0));
+  }, 0);
+  const depositQty = lammaQty();
+  const depositTotal = depositQty * PLATE_DEPOSIT;
+  return {
+    itemQty,
+    productsTotal,
+    depositQty,
+    depositTotal,
+    total: productsTotal + depositTotal
+  };
+}
+
+function updateCartUI(){
+  const info = totals();
+  cartCount.textContent = money(info.itemQty);
+  cartTotal.textContent = money(info.total);
+  sheetTotal.textContent = money(info.total);
+  if(sheetCount) sheetCount.textContent = money(info.itemQty);
+}
+
+function renderCart(){
+  const info = totals();
+
+  if(!cart.length){
+    cartItems.innerHTML = '<div class="empty-state">السلة فارغة.</div>';
+    updateCartUI();
+    return;
+  }
+
+  cartItems.innerHTML = cart.map(item => {
+    const depositLine = item.name === LAMMA_ITEM_NAME
+      ? '<small>تأمين الصحن: ' + money(PLATE_DEPOSIT) + ' ر.س</small>'
+      : '';
+    const lineTotal = (Number(item.price || 0) * Number(item.qty || 0))
+      + (item.name === LAMMA_ITEM_NAME ? PLATE_DEPOSIT * Number(item.qty || 0) : 0);
+
+    return `
+      <article class="cart-item cart-row">
+        <div class="cart-row-price"><strong>${money(lineTotal)}</strong><small>ر.س</small></div>
+        <div class="cart-row-info">
+          <h4>${escapeHtml(item.name)}</h4>
+          <small>${escapeHtml(item.size || "")}</small>
+          ${depositLine}
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" type="button" data-change="-1" data-key="${escapeHtml(item.key)}" aria-label="تقليل الكمية">−</button>
+          <strong>${money(item.qty)}</strong>
+          <button class="qty-btn" type="button" data-change="1" data-key="${escapeHtml(item.key)}" aria-label="زيادة الكمية">+</button>
+        </div>
+        <button class="remove-btn" type="button" data-remove="${escapeHtml(item.key)}">حذف</button>
+      </article>
+    `;
+  }).join("");
+
   updateCartUI();
 }
 

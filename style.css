@@ -818,3 +818,10 @@ gap:8px;
 .visitor-counter{padding:6px 10px!important;font-size:13px;background:#fff!important;color:#5b3939!important;border:none!important}
 .quick-actions{gap:8px!important}
 .quick-btn{padding:8px 12px!important;font-size:13px;background:#fff!important;color:#5b3939!important;border:none!important}
+
+/* إصلاح قابلية الضغط بعد إعادة تصميم الهيدر */
+.hero{isolation:isolate}
+.hero-content{pointer-events:auto}
+.sticky-tools,.menu-area,.category-tabs,.items-grid,.item-card,.variant-btn{position:relative;pointer-events:auto}
+.sticky-tools{z-index:30}
+.menu-area{z-index:1}
