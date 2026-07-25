@@ -17,6 +17,7 @@ const cartItems = document.getElementById("cartItems");
 const cartCount = document.getElementById("cartCount");
 const cartTotal = document.getElementById("cartTotal");
 const sheetTotal = document.getElementById("sheetTotal");
+const sheetCount = document.getElementById("sheetCount");
 const clearCartBtn = document.getElementById("clearCartBtn");
 const phoneInput = document.getElementById("phoneInput");
 const locationInput = document.getElementById("locationInput");
@@ -556,6 +557,15 @@ function updateCartUI(){
   cartCount.textContent = info.count;
   cartTotal.textContent = money(info.total);
   sheetTotal.textContent = money(info.total);
+  if(sheetCount) sheetCount.textContent = info.count;
+}
+
+function cartItemIcon(name){
+  if(/بيبسي|ديو|سفن|ميرندا|حمضيات|مشروب|عصير/.test(name)) return "🥤";
+  if(/كنافة/.test(name)) return "🍮";
+  if(/عريكة/.test(name)) return "🥣";
+  if(/لمة|صحن/.test(name)) return "🍽️";
+  return "🥧";
 }
 
 function renderCart(){
@@ -563,29 +573,36 @@ function renderCart(){
     cartItems.innerHTML = '<div class="empty-state">السلة فارغة</div>';
   }else{
     cartItems.innerHTML = cart.map(item => `
-      <article class="cart-item">
-        <div>
+      <article class="cart-item cart-row">
+        <div class="cart-product-icon" aria-hidden="true">${cartItemIcon(item.name)}</div>
+        <div class="cart-product-info">
           <h4>${escapeHtml(item.name)}</h4>
-          <small>${escapeHtml(item.size)} — ${money(item.price)} ريال للحبة</small>
-          <div><button class="remove-btn" data-remove="${escapeHtml(item.key)}" type="button">حذف</button></div>
+          <small>${escapeHtml(item.size)}</small>
+          <span class="unit-price">${money(item.price)} ريال</span>
         </div>
-        <div class="qty-controls">
-          <button class="qty-btn" data-change="-1" data-key="${escapeHtml(item.key)}" type="button">−</button>
+        <div class="qty-controls" aria-label="تعديل الكمية">
+          <button class="qty-btn" data-change="-1" data-key="${escapeHtml(item.key)}" type="button" aria-label="إنقاص الكمية">−</button>
           <strong>${item.qty}</strong>
-          <button class="qty-btn" data-change="1" data-key="${escapeHtml(item.key)}" type="button">+</button>
+          <button class="qty-btn" data-change="1" data-key="${escapeHtml(item.key)}" type="button" aria-label="زيادة الكمية">+</button>
         </div>
+        <div class="cart-line-total">${money(item.qty * item.price)} ريال</div>
+        <button class="remove-btn" data-remove="${escapeHtml(item.key)}" type="button" aria-label="حذف ${escapeHtml(item.name)}">🗑</button>
       </article>
     `).join("");
 
     const depositQty = lammaQty();
     if(depositQty > 0){
       cartItems.insertAdjacentHTML("beforeend", `
-        <article class="cart-item">
-          <div>
+        <article class="cart-item cart-row deposit-row">
+          <div class="cart-product-icon" aria-hidden="true">🍽️</div>
+          <div class="cart-product-info">
             <h4>تأمين الصحن</h4>
-            <small>مرتبط تلقائيًا بصحن اللمة — ${money(PLATE_DEPOSIT)} ريال للصحن</small>
+            <small>يضاف تلقائيًا مع صحن اللمة</small>
+            <span class="unit-price">${money(PLATE_DEPOSIT)} ريال</span>
           </div>
-          <div class="qty-controls"></div>
+          <div class="qty-controls deposit-qty"><strong>${depositQty}</strong></div>
+          <div class="cart-line-total">${money(depositQty * PLATE_DEPOSIT)} ريال</div>
+          <span class="auto-badge">تلقائي</span>
         </article>
       `);
     }
