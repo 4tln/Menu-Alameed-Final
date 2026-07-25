@@ -807,3 +807,14 @@ gap:8px;
 .cart-product-icon{display:none!important;}
 
 .cart-product-info h4{white-space:normal!important;overflow:visible!important;text-overflow:unset!important;}
+
+
+/* Compact redesigned header */
+.hero{min-height:220px!important;background:linear-gradient(180deg,#6b463c,#8a5d49)!important;border-bottom-left-radius:28px;border-bottom-right-radius:28px}
+.hero-content{padding:16px 12px!important}
+.logo{width:145px!important;height:145px!important;border:none!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.hero h1{font-size:24px!important;margin:8px 0 2px}
+.hero p{font-size:13px!important;margin-bottom:8px}
+.visitor-counter{padding:6px 10px!important;font-size:13px;background:#fff!important;color:#5b3939!important;border:none!important}
+.quick-actions{gap:8px!important}
+.quick-btn{padding:8px 12px!important;font-size:13px;background:#fff!important;color:#5b3939!important;border:none!important}
