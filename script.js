@@ -458,11 +458,17 @@ function escapeHtml(value){
   })[char]);
 }
 
+function categoryIcon(name){
+  const icons = {"المشاوي":"🍽️","الفطائر":"🥟","البيتزا":"🍕","الشاورما":"🌯","السندوتشات":"🥪","المشروبات":"🥤","العصائر":"🧃","الحلى":"🍮"};
+  return icons[name] || "🍴";
+}
+function productIcon(category){ return categoryIcon(category); }
 function renderTabs(){
   categoryTabs.innerHTML = window.MENU_DATA.map(section => `
     <button type="button" class="tab-btn ${section.category === activeCategory ? "active" : ""}"
       data-category="${escapeHtml(section.category)}">
-      ${escapeHtml(section.category)}
+      <span class="tab-icon">${categoryIcon(section.category)}</span>
+      <span>${escapeHtml(section.category)}</span>
     </button>
   `).join("");
 }
@@ -470,35 +476,31 @@ function renderTabs(){
 function renderMenu(){
   const normalized = searchTerm.trim().toLowerCase();
   const sections = normalized
-    ? window.MENU_DATA.map(section => ({
-        ...section,
-        items: section.items.filter(item => item.name.toLowerCase().includes(normalized))
-      })).filter(section => section.items.length)
+    ? window.MENU_DATA.map(section => ({...section,items:section.items.filter(item => item.name.toLowerCase().includes(normalized))})).filter(section => section.items.length)
     : window.MENU_DATA.filter(section => section.category === activeCategory);
 
-  if(!sections.length){
-    menuArea.innerHTML = '<div class="empty-state">لم يتم العثور على صنف مطابق.</div>';
-    return;
-  }
+  if(!sections.length){ menuArea.innerHTML = '<div class="empty-state">لم يتم العثور على صنف مطابق.</div>'; return; }
 
   menuArea.innerHTML = sections.map(section => `
-    <section>
-      <h2 class="category-title">${escapeHtml(section.category)}</h2>
+    <section class="menu-section">
+      <h2 class="category-title"><span>${categoryIcon(section.category)}</span>${escapeHtml(section.category)}</h2>
       <div class="items-grid">
         ${section.items.map(item => `
           <article class="item-card ${Number(productOrderCounts[item.name] || 0) >= POPULAR_THRESHOLD ? "is-popular" : ""}">
-            <div class="item-card-head">
-              <div class="item-name">${escapeHtml(item.name)}</div>
+            <div class="product-art"><span>${productIcon(section.category)}</span></div>
+            <div class="item-content">
+              <div class="item-card-head">
+                <div class="item-name">${escapeHtml(item.name)}</div>
+              </div>
+              <p class="item-description">${section.category === 'المشاوي' ? 'مشوي طازج يقدم مع الأرز والسلطة والخبز' : 'محضر يوميًا بمكونات طازجة وجودة عالية'}</p>
               ${Number(productOrderCounts[item.name] || 0) >= POPULAR_THRESHOLD ? '<span class="popular-badge">🔥 الأكثر طلبًا</span>' : ''}
             </div>
             <div class="variant-grid">
               ${item.variants.map(variant => `
-                <button type="button" class="variant-btn"
-                  data-name="${escapeHtml(item.name)}"
-                  data-size="${escapeHtml(variant.size)}"
-                  data-price="${variant.price}">
-                  <span>${escapeHtml(variant.size)}</span>
-                  <span class="price">${money(variant.price)}  ر.س</span>
+                <button type="button" class="variant-btn" data-name="${escapeHtml(item.name)}" data-size="${escapeHtml(variant.size)}" data-price="${variant.price}">
+                  <span class="price">${money(variant.price)} ر.س</span>
+                  <span class="add-label">إضافة <b>＋</b></span>
+                  ${item.variants.length > 1 ? `<small>${escapeHtml(variant.size)}</small>` : ''}
                 </button>
               `).join("")}
             </div>
@@ -508,7 +510,6 @@ function renderMenu(){
     </section>
   `).join("");
 }
-
 function addToCart(name,size,price){
   const key = `${name}|${size}|${price}`;
   const found = cart.find(item => item.key === key);
