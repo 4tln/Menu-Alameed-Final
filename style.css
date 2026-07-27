@@ -1181,11 +1181,3 @@ body{
 
 /* Hide category heading */
 .category-title{display:none !important;}
-
-
-/* Startup order selection */
-.startup-overlay{position:fixed;inset:0;background:#f7f3ef;display:flex;align-items:center;justify-content:center;z-index:99999}
-.startup-card{background:#fff;padding:28px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.12);width:min(90%,360px);text-align:center}
-.startup-card h2{margin:10px 0 6px}
-.startup-btn{display:block;width:100%;margin:12px 0;padding:16px;border:none;border-radius:16px;font-size:18px;font-weight:700;background:#6b4226;color:#fff}
-.startup-btn.secondary{background:#8b5a3c}
