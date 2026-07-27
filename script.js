@@ -795,3 +795,12 @@ renderMenu();
 updateCartUI();
 initVisitorCounter();
 loadProductOrderCounts();
+
+function shareSite(){
+ if(navigator.share){navigator.share({title:document.title,url:location.href});}
+ else{navigator.clipboard.writeText(location.href);alert('تم نسخ الرابط');}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+ const b=[...document.querySelectorAll('.action-btn')].find(x=>x.textContent.includes('تحديث'));
+ if(b)b.onclick=()=>{const i=b.firstChild;b.classList.add('spin');setTimeout(()=>location.reload(),500);}
+});
