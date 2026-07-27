@@ -906,3 +906,174 @@ button:hover{transform:scale(1.03)}
 .search-box{border-radius:18px}
 .tab-btn{transition:.2s}
 .tab-btn:hover{background:#6b4545;color:#fff}
+
+/* ===== هوية فطائر العميد — بني وبيج مطابق للمرجع مع الحفاظ على المقاسات ===== */
+:root{
+  --brand:#654324;
+  --brand-dark:#3e2818;
+  --accent:#7a5330;
+  --cream:#f3eadc;
+  --card:#fffaf3;
+  --text:#352317;
+  --muted:#8a7b6e;
+  --green:#1f9d55;
+  --shadow:0 12px 28px rgba(83,53,28,.12);
+}
+body{
+  background:
+    radial-gradient(circle at 12% 7%,rgba(142,101,59,.14),transparent 27%),
+    linear-gradient(180deg,#f8f1e8 0%,#efe3d3 100%);
+}
+.hero{
+  background:
+    radial-gradient(circle at 8% 58%,rgba(101,67,36,.18),transparent 34%),
+    linear-gradient(180deg,#fbf6ef 0%,#eee0ce 100%);
+  color:var(--text);
+  border-bottom:1px solid rgba(101,67,36,.12);
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 0% 62%,rgba(109,72,38,.16),transparent 30%),
+    linear-gradient(90deg,rgba(255,255,255,0),rgba(255,250,243,.42));
+  pointer-events:none;
+}
+.hero-content{color:var(--text)}
+.logo{
+  border:0;
+  border-radius:0;
+  object-fit:contain;
+  box-shadow:none;
+  filter:drop-shadow(0 8px 14px rgba(72,43,22,.14));
+}
+.hero h1{
+  color:var(--brand-dark);
+  font-weight:900;
+  letter-spacing:.2px;
+}
+.hero h1::after{
+  content:"  •  ♥  •";
+  display:block;
+  margin-top:7px;
+  color:#8d6845;
+  font-size:14px;
+  letter-spacing:4px;
+}
+.hero p{color:#4b3829;opacity:1}
+.visitor-counter{
+  color:var(--brand-dark);
+  background:rgba(255,255,255,.72);
+  border-color:rgba(101,67,36,.13);
+  box-shadow:0 8px 20px rgba(83,53,28,.08);
+}
+.quick-actions{gap:12px}
+.quick-btn{
+  color:var(--brand-dark);
+  background:rgba(255,255,255,.8);
+  border:1px solid rgba(101,67,36,.12);
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(83,53,28,.08);
+  font-weight:800;
+}
+.sticky-tools{
+  background:rgba(248,242,234,.94);
+  border-bottom:1px solid rgba(101,67,36,.1);
+}
+.search-box{
+  background:rgba(255,255,255,.78);
+  border-color:rgba(101,67,36,.13);
+  border-radius:20px;
+  box-shadow:0 9px 22px rgba(83,53,28,.07);
+}
+.search-box input::placeholder{color:#a39588}
+.category-tabs{gap:10px}
+.tab-btn{
+  border:1px solid rgba(101,67,36,.11);
+  border-radius:17px;
+  background:rgba(255,255,255,.62);
+  color:var(--brand-dark);
+  box-shadow:0 7px 16px rgba(83,53,28,.06);
+}
+.tab-btn.active{
+  background:linear-gradient(145deg,#76502e,#4f321d);
+  color:#fffaf3;
+  box-shadow:0 10px 22px rgba(75,45,22,.24);
+}
+.category-title{
+  color:var(--brand-dark);
+  text-align:center;
+  position:relative;
+  padding:0 60px;
+}
+.category-title::before,.category-title::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:48px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#b79169);
+}
+.category-title::before{right:0}
+.category-title::after{left:0;transform:scaleX(-1)}
+.item-card{
+  background:rgba(255,251,246,.92);
+  border-color:rgba(101,67,36,.1);
+  border-radius:22px;
+  box-shadow:0 12px 26px rgba(83,53,28,.1);
+}
+.item-name{color:var(--brand-dark)}
+.variant-btn{
+  background:linear-gradient(180deg,#f8efe4,#f0e2d1);
+  border:1px solid rgba(101,67,36,.08);
+  color:var(--brand-dark);
+  border-radius:15px;
+}
+.variant-btn .price{color:#6b4728}
+.cart-bar{
+  background:linear-gradient(100deg,#52331d,#795331);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:21px;
+  box-shadow:0 14px 30px rgba(72,42,20,.28);
+}
+.sheet{
+  background:linear-gradient(180deg,#fffaf4,#f3e8da);
+}
+.sheet-header{background:#fffaf4}
+.icon-btn,.qty-btn{background:#f0e3d4;color:var(--brand-dark)}
+.cart-item{
+  background:#fffaf4;
+  border-color:rgba(101,67,36,.1);
+  box-shadow:0 7px 16px rgba(83,53,28,.07);
+}
+.cart-summary,.location-status,.delivery-info span{
+  background:#f3e7d8;
+}
+.order-types label{
+  background:#fffaf4;
+  border-color:rgba(101,67,36,.16);
+}
+.field{
+  background:#fffdf9;
+  border-color:rgba(101,67,36,.17);
+}
+.danger-btn{background:#fffaf4}
+.whatsapp-btn{
+  background:linear-gradient(135deg,#684524,#4a2f1c);
+  box-shadow:0 10px 22px rgba(74,47,28,.22);
+}
+.site-map,.site-map-head{background:#fffaf4}
+.site-map-head{background:#f3e7d8}
+.ios-spinner i{background:var(--brand-dark)}
+#refreshBtn.is-refreshing .ios-spinner i{background:var(--brand-dark)}
+.popular-badge{
+  background:#f4e2c7;
+  color:#71461f;
+  border-color:#d8b88f;
+}
+.item-card.is-popular{border-color:#c69b68}
+@media(max-width:520px){
+  .category-title{padding:0 45px}
+  .category-title::before,.category-title::after{width:34px}
+}
