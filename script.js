@@ -727,7 +727,9 @@ categoryTabs.addEventListener("click", event => {
   searchInput.value = "";
   renderTabs();
   renderMenu();
-  window.scrollTo({top: document.getElementById("menuArea").offsetTop-70, behavior:"smooth"});
+  const stickyHeight = document.querySelector(".sticky-tools")?.offsetHeight || 0;
+  const menuTop = document.getElementById("menuArea").getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({top: Math.max(0, menuTop - stickyHeight - 8), behavior:"smooth"});
 });
 
 menuArea.addEventListener("click", event => {
@@ -778,7 +780,7 @@ document.querySelectorAll('input[name="orderType"]').forEach(input => {
 
 sendOrderBtn.addEventListener("click",sendOrder);
 
-document.getElementById("shareBtn").addEventListener("click",async () => {
+document.getElementById("shareBtn")?.addEventListener("click",async () => {
   try{
     if(navigator.share){
       await navigator.share({title:"فطائر العميد",url:location.href});
