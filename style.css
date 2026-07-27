@@ -1241,3 +1241,45 @@ body{
   .top-actions{margin-top:6px;gap:5px}
   .action-btn{min-height:32px;padding:5px 3px;font-size:10px;border-radius:9px}
 }
+
+
+/* ChatGPT redesign */
+.hero{
+min-height:190px!important;
+background:linear-gradient(180deg,#f6ecdf 0%,#efe2d2 100%)!important;
+border-bottom-left-radius:32px;
+border-bottom-right-radius:32px;
+overflow:hidden;
+}
+.hero::before{
+content:"";
+position:absolute;
+top:-120px;left:-10%;
+width:120%;
+height:220px;
+background:radial-gradient(circle at 20% 90%, #6b4326 0,#6b4326 28%, transparent 29%),
+radial-gradient(circle at 80% 10%, #8a5b38 0,#8a5b38 24%, transparent 25%);
+opacity:.95;
+}
+.hero-overlay,.hero-cover{display:none!important;}
+.hero-content{z-index:2;padding-top:12px}
+.hero .logo,img.logo{
+max-width:110px!important;
+width:110px!important;
+}
+.header-buttons,.top-buttons,.action-buttons{
+display:flex!important;
+justify-content:center;
+gap:10px;
+flex-wrap:nowrap;
+margin-top:10px;
+}
+.header-buttons button,.top-buttons button,.action-buttons button{
+background:#6b4326!important;
+color:#fff!important;
+border:none;
+border-radius:16px!important;
+padding:10px 16px!important;
+box-shadow:0 6px 16px rgba(0,0,0,.15);
+font-weight:600;
+}
