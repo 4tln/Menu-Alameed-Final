@@ -175,13 +175,13 @@ button{cursor:pointer}
   border:0;
   border-radius:18px;
   padding:15px 18px;
-  background:var(--green);
+  background:linear-gradient(90deg,#5b3a22,#7b5230);
   color:#fff;
   font-size:18px;
   font-weight:900;
   display:flex;
   justify-content:space-between;
-  box-shadow:0 12px 28px rgba(19,111,59,.32);
+  box-shadow:0 12px 28px rgba(91,58,34,.28);
 }
 .toast{
   position:fixed;
