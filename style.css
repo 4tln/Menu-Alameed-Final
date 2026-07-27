@@ -100,7 +100,7 @@ button{cursor:pointer}
   outline:0;
   background:transparent;
   padding:13px 0;
-  font-size:16px;
+  font-size:13px;
 }
 .category-tabs{
   max-width:850px;
@@ -118,13 +118,13 @@ button{cursor:pointer}
   background:#eadfd1;
   color:var(--brand-dark);
   font-weight:700;
-  font-size:14px;
+  font-size:12px;
   line-height:1.2;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  white-space:normal;
+  white-space:nowrap;
   word-break:break-word;
 }
 .tab-btn.active{background:var(--brand);color:#fff}
@@ -226,7 +226,7 @@ button{cursor:pointer}
   border-radius:26px 26px 0 0;
   padding:12px;
 }
-.sheet-header{font-size:14px;
+.sheet-header{font-size:12px;
   position:sticky;
   top:-18px;
   z-index:2;
@@ -616,7 +616,7 @@ body.modal-open{overflow:hidden}
 
 @media(max-width:520px){
   .sheet{padding:12px;height:98dvh;max-height:98dvh;border-radius:22px 22px 0 0}
-  .sheet-header{font-size:14px;top:-12px;padding:4px 0 6px}
+  .sheet-header{font-size:12px;top:-12px;padding:4px 0 6px}
   .cart-item{padding:8px}
   .cart-map #map{height:130px}
   .cart-map .site-map-head{align-items:center;flex-direction:row}
@@ -628,7 +628,7 @@ body.modal-open{overflow:hidden}
 .sheet{padding:10px!important;}
 .sheet-header h2{font-size:18px!important;margin:4px 0;}
 .cart-item{padding:8px!important;}
-button,input,select,textarea{font-size:14px!important;}
+button,input,select,textarea{font-size:12px!important;}
 .order-type,.delivery-section,.customer-section{gap:6px!important;}
 .site-map #map{height:170px!important;}
 .site-map{margin:8px!important;}
@@ -646,7 +646,7 @@ gap:8px;
 }
 .qty-controls{gap:4px}
 .qty-btn{width:28px;height:28px;border-radius:8px;font-size:18px}
-.cart-item h4{font-size:15px;margin:0 0 2px}
+.cart-item h4{font-size:13px;margin:0 0 2px}
 .cart-item small{font-size:12px}
 .remove-btn{font-size:12px}
 
@@ -708,7 +708,7 @@ gap:8px;
   min-width:24px;
   padding:0 !important;
   border-radius:7px !important;
-  font-size:15px !important;
+  font-size:13px !important;
   line-height:24px;
 }
 .cart-item .remove-btn{
@@ -766,7 +766,7 @@ gap:8px;
 .cart-product-info{min-width:0}
 .cart-item.cart-row h4{
   min-height:0 !important;margin:0 0 2px !important;
-  font-size:14px !important;line-height:1.35 !important;
+  font-size:12px !important;line-height:1.35 !important;
   display:block !important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .cart-item.cart-row small{
@@ -780,11 +780,11 @@ gap:8px;
   border-radius:8px !important;font-size:18px !important;line-height:30px !important;
   border:1px solid var(--line,#ddd) !important;background:var(--soft,#f5f2ee) !important;
 }
-.cart-item.cart-row .qty-controls strong{min-width:20px;text-align:center;font-size:15px}
+.cart-item.cart-row .qty-controls strong{min-width:20px;text-align:center;font-size:13px}
 .cart-line-total{min-width:58px;text-align:center;font-size:12px;font-weight:900;white-space:nowrap}
 .cart-item.cart-row .remove-btn{
   width:32px;height:32px;padding:0 !important;display:grid;place-items:center;
-  font-size:16px !important;color:#d9272e;background:transparent;border:0;
+  font-size:13px !important;color:#d9272e;background:transparent;border:0;
 }
 .deposit-row{opacity:.92}
 .deposit-qty{min-width:92px}
@@ -794,7 +794,7 @@ gap:8px;
 .summary-meta{display:flex;flex-direction:column;gap:3px;font-size:12px}
 .summary-meta small{font-size:9px;color:var(--muted);font-weight:400}
 .summary-total{display:flex;align-items:baseline;gap:8px;margin-right:auto}
-.summary-total span{font-size:14px}
+.summary-total span{font-size:12px}
 .summary-total strong{font-size:21px;color:var(--primary,#9a651c);white-space:nowrap}
 
 @media(max-width:520px){
@@ -820,7 +820,7 @@ gap:8px;
 }
 .cart-product-icon{display:none!important;}
 
-.cart-product-info h4{white-space:normal!important;overflow:visible!important;text-overflow:unset!important;}
+.cart-product-info h4{white-space:nowrap!important;overflow:visible!important;text-overflow:unset!important;}
 
 
 /* Compact redesigned header */
@@ -970,7 +970,7 @@ body{
   display:block;
   margin-top:7px;
   color:#8d6845;
-  font-size:14px;
+  font-size:12px;
   letter-spacing:4px;
 }
 .hero p{color:#4b3829;opacity:1}
@@ -1117,9 +1117,9 @@ body{
   padding:9px 3px;
   font-size:12px;
   line-height:1.25;
-  white-space:normal;
+  white-space:nowrap;
   text-align:center;
 }
 @media (min-width:600px){
-  .category-tabs .tab-btn{font-size:14px;padding:10px 6px}
+  .category-tabs .tab-btn{font-size:12px;padding:10px 6px}
 }
