@@ -483,7 +483,6 @@ function renderMenu(){
 
   menuArea.innerHTML = sections.map(section => `
     <section>
-      <h2 class="category-title">${escapeHtml(section.category)}</h2>
       <div class="items-grid">
         ${section.items.map(item => `
           <article class="item-card ${Number(productOrderCounts[item.name] || 0) >= POPULAR_THRESHOLD ? "is-popular" : ""}">
