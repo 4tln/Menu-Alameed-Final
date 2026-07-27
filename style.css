@@ -827,3 +827,17 @@ gap:8px;
 .sticky-tools,.menu-area,.category-tabs,.items-grid,.item-card,.variant-btn{position:relative;pointer-events:auto}
 .sticky-tools{z-index:30}
 .menu-area{z-index:1}
+
+
+body{background:linear-gradient(180deg,#f8f4ee,#efe4d3);}
+.hero{min-height:380px;background:linear-gradient(135deg,#2f201d,#6d4c41);}
+.hero:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,255,255,.14),transparent 45%);}
+.hero-content h1{font-size:38px;letter-spacing:.5px}
+.hero-content p{font-size:17px}
+.logo{border-radius:50%;width:150px;height:150px;border:5px solid #fff;}
+.item-card{transition:.25s ease;border:none;border-radius:22px;overflow:hidden}
+.item-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.variant-btn,.quick-btn,.tab-btn{transition:.2s ease}
+.variant-btn:hover,.quick-btn:hover,.tab-btn:hover{transform:scale(1.04)}
+.search-box{border-radius:30px;padding:4px 16px}
+.sticky-tools{box-shadow:0 10px 30px rgba(0,0,0,.06)}
