@@ -841,3 +841,53 @@ body{background:linear-gradient(180deg,#f8f4ee,#efe4d3);}
 .variant-btn:hover,.quick-btn:hover,.tab-btn:hover{transform:scale(1.04)}
 .search-box{border-radius:30px;padding:4px 16px}
 .sticky-tools{box-shadow:0 10px 30px rgba(0,0,0,.06)}
+
+
+/* Modern redesign */
+body{
+background:linear-gradient(180deg,#f8f4ee,#efe6d8);
+}
+.hero{
+min-height:420px;
+background:radial-gradient(circle at top,#8b6a4d,#5b3939 55%,#2d1b18);
+}
+.hero:before{
+content:"";
+position:absolute;
+width:500px;height:500px;
+background:rgba(255,255,255,.05);
+border-radius:50%;
+top:-220px;right:-140px;
+}
+.hero-content{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,.12);
+border-radius:30px;
+}
+.logo{
+width:150px;
+height:150px;
+border-radius:50%;
+background:#fff;
+}
+.hero h1{font-size:40px;font-weight:800;letter-spacing:.5px}
+.hero p{font-size:18px}
+.quick-btn{
+background:#fff;
+color:#5b3939;
+font-weight:700;
+border:none;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+transition:.25s;
+}
+.quick-btn:hover{transform:translateY(-3px)}
+.category-card,.product-card,.item-card,.cart{
+border-radius:24px!important;
+box-shadow:0 14px 30px rgba(0,0,0,.08)!important;
+border:1px solid #eadfce!important;
+}
+button{
+transition:.25s ease;
+}
+button:hover{transform:scale(1.03)}
