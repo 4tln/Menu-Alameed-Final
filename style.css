@@ -1181,3 +1181,7 @@ body{
 
 /* Hide category heading */
 .category-title{display:none !important;}
+
+.top-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px}
+.action-btn{background:#fff;color:#5b3a22;border:none;border-radius:18px;padding:12px 18px;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:.2s}
+.action-btn:hover,.action-btn:active{transform:translateY(-2px);background:#5b3a22;color:#fff}

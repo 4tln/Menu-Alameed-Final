@@ -22,6 +22,13 @@
       <img class="logo" src="logo.png" alt="شعار فطائر العميد">
     </div>
   </header>
+
+<div class="top-actions">
+<a class="action-btn" href="tel:0536261408">📞 اتصل بنا</a>
+<button class="action-btn" onclick="shareSite()">↗ مشاركة</button>
+<button class="action-btn" onclick="location.reload()">🔄 تحديث الصفحة</button>
+</div>
+
   <div class="sticky-tools">
     <label class="search-box">
       <span>🔎</span>
@@ -112,5 +119,17 @@ refreshBtn?.addEventListener('click', () => {
 });
 </script>
 
+
+<script>
+function shareSite(){
+const url=location.href;
+if(navigator.share){
+navigator.share({title:document.title,url:url});
+}else{
+navigator.clipboard.writeText(url);
+alert("تم نسخ رابط الموقع.");
+}
+}
+</script>
 </body>
 </html>
