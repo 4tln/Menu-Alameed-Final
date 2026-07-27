@@ -1185,3 +1185,59 @@ body{
 .top-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:10px auto 18px;padding:0 16px}
 .action-btn{display:flex;align-items:center;justify-content:center;min-width:110px;padding:12px 18px;border-radius:18px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 24px rgba(0,0,0,.16),inset 0 1px 1px rgba(255,255,255,.4);color:#5b3a22;font-weight:700;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
 .action-btn:hover,.action-btn:active{transform:scale(.97);box-shadow:0 4px 14px rgba(0,0,0,.18)}
+
+/* تنسيق الهيدر والأزرار تحت الشعار مباشرة */
+.hero{
+  min-height:205px;
+  padding:10px 0 12px;
+}
+.hero-content{
+  width:min(94%,560px);
+  padding:8px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.logo{
+  width:190px;
+  height:118px;
+  border-radius:20px;
+  border-width:3px;
+}
+.top-actions{
+  width:100%;
+  margin-top:7px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:6px;
+}
+.action-btn{
+  min-width:0;
+  min-height:34px;
+  border:1px solid rgba(255,255,255,.48);
+  border-radius:10px;
+  padding:6px 5px;
+  background:rgba(255,255,255,.14);
+  color:#fff;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:800;
+  line-height:1.15;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  white-space:nowrap;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.action-btn:active{transform:scale(.97)}
+
+@media(max-width:420px){
+  .hero{min-height:188px;padding:8px 0 10px}
+  .hero-content{width:96%;padding:5px 7px}
+  .logo{width:168px;height:105px;border-radius:17px}
+  .top-actions{margin-top:6px;gap:5px}
+  .action-btn{min-height:32px;padding:5px 3px;font-size:10px;border-radius:9px}
+}
