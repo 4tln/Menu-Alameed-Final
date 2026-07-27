@@ -1177,3 +1177,7 @@ body{
     letter-spacing:-.5px !important;
   }
 }
+
+
+/* Hide category heading */
+.category-title{display:none !important;}
