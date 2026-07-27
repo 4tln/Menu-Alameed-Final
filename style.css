@@ -1095,3 +1095,24 @@ body{
   .logo{width:215px;height:145px}
   .sticky-tools{padding-top:max(10px,env(safe-area-inset-top))}
 }
+
+/* عرض جميع الأقسام في صفّين */
+.category-tabs{
+  display:grid !important;
+  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  gap:8px !important;
+  overflow:visible !important;
+  width:min(100% - 24px,850px);
+}
+.category-tabs .tab-btn{
+  width:100%;
+  min-width:0;
+  padding:9px 3px;
+  font-size:12px;
+  line-height:1.25;
+  white-space:normal;
+  text-align:center;
+}
+@media (min-width:600px){
+  .category-tabs .tab-btn{font-size:14px;padding:10px 6px}
+}
