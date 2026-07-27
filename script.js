@@ -459,12 +459,19 @@ function escapeHtml(value){
 }
 
 function renderTabs(){
-  categoryTabs.innerHTML = window.MENU_DATA.map(section => `
+  const orderedSections = [
+    ...window.MENU_DATA.filter(section => section.category === activeCategory),
+    ...window.MENU_DATA.filter(section => section.category !== activeCategory)
+  ];
+
+  categoryTabs.innerHTML = orderedSections.map(section => `
     <button type="button" class="tab-btn ${section.category === activeCategory ? "active" : ""}"
       data-category="${escapeHtml(section.category)}">
       ${escapeHtml(section.category)}
     </button>
   `).join("");
+
+  categoryTabs.scrollLeft = 0;
 }
 
 function renderMenu(){
