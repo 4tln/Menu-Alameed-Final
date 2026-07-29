@@ -15,7 +15,7 @@ html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
-  background:linear-gradient(180deg,#5b3a22 0%,#7b5230 100%);
+  background:linear-gradient(180deg,#5a3218 0%,#7b4a25 100%);
   background-attachment:fixed;
   color:var(--text);
   padding-bottom:92px;
@@ -24,14 +24,14 @@ button,input,textarea{font:inherit}
 button{cursor:pointer}
 .hero{
   position:relative;
-  min-height:210px;
+  min-height:170px;
   overflow:hidden;
   display:grid;
   place-items:center;
   text-align:center;
   background:
-radial-gradient(circle at top left,#ffffff 0 12%,transparent 13%),
-radial-gradient(circle at top right,#ffffff 0 12%,transparent 13%),
+radial-gradient(circle at top left,rgba(255,255,255,.95) 0 18%,transparent 19%),
+radial-gradient(circle at top right,rgba(255,255,255,.8) 0 16%,transparent 17%),
 linear-gradient(90deg,#6a3d20,#8a552f);
 }
 .hero-cover{
@@ -56,8 +56,8 @@ linear-gradient(90deg,#6a3d20,#8a552f);
 .logo{
   filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
 
-  width:270px;
-  height:180px;
+  width:310px;
+  height:200px;
   border-radius:26px;
   object-fit:contain;
   background:#fff;
@@ -80,20 +80,20 @@ linear-gradient(90deg,#6a3d20,#8a552f);
   position:sticky;
   top:0;
   z-index:50;
-  background:rgba(255,255,255,.18);
-  backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,.28); box-shadow:0 10px 30px rgba(0,0,0,.15);
-  padding:8px 12px 6px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,.45); box-shadow:0 10px 30px rgba(0,0,0,.15);
+  padding:6px 10px 5px;
 }
 .search-box{
-  max-width:720px;
+  max-width:620px;
   margin:auto;
   display:flex;
   align-items:center;
   gap:8px;
   background:#fff;
   border:1px solid #e2d8cc;
-  border-radius:14px;
+  border-radius:10px;
   padding:0 16px;
   box-shadow:0 4px 14px rgba(58,35,29,.05);
 }
@@ -102,7 +102,7 @@ linear-gradient(90deg,#6a3d20,#8a552f);
   border:0;
   outline:0;
   background:transparent;
-  padding:13px 0;
+  padding:10px 0;
   font-size:15px;
 }
 .category-tabs{
@@ -133,7 +133,7 @@ linear-gradient(90deg,#6a3d20,#8a552f);
 .tab-btn.active{background:var(--brand);color:#fff}
 .menu-area{
   width:min(100% - 24px,850px);
-  margin:18px auto;
+  margin:10px auto;
   background:var(--cream);
   border-radius:20px;
   padding:14px;
@@ -290,7 +290,7 @@ linear-gradient(90deg,#6a3d20,#8a552f);
 .cart-summary{
   margin:15px 0 10px;
   padding:14px;
-  border-radius:14px;
+  border-radius:10px;
   background:#f8f2eb;
   display:flex;
   justify-content:space-between;
@@ -338,7 +338,7 @@ linear-gradient(90deg,#6a3d20,#8a552f);
   width:100%;
   margin-top:15px;
   border:0;
-  border-radius:14px;
+  border-radius:10px;
   background:#25D366;
   color:#fff;
   padding:15px;
@@ -1043,7 +1043,7 @@ body{
   background:linear-gradient(180deg,#f8efe4,#f0e2d1);
   border:1px solid rgba(101,67,36,.08);
   color:var(--brand-dark);
-  border-radius:14px;
+  border-radius:10px;
 }
 .variant-btn .price{color:#6b4728}
 .cart-bar{
@@ -1186,7 +1186,7 @@ body{
 .category-title{display:none !important;}
 
 .top-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:10px auto 18px;padding:0 16px}
-.action-btn{display:flex;align-items:center;justify-content:center;min-width:110px;padding:12px 18px;border-radius:18px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 24px rgba(0,0,0,.16),inset 0 1px 1px rgba(255,255,255,.4);color:#5b3a22;font-weight:700;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
+.action-btn{display:flex;align-items:center;justify-content:center;min-width:110px;padding:12px 18px;border-radius:18px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.22);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:0 10px 24px rgba(0,0,0,.16),inset 0 1px 1px rgba(255,255,255,.4);color:#5b3a22;font-weight:700;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
 .action-btn:hover,.action-btn:active{transform:scale(.97);box-shadow:0 4px 14px rgba(0,0,0,.18)}
 
 /* تنسيق الهيدر والأزرار تحت الشعار مباشرة */
@@ -1302,10 +1302,10 @@ border-radius:50%;
 background:rgba(255,255,255,.12);
 transform:rotate(-18deg);
 }
-.hero::before{width:140%;height:180px;bottom:-50px;left:-20%;}
+.hero::before{width:140%;height:200px;bottom:-50px;left:-20%;}
 .hero::after{width:120%;height:140px;top:-70px;right:-15%;}
 .hero-content{
-background:rgba(255,255,255,.18);
+background:rgba(255,255,255,.08);
 backdrop-filter:blur(14px);
 border:2px solid rgba(255,255,255,.45);
 border-radius:28px;
@@ -1353,8 +1353,8 @@ linear-gradient(135deg,#f7efe8,#fff 45%,#efe4d8);
 .hero:before{width:140%;height:220px;top:-90px;left:-20%;transform:rotate(-8deg)}
 .hero:after{width:140%;height:220px;bottom:-120px;right:-20%;transform:rotate(8deg)}
 .hero-content{
-background:rgba(255,255,255,.18);
-backdrop-filter:blur(18px);
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(4px);
 border:2px solid rgba(255,255,255,.5);
 border-radius:28px;
 box-shadow:0 15px 40px rgba(0,0,0,.18);
