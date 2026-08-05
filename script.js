@@ -2,6 +2,26 @@ const WHATSAPP_NUMBER = "966536261408";
 const CART_KEY = "alameed_cart_v2";
 const PLATE_DEPOSIT = 12;
 const LAMMA_ITEM_NAME = "صحن اللمة";
+const POPULAR_THRESHOLD = 25;
+const productOrderCounts = {};
+const ORDER_COUNTS_KEY = "alameed_product_order_counts_v1";
+function loadProductOrderCounts(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(ORDER_COUNTS_KEY) || "{}");
+    if(saved && typeof saved === "object" && !Array.isArray(saved)){
+      Object.assign(productOrderCounts, saved);
+    }
+  }catch{}
+  if(typeof renderMenu === "function") renderMenu();
+}
+function registerOrderedProducts(){
+  cart.forEach(item => {
+    productOrderCounts[item.name] = Number(productOrderCounts[item.name] || 0) + Number(item.qty || 0);
+  });
+  try{
+    localStorage.setItem(ORDER_COUNTS_KEY, JSON.stringify(productOrderCounts));
+  }catch{}
+}
 let activeCategory = window.MENU_DATA[0]?.category || "";
 let searchTerm = "";
 let cart = loadCart();
