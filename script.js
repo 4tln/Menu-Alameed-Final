@@ -109,7 +109,7 @@ async function counterRequest(name, action = "", attempt = 1){
   }
 }
 
-async function initVisitorCounter(){
+async function initVisitorCounter(){ return; 
   if(!visitorCount) return;
 
   const cachedValue = Number(localStorage.getItem(VISITOR_CACHE_KEY));

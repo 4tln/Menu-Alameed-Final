@@ -813,3 +813,8 @@ box-shadow:0 0 0 2px rgba(231,191,98,.35),0 12px 26px rgba(0,0,0,.25);
     font-size:11px !important;
   }
 }
+
+.visitor-pill,.hero-kicker{display:none!important;}
+.category-tabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;padding:8px 10px;gap:10px;scrollbar-width:none;}
+.category-tabs::-webkit-scrollbar{display:none;}
+.category-tabs>*{flex:0 0 auto!important;min-width:145px;font-size:18px!important;font-weight:700;}
