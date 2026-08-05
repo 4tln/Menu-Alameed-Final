@@ -720,3 +720,31 @@ transition:.25s ease;
 transform:translateY(-2px) scale(1.03);
 filter:brightness(1.08);
 }
+
+
+/* === Horizontal category tabs === */
+.category-tabs{
+display:flex !important;
+flex-wrap:nowrap !important;
+overflow-x:auto !important;
+overflow-y:hidden;
+gap:10px;
+padding:8px 4px;
+width:calc(100% - 16px)!important;
+scrollbar-width:none;
+-ms-overflow-style:none;
+}
+.category-tabs::-webkit-scrollbar{display:none;}
+.category-tabs .tab-btn{
+flex:0 0 auto;
+min-width:120px;
+border-radius:999px!important;
+background:linear-gradient(135deg,#6f4b2d,#c7964a)!important;
+color:#fff!important;
+font-weight:800;
+box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+.category-tabs .tab-btn.active{
+background:linear-gradient(135deg,#2f1c10,#8b5e34)!important;
+box-shadow:0 0 0 2px rgba(231,191,98,.35),0 12px 26px rgba(0,0,0,.25);
+}
