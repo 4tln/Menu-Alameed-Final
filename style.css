@@ -35,9 +35,7 @@ button{cursor:pointer}
   padding:22px 14px 106px;
   overflow:hidden;
   isolation:isolate;
-  background:
-    linear-gradient(rgba(20,12,6,.45),rgba(20,12,6,.45)),
-    url("hero-bg.jpeg") center/cover no-repeat;
+  background:transparent;
 }
 .hero::before{
   content:"";
