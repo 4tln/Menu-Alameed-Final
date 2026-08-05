@@ -96,12 +96,12 @@ button{cursor:pointer}
   display:flex;
   flex-direction:column;
   align-items:center;
-  border:1px solid rgba(255,255,255,.34);
+  border:none;
   border-radius:24px;
-  background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.07));
-  -webkit-backdrop-filter:blur(18px) saturate(130%);
-  backdrop-filter:blur(18px) saturate(130%);
-  box-shadow:0 20px 46px rgba(19,9,3,.25),inset 0 1px 0 rgba(255,255,255,.42);
+  background:transparent;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  box-shadow:none;
 }
 .hero-card-top{
   width:100%;
@@ -163,7 +163,7 @@ button{cursor:pointer}
   align-items:center;
   justify-content:center;
   gap:6px;
-  border:1px solid rgba(255,255,255,.34);
+  border:none;
   border-radius:12px;
   background:linear-gradient(180deg,rgba(255,255,255,.19),rgba(255,255,255,.09));
   color:#fff;
