@@ -748,3 +748,68 @@ box-shadow:0 8px 20px rgba(0,0,0,.18);
 background:linear-gradient(135deg,#2f1c10,#8b5e34)!important;
 box-shadow:0 0 0 2px rgba(231,191,98,.35),0 12px 26px rgba(0,0,0,.25);
 }
+
+
+/* === FINAL: Single-row swipe categories (2026-08-05) === */
+#categoryTabs.category-tabs{
+  box-sizing:border-box !important;
+  width:calc(100% - 14px) !important;
+  max-width:850px !important;
+  margin:10px auto 0 !important;
+  padding:7px 4px 11px !important;
+  display:flex !important;
+  flex-flow:row nowrap !important;
+  justify-content:flex-start !important;
+  align-items:stretch !important;
+  gap:9px !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior-inline:contain;
+  scroll-snap-type:x proximity;
+  scrollbar-width:none !important;
+  touch-action:pan-x !important;
+}
+#categoryTabs.category-tabs::-webkit-scrollbar{
+  width:0 !important;
+  height:0 !important;
+  display:none !important;
+}
+#categoryTabs.category-tabs > .tab-btn{
+  box-sizing:border-box !important;
+  flex:0 0 auto !important;
+  width:auto !important;
+  min-width:112px !important;
+  min-height:48px !important;
+  margin:0 !important;
+  padding:10px 18px !important;
+  white-space:nowrap !important;
+  scroll-snap-align:start;
+  border:1px solid rgba(116,72,34,.20) !important;
+  border-radius:16px !important;
+  background:linear-gradient(145deg,#c99650 0%,#a46f32 52%,#7c4d24 100%) !important;
+  color:#fffaf2 !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  letter-spacing:0 !important;
+  line-height:1.2 !important;
+  box-shadow:0 7px 16px rgba(83,49,20,.18),inset 0 1px 0 rgba(255,255,255,.26) !important;
+}
+#categoryTabs.category-tabs > .tab-btn.active{
+  border-color:#d9ad69 !important;
+  background:linear-gradient(145deg,#4b2b17 0%,#6f3f20 58%,#8d592d 100%) !important;
+  color:#fff !important;
+  box-shadow:0 0 0 2px rgba(211,166,96,.25),0 9px 20px rgba(58,31,13,.27),inset 0 1px 0 rgba(255,255,255,.18) !important;
+  transform:none !important;
+}
+#categoryTabs.category-tabs > .tab-btn:active{
+  transform:scale(.97) !important;
+}
+@media(max-width:520px){
+  #categoryTabs.category-tabs > .tab-btn{
+    min-width:104px !important;
+    min-height:46px !important;
+    padding:9px 15px !important;
+    font-size:11px !important;
+  }
+}
