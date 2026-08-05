@@ -833,3 +833,21 @@ background:#f3eadc !important;
 background-image:none !important;
 color:#352317 !important;
 }
+
+
+/* ChatGPT override: category buttons same as price badge */
+#categoryTabs .tab-btn,
+.category-tabs .tab-btn,
+.category-tabs>.tab-btn{
+background:#8b5e34 !important;
+background-image:none !important;
+color:#fff !important;
+border:1px solid #8b5e34 !important;
+box-shadow:none !important;
+}
+#categoryTabs .tab-btn.active,
+.category-tabs .tab-btn.active{
+background:#8b5e34 !important;
+background-image:none !important;
+color:#fff !important;
+}
