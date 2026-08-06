@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#5b3a22">
   <title>فطائر العميد</title>
-  <link rel="stylesheet" href="style.css?v=20260806-compact-glass-cart">
+  <link rel="stylesheet" href="style.css?v=20260807-cart-order-exact">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,7 +48,7 @@
   <main id="menuArea" class="menu-area"></main>
   <button id="cartBar" class="cart-bar" type="button" aria-label="فتح الطلب ومراجعة الأصناف">
     <span class="cart-bar-icon" aria-hidden="true">🛒<b id="cartCount" class="cart-count-badge">0</b></span>
-    <span class="cart-bar-total"><b id="cartTotal">0</b> <img class="sar-symbol" src="sar-symbol.png" alt="ريال سعودي"></span>
+    <span class="cart-bar-total"><b id="cartTotal">0</b><img class="sar-symbol" src="sar-symbol.png" alt="ريال سعودي"></span>
   </button>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <div id="cartModal" class="modal" aria-hidden="true">
@@ -68,7 +68,7 @@
         </div>
         <div class="review-total">
           <span>الإجمالي</span>
-          <strong>🛒 <span id="sheetTotal">0</span> <img class="sar-symbol" src="sar-symbol.png" alt="ريال سعودي"></strong>
+          <strong class="review-total-value"><span class="review-cart-icon" aria-hidden="true">🛒</span><span id="sheetTotal">0</span><img class="sar-symbol" src="sar-symbol.png" alt="ريال سعودي"></strong>
         </div>
       </div>
       <button id="toggleCartItemsBtn" class="cart-items-toggle" type="button" aria-expanded="false" aria-controls="cartItemsPanel">

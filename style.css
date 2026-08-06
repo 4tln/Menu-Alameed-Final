@@ -1973,3 +1973,37 @@ body{padding-bottom:78px!important}
 .checkout-panel[hidden]{display:none!important}
 .checkout-panel{margin-top:7px}
 .checkout-panel .order-box{margin-top:0!important}
+\n\n/* ===== 2026-08-07: ترتيب زر السلة والإجمالي فقط ===== */
+#cartBar{
+  direction:ltr!important;
+  flex-direction:row!important;
+}
+#cartBar .cart-bar-icon{
+  order:1!important;
+  flex:0 0 auto!important;
+}
+#cartBar .cart-bar-total{
+  order:2!important;
+  direction:ltr!important;
+  unicode-bidi:isolate!important;
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:4px!important;
+  font-family:inherit!important;
+}
+#cartBar #cartTotal{order:1!important;font-family:inherit!important;font-weight:900!important;}
+#cartBar .cart-bar-total .sar-symbol{order:2!important;display:block!important;flex:0 0 auto!important;}
+.review-total .review-total-value{
+  direction:ltr!important;
+  unicode-bidi:isolate!important;
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  font-family:inherit!important;
+}
+.review-total .review-cart-icon{order:1!important;display:inline-block!important;}
+.review-total #sheetTotal{order:2!important;font-family:inherit!important;font-weight:900!important;}
+.review-total .review-total-value .sar-symbol{order:3!important;display:block!important;flex:0 0 auto!important;}
