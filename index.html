@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#5b3a22">
   <title>فطائر العميد</title>
-  <link rel="stylesheet" href="style.css?v=20260806-compact-glass-cart">
+  <link rel="stylesheet" href="style.css?v=20260806-final-real-fix">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -55,22 +55,18 @@
     <div class="modal-backdrop" data-close-modal></div>
     <section class="sheet" role="dialog" aria-modal="true" aria-label="سلة الطلب">
       <header class="sheet-header">
-        <div>
+        <div class="sheet-header-copy">
           <h2>مراجعة طلبك</h2>
           <p>تأكد من الأصناف والكميات قبل الإرسال</p>
         </div>
-        <button type="button" class="icon-btn" data-close-modal aria-label="إغلاق السلة">×</button>
+        <div class="sheet-header-tools">
+          <div class="sheet-count-badge" aria-label="عدد الأصناف">
+            <span>عدد الأصناف</span>
+            <strong id="sheetCount">0</strong>
+          </div>
+          <button type="button" class="icon-btn" data-close-modal aria-label="إغلاق السلة">×</button>
+        </div>
       </header>
-      <div class="cart-review-summary">
-        <div class="review-stat">
-          <span>عدد الأصناف</span>
-          <strong id="sheetCount">0</strong>
-        </div>
-        <div class="review-total">
-          <span>الإجمالي</span>
-          <strong><span id="sheetTotal">0</span><img class="sar-symbol" src="sar-symbol.png" alt="ريال سعودي"></strong>
-        </div>
-      </div>
       <button id="toggleCartItemsBtn" class="cart-items-toggle" type="button" aria-expanded="false" aria-controls="cartItemsPanel">
         <span class="cart-items-toggle-copy">
           <strong>عرض الأصناف المضافة</strong>
@@ -113,9 +109,13 @@
         <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب عبر واتساب</button>
       </div>
       </div>
+      <div class="cart-total-footer" aria-live="polite">
+        <span>الإجمالي</span>
+        <strong class="cart-total-footer-price"><b id="sheetTotal">0</b><img class="sar-symbol" src="sar-symbol.png" alt="ريال سعودي"></strong>
+      </div>
     </section>
   </div>
   <script src="menu-data.js?v=20260806-categories-fixed"></script>
-  <script src="script.js?v=20260806-compact-glass-cart"></script>
+  <script src="script.js?v=20260806-final-real-fix"></script>
 </body>
 </html>

@@ -28,8 +28,8 @@ button,input,textarea{font:inherit}
 button{cursor:pointer}
 .hero{
   position:relative;
-  min-height:455px;
-  padding:30px 14px 78px;
+  min-height:420px;
+  padding:22px 14px 70px;
   overflow:hidden;
   isolation:isolate;
   background:url("hero-bg.jpeg") center center/contain no-repeat;
@@ -1973,3 +1973,260 @@ body{padding-bottom:78px!important}
 .checkout-panel[hidden]{display:none!important}
 .checkout-panel{margin-top:7px}
 .checkout-panel .order-box{margin-top:0!important}
+
+
+/* ===== التصحيح الحقيقي النهائي 2026-08-06 ===== */
+/* تكبير الهيدر وتوسيط صورة الاسم مع الأزرار كمجموعة واحدة */
+.hero{
+  padding:15px 9px 16px!important;
+  background:#f1e5d6!important;
+}
+.header-bar{
+  min-height:208px!important;
+  padding:20px 16px 17px!important;
+  grid-template-columns:104px minmax(0,1fr) 104px!important;
+  gap:10px!important;
+  direction:ltr!important;
+  border:2px solid rgba(255,255,255,.98)!important;
+  border-radius:32px!important;
+  box-shadow:
+    0 0 0 1.5px rgba(121,76,40,.34),
+    0 18px 40px rgba(82,50,25,.16),
+    inset 0 2px 0 rgba(255,255,255,1),
+    inset 0 -1.5px 0 rgba(121,76,40,.22)!important;
+}
+.header-bar::before{
+  inset:5px!important;
+  border:1.5px solid rgba(121,76,40,.28)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.68),
+    inset 0 0 24px rgba(255,255,255,.22)!important;
+}
+.header-logo-wrap{
+  width:104px!important;
+  display:flex!important;
+  justify-content:flex-start!important;
+  align-items:center!important;
+  background:transparent!important;
+}
+.header-logo-wrap::before{display:none!important}
+.header-logo{
+  width:100px!important;
+  height:100px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  object-fit:contain!important;
+}
+.header-center{
+  width:100%!important;
+  max-width:365px!important;
+  margin:0 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+}
+.header-title-art{
+  width:min(100%,350px)!important;
+  max-height:124px!important;
+  margin:0 auto 9px!important;
+}
+.header-center .top-actions{
+  width:min(100%,330px)!important;
+  margin:0 auto!important;
+}
+.header-spacer{width:104px!important}
+
+/* زر السلة: عربة ثم المبلغ ثم نفس رمز الريال الحالي */
+.cart-bar{
+  left:10px!important;
+  right:auto!important;
+  min-width:108px!important;
+  max-width:132px!important;
+  min-height:43px!important;
+  padding:6px 8px!important;
+  gap:6px!important;
+  direction:ltr!important;
+  flex-direction:row!important;
+  justify-content:center!important;
+  border:1.5px solid rgba(255,255,255,.96)!important;
+  border-radius:15px!important;
+  background:rgba(255,248,239,.72)!important;
+  box-shadow:
+    0 9px 21px rgba(64,35,16,.17),
+    0 0 0 1px rgba(121,76,40,.20),
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(121,76,40,.12)!important;
+}
+.cart-bar-icon{
+  order:1!important;
+  width:28px!important;
+  height:28px!important;
+  flex:0 0 28px!important;
+  border-radius:10px!important;
+  font-size:15px!important;
+}
+.cart-bar-total{
+  order:2!important;
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:2px!important;
+  direction:ltr!important;
+  font-size:15px!important;
+  font-family:inherit!important;
+  white-space:nowrap!important;
+}
+.cart-bar-total b{font-family:inherit!important}
+.cart-bar-total .sar-symbol{
+  order:2!important;
+  width:18px!important;
+  height:18px!important;
+  margin:0!important;
+}
+.cart-count-badge{
+  min-width:16px!important;
+  height:16px!important;
+  padding:0 3px!important;
+  top:-5px!important;
+  right:-6px!important;
+  font-size:8px!important;
+}
+
+/* خانة عدد الأصناف صغيرة وأنيقة داخل رأس السلة */
+.sheet-header{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:8px!important;
+}
+.sheet-header-copy{min-width:0!important;flex:1 1 auto!important}
+.sheet-header-tools{
+  flex:0 0 auto!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+}
+.sheet-count-badge{
+  min-height:31px!important;
+  padding:4px 8px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  border:1px solid rgba(121,76,40,.18)!important;
+  border-radius:999px!important;
+  background:rgba(247,235,220,.82)!important;
+  color:#745337!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.92)!important;
+  white-space:nowrap!important;
+}
+.sheet-count-badge span{
+  font-size:9px!important;
+  font-weight:800!important;
+}
+.sheet-count-badge strong{
+  min-width:19px!important;
+  height:19px!important;
+  padding:0 4px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:999px!important;
+  background:#684326!important;
+  color:#fff!important;
+  font-size:10px!important;
+  line-height:1!important;
+}
+
+/* الإجمالي في أسفل السلة: المبلغ ثم نفس رمز الريال */
+.cart-total-footer{
+  position:sticky!important;
+  bottom:-12px!important;
+  z-index:5!important;
+  min-height:58px!important;
+  margin:9px -12px -12px!important;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom))!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  border-top:1px solid rgba(121,76,40,.15)!important;
+  border-radius:0 0 24px 24px!important;
+  background:rgba(255,249,242,.96)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(150%)!important;
+  backdrop-filter:blur(20px) saturate(150%)!important;
+  box-shadow:0 -7px 18px rgba(67,39,18,.08)!important;
+  color:#4d301c!important;
+  font-family:inherit!important;
+}
+.cart-total-footer>span{
+  font-size:13px!important;
+  font-weight:900!important;
+  color:#6e513a!important;
+}
+.cart-total-footer-price{
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:3px!important;
+  direction:ltr!important;
+  color:#4d301c!important;
+  font-family:inherit!important;
+  font-size:22px!important;
+  font-weight:950!important;
+  line-height:1!important;
+}
+.cart-total-footer-price b{font:inherit!important}
+.cart-total-footer-price .sar-symbol{
+  order:2!important;
+  width:23px!important;
+  height:23px!important;
+  margin:0!important;
+  filter:none!important;
+}
+
+@media(max-width:520px){
+  .hero{padding:12px 8px 14px!important}
+  .header-bar{
+    min-height:194px!important;
+    padding:18px 10px 15px!important;
+    grid-template-columns:88px minmax(0,1fr) 88px!important;
+    gap:6px!important;
+  }
+  .header-logo-wrap,.header-spacer{width:88px!important}
+  .header-logo{width:88px!important;height:88px!important}
+  .header-title-art{
+    width:min(100%,285px)!important;
+    max-height:116px!important;
+    margin-bottom:8px!important;
+  }
+  .header-center .top-actions{width:min(100%,270px)!important}
+  .cart-bar{
+    min-width:104px!important;
+    max-width:126px!important;
+    min-height:42px!important;
+    padding:5px 8px!important;
+  }
+  .cart-bar-icon{width:27px!important;height:27px!important;flex-basis:27px!important}
+  .cart-bar-total{font-size:14px!important}
+  .sheet-count-badge{padding:3px 7px!important;gap:4px!important}
+  .sheet-count-badge span{font-size:8px!important}
+  .sheet-count-badge strong{min-width:18px!important;height:18px!important;font-size:9px!important}
+  .cart-total-footer{
+    bottom:-10px!important;
+    margin:8px -10px -10px!important;
+    border-radius:0 0 21px 21px!important;
+  }
+}
+
+@media(max-width:365px){
+  .header-bar{
+    min-height:184px!important;
+    grid-template-columns:78px minmax(0,1fr) 78px!important;
+  }
+  .header-logo-wrap,.header-spacer{width:78px!important}
+  .header-logo{width:78px!important;height:78px!important}
+  .header-title-art{max-height:108px!important}
+}
