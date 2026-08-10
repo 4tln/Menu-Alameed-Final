@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#24130e">
+  <meta name="description" content="منيو مطعم فطائر العميد والطلب عبر واتساب">
+  <title>مطعم فطائر العميد</title>
+  <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
+  <link rel="stylesheet" href="style.css?v=20260810-customer-flow-v1">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="فطائر العميد">
+</head>
+<body>
+  <div id="brandSplash" class="brand-splash" aria-label="مطعم فطائر العميد">
+    <img class="brand-splash-logo" src="brand-logo.png" alt="مطعم فطائر العميد" draggable="false">
+  </div>
+  <div class="sticky-tools">
+    <label class="search-box">
+      <span aria-hidden="true">⌕</span>
+      <input id="searchInput" type="search" placeholder="ابحث عن صنف..." autocomplete="off">
+    </label>
+    <div class="quick-actions" aria-label="روابط سريعة">
+      <a class="quick-action" href="tel:0536261408" aria-label="اتصال بالمطعم">
+        <span aria-hidden="true">☎</span><b>اتصال</b>
+      </a>
+      <button id="shareBtn" class="quick-action" type="button" aria-label="مشاركة المنيو">
+        <span aria-hidden="true">↗</span><b>مشاركة</b>
+      </button>
+      <button id="refreshBtn" class="quick-action" type="button" aria-label="تحديث الصفحة">
+        <span aria-hidden="true">↻</span><b>تحديث</b>
+      </button>
+    </div>
+    <nav id="categoryTabs" class="category-tabs" aria-label="أقسام المنيو"></nav>
+  </div>
+  <main id="menuArea" class="menu-area"></main>
+  <button id="offersBadge" class="offers-badge" type="button" aria-label="فتح عروض العميد">
+    <span class="offers-badge-mark" aria-hidden="true">٪</span>
+    <span>عروض العميد</span>
+  </button>
+  <button id="cartBar" class="cart-bar" type="button" aria-label="فتح الطلب ومراجعة الأصناف">
+    <span class="cart-bar-total"><b id="cartTotal">0</b><img class="sar-symbol" src="sar-symbol.png" alt="ريال سعودي"></span>
+    <span class="cart-bar-icon" aria-hidden="true">🛒<b id="cartCount" class="cart-count-badge">0</b></span>
+  </button>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="cartModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="sheet" role="dialog" aria-modal="true" aria-label="سلة الطلب">
+      <header class="sheet-header">
+        <div>
+          <h2>مراجعة طلبك</h2>
+          <p>تأكد من الأصناف والكميات قبل الإرسال</p>
+        </div>
+        <button type="button" class="icon-btn" data-close-modal aria-label="إغلاق السلة">×</button>
+      </header>
+      <div class="cart-review-summary">
+        <div class="review-stat">
+          <span>عدد الأصناف</span>
+          <strong id="sheetCount">0</strong>
+        </div>
+        <div class="review-total">
+          <span>الإجمالي</span>
+          <strong class="review-total-value"><span id="sheetTotal">0</span><img class="sar-symbol" src="sar-symbol.png" alt="ريال سعودي"></strong>
+        </div>
+      </div>
+      <button id="toggleCartItemsBtn" class="cart-items-toggle" type="button" aria-expanded="false" aria-controls="cartItemsPanel">
+        <span class="cart-items-toggle-copy">
+          <strong>عرض الأصناف المضافة</strong>
+          <small><b id="cartPreviewCount">0</b> صنف في الطلب</small>
+        </span>
+        <span class="cart-items-toggle-arrow" aria-hidden="true">⌄</span>
+      </button>
+      <div id="cartItemsPanel" class="cart-items-panel" hidden>
+        <div id="cartItems" class="cart-items"></div>
+        <button id="clearCartBtn" class="danger-btn" type="button">حذف جميع الأصناف</button>
+      </div>
+      <button id="toggleCheckoutBtn" class="checkout-toggle" type="button" aria-expanded="false" aria-controls="checkoutPanel">
+        <span class="checkout-toggle-copy">
+          <strong>إكمال الطلب</strong>
+          <small>نوع الطلب ورقم الجوال والملاحظات</small>
+        </span>
+        <span class="checkout-toggle-arrow" aria-hidden="true">⌄</span>
+      </button>
+      <div id="checkoutPanel" class="checkout-panel" hidden>
+      <div class="order-box">
+        <h3>نوع الطلب</h3>
+        <div class="order-types">
+          <label><input type="radio" name="orderType" value="استلام" checked> استلام</label>
+          <label><input type="radio" name="orderType" value="توصيل"> توصيل</label>
+        </div>
+        <label class="field-label" for="phoneInput">رقم الجوال *</label>
+        <input id="phoneInput" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="05XXXXXXXX">
+        <div id="locationWrap" hidden>
+          <div class="location-status"><span>🚚</span><span>يتم تحديد رسوم التوصيل من قبل المطعم بعد استلام الطلب.</span></div>
+          <label class="field-label">موقع التوصيل *</label>
+          <div id="locationStatus" class="location-status loading" role="status">
+            <span id="locationStatusIcon">⏳</span>
+            <span id="locationStatusText">جارٍ تحديد موقعك...</span>
+          </div>
+          <button id="retryLocationBtn" class="retry-location-btn" type="button" hidden>📍 إعادة تحديد الموقع</button>
+          <input id="locationInput" type="hidden">
+        </div>
+        <label class="field-label" for="notesInput">ملاحظات الطلب</label>
+        <textarea id="notesInput" class="field" rows="3" placeholder="مثال: بدون شطة"></textarea>
+        <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب عبر واتساب</button>
+      </div>
+      </div>
+    </section>
+  </div>
+  <div id="phoneGate" class="phone-gate" aria-hidden="true" hidden>
+    <div class="phone-gate-backdrop" aria-hidden="true"></div>
+    <form id="phoneGateForm" class="phone-gate-card" role="dialog" aria-modal="true" aria-labelledby="phoneGateTitle">
+      <span class="phone-gate-kicker">مرحبًا بك</span>
+      <h2 id="phoneGateTitle">أدخل رقم جوالك</h2>
+      <p>سيُحفظ تلقائيًا ويُضاف إلى بيانات طلبك.</p>
+      <label class="phone-gate-label" for="welcomePhoneInput">رقم الجوال</label>
+      <input id="welcomePhoneInput" class="phone-gate-input" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="05XXXXXXXX" required>
+      <small id="welcomePhoneError" class="phone-gate-error" role="alert" hidden>أدخل رقمًا سعوديًا صحيحًا يبدأ بـ 05 ويتكون من 10 أرقام.</small>
+      <button class="phone-gate-submit" type="submit">دخول إلى المنيو</button>
+    </form>
+  </div>
+  <script src="menu-data.js?v=20260806-categories-fixed"></script>
+  <script src="script.js?v=20260810-customer-flow-v1"></script>
+</body>
+</html>
