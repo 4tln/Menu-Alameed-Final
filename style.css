@@ -1194,7 +1194,7 @@ body{padding-top:0!important;}
   background:
     radial-gradient(circle at 50% 43%,rgba(196,122,67,.13),transparent 38%),
     linear-gradient(145deg,#311a12 0%,var(--brand-deep) 54%,#1b0e0a 100%);
-  animation:brandSplashOut .46s cubic-bezier(.55,0,.25,1) 1.78s forwards;
+  animation:brandSplashOut .01s linear 1.72s forwards;
   -webkit-touch-callout:none;
   user-select:none;
 }
@@ -1441,7 +1441,7 @@ body.modal-open .offers-badge{
   .offer-photo-label{right:9px;bottom:8px;padding:6px 10px;font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){
-  .brand-splash{animation-delay:.2s;animation-duration:.2s}
+  .brand-splash{animation-delay:.2s;animation-duration:.01s}
   .brand-splash-logo{animation:none}
 }
 
@@ -2458,7 +2458,7 @@ body{padding-bottom:78px!important}
 }
 .sticky-tools .search-box input{
   padding:7px 0!important;
-  font-size:13px!important;
+  font-size:16px!important;
 }
 .sticky-tools .search-box > span{
   font-size:17px!important;
@@ -2501,7 +2501,7 @@ body{padding-bottom:78px!important}
   }
   .sticky-tools .search-box input{
     padding:6px 0!important;
-    font-size:12.5px!important;
+    font-size:16px!important;
   }
   #categoryTabs.category-tabs{
     margin-top:4px!important;
@@ -2698,19 +2698,19 @@ body{
   background-attachment:fixed;
 }
 
-/* شارة العروض تظهر وسط المنيو لمدة 15 ثانية فقط */
+/* شارة العروض تظهر في يسار منتصف الشاشة لمدة 15 ثانية فقط */
 .offers-badge{
   top:50%!important;
   right:auto!important;
   bottom:auto!important;
-  left:50%!important;
+  left:8px!important;
   min-height:36px!important;
   padding:5px 8px 5px 7px!important;
   gap:5px!important;
   border-radius:14px!important;
   font-size:10px!important;
-  transform:translate(-50%,-50%)!important;
-  animation:offersBadgeCenteredIn .38s cubic-bezier(.2,.8,.2,1) both!important;
+  transform:translateY(-50%)!important;
+  animation:offersBadgeLeftIn .38s cubic-bezier(.2,.8,.2,1) both!important;
 }
 .offers-badge-mark{
   width:22px!important;
@@ -2720,15 +2720,15 @@ body{
 }
 .offers-badge.is-hiding{
   pointer-events:none!important;
-  animation:offersBadgeCenteredOut .30s ease forwards!important;
+  animation:offersBadgeLeftOut .30s ease forwards!important;
 }
-@keyframes offersBadgeCenteredIn{
-  from{opacity:0;transform:translate(-50%,calc(-50% + 12px)) scale(.92)}
-  to{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@keyframes offersBadgeLeftIn{
+  from{opacity:0;transform:translate(-14px,-50%) scale(.92)}
+  to{opacity:1;transform:translateY(-50%) scale(1)}
 }
-@keyframes offersBadgeCenteredOut{
-  from{opacity:1;transform:translate(-50%,-50%) scale(1)}
-  to{opacity:0;transform:translate(-50%,calc(-50% - 8px)) scale(.94)}
+@keyframes offersBadgeLeftOut{
+  from{opacity:1;transform:translateY(-50%) scale(1)}
+  to{opacity:0;transform:translate(-10px,-50%) scale(.94)}
 }
 
 /* الأسهم داخل مربعات أنيقة مع بقاء حجم الخانات كما هو */
@@ -2759,19 +2759,19 @@ body{
 /* إجمالي واضح وبنفس لون خطوط الموقع */
 .review-total .review-total-value{
   color:var(--text)!important;
-  font-size:24px!important;
-  font-weight:950!important;
-  line-height:1.05!important;
+  font-size:19px!important;
+  font-weight:700!important;
+  line-height:1!important;
   gap:4px!important;
 }
 .review-total #sheetTotal{
   color:var(--text)!important;
-  font-size:24px!important;
-  font-weight:950!important;
+  font-size:19px!important;
+  font-weight:700!important;
 }
 .review-total .sar-symbol{
-  width:24px!important;
-  height:24px!important;
+  width:20px!important;
+  height:20px!important;
   opacity:1!important;
   filter:none!important;
 }
@@ -2829,6 +2829,6 @@ body{
     top:50%!important;
     right:auto!important;
     bottom:auto!important;
-    left:50%!important;
+    left:8px!important;
   }
 }

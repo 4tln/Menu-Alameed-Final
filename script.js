@@ -215,14 +215,14 @@ function businessStatusFor(date, prayers){
       return {type:"open",title:"مفتوح الآن",note:"يستقبل الطلبات حتى 3:00 م",isOpen:true};
     }
     if(minute >= 15 * 60 && minute < 16 * 60){
-      return {type:"break",title:"استراحة — الطلبات مستمرة",note:"يبدأ التجهيز مرة أخرى 4:00 م",isOpen:false};
+      return {type:"break",title:"استراحة",note:"يبدأ التجهيز مرة أخرى 4:00 م",isOpen:false};
     }
     if(minute >= 16 * 60){
       return {type:"open",title:"مفتوح الآن",note:"يستقبل الطلبات حتى 12:30 ص",isOpen:true};
     }
     return {
       type:"closed",
-      title:"مغلق الآن — الطلبات مستمرة",
+      title:"مغلق الآن",
       note:`يبدأ التجهيز بعد صلاة الجمعة ${fridayOpeningText}`,
       isOpen:false
     };
@@ -232,12 +232,12 @@ function businessStatusFor(date, prayers){
     return {type:"open",title:"مفتوح الآن",note:"يستقبل الطلبات حتى 3:00 م",isOpen:true};
   }
   if(minute >= 15 * 60 && minute < 16 * 60){
-    return {type:"break",title:"استراحة — الطلبات مستمرة",note:"يبدأ التجهيز مرة أخرى 4:00 م",isOpen:false};
+    return {type:"break",title:"استراحة",note:"يبدأ التجهيز مرة أخرى 4:00 م",isOpen:false};
   }
   if(minute >= 16 * 60){
     return {type:"open",title:"مفتوح الآن",note:"يستقبل الطلبات حتى 12:30 ص",isOpen:true};
   }
-  return {type:"closed",title:"مغلق الآن — الطلبات مستمرة",note:"يبدأ التجهيز عند الفتح 11:00 ص",isOpen:false};
+  return {type:"closed",title:"مغلق الآن",note:"يبدأ التجهيز عند الفتح 11:00 ص",isOpen:false};
 }
 
 function getRestaurantStatus(date = new Date()){
@@ -250,7 +250,7 @@ function getRestaurantStatus(date = new Date()){
   const prayerLabel = activePrayer.name.startsWith("صلاة") ? activePrayer.name : `صلاة ${activePrayer.name}`;
   return {
     type:"prayer",
-    title:isFridayPrayer ? "وقت صلاة الجمعة الآن — الطلبات مستمرة" : "وقت الصلاة الآن — الطلبات مستمرة",
+    title:isFridayPrayer ? "وقت صلاة الجمعة الآن" : "وقت الصلاة الآن",
     note:business.isOpen
       ? `يمكنك إرسال الطلب الآن، ويبدأ التجهيز بعد ${prayerLabel} عند ${formatRestaurantTime(activePrayer.end)}`
       : "يمكنك إرسال الطلب الآن، ويبدأ التجهيز بعد الصلاة وفي وقت الدوام",
@@ -298,7 +298,7 @@ if(brandSplash){
     if(event.animationName === "brandSplashOut") removeBrandSplash();
   });
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  window.setTimeout(removeBrandSplash, reducedMotion ? 700 : 2600);
+  window.setTimeout(removeBrandSplash, reducedMotion ? 250 : 1850);
 }else{
   startOffersBadgeWindow();
 }
