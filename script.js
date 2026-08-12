@@ -69,6 +69,9 @@ const locationStatusText = document.getElementById("locationStatusText");
 const retryLocationBtn = document.getElementById("retryLocationBtn");
 const brandSplash = document.getElementById("brandSplash");
 const offersBadge = document.getElementById("offersBadge");
+const OFFERS_BADGE_DURATION_MS = 15000;
+let offersBadgeExpired = false;
+let offersBadgeTimer = 0;
 const shareBtn = document.getElementById("shareBtn");
 const refreshBtn = document.getElementById("refreshBtn");
 const storeStatusBtn = document.getElementById("storeStatusBtn");
@@ -76,6 +79,26 @@ const storeStatusIcon = document.getElementById("storeStatusIcon");
 const storeStatusTitle = document.getElementById("storeStatusTitle");
 const storeStatusNote = document.getElementById("storeStatusNote");
 const storeHoursPanel = document.getElementById("storeHoursPanel");
+
+function syncOffersBadgeVisibility(){
+  if(!offersBadge) return;
+  offersBadge.hidden = offersBadgeExpired || activeCategory === "العروض";
+}
+
+function startOffersBadgeWindow(){
+  if(!offersBadge || offersBadgeTimer) return;
+  offersBadgeExpired = false;
+  offersBadge.classList.remove("is-hiding");
+  syncOffersBadgeVisibility();
+  offersBadgeTimer = window.setTimeout(() => {
+    offersBadgeExpired = true;
+    offersBadge.classList.add("is-hiding");
+    window.setTimeout(() => {
+      offersBadge.hidden = true;
+      offersBadge.classList.remove("is-hiding");
+    }, 320);
+  }, OFFERS_BADGE_DURATION_MS);
+}
 
 const restaurantPartsFormatter = new Intl.DateTimeFormat("en-GB", {
   timeZone: RESTAURANT_TIME_ZONE,
@@ -266,6 +289,7 @@ if(brandSplash){
     if(splashFinished) return;
     splashFinished = true;
     if(brandSplash.isConnected) brandSplash.remove();
+    startOffersBadgeWindow();
   };
   ["contextmenu","dragstart","selectstart","auxclick"].forEach(eventName => {
     brandSplash.addEventListener(eventName, event => event.preventDefault(), {capture:true});
@@ -275,6 +299,8 @@ if(brandSplash){
   });
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.setTimeout(removeBrandSplash, reducedMotion ? 700 : 2600);
+}else{
+  startOffersBadgeWindow();
 }
 function setLocationStatus(type, text){
   locationStatus.className = `location-status ${type}`;
@@ -363,7 +389,7 @@ function renderTabs(){
       ${escapeHtml(section.category)}
     </button>
   `).join("");
-  if(offersBadge) offersBadge.hidden = activeCategory === "العروض";
+  syncOffersBadgeVisibility();
 }
 function renderMenu(){
   const normalized = searchTerm.trim().toLowerCase();
@@ -545,6 +571,12 @@ function setCheckoutExpanded(expanded){
   toggleCheckoutBtn.classList.toggle("expanded", shouldExpand);
   const label = toggleCheckoutBtn.querySelector(".checkout-toggle-copy strong");
   if(label) label.textContent = shouldExpand ? "إخفاء بيانات الطلب" : "إكمال الطلب";
+  if(shouldExpand){
+    window.requestAnimationFrame(() => {
+      const sheet = checkoutPanel.closest(".sheet");
+      sheet?.scrollTo({top:sheet.scrollHeight,behavior:"smooth"});
+    });
+  }
 }
 function openCart(){
   renderCart();
@@ -603,10 +635,11 @@ function sendOrder(){
   lastSend = Date.now();
   const info = totals();
   const orderNumber = generateOrderNumber();
+  const orderTypeIcon = orderType === "توصيل" ? "🚚" : orderType === "محلي" ? "🍽️" : "🏪";
   const lines = [
     "📦 طلب جديد",
     "",
-    `${orderType === "توصيل" ? "🚚" : "🏪"} ${orderType}`
+    `${orderTypeIcon} ${orderType}`
   ];
   if(orderType === "توصيل"){
     lines.push(`📍 ${customerLocation.address || customerLocation.link}`);

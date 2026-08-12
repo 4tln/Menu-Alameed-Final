@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#24130e">
+  <meta name="theme-color" content="#efe3d3">
   <meta name="description" content="منيو مطعم فطائر العميد والطلب عبر واتساب">
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20260812-no-phone-v1">
+  <link rel="stylesheet" href="style.css?v=20260812-final-layout-v1">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -101,7 +101,7 @@
       <button id="toggleCheckoutBtn" class="checkout-toggle" type="button" aria-expanded="false" aria-controls="checkoutPanel">
         <span class="checkout-toggle-copy">
           <strong>إكمال الطلب</strong>
-          <small>نوع الطلب والملاحظات</small>
+          <small>نوع الطلب والملاحظات وإرسال الطلب للمطعم</small>
         </span>
         <span class="checkout-toggle-arrow" aria-hidden="true">⌄</span>
       </button>
@@ -111,6 +111,7 @@
         <div class="order-types">
           <label><input type="radio" name="orderType" value="استلام" checked> استلام</label>
           <label><input type="radio" name="orderType" value="توصيل"> توصيل</label>
+          <label><input type="radio" name="orderType" value="محلي"> محلي</label>
         </div>
         <div id="locationWrap" hidden>
           <div class="location-status"><span>🚚</span><span>يتم تحديد رسوم التوصيل من قبل المطعم بعد استلام الطلب.</span></div>
@@ -123,14 +124,14 @@
           <input id="locationInput" type="hidden">
         </div>
         <label class="field-label" for="notesInput">ملاحظات الطلب</label>
-        <textarea id="notesInput" class="field" rows="3" placeholder="مثال: بدون شطة"></textarea>
-        <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب عبر واتساب</button>
+        <textarea id="notesInput" class="field" rows="2" placeholder="مثال: بدون شطة"></textarea>
+        <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب للمطعم</button>
       </div>
       </div>
     </section>
   </div>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20260806-categories-fixed"></script>
-  <script src="script.js?v=20260812-no-phone-v1"></script>
+  <script src="script.js?v=20260812-final-layout-v1"></script>
 </body>
 </html>
