@@ -1304,8 +1304,7 @@ body{padding-top:0!important;}
   from{opacity:0;transform:translateX(16px)}
   to{opacity:1;transform:translateX(0)}
 }
-body.modal-open .offers-badge,
-body.phone-gate-open .offers-badge{
+body.modal-open .offers-badge{
   opacity:0!important;
   visibility:hidden!important;
   pointer-events:none!important;
@@ -1397,110 +1396,6 @@ body.phone-gate-open .offers-badge{
 .review-total .review-total-value .sar-symbol{order:2!important}
 .review-total .review-cart-icon{display:none!important}
 
-.phone-gate[hidden]{display:none!important}
-.phone-gate{
-  position:fixed;
-  z-index:950;
-  inset:0;
-  display:grid;
-  place-items:center;
-  padding:20px;
-  opacity:1;
-  transition:opacity .2s ease;
-}
-.phone-gate.is-closing{opacity:0}
-.phone-gate-backdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(45,27,17,.28);
-  -webkit-backdrop-filter:blur(9px) saturate(110%);
-  backdrop-filter:blur(9px) saturate(110%);
-}
-.phone-gate-card{
-  position:relative;
-  width:min(90vw,350px);
-  padding:21px 19px 18px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.92);
-  border-radius:24px;
-  background:linear-gradient(150deg,rgba(255,252,247,.90),rgba(243,225,204,.82));
-  box-shadow:0 24px 54px rgba(55,30,14,.24),inset 0 1px 0 #fff;
-  color:#3e2818;
-  text-align:center;
-  -webkit-backdrop-filter:blur(24px) saturate(140%);
-  backdrop-filter:blur(24px) saturate(140%);
-  animation:phoneGateIn .38s cubic-bezier(.2,.75,.25,1) both;
-}
-.phone-gate-kicker{
-  display:inline-block;
-  margin-bottom:5px;
-  color:#9a6238;
-  font-size:11px;
-  font-weight:900;
-}
-.phone-gate-card h2{margin:0;font-size:22px;font-weight:950}
-.phone-gate-card p{margin:7px 0 14px;color:#806d5e;font-size:12px;font-weight:700}
-.phone-gate-label{
-  display:block;
-  margin-bottom:6px;
-  color:#5f422d;
-  font-size:11px;
-  font-weight:900;
-  text-align:right;
-}
-.phone-gate-input{
-  width:100%;
-  min-height:50px;
-  padding:10px 13px;
-  border:1px solid rgba(112,69,38,.19);
-  border-radius:15px;
-  outline:0;
-  background:rgba(255,255,255,.76);
-  color:#3f2818;
-  box-shadow:inset 0 1px 0 #fff;
-  direction:ltr;
-  font-size:19px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-align:center;
-}
-.phone-gate-input:focus{
-  border-color:#a66b3e;
-  box-shadow:0 0 0 3px rgba(166,107,62,.13),inset 0 1px 0 #fff;
-}
-.phone-gate-error{
-  margin:7px 2px 0;
-  display:block;
-  color:#a52a2f;
-  font-size:10.5px;
-  font-weight:850;
-  line-height:1.4;
-}
-.phone-gate-error[hidden]{display:none!important}
-.phone-gate-submit{
-  width:100%;
-  min-height:46px;
-  margin-top:12px;
-  border:1px solid rgba(255,255,255,.20);
-  border-radius:15px;
-  background:linear-gradient(135deg,#744a29,#482a18);
-  color:#fff;
-  box-shadow:0 9px 18px rgba(67,37,18,.18),inset 0 1px 0 rgba(255,255,255,.18);
-  font-size:13px;
-  font-weight:950;
-}
-body.phone-gate-open{overflow:hidden!important}
-@keyframes phoneGateIn{
-  from{opacity:0;transform:translateY(15px) scale(.96)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-@keyframes phoneGateShake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-6px)}
-  75%{transform:translateX(6px)}
-}
-.phone-gate-card.is-invalid{animation:phoneGateShake .28s ease}
-
 @media(max-width:520px){
   .quick-actions{margin-top:4px;gap:4px}
   .quick-action{min-height:30px;padding:4px 6px;border-radius:11px;font-size:10px}
@@ -1508,8 +1403,6 @@ body.phone-gate-open{overflow:hidden!important}
   .offers-badge{right:8px;bottom:max(72px,calc(env(safe-area-inset-bottom) + 68px));min-height:39px;padding:6px 8px;font-size:10px}
   .offers-badge-mark{width:23px;height:23px;border-radius:8px;font-size:14px}
   .offer-components span{font-size:10.5px}
-  .phone-gate{padding:15px}
-  .phone-gate-card{width:min(92vw,340px);padding:19px 16px 16px;border-radius:22px}
 }
 .offers-section{display:block}
 .offer-photo{

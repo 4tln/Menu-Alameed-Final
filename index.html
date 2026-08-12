@@ -7,7 +7,7 @@
   <meta name="description" content="منيو مطعم فطائر العميد والطلب عبر واتساب">
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20260811-protected-sar-v1">
+  <link rel="stylesheet" href="style.css?v=20260812-no-phone-v1">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -101,7 +101,7 @@
       <button id="toggleCheckoutBtn" class="checkout-toggle" type="button" aria-expanded="false" aria-controls="checkoutPanel">
         <span class="checkout-toggle-copy">
           <strong>إكمال الطلب</strong>
-          <small>نوع الطلب ورقم الجوال والملاحظات</small>
+          <small>نوع الطلب والملاحظات</small>
         </span>
         <span class="checkout-toggle-arrow" aria-hidden="true">⌄</span>
       </button>
@@ -112,8 +112,6 @@
           <label><input type="radio" name="orderType" value="استلام" checked> استلام</label>
           <label><input type="radio" name="orderType" value="توصيل"> توصيل</label>
         </div>
-        <label class="field-label" for="phoneInput">رقم الجوال *</label>
-        <input id="phoneInput" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="05XXXXXXXX">
         <div id="locationWrap" hidden>
           <div class="location-status"><span>🚚</span><span>يتم تحديد رسوم التوصيل من قبل المطعم بعد استلام الطلب.</span></div>
           <label class="field-label">موقع التوصيل *</label>
@@ -131,20 +129,8 @@
       </div>
     </section>
   </div>
-  <div id="phoneGate" class="phone-gate" aria-hidden="true" hidden>
-    <div class="phone-gate-backdrop" aria-hidden="true"></div>
-    <form id="phoneGateForm" class="phone-gate-card" role="dialog" aria-modal="true" aria-labelledby="phoneGateTitle">
-      <span class="phone-gate-kicker">مرحبًا بك</span>
-      <h2 id="phoneGateTitle">أدخل رقم جوالك</h2>
-      <p>سيُحفظ تلقائيًا ويُضاف إلى بيانات طلبك.</p>
-      <label class="phone-gate-label" for="welcomePhoneInput">رقم الجوال</label>
-      <input id="welcomePhoneInput" class="phone-gate-input" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="05XXXXXXXX" required>
-      <small id="welcomePhoneError" class="phone-gate-error" role="alert" hidden>أدخل رقمًا سعوديًا صحيحًا يبدأ بـ 05 ويتكون من 10 أرقام.</small>
-      <button class="phone-gate-submit" type="submit">دخول إلى المنيو</button>
-    </form>
-  </div>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20260806-categories-fixed"></script>
-  <script src="script.js?v=20260811-protected-sar-v1"></script>
+  <script src="script.js?v=20260812-no-phone-v1"></script>
 </body>
 </html>

@@ -46,15 +46,16 @@ const cartTotal = document.getElementById("cartTotal");
 const sheetTotal = document.getElementById("sheetTotal");
 const sheetCount = document.getElementById("sheetCount");
 const clearCartBtn = document.getElementById("clearCartBtn");
-const phoneInput = document.getElementById("phoneInput");
 const locationInput = document.getElementById("locationInput");
 const locationWrap = document.getElementById("locationWrap");
 const notesInput = document.getElementById("notesInput");
 const sendOrderBtn = document.getElementById("sendOrderBtn");
 const toast = document.getElementById("toast");
-const PHONE_KEY = "alameed_phone";
-const PHONE_GATE_KEY = "alameed_phone_gate_v1";
 const SEND_DELAY_MS = 30000;
+try{
+  localStorage.removeItem("alameed_phone");
+  localStorage.removeItem("alameed_phone_gate_v1");
+}catch{}
 let customerLocation = {
   link: "",
   latitude: null,
@@ -67,10 +68,6 @@ const locationStatusIcon = document.getElementById("locationStatusIcon");
 const locationStatusText = document.getElementById("locationStatusText");
 const retryLocationBtn = document.getElementById("retryLocationBtn");
 const brandSplash = document.getElementById("brandSplash");
-const phoneGate = document.getElementById("phoneGate");
-const phoneGateForm = document.getElementById("phoneGateForm");
-const welcomePhoneInput = document.getElementById("welcomePhoneInput");
-const welcomePhoneError = document.getElementById("welcomePhoneError");
 const offersBadge = document.getElementById("offersBadge");
 const shareBtn = document.getElementById("shareBtn");
 const refreshBtn = document.getElementById("refreshBtn");
@@ -269,7 +266,6 @@ if(brandSplash){
     if(splashFinished) return;
     splashFinished = true;
     if(brandSplash.isConnected) brandSplash.remove();
-    window.setTimeout(maybeShowPhoneGate, 100);
   };
   ["contextmenu","dragstart","selectstart","auxclick"].forEach(eventName => {
     brandSplash.addEventListener(eventName, event => event.preventDefault(), {capture:true});
@@ -279,74 +275,7 @@ if(brandSplash){
   });
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.setTimeout(removeBrandSplash, reducedMotion ? 700 : 2600);
-}else{
-  window.setTimeout(maybeShowPhoneGate, 180);
 }
-const savedPhone = normalizePhone(localStorage.getItem(PHONE_KEY) || "");
-phoneInput.value = savedPhone;
-if(welcomePhoneInput) welcomePhoneInput.value = savedPhone;
-
-function normalizePhone(value){
-  return String(value || "").replace(/\D/g, "").slice(0, 10);
-}
-function savePhoneDraft(value){
-  const cleanPhone = normalizePhone(value);
-  localStorage.setItem(PHONE_KEY, cleanPhone);
-  if(!validatePhone(cleanPhone)) localStorage.removeItem(PHONE_GATE_KEY);
-  return cleanPhone;
-}
-function maybeShowPhoneGate(){
-  if(!phoneGate || !welcomePhoneInput) return;
-  const currentPhone = normalizePhone(localStorage.getItem(PHONE_KEY) || "");
-  const completed = localStorage.getItem(PHONE_GATE_KEY) === "1" && validatePhone(currentPhone);
-  if(completed){
-    phoneInput.value = currentPhone;
-    return;
-  }
-  welcomePhoneInput.value = currentPhone;
-  phoneGate.hidden = false;
-  phoneGate.setAttribute("aria-hidden", "false");
-  document.body.classList.add("phone-gate-open");
-  window.setTimeout(() => welcomePhoneInput.focus(), 160);
-}
-function closePhoneGate(){
-  if(!phoneGate) return;
-  phoneGate.classList.add("is-closing");
-  window.setTimeout(() => {
-    phoneGate.hidden = true;
-    phoneGate.setAttribute("aria-hidden", "true");
-    phoneGate.classList.remove("is-closing");
-    document.body.classList.remove("phone-gate-open");
-  }, 220);
-}
-phoneInput.addEventListener("input", () => {
-  const cleanPhone = savePhoneDraft(phoneInput.value);
-  phoneInput.value = cleanPhone;
-  if(welcomePhoneInput) welcomePhoneInput.value = cleanPhone;
-  if(validatePhone(cleanPhone)) localStorage.setItem(PHONE_GATE_KEY, "1");
-});
-welcomePhoneInput?.addEventListener("input", () => {
-  const cleanPhone = savePhoneDraft(welcomePhoneInput.value);
-  welcomePhoneInput.value = cleanPhone;
-  phoneInput.value = cleanPhone;
-  if(welcomePhoneError) welcomePhoneError.hidden = true;
-});
-phoneGateForm?.addEventListener("submit", event => {
-  event.preventDefault();
-  const cleanPhone = normalizePhone(welcomePhoneInput.value);
-  if(!validatePhone(cleanPhone)){
-    welcomePhoneError.hidden = false;
-    welcomePhoneInput.focus();
-    phoneGateForm.classList.remove("is-invalid");
-    void phoneGateForm.offsetWidth;
-    phoneGateForm.classList.add("is-invalid");
-    return;
-  }
-  localStorage.setItem(PHONE_KEY, cleanPhone);
-  localStorage.setItem(PHONE_GATE_KEY, "1");
-  phoneInput.value = cleanPhone;
-  closePhoneGate();
-});
 function setLocationStatus(type, text){
   locationStatus.className = `location-status ${type}`;
   locationStatusIcon.textContent = type === "success" ? "✅" : type === "error" ? "❌" : "⏳";
@@ -641,9 +570,6 @@ function showToast(message){
 function selectedOrderType(){
   return document.querySelector('input[name="orderType"]:checked')?.value || "استلام";
 }
-function validatePhone(phone){
-  return /^05\d{8}$/.test(phone);
-}
 function generateOrderNumber(){
   const datePart = new Date().toISOString().slice(5,10).replace("-", "");
   const randomPart = Math.floor(1000 + Math.random() * 9000);
@@ -661,18 +587,7 @@ function sendOrder(){
     return;
   }
   const orderType = selectedOrderType();
-  const phone = phoneInput.value.replace(/\D/g, "");
   const notes = notesInput.value.trim();
-  if(!phone){
-    alert("يرجى إدخال رقم الجوال لإكمال الطلب.");
-    phoneInput.focus();
-    return;
-  }
-  if(!validatePhone(phone)){
-    alert("الرجاء إدخال رقم جوال سعودي صحيح يبدأ بـ 05 ويتكون من 10 أرقام.");
-    phoneInput.focus();
-    return;
-  }
   if(orderType === "توصيل" && !customerLocation.link){
     alert("يرجى السماح بالوصول للموقع ثم إعادة المحاولة.");
     locationWrap.hidden = false;
@@ -691,8 +606,7 @@ function sendOrder(){
   const lines = [
     "📦 طلب جديد",
     "",
-    `${orderType === "توصيل" ? "🚚" : "🏪"} ${orderType}`,
-    `📞 ${phone}`
+    `${orderType === "توصيل" ? "🚚" : "🏪"} ${orderType}`
   ];
   if(orderType === "توصيل"){
     lines.push(`📍 ${customerLocation.address || customerLocation.link}`);
