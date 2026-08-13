@@ -721,7 +721,17 @@ function orderItemLabel(item){
   return size && size !== "السعر" ? `${size} ${name}` : name;
 }
 function orderQuantityLine(label, qty){
-  return `" ${money(qty)} " ${label}`;
+  return `*${money(qty)}ـ* ${label}`;
+}
+function openWhatsAppInCurrentPage(url){
+  const link = document.createElement("a");
+  link.href = url;
+  link.target = "_self";
+  link.rel = "noopener";
+  link.hidden = true;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
 }
 function generateOrderNumber(){
   const datePart = new Date().toISOString().slice(5,10).replace("-", "");
@@ -762,17 +772,15 @@ function sendOrder(){
   if(!confirm("هل تريد إرسال الطلب إلى واتساب المطعم؟")) return;
   lastSend = Date.now();
   const info = totals();
-  const orderNumber = generateOrderNumber();
-  const orderTypeIcon = orderType === "توصيل" ? "🚚" : orderType === "محلي" ? "🍽️" : "🏪";
-  const lines = ["📦 طلب جديد", ""];
+  const lines = ["          ```📦 طلب جديد```", ""];
   if(orderType === "توصيل"){
-    lines.push(`🚚 توصيل: ${placeName}`);
-    lines.push("📍 الموقع:");
+    lines.push(`             *🚚 توصيل: ${placeName}*`);
     lines.push(customerLocation.link);
+  }else if(orderType === "محلي"){
+    lines.push("              *# محلــي*");
   }else{
-    lines.push(`${orderTypeIcon} ${orderType}`);
+    lines.push("              *# استــلام*");
   }
-  lines.push("", "🍽️ الطلبات:", "");
   cart.forEach(item => {
     lines.push(orderQuantityLine(orderItemLabel(item), item.qty));
   });
@@ -780,11 +788,12 @@ function sendOrder(){
     lines.push(orderQuantityLine("تأمين الصحن", info.depositQty));
   }
   if(notes){
-    lines.push("", "📝 الملاحظات:", notes);
+    lines.push("", "*📝 الملاحظات:*", notes);
   }
   registerOrderedProducts();
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
-  window.open(url, "_blank", "noopener");
+  closeCart();
+  openWhatsAppInCurrentPage(url);
 }
 function selectCategory(category){
   if(!window.MENU_DATA.some(section => section.category === category)) return;
