@@ -254,20 +254,31 @@ button{cursor:pointer}
   margin-bottom:11px;
 }
 .item-name{margin:0;font-size:18px;font-weight:900;color:var(--brand-dark)}
-.variant-grid{display:grid;gap:8px}
+.variant-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:7px;
+}
+.variant-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.variant-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .variant-btn{
   width:100%;
-  padding:12px 14px;
+  min-width:0;
+  min-height:45px;
+  padding:11px 7px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:4px;
   border:1px solid rgba(101,67,36,.08);
   border-radius:11px;
   background:linear-gradient(180deg,#f8efe4,#f0e2d1);
   color:var(--brand-dark);
+  font-size:13px;
   font-weight:800;
   transition:transform .15s ease;
 }
+.variant-btn>span:first-child{white-space:nowrap}
 .variant-btn:active{transform:scale(.985)}
 .variant-btn .price{color:#6b4728}
 .popular-badge{
@@ -710,6 +721,21 @@ box-shadow:0 0 0 2px rgba(231,191,98,.35),0 12px 26px rgba(0,0,0,.25);
     min-height:46px !important;
     padding:9px 15px !important;
     font-size:11px !important;
+  }
+}
+
+/* إبقاء مستطيلات المقاسات واضحة حتى على الجوالات الضيقة */
+@media(max-width:360px){
+  .variant-grid{gap:5px}
+  .variant-grid-3 .variant-btn{
+    padding-inline:4px;
+    font-size:11.5px;
+  }
+  .variant-grid-3 .variant-btn .price{font-size:11.5px}
+  .variant-grid-3 .variant-btn .sar-symbol{
+    width:13px;
+    height:13px;
+    margin-inline-start:1px;
   }
 }
 
@@ -2823,7 +2849,7 @@ body{
   }
 }
 
-/* ===== 2026-08-13: عداد الزوار والأقسام المستقلة ===== */
+/* ===== 2026-08-13: الأقسام المستقلة ===== */
 .sticky-stack{
   position:-webkit-sticky;
   position:sticky;
@@ -2839,30 +2865,6 @@ body{
   z-index:auto!important;
   width:100%!important;
   margin:0!important;
-}
-.visitor-count{
-  min-width:72px;
-  height:30px;
-  flex:0 0 auto;
-  padding:0 8px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-  border:1px solid rgba(101,67,36,.16);
-  border-radius:9px;
-  background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(235,218,198,.86));
-  color:inherit;
-  box-shadow:0 4px 10px rgba(74,43,24,.08),inset 0 1px 0 #fff;
-  font-family:inherit;
-  font-size:10px;
-  font-weight:800;
-  line-height:1;
-  white-space:nowrap;
-}
-.visitor-count b{
-  font:inherit;
-  font-weight:900;
 }
 .category-panel{
   position:relative;
@@ -2928,13 +2930,6 @@ body.modal-open .sticky-stack{
   .sticky-stack>.sticky-tools{
     width:100%!important;
     border-radius:20px!important;
-  }
-  .visitor-count{
-    min-width:66px;
-    height:28px;
-    padding:0 6px;
-    border-radius:8px;
-    font-size:9.5px;
   }
   .category-panel{
     margin-top:5px;

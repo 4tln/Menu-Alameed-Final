@@ -8,11 +8,6 @@ const RESTAURANT_TIME_ZONE = "Asia/Riyadh";
 const RESTAURANT_COORDINATES = Object.freeze({latitude:17.33848,longitude:43.13289});
 const NORMAL_PRAYER_NOTICE_MINUTES = 30;
 const FRIDAY_PRAYER_NOTICE_MINUTES = 45;
-const VISITOR_COUNTER_URL = "https://counterapi.com/api/4tln.github.io/visit/menu-alameed-unique-v1";
-const VISITOR_COUNTED_KEY = "alameed_visitor_counted_v1";
-const VISITOR_LAST_COUNT_KEY = "alameed_visitor_last_count_v1";
-const VISITOR_REQUEST_TIMEOUT_MS = 7000;
-const VISITOR_REFRESH_INTERVAL_MS = 60000;
 const productOrderCounts = {};
 const ORDER_COUNTS_KEY = "alameed_product_order_counts_v1";
 function loadProductOrderCounts(){
@@ -86,15 +81,12 @@ const storeStatusIcon = document.getElementById("storeStatusIcon");
 const storeStatusTitle = document.getElementById("storeStatusTitle");
 const storeStatusNote = document.getElementById("storeStatusNote");
 const storeHoursPanel = document.getElementById("storeHoursPanel");
-const visitorCount = document.getElementById("visitorCount");
-const visitorCountNumber = document.getElementById("visitorCountNumber");
 const LOCATION_TARGET_ACCURACY_METERS = 25;
 const LOCATION_MAX_WAIT_MS = 18000;
 let locationWatchId = null;
 let locationWaitTimer = 0;
 let bestLocationPosition = null;
 let locationRequestSerial = 0;
-let visitorUpdateInFlight = false;
 
 function syncOffersBadgeVisibility(){
   if(!offersBadge) return;
@@ -285,71 +277,16 @@ function updateStoreStatus(date = new Date()){
   storeStatusBtn.setAttribute("aria-label", `${status.title}. ${status.note}. اضغط لعرض أوقات الدوام`);
 }
 
-function storedVisitorValue(key){
-  try{return localStorage.getItem(key)}catch{return null}
-}
-
-function saveVisitorValue(key,value){
-  try{localStorage.setItem(key,String(value))}catch{}
-}
-
-function renderVisitorCount(value){
-  const count = Math.max(0,Math.floor(Number(value)));
-  if(!visitorCount || !visitorCountNumber || !Number.isFinite(count)) return;
-  visitorCountNumber.textContent = count.toLocaleString("en-US");
-  visitorCount.dataset.count = String(count);
-  visitorCount.setAttribute("aria-label", `${count.toLocaleString("en-US")} زائر`);
-}
-
-async function updateVisitorCount(){
-  if(!visitorCount || !visitorCountNumber || visitorUpdateInFlight) return;
-  visitorUpdateInFlight = true;
-  const cachedCount = Number(storedVisitorValue(VISITOR_LAST_COUNT_KEY));
-  if(Number.isFinite(cachedCount) && cachedCount >= 0) renderVisitorCount(cachedCount);
-
-  const countedBefore = storedVisitorValue(VISITOR_COUNTED_KEY) === "1";
-  const endpoint = new URL(VISITOR_COUNTER_URL);
-  endpoint.searchParams.set("unique","true");
-  endpoint.searchParams.set("noFormatting","true");
-  if(countedBefore) endpoint.searchParams.set("readOnly","true");
-
-  const controller = typeof AbortController === "function" ? new AbortController() : null;
-  const timeout = window.setTimeout(() => controller?.abort(),VISITOR_REQUEST_TIMEOUT_MS);
-  try{
-    const response = await fetch(endpoint.toString(),{
-      method:"GET",
-      cache:"no-store",
-      credentials:"omit",
-      referrerPolicy:"no-referrer",
-      signal:controller?.signal
-    });
-    if(!response.ok) throw new Error("visitor counter unavailable");
-    const data = await response.json();
-    const count = Number(data?.value);
-    if(!Number.isFinite(count) || count < 0) throw new Error("invalid visitor count");
-    renderVisitorCount(count);
-    saveVisitorValue(VISITOR_LAST_COUNT_KEY,count);
-    if(!countedBefore) saveVisitorValue(VISITOR_COUNTED_KEY,"1");
-  }catch{}
-  finally{
-    window.clearTimeout(timeout);
-    visitorUpdateInFlight = false;
-  }
-}
-
 storeStatusBtn?.addEventListener("click", () => {
   const expanded = storeStatusBtn.getAttribute("aria-expanded") === "true";
   storeStatusBtn.setAttribute("aria-expanded", String(!expanded));
   if(storeHoursPanel) storeHoursPanel.hidden = expanded;
 });
 updateStoreStatus();
-updateVisitorCount();
 window.setInterval(updateStoreStatus, 30000);
-window.setInterval(updateVisitorCount, VISITOR_REFRESH_INTERVAL_MS);
 document.addEventListener("visibilitychange", () => {
   if(!document.hidden){
     updateStoreStatus();
-    updateVisitorCount();
   }
 });
 
@@ -546,7 +483,7 @@ function renderMenu(){
                 <span>رز</span>
               </div>
             ` : ""}
-            <div class="variant-grid">
+            <div class="variant-grid variant-grid-${Math.max(1,Math.min(item.variants.length,3))}">
               ${item.variants.map(variant => `
                 <button type="button" class="variant-btn"
                   data-name="${escapeHtml(item.name)}"
@@ -771,7 +708,6 @@ function sendOrder(){
   }
   if(!confirm("هل تريد إرسال الطلب إلى واتساب المطعم؟")) return;
   lastSend = Date.now();
-  const info = totals();
   const lines = ["          ```📦 طلب جديد```", ""];
   if(orderType === "توصيل"){
     lines.push(`             *🚚 توصيل: ${placeName}*`);
@@ -784,9 +720,6 @@ function sendOrder(){
   cart.forEach(item => {
     lines.push(orderQuantityLine(orderItemLabel(item), item.qty));
   });
-  if(info.depositQty > 0){
-    lines.push(orderQuantityLine("تأمين الصحن", info.depositQty));
-  }
   if(notes){
     lines.push("", "*📝 الملاحظات:*", notes);
   }
