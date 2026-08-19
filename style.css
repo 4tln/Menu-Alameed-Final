@@ -1238,8 +1238,10 @@ body{padding-top:0!important;}
   position:relative;
   z-index:1;
   display:block;
-  width:min(92vw,820px);
+  width:min(82vw,560px);
   height:auto;
+  max-height:76vh;
+  object-fit:contain;
   user-select:none;
   -webkit-user-drag:none;
   filter:drop-shadow(0 18px 34px rgba(0,0,0,.28));
@@ -1422,7 +1424,7 @@ body.modal-open .offers-badge{
 }
 @media(max-width:520px){
   .brand-splash{padding:16px}
-  .brand-splash-logo{width:96vw}
+  .brand-splash-logo{width:min(88vw,420px);max-height:72vh}
   .offer-photo{border-radius:18px}
 }
 @media(prefers-reduced-motion:reduce){
