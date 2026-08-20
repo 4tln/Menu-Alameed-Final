@@ -2948,3 +2948,13 @@ body.modal-open .sticky-stack{
     padding:1px 2px 2px!important;
   }
 }
+
+/* إطار بني ثابت حول شاشة المنيو كاملة */
+body::after{
+  content:"";
+  position:fixed;
+  z-index:9999;
+  inset:0;
+  border:2px solid var(--brand);
+  pointer-events:none;
+}
