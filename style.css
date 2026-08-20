@@ -562,6 +562,13 @@ button{cursor:pointer}
   .deposit-qty{min-width:auto}
   .summary-meta small{display:none}
 }
+
+/* إطار بني واضح حول بطاقة الصنف كاملة */
+.item-card,
+.item-card.is-popular,
+.item-card.offer-item-card{
+  border:1.5px solid var(--brand)!important;
+}
 @media(max-width:380px){
   .hero{min-height:318px}
   .hero-card{width:95vw}
