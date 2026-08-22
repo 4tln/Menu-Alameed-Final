@@ -693,7 +693,7 @@ async function copyBankIban(){
 }
 function prepareAlRajhiAppOpen(){
   void writeBankIban();
-  showToast("جاري فتح تطبيق الراجحي مباشرة");
+  showToast("جاري فتح صفحة إضافة المستفيد");
 }
 function orderItemLabel(item){
   const name = String(item?.name || "").trim();
