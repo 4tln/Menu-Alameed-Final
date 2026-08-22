@@ -9,6 +9,8 @@ const RESTAURANT_COORDINATES = Object.freeze({latitude:17.33848,longitude:43.132
 const NORMAL_PRAYER_NOTICE_MINUTES = 30;
 const FRIDAY_PRAYER_NOTICE_MINUTES = 45;
 const BANK_IBAN = "SA1580000417608010132485";
+const ALRAJHI_IOS_URL = "https://apps.apple.com/sa/app/alrajhi-mobile/id1472508112";
+const ALRAJHI_ANDROID_URL = "https://play.google.com/store/apps/details?id=com.alrajhiretailapp";
 const productOrderCounts = {};
 const ORDER_COUNTS_KEY = "alameed_product_order_counts_v1";
 function loadProductOrderCounts(){
@@ -53,6 +55,7 @@ const placeNameInput = document.getElementById("placeNameInput");
 const notesInput = document.getElementById("notesInput");
 const bankTransferPanel = document.getElementById("bankTransferPanel");
 const copyIbanBtn = document.getElementById("copyIbanBtn");
+const openAlRajhiBtn = document.getElementById("openAlRajhiBtn");
 const bankQrImage = document.getElementById("bankQrImage");
 const sendOrderBtn = document.getElementById("sendOrderBtn");
 const toast = document.getElementById("toast");
@@ -663,7 +666,7 @@ function syncPaymentMethod(){
   if(!bankTransferPanel) return;
   bankTransferPanel.hidden = selectedPaymentMethod() !== "تحويل بنكي";
 }
-async function copyBankIban(){
+async function writeBankIban(){
   let copied = false;
   try{
     await navigator.clipboard.writeText(BANK_IBAN);
@@ -679,12 +682,26 @@ async function copyBankIban(){
     copied = document.execCommand("copy");
     helper.remove();
   }
+  return copied;
+}
+async function copyBankIban(){
+  const copied = await writeBankIban();
   if(!copied) return showToast("تعذر النسخ، اضغط مطولاً على الآيبان");
   showToast("تم نسخ رقم الآيبان");
   if(copyIbanBtn){
     copyIbanBtn.textContent = "تم النسخ ✓";
     window.setTimeout(() => { copyIbanBtn.textContent = "نسخ"; }, 1600);
   }
+}
+function officialAlRajhiAppUrl(){
+  return /Android/i.test(navigator.userAgent) ? ALRAJHI_ANDROID_URL : ALRAJHI_IOS_URL;
+}
+async function openAlRajhiApp(){
+  const copied = await writeBankIban();
+  showToast(copied ? "تم نسخ الآيبان، جاري فتح الراجحي" : "جاري فتح صفحة تطبيق الراجحي");
+  window.setTimeout(() => {
+    window.location.href = officialAlRajhiAppUrl();
+  }, 350);
 }
 function orderItemLabel(item){
   const name = String(item?.name || "").trim();
@@ -840,6 +857,7 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
   input.addEventListener("change", syncPaymentMethod);
 });
 copyIbanBtn?.addEventListener("click", copyBankIban);
+openAlRajhiBtn?.addEventListener("click", openAlRajhiApp);
 bankQrImage?.addEventListener("contextmenu", event => event.preventDefault());
 sendOrderBtn.addEventListener("click",sendOrder);
 shareBtn?.addEventListener("click", async () => {

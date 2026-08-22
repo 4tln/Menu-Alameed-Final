@@ -3193,6 +3193,47 @@ body.modal-open .sticky-stack{
   font-size:11px;
   font-weight:950;
 }
+.open-alrajhi-btn{
+  width:calc(100% - 20px);
+  min-height:50px;
+  margin:0 10px 9px;
+  padding:8px 11px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#0a3d6e,#061f3a);
+  color:#fff;
+  box-shadow:0 7px 16px rgba(8,47,85,.18),inset 0 1px 0 rgba(255,255,255,.16);
+  text-align:right;
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.open-alrajhi-btn:active{
+  transform:scale(.985);
+  box-shadow:0 4px 10px rgba(8,47,85,.16),inset 0 1px 0 rgba(255,255,255,.14);
+}
+.open-alrajhi-icon{
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  flex:0 0 31px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:10px;
+  background:rgba(255,255,255,.10);
+  font-size:17px;
+  font-weight:950;
+}
+.open-alrajhi-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:1px;
+}
+.open-alrajhi-copy strong{font-size:12px;font-weight:950}
+.open-alrajhi-copy small{color:rgba(255,255,255,.72);font-size:9px;font-weight:700}
 .bank-transfer-note{
   margin:0;
   padding:8px 10px;
