@@ -8,6 +8,7 @@ const RESTAURANT_TIME_ZONE = "Asia/Riyadh";
 const RESTAURANT_COORDINATES = Object.freeze({latitude:17.33848,longitude:43.13289});
 const NORMAL_PRAYER_NOTICE_MINUTES = 30;
 const FRIDAY_PRAYER_NOTICE_MINUTES = 45;
+const BANK_IBAN = "SA1580000417608010132485";
 const productOrderCounts = {};
 const ORDER_COUNTS_KEY = "alameed_product_order_counts_v1";
 function loadProductOrderCounts(){
@@ -50,6 +51,9 @@ const locationInput = document.getElementById("locationInput");
 const locationWrap = document.getElementById("locationWrap");
 const placeNameInput = document.getElementById("placeNameInput");
 const notesInput = document.getElementById("notesInput");
+const bankTransferPanel = document.getElementById("bankTransferPanel");
+const copyIbanBtn = document.getElementById("copyIbanBtn");
+const bankQrImage = document.getElementById("bankQrImage");
 const sendOrderBtn = document.getElementById("sendOrderBtn");
 const toast = document.getElementById("toast");
 const SEND_DELAY_MS = 30000;
@@ -652,6 +656,36 @@ function showToast(message){
 function selectedOrderType(){
   return document.querySelector('input[name="orderType"]:checked')?.value || "استلام";
 }
+function selectedPaymentMethod(){
+  return document.querySelector('input[name="paymentMethod"]:checked')?.value || "عند الاستلام";
+}
+function syncPaymentMethod(){
+  if(!bankTransferPanel) return;
+  bankTransferPanel.hidden = selectedPaymentMethod() !== "تحويل بنكي";
+}
+async function copyBankIban(){
+  let copied = false;
+  try{
+    await navigator.clipboard.writeText(BANK_IBAN);
+    copied = true;
+  }catch{
+    const helper = document.createElement("textarea");
+    helper.value = BANK_IBAN;
+    helper.setAttribute("readonly", "");
+    helper.style.position = "fixed";
+    helper.style.opacity = "0";
+    document.body.appendChild(helper);
+    helper.select();
+    copied = document.execCommand("copy");
+    helper.remove();
+  }
+  if(!copied) return showToast("تعذر النسخ، اضغط مطولاً على الآيبان");
+  showToast("تم نسخ رقم الآيبان");
+  if(copyIbanBtn){
+    copyIbanBtn.textContent = "تم النسخ ✓";
+    window.setTimeout(() => { copyIbanBtn.textContent = "نسخ"; }, 1600);
+  }
+}
 function orderItemLabel(item){
   const name = String(item?.name || "").trim();
   const size = String(item?.size || "").trim();
@@ -687,6 +721,7 @@ function sendOrder(){
     return;
   }
   const orderType = selectedOrderType();
+  const paymentMethod = selectedPaymentMethod();
   const notes = notesInput.value.trim();
   const placeName = placeNameInput.value.trim();
   if(orderType === "توصيل" && !customerLocation.link){
@@ -706,7 +741,10 @@ function sendOrder(){
     alert(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد.`);
     return;
   }
-  if(!confirm("هل تريد إرسال الطلب إلى واتساب المطعم؟")) return;
+  const confirmMessage = paymentMethod === "تحويل بنكي"
+    ? "بعد فتح واتساب أرسل صورة إيصال التحويل. هل تريد المتابعة؟"
+    : "هل تريد إرسال الطلب إلى واتساب المطعم؟";
+  if(!confirm(confirmMessage)) return;
   lastSend = Date.now();
   const lines = ["          ```📦 طلب جديد```", ""];
   if(orderType === "توصيل"){
@@ -720,6 +758,9 @@ function sendOrder(){
   cart.forEach(item => {
     lines.push(orderQuantityLine(orderItemLabel(item), item.qty));
   });
+  if(paymentMethod === "تحويل بنكي"){
+    lines.push("", "*💳 طريقة الدفع: تحويل بنكي*", "*📎 سيتم إرسال إيصال التحويل في المحادثة*");
+  }
   if(notes){
     lines.push("", "*📝 الملاحظات:*", notes);
   }
@@ -795,6 +836,11 @@ document.querySelectorAll('input[name="orderType"]').forEach(input => {
     }
   });
 });
+document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
+  input.addEventListener("change", syncPaymentMethod);
+});
+copyIbanBtn?.addEventListener("click", copyBankIban);
+bankQrImage?.addEventListener("contextmenu", event => event.preventDefault());
 sendOrderBtn.addEventListener("click",sendOrder);
 shareBtn?.addEventListener("click", async () => {
   try{
@@ -807,6 +853,7 @@ shareBtn?.addEventListener("click", async () => {
   }catch{}
 });
 refreshBtn?.addEventListener("click", () => location.reload());
+syncPaymentMethod();
 renderTabs();
 renderMenu();
 updateCartUI();

@@ -2963,3 +2963,255 @@ body.modal-open .sticky-stack{
     padding:1px 2px 2px!important;
   }
 }
+
+/* ===== 2026-08-22: الدفع والتحويل إلى حساب المؤسسة ===== */
+.payment-box{
+  margin-top:9px;
+  padding-top:9px;
+  border-top:1px solid rgba(101,67,36,.12);
+}
+.payment-heading{
+  margin-bottom:7px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.payment-heading h3{
+  margin:0!important;
+  color:var(--brand-dark);
+  font-size:14px!important;
+}
+.payment-heading small{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:750;
+}
+.payment-types{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
+}
+.payment-option{
+  position:relative;
+  min-width:0;
+  min-height:58px;
+  padding:8px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  overflow:hidden;
+  border:1px solid rgba(101,67,36,.14);
+  border-radius:13px;
+  background:rgba(255,253,249,.92);
+  cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.payment-option:active{transform:scale(.985)}
+.payment-option:has(input:checked){
+  border-color:#724927;
+  background:linear-gradient(145deg,#fffaf3,#f1dfca);
+  box-shadow:0 0 0 1px rgba(114,73,39,.12),0 6px 14px rgba(75,44,21,.08);
+}
+.payment-option input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+.payment-option-icon{
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  flex:0 0 30px;
+  border:1px solid rgba(101,67,36,.12);
+  border-radius:10px;
+  background:#f0e2d1;
+  color:#684425;
+  font-size:16px;
+  font-weight:950;
+}
+.payment-option:has(input:checked) .payment-option-icon{
+  border-color:transparent;
+  background:linear-gradient(135deg,#6d4728,#4b2f1c);
+  color:#fff;
+}
+.payment-option-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:2px;
+}
+.payment-option-copy b{
+  color:var(--brand-dark);
+  font-size:12px;
+  font-weight:950;
+  white-space:nowrap;
+}
+.payment-option-copy small{
+  color:var(--muted);
+  font-size:9px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.bank-transfer-panel[hidden]{display:none!important}
+.bank-transfer-panel{
+  margin-top:8px;
+  overflow:hidden;
+  border:1px solid rgba(4,47,85,.20);
+  border-radius:16px;
+  background:linear-gradient(180deg,#fff 0%,#f7f3ed 100%);
+  box-shadow:0 9px 22px rgba(43,37,30,.09);
+  animation:bankPanelIn .22s ease both;
+}
+@keyframes bankPanelIn{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.bank-transfer-header{
+  min-height:52px;
+  padding:9px 11px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:linear-gradient(135deg,#082f55,#061f3a);
+  color:#fff;
+}
+.bank-transfer-mark{
+  min-width:64px;
+  padding:7px 8px;
+  display:inline-grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:10px;
+  background:rgba(255,255,255,.09);
+  font-size:12px;
+  font-weight:950;
+}
+.bank-transfer-header>span:last-child{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+}
+.bank-transfer-header strong{font-size:13px;font-weight:950}
+.bank-transfer-header small{color:rgba(255,255,255,.72);font-size:9px;font-weight:700}
+.bank-transfer-body{
+  padding:10px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 112px;
+  align-items:center;
+  gap:10px;
+}
+.bank-beneficiary{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:3px;
+}
+.bank-beneficiary>span,
+.bank-iban-copy>span{
+  color:#64707d;
+  font-size:9px;
+  font-weight:800;
+}
+.bank-beneficiary strong{
+  color:#172b3d;
+  font-size:11px;
+  font-weight:950;
+  line-height:1.5;
+}
+.bank-beneficiary small{
+  color:#5e6871;
+  font-size:9px;
+  font-weight:700;
+  line-height:1.45;
+}
+.bank-qr-crop{
+  position:relative;
+  width:112px;
+  height:112px;
+  overflow:hidden;
+  justify-self:end;
+  border:1px solid #e0e5e8;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 5px 12px rgba(15,43,66,.08);
+  -webkit-touch-callout:none;
+  user-select:none;
+}
+.bank-qr-crop img{
+  position:absolute;
+  top:-1px;
+  left:50%;
+  width:230px;
+  max-width:none;
+  height:auto;
+  transform:translateX(-50%);
+  pointer-events:none;
+  -webkit-user-drag:none;
+  user-select:none;
+}
+.bank-iban-row{
+  margin:0 10px 9px;
+  padding:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(8,47,85,.12);
+  border-radius:12px;
+  background:#f3f6f8;
+}
+.bank-iban-copy{
+  min-width:0;
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:3px;
+}
+.bank-iban-copy b{
+  max-width:100%;
+  color:#082f55;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.1px;
+  white-space:nowrap;
+}
+.copy-iban-btn{
+  min-width:58px;
+  min-height:38px;
+  padding:7px 9px;
+  flex:0 0 auto;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(135deg,#0b477d,#072f57);
+  color:#fff;
+  box-shadow:0 5px 11px rgba(8,47,85,.17);
+  font-size:11px;
+  font-weight:950;
+}
+.bank-transfer-note{
+  margin:0;
+  padding:8px 10px;
+  border-top:1px solid rgba(8,47,85,.09);
+  background:#eef5fa;
+  color:#234861;
+  font-size:10px;
+  font-weight:850;
+  text-align:center;
+}
+@media(max-width:370px){
+  .payment-option{padding:7px 5px;gap:5px}
+  .payment-option-icon{width:27px;height:27px;flex-basis:27px}
+  .payment-option-copy b{font-size:11px}
+  .payment-option-copy small{font-size:8px}
+  .bank-transfer-body{grid-template-columns:minmax(0,1fr) 96px;gap:7px;padding:8px}
+  .bank-qr-crop{width:96px;height:96px}
+  .bank-qr-crop img{width:199px}
+  .bank-beneficiary strong{font-size:10px}
+  .bank-iban-copy b{font-size:10px}
+  .copy-iban-btn{min-width:52px;padding-inline:7px}
+}
