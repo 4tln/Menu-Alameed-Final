@@ -3208,6 +3208,8 @@ body.modal-open .sticky-stack{
   color:#fff;
   box-shadow:0 7px 16px rgba(8,47,85,.18),inset 0 1px 0 rgba(255,255,255,.16);
   text-align:right;
+  text-decoration:none;
+  cursor:pointer;
   transition:transform .16s ease,box-shadow .16s ease;
 }
 .open-alrajhi-btn:active{
