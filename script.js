@@ -55,7 +55,6 @@ const notesInput = document.getElementById("notesInput");
 const bankTransferPanel = document.getElementById("bankTransferPanel");
 const copyIbanBtn = document.getElementById("copyIbanBtn");
 const openAlRajhiBtn = document.getElementById("openAlRajhiBtn");
-const bankQrImage = document.getElementById("bankQrImage");
 const sendOrderBtn = document.getElementById("sendOrderBtn");
 const toast = document.getElementById("toast");
 const SEND_DELAY_MS = 30000;
@@ -851,7 +850,6 @@ document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
 });
 copyIbanBtn?.addEventListener("click", copyBankIban);
 openAlRajhiBtn?.addEventListener("click", prepareAlRajhiAppOpen);
-bankQrImage?.addEventListener("contextmenu", event => event.preventDefault());
 sendOrderBtn.addEventListener("click",sendOrder);
 shareBtn?.addEventListener("click", async () => {
   try{

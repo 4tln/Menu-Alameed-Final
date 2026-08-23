@@ -3098,18 +3098,16 @@ body.modal-open .sticky-stack{
 .bank-transfer-header strong{font-size:11px;font-weight:950}
 .bank-transfer-header small{color:rgba(255,255,255,.72);font-size:8px;font-weight:700}
 .bank-transfer-body{
-  padding:7px;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 86px;
-  align-items:center;
-  gap:7px;
+  padding:7px 9px 5px;
+  display:block;
 }
 .bank-beneficiary{
-  min-width:0;
+  width:100%;
   display:flex;
   flex-direction:column;
-  align-items:flex-start;
-  gap:2px;
+  align-items:center;
+  gap:1px;
+  text-align:center;
 }
 .bank-beneficiary>span,
 .bank-iban-copy>span{
@@ -3118,41 +3116,19 @@ body.modal-open .sticky-stack{
   font-weight:800;
 }
 .bank-beneficiary strong{
+  width:100%;
   color:#172b3d;
   font-size:10px;
   font-weight:950;
-  line-height:1.5;
+  line-height:1.35;
+  white-space:nowrap;
 }
 .bank-beneficiary small{
+  width:100%;
   color:#5e6871;
   font-size:8px;
   font-weight:700;
-  line-height:1.45;
-}
-.bank-qr-crop{
-  position:relative;
-  width:86px;
-  height:86px;
-  overflow:hidden;
-  justify-self:end;
-  border:1px solid #e0e5e8;
-  border-radius:10px;
-  background:#fff;
-  box-shadow:0 3px 9px rgba(15,43,66,.08);
-  -webkit-touch-callout:none;
-  user-select:none;
-}
-.bank-qr-crop img{
-  position:absolute;
-  top:-1px;
-  left:50%;
-  width:177px;
-  max-width:none;
-  height:auto;
-  transform:translateX(-50%);
-  pointer-events:none;
-  -webkit-user-drag:none;
-  user-select:none;
+  line-height:1.35;
 }
 .bank-iban-row{
   margin:0 7px 6px;
@@ -3249,9 +3225,7 @@ body.modal-open .sticky-stack{
   .payment-option-icon{width:27px;height:27px;flex-basis:27px}
   .payment-option-copy b{font-size:11px}
   .payment-option-copy small{font-size:8px}
-  .bank-transfer-body{grid-template-columns:minmax(0,1fr) 78px;gap:6px;padding:6px}
-  .bank-qr-crop{width:78px;height:78px}
-  .bank-qr-crop img{width:161px}
+  .bank-transfer-body{padding:6px 7px 4px}
   .bank-beneficiary strong{font-size:9px}
   .bank-iban-copy b{font-size:9px}
   .copy-iban-btn{min-width:45px;padding-inline:6px}
