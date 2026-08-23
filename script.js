@@ -695,10 +695,30 @@ function prepareAlRajhiAppOpen(){
   void writeBankIban(BANK_IBAN_WITHOUT_COUNTRY_CODE);
   showToast("جاري فتح صفحة إضافة المستفيد");
 }
+function menuCategoryForOrderItem(name){
+  const sections = Array.isArray(window.MENU_DATA) ? window.MENU_DATA : [];
+  return sections.find(section => section.items?.some(item => item.name === name))?.category || "";
+}
+function completeOrderItemName(value){
+  const name = String(value || "").trim();
+  const category = menuCategoryForOrderItem(name);
+  if(category === "الشاورما"){
+    if(name.startsWith("ساندويتش")){
+      const details = name.slice("ساندويتش".length).trim();
+      return details ? `ساندوتش شاورما ${details}` : "ساندوتش شاورما";
+    }
+    if(name.startsWith("عربي")) return `شاورما ${name}`;
+    if(name.startsWith("صحن إسكندر")) return name.replace("صحن إسكندر", "صحن شاورما إسكندر");
+  }
+  if(category === "السندوتشات" && /^(كباب دجاج|شيش دجاج|مسحب دجاج|تورتيلا دجاج)/.test(name)){
+    return `ساندويتش ${name}`;
+  }
+  return name;
+}
 function orderItemLabel(item){
-  const name = String(item?.name || "").trim();
+  const name = completeOrderItemName(item?.name);
   const size = String(item?.size || "").trim();
-  return size && size !== "السعر" ? `${size} ${name}` : name;
+  return size && size !== "السعر" ? `${name} ${size}` : name;
 }
 function orderQuantityLine(label, qty){
   return `*${money(qty)}ـ* ${label}`;
