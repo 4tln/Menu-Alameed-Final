@@ -8,7 +8,7 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="hero-lamma.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20260823-direct-send-v11">
+  <link rel="stylesheet" href="style.css?v=20260823-site-alert-v12">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -71,6 +71,16 @@
     <span class="cart-bar-icon" aria-hidden="true">🛒<b id="cartCount" class="cart-count-badge">0</b></span>
   </button>
   <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+  <div id="siteAlert" class="site-alert" aria-hidden="true" hidden>
+    <div id="siteAlertBackdrop" class="site-alert-backdrop"></div>
+    <section class="site-alert-card" role="alertdialog" aria-modal="true" aria-labelledby="siteAlertMessage">
+      <p id="siteAlertMessage" class="site-alert-message"></p>
+      <div id="siteAlertActions" class="site-alert-actions">
+        <button id="siteAlertConfirmBtn" class="site-alert-button site-alert-confirm" type="button">حسنًا</button>
+        <button id="siteAlertCancelBtn" class="site-alert-button site-alert-cancel" type="button" hidden>إلغاء</button>
+      </div>
+    </section>
+  </div>
   <div id="cartModal" class="modal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
     <section class="sheet" role="dialog" aria-modal="true" aria-label="سلة الطلب">
@@ -215,6 +225,6 @@
   </div>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20260812-lamma-v2"></script>
-  <script src="script.js?v=20260823-direct-send-v11"></script>
+  <script src="script.js?v=20260823-site-alert-v12"></script>
 </body>
 </html>

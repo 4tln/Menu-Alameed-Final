@@ -39,6 +39,12 @@ const copyIbanBtn = document.getElementById("copyIbanBtn");
 const openAlRajhiBtn = document.getElementById("openAlRajhiBtn");
 const sendOrderBtn = document.getElementById("sendOrderBtn");
 const toast = document.getElementById("toast");
+const siteAlert = document.getElementById("siteAlert");
+const siteAlertBackdrop = document.getElementById("siteAlertBackdrop");
+const siteAlertMessage = document.getElementById("siteAlertMessage");
+const siteAlertActions = document.getElementById("siteAlertActions");
+const siteAlertConfirmBtn = document.getElementById("siteAlertConfirmBtn");
+const siteAlertCancelBtn = document.getElementById("siteAlertCancelBtn");
 const SEND_DELAY_MS = 30000;
 try{
   localStorage.removeItem("alameed_phone");
@@ -632,6 +638,34 @@ function showToast(message){
   clearTimeout(showToast.timer);
   showToast.timer = setTimeout(() => toast.classList.remove("show"),2600);
 }
+let siteAlertConfirmAction = null;
+let siteAlertReturnFocus = null;
+function closeSiteAlert(confirmed = false){
+  if(!siteAlert || siteAlert.hidden) return;
+  const confirmAction = confirmed ? siteAlertConfirmAction : null;
+  const returnFocus = siteAlertReturnFocus;
+  siteAlert.hidden = true;
+  siteAlert.setAttribute("aria-hidden", "true");
+  siteAlertActions.classList.remove("has-cancel");
+  siteAlertCancelBtn.hidden = true;
+  siteAlertConfirmAction = null;
+  siteAlertReturnFocus = null;
+  if(returnFocus?.isConnected) returnFocus.focus();
+  if(confirmAction) confirmAction();
+}
+function showSiteAlert(message, options = {}){
+  if(!siteAlert) return;
+  siteAlertReturnFocus = document.activeElement;
+  siteAlertConfirmAction = typeof options.onConfirm === "function" ? options.onConfirm : null;
+  siteAlertMessage.textContent = message;
+  siteAlertConfirmBtn.textContent = options.confirmText || "حسنًا";
+  siteAlertCancelBtn.textContent = options.cancelText || "إلغاء";
+  siteAlertCancelBtn.hidden = !options.cancelText;
+  siteAlertActions.classList.toggle("has-cancel", Boolean(options.cancelText));
+  siteAlert.hidden = false;
+  siteAlert.setAttribute("aria-hidden", "false");
+  window.requestAnimationFrame(() => siteAlertConfirmBtn.focus());
+}
 function selectedOrderType(){
   return document.querySelector('input[name="orderType"]:checked')?.value || "استلام";
 }
@@ -734,7 +768,7 @@ function formatOrderDate(){
 }
 function sendOrder(){
   if(!cart.length){
-    showToast("السلة فارغة، أضف صنفًا أولًا");
+    showSiteAlert("السلة فارغة، أضف صنفًا أولًا");
     return;
   }
   const orderType = selectedOrderType();
@@ -742,25 +776,24 @@ function sendOrder(){
   const notes = notesInput.value.trim();
   const placeName = placeNameInput.value.trim();
   if(orderType === "توصيل" && !customerLocation.link){
-    showToast("يرجى السماح بالوصول للموقع");
     locationWrap.hidden = false;
-    requestLocation();
+    showSiteAlert("يرجى السماح بالوصول للموقع", {onConfirm:requestLocation});
     return;
   }
   if(orderType === "توصيل" && !placeName){
-    showToast("يرجى كتابة اسم المكان");
     locationWrap.hidden = false;
-    placeNameInput.focus();
+    showSiteAlert("يرجى كتابة اسم المكان", {onConfirm:() => placeNameInput.focus()});
     return;
   }
   if(!paymentMethod){
-    showToast("يرجى اختيار طريقة الدفع");
-    document.querySelector(".payment-box")?.scrollIntoView({behavior:"smooth",block:"center"});
+    showSiteAlert("يرجى اختيار طريقة الدفع", {
+      onConfirm:() => document.querySelector(".payment-box")?.scrollIntoView({behavior:"smooth",block:"center"})
+    });
     return;
   }
   const remaining = SEND_DELAY_MS - (Date.now() - lastSend);
   if(remaining > 0){
-    showToast(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد`);
+    showSiteAlert(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد`);
     return;
   }
   lastSend = Date.now();
@@ -831,20 +864,24 @@ toggleCheckoutBtn?.addEventListener("click",() => {
 });
 document.querySelectorAll("[data-close-modal]").forEach(el => el.addEventListener("click",closeCart));
 clearCartBtn.addEventListener("click",() => {
-  if(!cart.length) return showToast("السلة فارغة");
-  const now = Date.now();
-  const confirmUntil = Number(clearCartBtn.dataset.confirmUntil || 0);
-  if(now > confirmUntil){
-    clearCartBtn.dataset.confirmUntil = String(now + 3000);
-    showToast("اضغط إفراغ السلة مرة ثانية للتأكيد");
-    return;
-  }
-  delete clearCartBtn.dataset.confirmUntil;
-  cart = [];
-  saveCart();
-  renderCart();
-  setCartItemsExpanded(false);
-  showToast("تم إفراغ السلة");
+  if(!cart.length) return showSiteAlert("السلة فارغة");
+  showSiteAlert("هل تريد إفراغ السلة؟", {
+    confirmText:"إفراغ",
+    cancelText:"إلغاء",
+    onConfirm:() => {
+      cart = [];
+      saveCart();
+      renderCart();
+      setCartItemsExpanded(false);
+      showToast("تم إفراغ السلة");
+    }
+  });
+});
+siteAlertConfirmBtn?.addEventListener("click", () => closeSiteAlert(true));
+siteAlertCancelBtn?.addEventListener("click", () => closeSiteAlert(false));
+siteAlertBackdrop?.addEventListener("click", () => closeSiteAlert(false));
+document.addEventListener("keydown", event => {
+  if(event.key === "Escape" && siteAlert && !siteAlert.hidden) closeSiteAlert(false);
 });
 document.querySelectorAll('input[name="orderType"]').forEach(input => {
   input.addEventListener("change", () => {
