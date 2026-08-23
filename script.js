@@ -298,7 +298,7 @@ if(brandSplash){
   startOffersBadgeWindow();
 }
 function setLocationStatus(type, text){
-  locationStatus.className = `location-status ${type}`;
+  locationStatus.className = `location-status delivery-location-compact ${type}`;
   locationStatusIcon.textContent = type === "success" ? "✅" : type === "error" ? "❌" : "⏳";
   locationStatusText.textContent = text;
   retryLocationBtn.hidden = type !== "error";
@@ -314,9 +314,6 @@ function stopLocationWatcher(){
 function locationAccuracy(position){
   const accuracy = Number(position?.coords?.accuracy);
   return Number.isFinite(accuracy) && accuracy > 0 ? accuracy : Infinity;
-}
-function locationAccuracyText(accuracy){
-  return Number.isFinite(accuracy) ? ` بدقة ±${Math.max(1,Math.round(accuracy))} متر` : "";
 }
 async function getLocationName(latitude, longitude){
   try{
@@ -344,11 +341,10 @@ async function finalizeLocation(serial){
   const link = `https://maps.google.com/?q=${latitude},${longitude}`;
   customerLocation = {link, latitude, longitude, address:"", accuracy};
   locationInput.value = link;
-  setLocationStatus("success", `تم تحديد موقعك${locationAccuracyText(accuracy)}`);
+  setLocationStatus("success", "تم تحديد موقعك");
   const address = await getLocationName(latitude, longitude);
   if(serial !== locationRequestSerial || !address) return;
   customerLocation.address = address;
-  setLocationStatus("success", `${address}${locationAccuracyText(accuracy)}`);
 }
 function requestLocation(){
   const serial = ++locationRequestSerial;
@@ -360,13 +356,13 @@ function requestLocation(){
     setLocationStatus("error", "جهازك لا يدعم تحديد الموقع");
     return;
   }
-  setLocationStatus("loading", "جارٍ تحديد موقعك بأعلى دقة...");
+  setLocationStatus("loading", "جارٍ تحديد موقعك...");
   locationWatchId = navigator.geolocation.watchPosition(position => {
     if(serial !== locationRequestSerial) return;
     const accuracy = locationAccuracy(position);
     if(!bestLocationPosition || accuracy < locationAccuracy(bestLocationPosition)){
       bestLocationPosition = position;
-      setLocationStatus("loading", `جارٍ تحسين دقة موقعك...${locationAccuracyText(accuracy)}`);
+      setLocationStatus("loading", "جارٍ تحديد موقعك...");
     }
     if(accuracy <= LOCATION_TARGET_ACCURACY_METERS) finalizeLocation(serial);
   }, error => {

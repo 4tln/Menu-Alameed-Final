@@ -3059,7 +3059,9 @@ body.modal-open .sticky-stack{
 
 /* بيانات التوصيل: تحديد الموقع مستمر لكن تفاصيله مخفية من النموذج */
 #locationWrap .delivery-location-technical{display:none!important}
-#locationWrap .delivery-fee-note{
+#locationWrap .delivery-fee-note,
+#locationWrap .delivery-location-compact{
+  height:26px;
   min-height:0;
   margin:3px 0 4px;
   padding:4px 7px;
@@ -3070,9 +3072,14 @@ body.modal-open .sticky-stack{
   line-height:1.2;
   text-align:center;
 }
-#locationWrap .delivery-fee-note>span:first-child{
+#locationWrap .delivery-fee-note>span:first-child,
+#locationWrap .delivery-location-compact>span:first-child{
   font-size:10px;
   line-height:1;
+}
+#locationWrap .delivery-location-compact.error{
+  height:auto;
+  min-height:26px;
 }
 .bank-transfer-panel[hidden]{display:none!important}
 .bank-transfer-panel{
