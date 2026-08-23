@@ -9,6 +9,7 @@ const RESTAURANT_COORDINATES = Object.freeze({latitude:17.33848,longitude:43.132
 const NORMAL_PRAYER_NOTICE_MINUTES = 30;
 const FRIDAY_PRAYER_NOTICE_MINUTES = 45;
 const BANK_IBAN = "SA1580000417608010132485";
+const BANK_IBAN_WITHOUT_COUNTRY_CODE = "1580000417608010132485";
 const productOrderCounts = {};
 const ORDER_COUNTS_KEY = "alameed_product_order_counts_v1";
 function loadProductOrderCounts(){
@@ -664,14 +665,14 @@ function syncPaymentMethod(){
   if(!bankTransferPanel) return;
   bankTransferPanel.hidden = selectedPaymentMethod() !== "تحويل بنكي";
 }
-async function writeBankIban(){
+async function writeBankIban(value = BANK_IBAN){
   let copied = false;
   try{
-    await navigator.clipboard.writeText(BANK_IBAN);
+    await navigator.clipboard.writeText(value);
     copied = true;
   }catch{
     const helper = document.createElement("textarea");
-    helper.value = BANK_IBAN;
+    helper.value = value;
     helper.setAttribute("readonly", "");
     helper.style.position = "fixed";
     helper.style.opacity = "0";
@@ -692,7 +693,7 @@ async function copyBankIban(){
   }
 }
 function prepareAlRajhiAppOpen(){
-  void writeBankIban();
+  void writeBankIban(BANK_IBAN_WITHOUT_COUNTRY_CODE);
   showToast("جاري فتح صفحة إضافة المستفيد");
 }
 function orderItemLabel(item){
