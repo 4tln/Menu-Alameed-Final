@@ -630,7 +630,7 @@ function showToast(message){
   toast.textContent = message;
   toast.classList.add("show");
   clearTimeout(showToast.timer);
-  showToast.timer = setTimeout(() => toast.classList.remove("show"),1700);
+  showToast.timer = setTimeout(() => toast.classList.remove("show"),2600);
 }
 function selectedOrderType(){
   return document.querySelector('input[name="orderType"]:checked')?.value || "استلام";
@@ -734,7 +734,7 @@ function formatOrderDate(){
 }
 function sendOrder(){
   if(!cart.length){
-    alert("لا يمكن إرسال الطلب، السلة فارغة.");
+    showToast("السلة فارغة، أضف صنفًا أولًا");
     return;
   }
   const orderType = selectedOrderType();
@@ -742,31 +742,27 @@ function sendOrder(){
   const notes = notesInput.value.trim();
   const placeName = placeNameInput.value.trim();
   if(orderType === "توصيل" && !customerLocation.link){
-    alert("يرجى السماح بالوصول للموقع ثم إعادة المحاولة.");
+    showToast("يرجى السماح بالوصول للموقع");
     locationWrap.hidden = false;
     requestLocation();
     return;
   }
   if(orderType === "توصيل" && !placeName){
-    alert("يرجى كتابة اسم المكان.");
+    showToast("يرجى كتابة اسم المكان");
     locationWrap.hidden = false;
     placeNameInput.focus();
     return;
   }
   if(!paymentMethod){
-    alert("يرجى اختيار طريقة الدفع.");
+    showToast("يرجى اختيار طريقة الدفع");
     document.querySelector(".payment-box")?.scrollIntoView({behavior:"smooth",block:"center"});
     return;
   }
   const remaining = SEND_DELAY_MS - (Date.now() - lastSend);
   if(remaining > 0){
-    alert(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد.`);
+    showToast(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد`);
     return;
   }
-  const confirmMessage = paymentMethod === "تحويل بنكي"
-    ? "بعد فتح واتساب أرسل صورة إيصال التحويل. هل تريد المتابعة؟"
-    : "هل تريد إرسال الطلب إلى واتساب المطعم؟";
-  if(!confirm(confirmMessage)) return;
   lastSend = Date.now();
   const lines = ["          ```📦 طلب جديد```", ""];
   if(orderType === "توصيل"){
@@ -835,13 +831,20 @@ toggleCheckoutBtn?.addEventListener("click",() => {
 });
 document.querySelectorAll("[data-close-modal]").forEach(el => el.addEventListener("click",closeCart));
 clearCartBtn.addEventListener("click",() => {
-  if(!cart.length) return;
-  if(confirm("هل تريد إفراغ السلة؟")){
-    cart = [];
-    saveCart();
-    renderCart();
-    setCartItemsExpanded(false);
+  if(!cart.length) return showToast("السلة فارغة");
+  const now = Date.now();
+  const confirmUntil = Number(clearCartBtn.dataset.confirmUntil || 0);
+  if(now > confirmUntil){
+    clearCartBtn.dataset.confirmUntil = String(now + 3000);
+    showToast("اضغط إفراغ السلة مرة ثانية للتأكيد");
+    return;
   }
+  delete clearCartBtn.dataset.confirmUntil;
+  cart = [];
+  saveCart();
+  renderCart();
+  setCartItemsExpanded(false);
+  showToast("تم إفراغ السلة");
 });
 document.querySelectorAll('input[name="orderType"]').forEach(input => {
   input.addEventListener("change", () => {

@@ -313,18 +313,23 @@ button{cursor:pointer}
   z-index:80;
   left:50%;
   bottom:88px;
-  max-width:90%;
+  width:max-content;
+  max-width:min(90%,360px);
   padding:11px 16px;
-  overflow:hidden;
-  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:16px;
   background:#25211f;
   color:#fff;
+  box-shadow:0 12px 28px rgba(0,0,0,.24);
+  font-size:14px;
+  font-weight:850;
+  line-height:1.45;
+  text-align:center;
   opacity:0;
   pointer-events:none;
   transform:translate(-50%,20px);
   transition:.2s;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+  white-space:normal;
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .modal{position:fixed;inset:0;z-index:60;display:none}
