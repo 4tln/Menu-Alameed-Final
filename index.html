@@ -8,7 +8,7 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="hero-lamma.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20260823-bank-transfer-v6">
+  <link rel="stylesheet" href="style.css?v=20260823-payment-v8">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -136,21 +136,29 @@
             <h3 id="paymentTitle">طريقة الدفع</h3>
             <small>اختر الطريقة المناسبة لك</small>
           </div>
-          <div class="payment-types">
-            <label class="payment-option">
-              <input type="radio" name="paymentMethod" value="عند الاستلام" checked>
-              <span class="payment-option-icon" aria-hidden="true">✓</span>
+          <div id="paymentTypes" class="payment-types">
+            <label class="payment-option" data-payment-option="cash">
+              <input type="radio" name="paymentMethod" value="كاش">
+              <span class="payment-option-icon" aria-hidden="true">﷼</span>
               <span class="payment-option-copy">
-                <b>عند الاستلام</b>
-                <small>الدفع عند وصول الطلب</small>
+                <b>كاش</b>
+                <small>دفع نقدي</small>
               </span>
             </label>
-            <label class="payment-option">
+            <label id="networkPaymentOption" class="payment-option" data-payment-option="network">
+              <input type="radio" name="paymentMethod" value="شبكة">
+              <span class="payment-option-icon" aria-hidden="true">▣</span>
+              <span class="payment-option-copy">
+                <b>شبكة</b>
+                <small>مدى</small>
+              </span>
+            </label>
+            <label class="payment-option" data-payment-option="transfer">
               <input type="radio" name="paymentMethod" value="تحويل بنكي">
               <span class="payment-option-icon" aria-hidden="true">⇄</span>
               <span class="payment-option-copy">
-                <b>تحويل بنكي</b>
-                <small>إلى حساب المؤسسة</small>
+                <b>تحويل</b>
+                <small>حساب المؤسسة</small>
               </span>
             </label>
           </div>
@@ -192,6 +200,6 @@
   </div>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20260812-lamma-v2"></script>
-  <script src="script.js?v=20260823-whatsapp-items-v7"></script>
+  <script src="script.js?v=20260823-payment-v8"></script>
 </body>
 </html>

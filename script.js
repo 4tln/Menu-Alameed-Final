@@ -53,6 +53,8 @@ const locationWrap = document.getElementById("locationWrap");
 const placeNameInput = document.getElementById("placeNameInput");
 const notesInput = document.getElementById("notesInput");
 const bankTransferPanel = document.getElementById("bankTransferPanel");
+const paymentTypes = document.getElementById("paymentTypes");
+const networkPaymentOption = document.getElementById("networkPaymentOption");
 const copyIbanBtn = document.getElementById("copyIbanBtn");
 const openAlRajhiBtn = document.getElementById("openAlRajhiBtn");
 const sendOrderBtn = document.getElementById("sendOrderBtn");
@@ -257,7 +259,8 @@ function getRestaurantStatus(date = new Date()){
   const prayers = prayerScheduleFor(date);
   const business = businessStatusFor(date, prayers);
   const activePrayer = prayers.find(prayer => date >= prayer.start && date < prayer.end);
-  if(!activePrayer) return {...business,icon:business.type === "open" ? "●" : business.type === "break" ? "◐" : "○"};
+  const businessIcon = business.type === "open" ? "●" : business.type === "break" ? "◐" : "○";
+  if(!activePrayer || !business.isOpen) return {...business,icon:businessIcon};
 
   const isFridayPrayer = activePrayer.key === "dhuhr" && restaurantDateParts(date).weekday === 5;
   return {
@@ -658,11 +661,21 @@ function selectedOrderType(){
   return document.querySelector('input[name="orderType"]:checked')?.value || "استلام";
 }
 function selectedPaymentMethod(){
-  return document.querySelector('input[name="paymentMethod"]:checked')?.value || "عند الاستلام";
+  return document.querySelector('input[name="paymentMethod"]:checked')?.value || "";
 }
 function syncPaymentMethod(){
   if(!bankTransferPanel) return;
   bankTransferPanel.hidden = selectedPaymentMethod() !== "تحويل بنكي";
+}
+function syncPaymentOptions(){
+  const isDelivery = selectedOrderType() === "توصيل";
+  if(networkPaymentOption){
+    networkPaymentOption.hidden = isDelivery;
+    const networkInput = networkPaymentOption.querySelector('input[name="paymentMethod"]');
+    if(isDelivery && networkInput?.checked) networkInput.checked = false;
+  }
+  paymentTypes?.classList.toggle("delivery-mode", isDelivery);
+  syncPaymentMethod();
 }
 async function writeBankIban(value = BANK_IBAN){
   let copied = false;
@@ -765,6 +778,11 @@ function sendOrder(){
     placeNameInput.focus();
     return;
   }
+  if(!paymentMethod){
+    alert("يرجى اختيار طريقة الدفع.");
+    document.querySelector(".payment-box")?.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
   const remaining = SEND_DELAY_MS - (Date.now() - lastSend);
   if(remaining > 0){
     alert(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد.`);
@@ -787,9 +805,8 @@ function sendOrder(){
   cart.forEach(item => {
     lines.push(orderQuantityLine(orderItemLabel(item), item.qty));
   });
-  if(paymentMethod === "تحويل بنكي"){
-    lines.push("", "*💳 طريقة الدفع: تحويل بنكي*", "*📎 سيتم إرسال إيصال التحويل في المحادثة*");
-  }
+  lines.push("", `*💳 طريقة الدفع: ${paymentMethod}*`);
+  if(paymentMethod === "تحويل بنكي") lines.push("*📎 سيتم إرسال إيصال التحويل في المحادثة*");
   if(notes){
     lines.push("", "*📝 الملاحظات:*", notes);
   }
@@ -857,6 +874,7 @@ clearCartBtn.addEventListener("click",() => {
 document.querySelectorAll('input[name="orderType"]').forEach(input => {
   input.addEventListener("change", () => {
     const isDelivery = selectedOrderType() === "توصيل";
+    syncPaymentOptions();
     locationWrap.hidden = !isDelivery;
     if(isDelivery) requestLocation();
     else{
@@ -882,7 +900,7 @@ shareBtn?.addEventListener("click", async () => {
   }catch{}
 });
 refreshBtn?.addEventListener("click", () => location.reload());
-syncPaymentMethod();
+syncPaymentOptions();
 renderTabs();
 renderMenu();
 updateCartUI();
