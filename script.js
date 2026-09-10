@@ -763,10 +763,6 @@ function sendOrder(){
     alert(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد.`);
     return;
   }
-  const confirmMessage = paymentMethod === "تحويل بنكي"
-    ? "بعد فتح واتساب أرسل صورة إيصال التحويل. هل تريد المتابعة؟"
-    : "هل تريد إرسال الطلب إلى واتساب المطعم؟";
-  if(!confirm(confirmMessage)) return;
   lastSend = Date.now();
   const lines = ["          ```📦 طلب جديد```", ""];
   if(orderType === "توصيل"){
