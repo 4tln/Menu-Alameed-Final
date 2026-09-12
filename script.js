@@ -1,5 +1,6 @@
 const WHATSAPP_NUMBER = "966536261408";
 const CART_KEY = "alameed_cart_v2";
+const THEME_STORAGE_KEY = "alameed_theme_v1";
 const PLATE_DEPOSIT = 12;
 const LAMMA_ITEM_NAME = "صحن اللمة";
 const OFFER_ITEM_PREFIX = "عرض العميد";
@@ -63,6 +64,8 @@ let offersBadgeExpired = false;
 let offersBadgeTimer = 0;
 const shareBtn = document.getElementById("shareBtn");
 const refreshBtn = document.getElementById("refreshBtn");
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+const themeColorMeta = document.getElementById("themeColorMeta");
 const storeStatusBtn = document.getElementById("storeStatusBtn");
 const storeStatusIcon = document.getElementById("storeStatusIcon");
 const storeStatusTitle = document.getElementById("storeStatusTitle");
@@ -74,6 +77,34 @@ let locationWatchId = null;
 let locationWaitTimer = 0;
 let bestLocationPosition = null;
 let locationRequestSerial = 0;
+
+function savedTheme(){
+  try{
+    const value = localStorage.getItem(THEME_STORAGE_KEY);
+    return value === "dark" || value === "light" ? value : "";
+  }catch{
+    return "";
+  }
+}
+
+function applyTheme(theme, persist = false){
+  const nextTheme = theme === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = nextTheme;
+  themeColorMeta?.setAttribute("content", nextTheme === "dark" ? "#17110d" : "#efe3d3");
+  if(themeToggleBtn){
+    const darkMode = nextTheme === "dark";
+    themeToggleBtn.setAttribute("aria-pressed", String(darkMode));
+    themeToggleBtn.setAttribute("aria-label", darkMode ? "التبديل إلى الوضع النهاري" : "التبديل إلى الوضع الليلي");
+    themeToggleBtn.title = darkMode ? "الوضع النهاري" : "الوضع الليلي";
+  }
+  if(persist){
+    try{ localStorage.setItem(THEME_STORAGE_KEY, nextTheme); }catch{}
+  }
+}
+
+function toggleTheme(){
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
+}
 
 function syncOffersBadgeVisibility(){
   if(!offersBadge) return;
@@ -868,6 +899,12 @@ shareBtn?.addEventListener("click", async () => {
   }catch{}
 });
 refreshBtn?.addEventListener("click", () => location.reload());
+themeToggleBtn?.addEventListener("click", toggleTheme);
+const systemThemePreference = window.matchMedia?.("(prefers-color-scheme: dark)");
+systemThemePreference?.addEventListener?.("change", event => {
+  if(!savedTheme()) applyTheme(event.matches ? "dark" : "light");
+});
+applyTheme(document.documentElement.dataset.theme);
 syncPaymentOptions();
 renderTabs();
 renderMenu();

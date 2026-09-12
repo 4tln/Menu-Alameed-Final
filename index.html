@@ -3,12 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#efe3d3">
+  <meta id="themeColorMeta" name="theme-color" content="#efe3d3">
+  <script>
+    (() => {
+      let theme = window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      try {
+        const savedTheme = localStorage.getItem("alameed_theme_v1");
+        if(savedTheme === "dark" || savedTheme === "light") theme = savedTheme;
+      }catch{}
+      document.documentElement.dataset.theme = theme;
+      document.getElementById("themeColorMeta")?.setAttribute("content", theme === "dark" ? "#17110d" : "#efe3d3");
+    })();
+  </script>
   <meta name="description" content="منيو مطعم فطائر العميد والطلب عبر واتساب">
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="hero-lamma.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20260823-location-v10">
+  <link rel="stylesheet" href="style.css?v=20260912-theme-v1">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,6 +45,14 @@
         </button>
         <button id="refreshBtn" class="quick-action" type="button" aria-label="تحديث الصفحة">
           <span aria-hidden="true">↻</span><b>تحديث</b>
+        </button>
+        <button id="themeToggleBtn" class="quick-action theme-toggle-btn" type="button" aria-label="التبديل إلى الوضع الليلي" title="الوضع الليلي">
+          <span class="theme-icon theme-icon-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M20.2 15.2A8.4 8.4 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"></path></svg>
+          </span>
+          <span class="theme-icon theme-icon-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="3.6"></circle><path d="M12 2.2v2.1M12 19.7v2.1M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2.2 12h2.1M19.7 12h2.1M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"></path></svg>
+          </span>
         </button>
       </div>
       <div class="store-status-wrap">
@@ -215,6 +234,6 @@
   </div>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20260812-lamma-v2"></script>
-  <script src="script.js?v=20260910-direct-send-v1"></script>
+  <script src="script.js?v=20260912-theme-v1"></script>
 </body>
 </html>
