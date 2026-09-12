@@ -66,6 +66,7 @@ const shareBtn = document.getElementById("shareBtn");
 const refreshBtn = document.getElementById("refreshBtn");
 const themeToggleBtn = document.getElementById("themeToggleBtn");
 const themeColorMeta = document.getElementById("themeColorMeta");
+const appleStatusBarMeta = document.getElementById("appleStatusBarMeta");
 const storeStatusBtn = document.getElementById("storeStatusBtn");
 const storeStatusIcon = document.getElementById("storeStatusIcon");
 const storeStatusTitle = document.getElementById("storeStatusTitle");
@@ -89,8 +90,12 @@ function savedTheme(){
 
 function applyTheme(theme, persist = false){
   const nextTheme = theme === "dark" ? "dark" : "light";
+  const browserColor = nextTheme === "dark" ? "#101214" : "#efe3d3";
   document.documentElement.dataset.theme = nextTheme;
-  themeColorMeta?.setAttribute("content", nextTheme === "dark" ? "#17110d" : "#efe3d3");
+  document.documentElement.style.backgroundColor = browserColor;
+  document.documentElement.style.colorScheme = nextTheme;
+  themeColorMeta?.setAttribute("content", browserColor);
+  appleStatusBarMeta?.setAttribute("content", nextTheme === "dark" ? "black-translucent" : "default");
   if(themeToggleBtn){
     const darkMode = nextTheme === "dark";
     themeToggleBtn.setAttribute("aria-pressed", String(darkMode));
