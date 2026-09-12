@@ -65,8 +65,6 @@ let offersBadgeTimer = 0;
 const shareBtn = document.getElementById("shareBtn");
 const refreshBtn = document.getElementById("refreshBtn");
 const themeToggleBtn = document.getElementById("themeToggleBtn");
-const themeColorMeta = document.getElementById("themeColorMeta");
-const appleStatusBarMeta = document.getElementById("appleStatusBarMeta");
 const storeStatusBtn = document.getElementById("storeStatusBtn");
 const storeStatusIcon = document.getElementById("storeStatusIcon");
 const storeStatusTitle = document.getElementById("storeStatusTitle");
@@ -88,14 +86,28 @@ function savedTheme(){
   }
 }
 
+function replaceThemeMeta(id, content){
+  const currentMeta = document.getElementById(id);
+  if(!currentMeta) return;
+  const freshMeta = currentMeta.cloneNode(false);
+  freshMeta.setAttribute("content", content);
+  currentMeta.replaceWith(freshMeta);
+}
+
+function paintBrowserChrome(theme){
+  const darkMode = theme === "dark";
+  const browserColor = darkMode ? "#101214" : "#efe3d3";
+  document.documentElement.style.setProperty("background-color", browserColor, "important");
+  document.documentElement.style.colorScheme = theme;
+  document.body?.style.setProperty("background-color", browserColor, "important");
+  replaceThemeMeta("themeColorMeta", browserColor);
+  replaceThemeMeta("appleStatusBarMeta", darkMode ? "black-translucent" : "default");
+}
+
 function applyTheme(theme, persist = false){
   const nextTheme = theme === "dark" ? "dark" : "light";
-  const browserColor = nextTheme === "dark" ? "#101214" : "#efe3d3";
   document.documentElement.dataset.theme = nextTheme;
-  document.documentElement.style.backgroundColor = browserColor;
-  document.documentElement.style.colorScheme = nextTheme;
-  themeColorMeta?.setAttribute("content", browserColor);
-  appleStatusBarMeta?.setAttribute("content", nextTheme === "dark" ? "black-translucent" : "default");
+  paintBrowserChrome(nextTheme);
   if(themeToggleBtn){
     const darkMode = nextTheme === "dark";
     themeToggleBtn.setAttribute("aria-pressed", String(darkMode));
