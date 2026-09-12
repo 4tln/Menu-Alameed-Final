@@ -3752,3 +3752,57 @@ html[data-theme="dark"] .qty-controls,
 html[data-theme="dark"] .payment-option-icon{
   border-color:#464c53!important;
 }
+
+/* ===== 2026-09-12: إبراز الاختيارات وأزرار الطلب في الوضع الليلي ===== */
+html[data-theme="dark"] #categoryTabs.category-tabs>.tab-btn.active,
+html[data-theme="dark"] .payment-option:has(input:checked),
+html[data-theme="dark"] .order-types label:has(input:checked){
+  border-color:#eef1f4!important;
+  background:linear-gradient(145deg,#59616a,#41474e)!important;
+  color:#fff!important;
+  box-shadow:0 0 0 2px rgba(238,241,244,.15),0 7px 17px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+html[data-theme="dark"] .order-types input[type="radio"],
+html[data-theme="dark"] .payment-option input[type="radio"]{
+  accent-color:#f4f6f8;
+}
+html[data-theme="dark"] .payment-option:has(input:checked) .payment-option-icon{
+  border-color:#eef1f4!important;
+  background:linear-gradient(145deg,#69727c,#4b5158)!important;
+  color:#fff!important;
+}
+html[data-theme="dark"] .field:focus,
+html[data-theme="dark"] #notesInput:focus,
+html[data-theme="dark"] #placeNameInput:focus{
+  border-color:#eef1f4!important;
+  box-shadow:0 0 0 2px rgba(238,241,244,.15)!important;
+}
+
+html[data-theme="dark"] .offers-badge{
+  border-color:#e8ebee!important;
+  background:linear-gradient(145deg,#4f565e,#2d3238)!important;
+  color:#fff!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.15)!important;
+}
+html[data-theme="dark"] .offers-badge-mark,
+html[data-theme="dark"] .offer-card-badge{
+  border-color:rgba(255,255,255,.58)!important;
+  background:#59616a!important;
+  color:#fff!important;
+}
+
+html[data-theme="dark"] .checkout-toggle,
+html[data-theme="dark"] .whatsapp-btn{
+  border:1px solid #747c85!important;
+  background:linear-gradient(145deg,#4b525a,#292e34)!important;
+  color:#fff!important;
+  box-shadow:0 9px 21px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+html[data-theme="dark"] .checkout-toggle-copy small{
+  color:rgba(255,255,255,.78)!important;
+}
+html[data-theme="dark"] .checkout-toggle-arrow{
+  border-color:rgba(255,255,255,.48)!important;
+  background:linear-gradient(145deg,#626a73,#444a51)!important;
+  color:#fff!important;
+}
