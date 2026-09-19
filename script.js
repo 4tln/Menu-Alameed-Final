@@ -4,12 +4,36 @@ const THEME_STORAGE_KEY = "alameed_theme_v1";
 const PLATE_DEPOSIT = 12;
 const LAMMA_ITEM_NAME = "صحن اللمة";
 const OFFER_ITEM_PREFIX = "عرض العميد";
+const LAMMA_REGULAR_PRICE = 115;
+const LAMMA_NATIONAL_DAY_PRICE = 96;
+const NATIONAL_DAY_OFFER_START = Date.parse("2026-09-20T00:00:00+03:00");
+const NATIONAL_DAY_OFFER_END = Date.parse("2026-09-27T00:00:00+03:00");
 const RESTAURANT_TIME_ZONE = "Asia/Riyadh";
 const RESTAURANT_COORDINATES = Object.freeze({latitude:17.33848,longitude:43.13289});
 const NORMAL_PRAYER_NOTICE_MINUTES = 30;
 const FRIDAY_PRAYER_NOTICE_MINUTES = 45;
 const BANK_IBAN = "SA1580000417608010132485";
 const BANK_IBAN_WITHOUT_COUNTRY_CODE = "1580000417608010132485";
+
+function isNationalDayOfferActive(now = Date.now()){
+  return now >= NATIONAL_DAY_OFFER_START && now < NATIONAL_DAY_OFFER_END;
+}
+function currentLammaPrice(){
+  return isNationalDayOfferActive() ? LAMMA_NATIONAL_DAY_PRICE : LAMMA_REGULAR_PRICE;
+}
+function applyNationalDayOfferPrice(){
+  const price = currentLammaPrice();
+  window.MENU_DATA.forEach(section => {
+    section.items.forEach(item => {
+      if(item.name !== LAMMA_ITEM_NAME) return;
+      item.variants.forEach(variant => {
+        variant.price = price;
+      });
+    });
+  });
+}
+
+applyNationalDayOfferPrice();
 let activeCategory = window.MENU_DATA[0]?.category || "";
 let searchTerm = "";
 let cart = loadCart();
@@ -457,7 +481,18 @@ retryLocationBtn.addEventListener("click", requestLocation);
 function loadCart(){
   try{
     const value = JSON.parse(localStorage.getItem(CART_KEY));
-    return Array.isArray(value) ? value : [];
+    if(!Array.isArray(value)) return [];
+    const lammaPrice = currentLammaPrice();
+    const merged = [];
+    value.forEach(item => {
+      const price = item.name === LAMMA_ITEM_NAME ? lammaPrice : Number(item.price || 0);
+      const key = `${item.name}|${item.size}|${price}`;
+      const existing = merged.find(row => row.key === key);
+      if(existing) existing.qty += Number(item.qty || 0);
+      else merged.push({...item,key,price,qty:Number(item.qty || 0)});
+    });
+    localStorage.setItem(CART_KEY, JSON.stringify(merged));
+    return merged;
   }catch{
     return [];
   }
