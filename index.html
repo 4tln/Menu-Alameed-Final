@@ -19,14 +19,15 @@
       const nationalThemeActive = Date.now() >= nationalThemeStart && Date.now() < nationalThemeEnd;
       document.documentElement.dataset.theme = theme;
       document.documentElement.dataset.nationalTheme = nationalThemeActive ? "heritage" : "";
+      document.documentElement.dataset.nationalPalette = nationalThemeActive ? "luxe" : "";
       const browserColor = nationalThemeActive
-        ? (theme === "dark" ? "#111a15" : "#f3e5c9")
+        ? (theme === "dark" ? "#10231a" : "#f6f0e4")
         : (theme === "dark" ? "#101214" : "#efe3d3");
       document.documentElement.style.backgroundColor = browserColor;
       const lightThemeColor = document.getElementById("themeColorLight");
       const darkThemeColor = document.getElementById("themeColorDark");
-      if(lightThemeColor) lightThemeColor.content = nationalThemeActive ? "#f3e5c9" : "#efe3d3";
-      if(darkThemeColor) darkThemeColor.content = nationalThemeActive ? "#111a15" : "#101214";
+      if(lightThemeColor) lightThemeColor.content = nationalThemeActive ? "#f6f0e4" : "#efe3d3";
+      if(darkThemeColor) darkThemeColor.content = nationalThemeActive ? "#10231a" : "#101214";
       if(lightThemeColor) lightThemeColor.media = theme === "dark" ? "not all" : "all";
       if(darkThemeColor) darkThemeColor.media = theme === "dark" ? "all" : "not all";
       document.getElementById("appleStatusBarMeta")?.setAttribute("content", theme === "dark" ? "black-translucent" : "default");
@@ -36,7 +37,7 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="hero-lamma.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20260920-national-heritage-theme-v1">
+  <link rel="stylesheet" href="style.css?v=20260920-national-luxe-theme-v2">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -94,6 +95,12 @@
     </div>
     <div class="category-panel">
       <nav id="categoryTabs" class="category-tabs" aria-label="أقسام المنيو"></nav>
+      <span class="national-theme-mark" aria-hidden="true">
+        <svg viewBox="0 0 88 32" focusable="false">
+          <path d="M8 5 35 25M6 12 13 4M10 10 4 3M80 5 53 25M82 12 75 4M78 10 84 3"/>
+          <path d="M44 26V15M44 16c-7-5-12-4-17-1M44 16c7-5 12-4 17-1M44 15c-2-5-5-8-9-10M44 15c2-5 5-8 9-10"/>
+        </svg>
+      </span>
     </div>
   </div>
   <main id="menuArea" class="menu-area"></main>
@@ -250,6 +257,6 @@
   </div>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20260812-lamma-v2"></script>
-  <script src="script.js?v=20260920-national-heritage-theme-v1"></script>
+  <script src="script.js?v=20260920-national-luxe-theme-v2"></script>
 </body>
 </html>

@@ -28,6 +28,7 @@ function isNationalThemeActive(now = Date.now()){
 function syncNationalTheme(){
   const active = isNationalThemeActive();
   document.documentElement.dataset.nationalTheme = active ? NATIONAL_THEME_NAME : "";
+  document.documentElement.dataset.nationalPalette = active ? "luxe" : "";
   return active;
 }
 function currentLammaPrice(){
@@ -125,8 +126,11 @@ function savedTheme(){
 function paintBrowserChrome(theme){
   const darkMode = theme === "dark";
   const heritageTheme = document.documentElement.dataset.nationalTheme === NATIONAL_THEME_NAME;
-  const browserColor = heritageTheme
-    ? (darkMode ? "#111a15" : "#f3e5c9")
+  const luxePalette = document.documentElement.dataset.nationalPalette === "luxe";
+  const browserColor = luxePalette
+    ? (darkMode ? "#10231a" : "#f6f0e4")
+    : heritageTheme
+      ? (darkMode ? "#111a15" : "#f3e5c9")
     : (darkMode ? "#101214" : "#efe3d3");
   document.documentElement.style.setProperty("background-color", browserColor, "important");
   document.documentElement.style.colorScheme = theme;
