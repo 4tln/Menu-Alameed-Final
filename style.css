@@ -1482,6 +1482,49 @@ body.modal-open .offers-badge{
   gap:1px!important;
   white-space:nowrap;
 }
+.variant-btn .price-with-offer{
+  gap:8px!important;
+}
+.variant-btn .old-price,
+.variant-btn .offer-price{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+}
+.variant-btn .old-price{
+  color:#877467;
+  font-size:12px;
+  font-weight:750;
+  opacity:.9;
+  text-decoration-line:line-through;
+  text-decoration-color:#a32626;
+  text-decoration-thickness:2px;
+}
+.variant-btn .old-price .sar-symbol{
+  opacity:.78;
+}
+.variant-btn .offer-price{
+  padding:4px 9px;
+  border-radius:999px;
+  background:#a32626;
+  color:#fff;
+  font-size:15px;
+  font-weight:950;
+  box-shadow:0 4px 10px rgba(163,38,38,.20);
+}
+.variant-btn .offer-price .sar-symbol,
+.offer-item-card .variant-btn .offer-price .sar-symbol{
+  filter:brightness(0) invert(1)!important;
+}
+html[data-theme="dark"] .variant-btn .old-price{
+  color:#cbb8a7!important;
+  text-decoration-color:#ff8c82;
+}
+html[data-theme="dark"] .variant-btn .offer-price{
+  background:#b83a32!important;
+  color:#fff!important;
+}
 
 /* زر سلة صغير لا يغطي الأصناف */
 .cart-bar{
@@ -3805,4 +3848,161 @@ html[data-theme="dark"] .checkout-toggle-arrow{
   border-color:rgba(255,255,255,.48)!important;
   background:linear-gradient(145deg,#626a73,#444a51)!important;
   color:#fff!important;
+}
+
+/* ===== إعلان اليوم الوطني لصحن اللمة — 20 إلى 26 سبتمبر 2026 ===== */
+.national-day-item-card{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden!important;
+  border:1px solid rgba(239,210,130,.72)!important;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(255,255,255,.13) 0 2px,transparent 3px),
+    radial-gradient(circle at 92% 18%,rgba(239,210,130,.15) 0 3px,transparent 4px),
+    linear-gradient(145deg,#08743f 0%,#045f34 46%,#034725 100%)!important;
+  background-size:28px 28px,38px 38px,auto!important;
+  box-shadow:0 15px 32px rgba(0,73,39,.27),inset 0 1px 0 rgba(255,255,255,.20)!important;
+}
+.national-day-item-card::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:6px;
+  pointer-events:none;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:15px;
+}
+.national-day-item-card::after{
+  content:"✦";
+  position:absolute;
+  z-index:-1;
+  left:17px;
+  top:8px;
+  color:rgba(239,210,130,.40);
+  font-size:48px;
+  line-height:1;
+  transform:rotate(12deg);
+  pointer-events:none;
+}
+.national-day-item-card .item-card-head{
+  position:relative;
+  z-index:1;
+}
+.national-day-item-card .item-name{
+  color:#fff!important;
+  text-shadow:0 2px 7px rgba(0,0,0,.18);
+}
+.national-day-item-card .offer-card-badge{
+  border-color:rgba(239,210,130,.50)!important;
+  background:rgba(239,210,130,.17)!important;
+  color:#ffe8a8!important;
+}
+.national-day-ad{
+  position:relative;
+  z-index:1;
+  margin:0 0 12px;
+  padding:13px 14px 12px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.07));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 7px 17px rgba(0,47,25,.16);
+  color:#fff;
+  text-align:right;
+}
+.national-day-ad::after{
+  content:"";
+  position:absolute;
+  left:-22px;
+  bottom:-32px;
+  width:92px;
+  height:92px;
+  border:16px solid rgba(239,210,130,.10);
+  border-radius:50%;
+  pointer-events:none;
+}
+.national-day-ad-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:5px;
+}
+.national-day-kicker{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.1px;
+  color:#ffe8a8;
+}
+.national-day-number{
+  width:43px;
+  height:43px;
+  display:inline-grid;
+  place-items:center;
+  flex:0 0 43px;
+  border:1px solid rgba(255,255,255,.65);
+  border-radius:50%;
+  background:#fff;
+  color:#08703e;
+  font-size:21px;
+  font-weight:1000;
+  box-shadow:0 5px 12px rgba(0,0,0,.14),inset 0 0 0 4px rgba(8,112,62,.08);
+}
+.national-day-ad>strong{
+  display:block;
+  margin-top:-8px;
+  font-size:23px;
+  font-weight:1000;
+  line-height:1.25;
+  text-shadow:0 2px 8px rgba(0,0,0,.16);
+}
+.national-day-ad>small{
+  display:block;
+  margin-top:5px;
+  color:rgba(255,255,255,.86);
+  font-size:11px;
+  font-weight:800;
+}
+.national-day-item-card .offer-components span{
+  border-color:rgba(255,255,255,.18)!important;
+  background:rgba(255,255,255,.10)!important;
+  color:#fff!important;
+}
+.national-day-item-card .variant-btn{
+  position:relative;
+  z-index:1;
+  border-color:rgba(239,210,130,.42)!important;
+  background:linear-gradient(180deg,#fffaf0,#f5e7c7)!important;
+  color:#075d35!important;
+  box-shadow:0 8px 17px rgba(0,44,24,.18),inset 0 1px 0 #fff!important;
+}
+.national-day-item-card .variant-btn .price-with-offer{
+  color:#075d35!important;
+}
+.national-day-item-card .variant-btn .old-price{
+  color:#7d7165!important;
+  text-decoration-color:#b32626!important;
+}
+.national-day-item-card .variant-btn .offer-price{
+  background:linear-gradient(135deg,#f6db88,#d8ad42)!important;
+  color:#064e2d!important;
+  box-shadow:0 4px 11px rgba(104,73,8,.20)!important;
+}
+.national-day-item-card .variant-btn .offer-price .sar-symbol{
+  filter:none!important;
+}
+html[data-theme="dark"] .national-day-item-card,
+html[data-theme="dark"] .item-card.national-day-item-card{
+  border-color:rgba(239,210,130,.68)!important;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(255,255,255,.10) 0 2px,transparent 3px),
+    radial-gradient(circle at 92% 18%,rgba(239,210,130,.13) 0 3px,transparent 4px),
+    linear-gradient(145deg,#08643a 0%,#044e2d 52%,#033b22 100%)!important;
+  background-size:28px 28px,38px 38px,auto!important;
+}
+@media(max-width:430px){
+  .national-day-ad{padding:11px 12px 10px}
+  .national-day-ad>strong{font-size:21px}
+  .national-day-number{width:39px;height:39px;flex-basis:39px;font-size:19px}
+  .national-day-item-card .price-with-offer{gap:6px!important}
 }

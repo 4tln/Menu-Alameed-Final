@@ -507,6 +507,17 @@ function sarIcon(extraClass = ""){
   const className = extraClass ? `sar-symbol ${extraClass}` : "sar-symbol";
   return `<span class="${className}" role="img" aria-label="ريال سعودي"></span>`;
 }
+function variantPriceHtml(itemName, price){
+  if(itemName === LAMMA_ITEM_NAME && isNationalDayOfferActive()){
+    return `
+      <span class="price price-with-offer" aria-label="السعر السابق ${LAMMA_REGULAR_PRICE} ريال، سعر العرض ${price} ريال">
+        <span class="old-price"><span>${money(LAMMA_REGULAR_PRICE)}</span>${sarIcon("sar-symbol-small")}</span>
+        <span class="offer-price"><span>${money(price)}</span>${sarIcon()}</span>
+      </span>
+    `;
+  }
+  return `<span class="price"><span>${money(price)}</span>${sarIcon()}</span>`;
+}
 function escapeHtml(value){
   return String(value).replace(/[&<>"']/g, char => ({
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
@@ -547,12 +558,23 @@ function renderMenu(){
       <div class="items-grid">
         ${section.items.map(item => {
           const offerItem = section.category === "العروض";
+          const nationalDayItem = item.name === LAMMA_ITEM_NAME && isNationalDayOfferActive();
           return `
-          <article class="item-card ${offerItem ? "offer-item-card" : ""}">
+          <article class="item-card ${offerItem ? "offer-item-card" : ""} ${nationalDayItem ? "national-day-item-card" : ""}">
             <div class="item-card-head">
               <div class="item-name">${escapeHtml(item.name)}</div>
               ${offerItem ? '<span class="offer-card-badge">عرض خاص</span>' : ''}
             </div>
+            ${nationalDayItem ? `
+              <div class="national-day-ad" aria-label="عرض اليوم الوطني السعودي السادس والتسعين">
+                <div class="national-day-ad-top">
+                  <span class="national-day-kicker">اليوم الوطني السعودي</span>
+                  <span class="national-day-number" aria-label="السادس والتسعون">96</span>
+                </div>
+                <strong>اللمة تجمعنا</strong>
+                <small>عرض خاص من 20 إلى 26 سبتمبر</small>
+              </div>
+            ` : ""}
             ${offerItem ? `
               <div class="offer-components" aria-label="محتويات صحن اللمة">
                 <span>4 أسياخ كباب دجاج</span>
@@ -571,7 +593,7 @@ function renderMenu(){
                   data-size="${escapeHtml(variant.size)}"
                   data-price="${variant.price}">
                   <span>${escapeHtml(variant.size)}</span>
-                  <span class="price"><span>${money(variant.price)}</span>${sarIcon()}</span>
+                  ${variantPriceHtml(item.name, variant.price)}
                 </button>
               `).join("")}
             </div>
