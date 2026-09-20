@@ -8,6 +8,10 @@ const LAMMA_REGULAR_PRICE = 115;
 const LAMMA_NATIONAL_DAY_PRICE = 96;
 const NATIONAL_DAY_OFFER_START = Date.parse("2026-09-20T00:00:00+03:00");
 const NATIONAL_DAY_OFFER_END = Date.parse("2026-09-27T00:00:00+03:00");
+const NATIONAL_THEME_START = Date.parse("2026-09-20T00:00:00+03:00");
+// يظل الثيم ظاهرًا طوال يوم 27 سبتمبر، وينتهي مع بداية 28 سبتمبر بتوقيت السعودية.
+const NATIONAL_THEME_END = Date.parse("2026-09-28T00:00:00+03:00");
+const NATIONAL_THEME_NAME = "heritage";
 const RESTAURANT_TIME_ZONE = "Asia/Riyadh";
 const RESTAURANT_COORDINATES = Object.freeze({latitude:17.33848,longitude:43.13289});
 const NORMAL_PRAYER_NOTICE_MINUTES = 30;
@@ -17,6 +21,14 @@ const BANK_IBAN_WITHOUT_COUNTRY_CODE = "1580000417608010132485";
 
 function isNationalDayOfferActive(now = Date.now()){
   return now >= NATIONAL_DAY_OFFER_START && now < NATIONAL_DAY_OFFER_END;
+}
+function isNationalThemeActive(now = Date.now()){
+  return now >= NATIONAL_THEME_START && now < NATIONAL_THEME_END;
+}
+function syncNationalTheme(){
+  const active = isNationalThemeActive();
+  document.documentElement.dataset.nationalTheme = active ? NATIONAL_THEME_NAME : "";
+  return active;
 }
 function currentLammaPrice(){
   return isNationalDayOfferActive() ? LAMMA_NATIONAL_DAY_PRICE : LAMMA_REGULAR_PRICE;
@@ -112,7 +124,10 @@ function savedTheme(){
 
 function paintBrowserChrome(theme){
   const darkMode = theme === "dark";
-  const browserColor = darkMode ? "#101214" : "#efe3d3";
+  const heritageTheme = document.documentElement.dataset.nationalTheme === NATIONAL_THEME_NAME;
+  const browserColor = heritageTheme
+    ? (darkMode ? "#111a15" : "#f3e5c9")
+    : (darkMode ? "#101214" : "#efe3d3");
   document.documentElement.style.setProperty("background-color", browserColor, "important");
   document.documentElement.style.colorScheme = theme;
   document.body?.style.setProperty("background-color", browserColor, "important");
@@ -971,6 +986,12 @@ const systemThemePreference = window.matchMedia?.("(prefers-color-scheme: dark)"
 systemThemePreference?.addEventListener?.("change", event => {
   if(!savedTheme()) applyTheme(event.matches ? "dark" : "light");
 });
+syncNationalTheme();
+window.setInterval(() => {
+  const previous = document.documentElement.dataset.nationalTheme === NATIONAL_THEME_NAME;
+  const current = syncNationalTheme();
+  if(previous !== current) paintBrowserChrome(document.documentElement.dataset.theme);
+}, 60000);
 applyTheme(document.documentElement.dataset.theme);
 syncPaymentOptions();
 renderTabs();
