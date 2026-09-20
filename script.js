@@ -7,7 +7,7 @@ const OFFER_ITEM_PREFIX = "عرض العميد";
 const LAMMA_REGULAR_PRICE = 115;
 const LAMMA_NATIONAL_DAY_PRICE = 96;
 const NATIONAL_DAY_OFFER_START = Date.parse("2026-09-20T00:00:00+03:00");
-const NATIONAL_DAY_OFFER_END = Date.parse("2026-09-27T00:00:00+03:00");
+const NATIONAL_DAY_OFFER_END = Date.parse("2026-09-28T00:00:00+03:00");
 const NATIONAL_THEME_START = Date.parse("2026-09-20T00:00:00+03:00");
 // يظل الثيم ظاهرًا طوال يوم 27 سبتمبر، وينتهي مع بداية 28 سبتمبر بتوقيت السعودية.
 const NATIONAL_THEME_END = Date.parse("2026-09-28T00:00:00+03:00");
@@ -584,15 +584,22 @@ function renderMenu(){
               </div>
             ` : ""}
             <div class="variant-grid variant-grid-${Math.max(1,Math.min(item.variants.length,3))}">
-              ${item.variants.map(variant => `
+              ${item.variants.map(variant => {
+                const discountedOffer = offerItem && item.name === LAMMA_ITEM_NAME && isNationalDayOfferActive();
+                return `
                 <button type="button" class="variant-btn"
                   data-name="${escapeHtml(item.name)}"
                   data-size="${escapeHtml(variant.size)}"
                   data-price="${variant.price}">
                   <span>${escapeHtml(variant.size)}</span>
-                  <span class="price"><span>${money(variant.price)}</span>${sarIcon()}</span>
+                  <span class="price${discountedOffer ? " offer-price" : ""}">
+                    ${discountedOffer ? `
+                      <span class="offer-old-price"><span>${money(LAMMA_REGULAR_PRICE)}</span>${sarIcon("sar-symbol-old")}</span>
+                      <span class="offer-new-price"><span>${money(variant.price)}</span>${sarIcon()}</span>
+                    ` : `<span>${money(variant.price)}</span>${sarIcon()}`}
+                  </span>
                 </button>
-              `).join("")}
+              `}).join("")}
             </div>
           </article>
         `}).join("")}

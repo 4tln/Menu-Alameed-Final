@@ -4630,3 +4630,96 @@ html[data-theme="dark"][data-national-palette="luxe"] .whatsapp-btn{border-color
 html[data-theme="dark"][data-national-palette="luxe"] .checkout-toggle-copy small{color:rgba(255,253,248,.78)!important}
 html[data-theme="dark"][data-national-palette="luxe"] .checkout-toggle-arrow{border-color:rgba(255,255,255,.36)!important;background:rgba(255,255,255,.10)!important;color:#fffdf8!important}
 html[data-theme="dark"][data-national-palette="luxe"] .national-theme-mark svg{stroke:#d7b978}
+
+/* نقش وطني صغير ومتكرر داخل جميع شرائح المنيو */
+html[data-national-palette="luxe"] .item-card,
+html[data-national-palette="luxe"] .item-card.offer-item-card{
+  background-color:#fffdf8!important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='34' viewBox='0 0 64 34'%3E%3Cg fill='none' stroke='%23d5b06b' stroke-opacity='.22' stroke-width='1.15' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7l18 17M3 12l7-8M7 11 2 5M59 7 41 24M61 12l-7-8M57 11l5-6'/%3E%3Cpath d='M32 26V15m0 1c-5-4-9-3-12-1m12 1c5-4 9-3 12-1m-12 0c-1-4-4-7-7-9m7 9c1-4 4-7 7-9'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(150deg,rgba(255,253,248,.98),rgba(248,241,227,.98))!important;
+  background-position:center top,center!important;
+  background-repeat:repeat,no-repeat!important;
+  background-size:64px 34px,100% 100%!important;
+}
+html[data-theme="dark"][data-national-palette="luxe"] .item-card,
+html[data-theme="dark"][data-national-palette="luxe"] .item-card.offer-item-card{
+  background-color:#1c3528!important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='34' viewBox='0 0 64 34'%3E%3Cg fill='none' stroke='%23d7b978' stroke-opacity='.17' stroke-width='1.15' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7l18 17M3 12l7-8M7 11 2 5M59 7 41 24M61 12l-7-8M57 11l5-6'/%3E%3Cpath d='M32 26V15m0 1c-5-4-9-3-12-1m12 1c5-4 9-3 12-1m-12 0c-1-4-4-7-7-9m7 9c1-4 4-7 7-9'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(150deg,rgba(28,53,40,.98),rgba(21,41,31,.98))!important;
+}
+
+/* السعر القديم المشطوب والسعر الجديد داخل عرض صحن اللمة */
+.offer-item-card .variant-btn .offer-price{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  direction:ltr!important;
+}
+.offer-old-price,
+.offer-new-price{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:1px;
+  white-space:nowrap;
+}
+.offer-old-price{
+  padding:2px 3px;
+  color:#887f73!important;
+  font-size:12px;
+  font-weight:800;
+  opacity:.78;
+}
+.offer-old-price::after{
+  content:"";
+  position:absolute;
+  z-index:2;
+  left:0;
+  right:0;
+  top:50%;
+  height:2px;
+  border-radius:999px;
+  background:#b54b42;
+  transform:rotate(-8deg);
+}
+.offer-old-price .sar-symbol{
+  width:14px!important;
+  height:14px!important;
+  margin-inline-start:2px!important;
+  opacity:.72!important;
+}
+.offer-new-price{
+  min-height:30px;
+  padding:4px 8px;
+  border:1px solid rgba(10,76,57,.20);
+  border-radius:10px;
+  background:linear-gradient(145deg,#e4f0e7,#c9ddce);
+  color:#0a4c39!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86),0 4px 10px rgba(10,56,42,.10);
+  font-size:18px;
+  font-weight:950;
+}
+.offer-new-price .sar-symbol{
+  width:18px!important;
+  height:18px!important;
+  margin-inline-start:3px!important;
+}
+html[data-theme="dark"] .offer-old-price{color:#aaa89f!important}
+html[data-theme="dark"] .offer-old-price::after{background:#e3877f}
+html[data-theme="dark"] .offer-new-price{
+  border-color:#d7b978;
+  background:linear-gradient(145deg,#387158,#27513f);
+  color:#fffdf8!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 4px 10px rgba(0,0,0,.26);
+}
+
+@media(max-width:380px){
+  .offer-item-card .variant-btn .offer-price{gap:5px!important}
+  .offer-old-price{font-size:11px}
+  .offer-new-price{min-height:27px;padding:3px 6px;font-size:16px}
+  .offer-new-price .sar-symbol{width:16px!important;height:16px!important}
+}
