@@ -7,10 +7,10 @@ const OFFER_ITEM_PREFIX = "عرض العميد";
 const LAMMA_REGULAR_PRICE = 115;
 const LAMMA_NATIONAL_DAY_PRICE = 96;
 const NATIONAL_DAY_OFFER_START = Date.parse("2026-09-20T00:00:00+03:00");
-const NATIONAL_DAY_OFFER_END = Date.parse("2026-09-28T00:00:00+03:00");
+const NATIONAL_DAY_OFFER_END = Date.parse("2026-09-27T00:00:00+03:00");
 const NATIONAL_THEME_START = Date.parse("2026-09-20T00:00:00+03:00");
-// يظل الثيم ظاهرًا طوال يوم 27 سبتمبر، وينتهي مع بداية 28 سبتمبر بتوقيت السعودية.
-const NATIONAL_THEME_END = Date.parse("2026-09-28T00:00:00+03:00");
+// انتهى العرض والثيم مع بداية 27 سبتمبر بتوقيت السعودية.
+const NATIONAL_THEME_END = Date.parse("2026-09-27T00:00:00+03:00");
 const NATIONAL_THEME_NAME = "heritage";
 const RESTAURANT_TIME_ZONE = "Asia/Riyadh";
 const RESTAURANT_COORDINATES = Object.freeze({latitude:17.33848,longitude:43.13289});
