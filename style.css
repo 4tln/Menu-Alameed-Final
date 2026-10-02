@@ -4724,8 +4724,8 @@ html[data-theme="dark"] .offer-new-price{
   .offer-new-price .sar-symbol{width:16px!important;height:16px!important}
 }
 
-/* Compact language slider, fixed to the upper-right corner above search. */
-.language-row{display:flex;direction:ltr;justify-content:flex-end;width:100%;margin:0 0 4px;padding:0 2px}
+/* Compact language slider, fixed to the upper-left corner above search. */
+.language-row{display:flex;direction:ltr;justify-content:flex-start;width:100%;margin:0 0 4px;padding:0 2px}
 .language-switch{position:relative;display:flex;align-items:center;width:82px;height:30px;padding:3px;border:1px solid var(--brand);border-radius:10px;background:var(--cream);color:var(--text);touch-action:pan-y;user-select:none;-webkit-user-select:none;flex-shrink:0}
 .language-option{position:relative;z-index:1;display:grid;place-items:center;width:50%;font-size:12px;font-weight:800;line-height:22px;pointer-events:none}
 .language-thumb{position:absolute;left:calc(50% - 1px);top:3px;width:calc(50% - 2px);height:22px;background:var(--brand);border-radius:6px;box-shadow:0 1px 3px #0002;transition:left .18s ease;pointer-events:none}
