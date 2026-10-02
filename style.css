@@ -4723,3 +4723,24 @@ html[data-theme="dark"] .offer-new-price{
   .offer-new-price{min-height:27px;padding:3px 6px;font-size:16px}
   .offer-new-price .sar-symbol{width:16px!important;height:16px!important}
 }
+
+/* Compact language slider, fixed to the upper-right corner above search. */
+.language-row{display:flex;direction:ltr;justify-content:flex-end;width:100%;margin:0 0 4px;padding:0 2px}
+.language-switch{position:relative;display:flex;align-items:center;width:82px;height:30px;padding:3px;border:1px solid var(--brand);border-radius:10px;background:var(--cream);color:var(--text);touch-action:pan-y;user-select:none;-webkit-user-select:none;flex-shrink:0}
+.language-option{position:relative;z-index:1;display:grid;place-items:center;width:50%;font-size:12px;font-weight:800;line-height:22px;pointer-events:none}
+.language-thumb{position:absolute;left:calc(50% - 1px);top:3px;width:calc(50% - 2px);height:22px;background:var(--brand);border-radius:6px;box-shadow:0 1px 3px #0002;transition:left .18s ease;pointer-events:none}
+.language-switch[data-language="en"] .language-thumb{left:3px}
+.language-switch[data-language="ar"] .language-option:last-child,.language-switch[data-language="en"] .language-option:nth-child(2){color:#fff}
+.language-switch.is-dragging .language-thumb{left:var(--thumb-left);transition:none}
+.language-switch:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+html[data-theme="dark"] .language-switch{background:#24282c;border-color:#a77950;color:#f8eee6}
+html[data-theme="dark"] .language-thumb{background:#a77950}
+html[lang="en"] .cart-item.cart-row,html[lang="en"] .cart-row-info,html[lang="en"] .payment-option-copy,html[lang="en"] .bank-beneficiary{text-align:left}
+html[lang="en"] .tab-btn{font-size:11px;line-height:1.2}
+html[lang="en"] .variant-btn{font-size:12px;gap:3px}
+html[lang="en"] .store-status-copy,html[lang="en"] .checkout-toggle-copy,html[lang="en"] .cart-items-toggle-copy{text-align:left}
+html[lang="en"] .cart-item.cart-row h4{white-space:normal}
+html[lang="en"] .remove-btn{width:auto;min-width:42px}
+@media(prefers-reduced-motion:reduce){.language-thumb{transition:none}}
+html[lang="en"] .variant-grid-2 .variant-btn,html[lang="en"] .variant-grid-3 .variant-btn{flex-direction:column!important;justify-content:center!important;gap:4px!important;padding:7px 3px!important}
+html[lang="en"] .variant-btn>span:first-child{font-size:12px!important}

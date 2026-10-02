@@ -551,7 +551,7 @@ function renderMenu(){
   const sections = normalized
     ? window.MENU_DATA.map(section => ({
         ...section,
-        items: section.items.filter(item => item.name.toLowerCase().includes(normalized))
+        items: section.items.filter(item => (item.name.toLowerCase().includes(normalized) || (window.ALAMEED_EN[item.name] || "").toLowerCase().includes(normalized)))
       })).filter(section => section.items.length)
     : window.MENU_DATA.filter(section => section.category === activeCategory);
   if(!sections.length){
@@ -858,7 +858,7 @@ function formatOrderDate(){
 }
 function sendOrder(){
   if(!cart.length){
-    alert("لا يمكن إرسال الطلب، السلة فارغة.");
+    alert(AlameedLanguage.translate("لا يمكن إرسال الطلب، السلة فارغة."));
     return;
   }
   const orderType = selectedOrderType();
@@ -866,25 +866,25 @@ function sendOrder(){
   const notes = notesInput.value.trim();
   const placeName = placeNameInput.value.trim();
   if(orderType === "توصيل" && !customerLocation.link){
-    alert("يرجى السماح بالوصول للموقع ثم إعادة المحاولة.");
+    alert(AlameedLanguage.translate("يرجى السماح بالوصول للموقع ثم إعادة المحاولة."));
     locationWrap.hidden = false;
     requestLocation();
     return;
   }
   if(orderType === "توصيل" && !placeName){
-    alert("يرجى كتابة اسم المكان.");
+    alert(AlameedLanguage.translate("يرجى كتابة اسم المكان."));
     locationWrap.hidden = false;
     placeNameInput.focus();
     return;
   }
   if(!paymentMethod){
-    alert("يرجى اختيار طريقة الدفع.");
+    alert(AlameedLanguage.translate("يرجى اختيار طريقة الدفع."));
     document.querySelector(".payment-box")?.scrollIntoView({behavior:"smooth",block:"center"});
     return;
   }
   const remaining = SEND_DELAY_MS - (Date.now() - lastSend);
   if(remaining > 0){
-    alert(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد.`);
+    alert(AlameedLanguage.translate(`انتظر ${Math.ceil(remaining / 1000)} ثانية قبل إرسال طلب جديد.`));
     return;
   }
   lastSend = Date.now();
@@ -956,7 +956,7 @@ toggleCheckoutBtn?.addEventListener("click",() => {
 document.querySelectorAll("[data-close-modal]").forEach(el => el.addEventListener("click",closeCart));
 clearCartBtn.addEventListener("click",() => {
   if(!cart.length) return;
-  if(confirm("هل تريد إفراغ السلة؟")){
+  if(confirm(AlameedLanguage.translate("هل تريد إفراغ السلة؟"))){
     cart = [];
     saveCart();
     renderCart();
