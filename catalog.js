@@ -89,9 +89,10 @@ function openProduct(name, trigger){
   renderProductOptions(item);
   const noteInput = document.getElementById('productNote');
   const noteLabel = document.querySelector('label[for="productNote"]');
-  const isPizza = categoryForProduct(item.name) === 'البيتزا';
-  if(noteLabel) noteLabel.hidden = isPizza;
-  noteInput.hidden = isPizza;
+  const hideItemNote = ['البيتزا','المشروبات','البطاط - الصوصات','العروض','الحلا','المقبلات','الفطائر','المشاوي'].includes(categoryForProduct(item.name));
+  if(noteLabel) noteLabel.hidden = hideItemNote;
+  noteInput.hidden = hideItemNote;
+  noteInput.disabled = hideItemNote;
   noteInput.value = '';
   updateProductPrice();
   productDialog.showModal();
@@ -177,7 +178,8 @@ document.getElementById('productAdd').addEventListener('click',()=>{
   const {item,index}=productSelection;
   const variant=item.variants[index];
   const modifiers = selectedModifierState();
-  const note = document.getElementById('productNote').value.trim();
+  const noteInput = document.getElementById('productNote');
+  const note = noteInput.disabled ? '' : noteInput.value.trim();
   addToCart(item.name,variant.size,variant.price + modifierUnitTotal(modifiers),productQuantity,note,modifiers,variant.price);
   closeProduct();
 });

@@ -1409,7 +1409,7 @@ body.modal-open .offers-badge{
   overflow:hidden;
   border:1px solid rgba(255,255,255,.88);
   border-radius:22px;
-  background:url("hero-lamma.jpg") center center/cover no-repeat;
+  background:url("hero-lamma.webp") center center/cover no-repeat;
   box-shadow:0 14px 30px rgba(70,41,20,.20);
   -webkit-touch-callout:none;
   user-select:none;
@@ -4846,3 +4846,35 @@ button:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
 img,.catalog-photo,.detail-photo,.cart-product-photo,.hero-slide,.offer-photo{
   -webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none;
 }
+
+/* Show the whole Lamma platter, including its rim, at every product size. */
+.catalog-photo.food-photo[src*="hero-lamma.webp"],
+.detail-photo.food-photo[src*="hero-lamma.webp"],
+.cart-product-photo.food-photo[src*="hero-lamma.webp"] {
+  object-fit: contain;
+  object-position: center;
+  box-sizing: border-box;
+  padding: 6%;
+  background: #faf8f4;
+}
+.offer-photo {
+  background-size: contain;
+  background-color: #faf8f4;
+}
+
+/* Fully remove the item note field and label when excluded. */
+#productNote[hidden],label[for="productNote"][hidden]{display:none!important}
+
+/* One uniform background and uncropped framing for every menu product. */
+.catalog-photo,.detail-photo,.cart-product-photo,
+.catalog-photo.food-photo,.detail-photo.food-photo,.cart-product-photo.food-photo,
+.catalog-photo.drink-photo,.detail-photo.drink-photo,.cart-product-photo.drink-photo,
+.catalog-photo.food-photo[src*="hero-lamma"],.detail-photo.food-photo[src*="hero-lamma"],.cart-product-photo.food-photo[src*="hero-lamma"] {
+ background:#fff!important;
+ object-fit:contain!important;
+ object-position:center;
+ box-sizing:border-box;
+ padding:6%;
+}
+.product-placeholder,.detail-photo.product-placeholder,.cart-product-photo.product-placeholder{background:#fff!important}
+.offer-photo{background-color:#fff!important;background-size:88% auto!important;background-position:center;background-repeat:no-repeat}
