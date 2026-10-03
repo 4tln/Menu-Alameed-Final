@@ -272,8 +272,8 @@ Object.assign(window.ALAMEED_EN, {
   'ملخص الطلب':'Order summary',
   'أضف المزيد من الأصناف':'Add more items',
   'حجم واحد':'One size',
-  'إرسال الطلب للمطعم':'Send order to restaurant'
-  ,'المكونات:':'Ingredients:',
+  'إرسال الطلب للمطعم':'Send order to restaurant',
+  'المكونات:':'Ingredients:',
   'إضافات البيتزا':'Pizza toppings',
   'إزالة مكونات':'Remove ingredients',
   'حدد عددًا يصل إلى':'Choose up to',

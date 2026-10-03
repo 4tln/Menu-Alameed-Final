@@ -12,6 +12,10 @@ function modifierConfig(item){
     removals: Array.isArray(config.removals) ? config.removals : []
   };
 }
+function categoryForProduct(name){
+  const section = (window.MENU_DATA || []).find(group => group.items?.some(item => item.name === name));
+  return section?.category || '';
+}
 function emptyModifiers(){ return {addons: [], removals: []}; }
 function normalizeModifiers(value){
   const source = value || {};
@@ -83,7 +87,12 @@ function openProduct(name, trigger){
   document.getElementById('productSizes').hidden = singleVariant;
   document.getElementById('productVariants').innerHTML = item.variants.map((variant,i) => `<button type="button" data-variant="${i}" aria-pressed="${i === productSelection.index}"><span>${escapeHtml(variant.size)}</span><strong>${money(variant.price)}${sarIcon()}</strong></button>`).join('');
   renderProductOptions(item);
-  document.getElementById('productNote').value = '';
+  const noteInput = document.getElementById('productNote');
+  const noteLabel = document.querySelector('label[for="productNote"]');
+  const isPizza = categoryForProduct(item.name) === 'البيتزا';
+  if(noteLabel) noteLabel.hidden = isPizza;
+  noteInput.hidden = isPizza;
+  noteInput.value = '';
   updateProductPrice();
   productDialog.showModal();
   document.body.classList.add('modal-open');
