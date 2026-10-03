@@ -4771,6 +4771,8 @@ html[lang="en"] .variant-btn>span:first-child{font-size:12px!important}
 .product-scroll{overflow:auto;overscroll-behavior:contain;flex:1;min-height:0}
 .detail-photo{display:block;width:100%;height:auto;max-height:42dvh;aspect-ratio:1;object-fit:contain;background:#faf8f4}
 .detail-photo.product-placeholder{display:flex;height:190px;background:var(--cream)}
+.catalog-photo.drink-photo,.detail-photo.drink-photo,.cart-product-photo.drink-photo{box-sizing:border-box;background:#fff;object-fit:contain;object-position:center;padding:10%}
+.cart-product-photo.drink-photo{padding:5px}
 .product-content{padding:18px 18px 22px}
 .product-content h2{font-size:23px;margin:0 0 6px;line-height:1.5}
 .photo-caption{font-size:12px;color:var(--muted);margin:0 0 20px}

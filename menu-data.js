@@ -1622,7 +1622,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 2
           }
-        ]
+        ],
+        "imageKind": "drink",
+        "image": "drink-laban.jpg"
       },
       {
         "name": "ربيع",
@@ -1631,90 +1633,127 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 2
           }
-        ]
+        ],
+        "imageKind": "drink",
+        "image": "drink-rabie.png"
       },
       {
         "name": "بيبسي",
+        "image": "drink-pepsi.jpg",
+        "imageKind": "drink",
         "variants": [
           {
             "size": "صغير",
-            "price": 2
+            "price": 2,
+            "image": "drink-pepsi.jpg"
           },
           {
             "size": "وسط",
-            "price": 5
+            "price": 5,
+            "image": "drink-pepsi-medium.jpg",
+            "volume": "1 لتر"
           },
           {
             "size": "كبير",
-            "price": 9
+            "price": 9,
+            "image": "drink-pepsi-large.jpg",
+            "volume": "2.20 لتر"
           }
         ]
       },
       {
         "name": "ديو",
+        "image": "drink-dew.jpg",
+        "imageKind": "drink",
         "variants": [
           {
             "size": "صغير",
-            "price": 2
+            "price": 2,
+            "image": "drink-dew.jpg"
           },
           {
             "size": "وسط",
-            "price": 5
+            "price": 5,
+            "image": "drink-dew-medium.jpg",
+            "volume": "1 لتر"
           },
           {
             "size": "كبير",
-            "price": 9
+            "price": 9,
+            "image": "drink-dew-large.jpg",
+            "volume": "2.20 لتر"
           }
         ]
       },
       {
         "name": "سفن",
+        "image": "drink-sevenup.jpg",
+        "imageKind": "drink",
         "variants": [
           {
             "size": "صغير",
-            "price": 2
+            "price": 2,
+            "image": "drink-sevenup.jpg"
           },
           {
             "size": "وسط",
-            "price": 5
+            "price": 5,
+            "image": "drink-sevenup-medium.jpg",
+            "volume": "1 لتر"
           },
           {
             "size": "كبير",
-            "price": 9
+            "price": 9,
+            "image": "drink-sevenup-large.jpg",
+            "volume": "2.20 لتر"
           }
         ]
       },
       {
         "name": "حمضيات",
+        "image": "drink-citrus.jpg",
+        "imageKind": "drink",
         "variants": [
           {
             "size": "صغير",
-            "price": 2
+            "price": 2,
+            "image": "drink-citrus.jpg"
           },
           {
             "size": "وسط",
-            "price": 5
+            "price": 5,
+            "image": "drink-citrus-medium.jpg",
+            "volume": "1 لتر"
           },
           {
             "size": "كبير",
-            "price": 9
+            "price": 9,
+            "image": "drink-citrus-large.jpg",
+            "volume": "2.20 لتر"
           }
         ]
       },
       {
         "name": "ميرندا برتقال",
+        "image": "drink-orange.jpg",
+        "imageKind": "drink",
         "variants": [
           {
             "size": "صغير",
-            "price": 2
+            "price": 2,
+            "image": "drink-orange.jpg"
           },
           {
             "size": "وسط",
-            "price": 5
+            "price": 5,
+            "image": "drink-orange-medium.jpg",
+            "volume": "1 لتر"
           },
           {
             "size": "كبير",
-            "price": 9
+            "price": 9,
+            "image": "drink-orange-large.jpg",
+            "volume": "2.20 لتر"
           }
         ]
       }

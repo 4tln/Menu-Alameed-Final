@@ -581,7 +581,10 @@ function renderMenu(){
 function findProduct(name){
   return window.MENU_DATA.flatMap(section => section.items).find(item => item.name === name);
 }
-function productImage(item, className){
+function productImage(item, className, size){
+  const variant = item?.variants?.find(option => option.size === size);
+  if(variant?.image) item = {...item, image:variant.image};
+  if(item?.imageKind === 'drink') className += ' drink-photo';
   if(item?.image) return `<img class="${className}" src="${escapeHtml(item.image)}" alt="" width="960" height="960" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">`;
   return `<div class="${className} product-placeholder" aria-hidden="true"><img src="brand-logo.png" alt="" width="96" height="96"><span>العميد</span></div>`;
 }
@@ -668,7 +671,7 @@ function renderCart(){
       + (hasDeposit ? PLATE_DEPOSIT * Number(item.qty || 0) : 0);
     return `
       <article class="cart-item cart-row">
-        ${productImage(findProduct(item.name), "cart-product-photo")}
+        ${productImage(findProduct(item.name), "cart-product-photo", item.size)}
         <div class="cart-row-info">
           <div class="cart-row-heading">
             <h4>${escapeHtml(item.name)}</h4>
