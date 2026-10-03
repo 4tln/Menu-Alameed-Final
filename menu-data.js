@@ -10,7 +10,8 @@ window.MENU_DATA = [
             "price": 115
           }
         ],
-        "image": "hero-lamma.jpg"
+        "image": "hero-lamma.jpg",
+        "imageKind": "food"
       },
       {
         "name": "صحن كباب دجاج",
@@ -1442,7 +1443,9 @@ window.MENU_DATA = [
             "size": "وسط",
             "price": 5
           }
-        ]
+        ],
+        "image": "sauce-mix.jpg",
+        "imageKind": "food"
       },
       {
         "name": "شطة العميد",
@@ -1455,7 +1458,9 @@ window.MENU_DATA = [
             "size": "وسط",
             "price": 5
           }
-        ]
+        ],
+        "image": "sauce-alameed.jpg",
+        "imageKind": "food"
       },
       {
         "name": "شطة بيت",
@@ -1477,7 +1482,9 @@ window.MENU_DATA = [
             "size": "وسط",
             "price": 5
           }
-        ]
+        ],
+        "image": "sauce-garlic.jpg",
+        "imageKind": "food"
       },
       {
         "name": "صحن مايونيز",
@@ -1486,7 +1493,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 5
           }
-        ]
+        ],
+        "image": "sauce-mayonnaise.jpg",
+        "imageKind": "food"
       },
       {
         "name": "صحن كاتشب",
@@ -1513,7 +1522,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 6
           }
-        ]
+        ],
+        "image": "food-musaqaa.jpg",
+        "imageKind": "food"
       },
       {
         "name": "ملوخية",
@@ -1522,7 +1533,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 6
           }
-        ]
+        ],
+        "image": "food-molokhia.jpg",
+        "imageKind": "food"
       },
       {
         "name": "مشكل فرن",
@@ -1531,7 +1544,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 6
           }
-        ]
+        ],
+        "image": "food-oven-vegetables.jpg",
+        "imageKind": "food"
       },
       {
         "name": "مشكل خضار",
@@ -1540,7 +1555,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 6
           }
-        ]
+        ],
+        "image": "food-mixed-vegetables.jpg",
+        "imageKind": "food"
       },
       {
         "name": "مرقي دجاج",
@@ -1549,7 +1566,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 10
           }
-        ]
+        ],
+        "image": "food-chicken-stew.jpg",
+        "imageKind": "food"
       }
     ]
   },
@@ -1770,7 +1789,8 @@ window.MENU_DATA = [
             "price": 115
           }
         ],
-        "image": "hero-lamma.jpg"
+        "image": "hero-lamma.jpg",
+        "imageKind": "food"
       }
     ]
   }

@@ -585,7 +585,8 @@ function productImage(item, className, size){
   const variant = item?.variants?.find(option => option.size === size);
   if(variant?.image) item = {...item, image:variant.image};
   if(item?.imageKind === 'drink') className += ' drink-photo';
-  if(item?.image) return `<img class="${className}" src="${escapeHtml(item.image)}" alt="" width="960" height="960" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">`;
+  if(item?.imageKind === 'food') className += ' food-photo';
+  if(item?.image) return `<img class="${className}" src="${escapeHtml(item.image)}" draggable="false" alt="" width="960" height="960" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">`;
   return `<div class="${className} product-placeholder" aria-hidden="true"><img src="brand-logo.png" alt="" width="96" height="96"><span>العميد</span></div>`;
 }
 
@@ -1002,3 +1003,12 @@ syncPaymentOptions();
 renderTabs();
 renderMenu();
 updateCartUI();
+
+// Discourage saving images without blocking ordering or normal page scrolling.
+['contextmenu', 'dragstart'].forEach(type => {
+  document.addEventListener(type, event => {
+    if(event.target instanceof Element && event.target.closest('img, .catalog-photo, .detail-photo, .cart-product-photo, .hero-slide, .hero-media-shield, .offer-photo')) {
+      event.preventDefault();
+    }
+  });
+});

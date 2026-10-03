@@ -4838,3 +4838,11 @@ button:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
 @media(min-width:760px){#menuArea .catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.product-dialog{margin:auto;height:min(90dvh,880px);border-bottom:1px solid var(--brand);border-radius:24px;inset:0}}
 @media(max-width:360px){.catalog-copy{padding:10px 9px 4px}.catalog-copy strong{font-size:14px}.catalog-bottom{padding:8px 9px 12px}.product-footer{gap:6px;padding-inline:9px}#productAdd{font-size:12px}.product-quantity button{width:28px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Consistent food photos in the existing catalogue, details and cart. */
+.catalog-photo.food-photo,.detail-photo.food-photo,.cart-product-photo.food-photo{
+  object-fit:cover;object-position:center;
+}
+img,.catalog-photo,.detail-photo,.cart-product-photo,.hero-slide,.offer-photo{
+  -webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none;
+}
