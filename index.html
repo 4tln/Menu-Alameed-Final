@@ -37,7 +37,7 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="hero-lamma.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20261002-language-left">
+  <link rel="stylesheet" href="style.css?v=20261003-photos">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -149,6 +149,8 @@
         <div id="cartItems" class="cart-items"></div>
         <button id="clearCartBtn" class="danger-btn" type="button">حذف جميع الأصناف</button>
       </div>
+      <button class="continue-shopping" type="button" data-close-modal>+ أضف المزيد من الأصناف</button>
+      <section id="orderSummary" class="order-summary" aria-label="ملخص الطلب"></section>
       <button id="toggleCheckoutBtn" class="checkout-toggle" type="button" aria-expanded="false" aria-controls="checkoutPanel">
         <span class="checkout-toggle-copy">
           <strong>إكمال الطلب</strong>
@@ -255,16 +257,29 @@
             <p class="bank-transfer-note"><span aria-hidden="true">📎</span> بعد التحويل أرسل صورة الإيصال في واتساب</p>
           </div>
         </section>
-        <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب</button>
+        <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب للمطعم</button>
       </div>
       </div>
     </section>
   </div>
+  <dialog id="productDialog" class="product-dialog" aria-labelledby="productTitle">
+    <div class="product-dialog-top"><span class="product-handle" aria-hidden="true"></span><button id="closeProduct" type="button" class="product-close" aria-label="إغلاق التفاصيل">×</button></div>
+    <div class="product-scroll">
+      <div id="productPhoto"></div>
+      <div class="product-content"><h2 id="productTitle"></h2><p id="productPhotoCaption" class="photo-caption"></p>
+        <fieldset id="productSizes"><legend>اختر الحجم</legend><div id="productVariants" class="product-variants"></div></fieldset>
+        <label class="field-label" for="productNote">ملاحظات الصنف</label>
+        <textarea id="productNote" class="field" rows="2" maxlength="200" placeholder="مثال: بدون بصل" dir="auto"></textarea>
+      </div>
+    </div>
+    <div class="product-footer"><div class="product-quantity"><button id="productMinus" type="button" aria-label="تقليل الكمية">−</button><output id="productQty" aria-live="polite">1</output><button id="productPlus" type="button" aria-label="زيادة الكمية">+</button></div><button id="productAdd" type="button"><span>إضافة إلى السلة</span><strong id="productPrice"></strong></button></div>
+  </dialog>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
-  <script src="menu-data.js?v=20260812-lamma-v2"></script>
-  <script src="translations.js?v=20261002-language"></script>
+  <script src="menu-data.js?v=20261003-photos"></script>
+  <script src="translations.js?v=20261003-photos"></script>
   <script src="language.js?v=20261002-language"></script>
-  <script src="script.js?v=20261002-language"></script>
+  <script src="catalog.js?v=20261003-photos"></script>
+  <script src="script.js?v=20261003-photos"></script>
   <script>AlameedLanguage.init();</script>
 </body>
 </html>

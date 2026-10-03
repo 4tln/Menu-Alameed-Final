@@ -258,3 +258,19 @@ window.ALAMEED_EN = {
   "هل تريد إفراغ السلة؟": "Empty your cart?",
   "تم نسخ رابط المنيو": "Menu link copied"
 };
+
+Object.assign(window.ALAMEED_EN, {
+  'الصورة للحجم:':'Photo shows size:',
+  'اختر الحجم والكمية':'Choose size and quantity',
+  'عرض التفاصيل':'View details',
+  'يبدأ من':'From',
+  'إغلاق التفاصيل':'Close details',
+  'اختر الحجم':'Choose a size',
+  'ملاحظات الصنف':'Item notes',
+  'مثال: بدون بصل':'Example: no onions',
+  'إضافة إلى السلة':'Add to cart',
+  'ملخص الطلب':'Order summary',
+  'أضف المزيد من الأصناف':'Add more items',
+  'حجم واحد':'One size',
+  'إرسال الطلب للمطعم':'Send order to restaurant'
+});

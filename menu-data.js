@@ -9,7 +9,8 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 115
           }
-        ]
+        ],
+        "image": "hero-lamma.jpg"
       },
       {
         "name": "صحن كباب دجاج",
@@ -26,7 +27,9 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 70
           }
-        ]
+        ],
+        "image": "images/kebab-small.webp",
+        "imageSize": "صغير"
       },
       {
         "name": "صحن شيش دجاج",
@@ -439,7 +442,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 8
           }
-        ]
+        ],
+        "image": "images/labneh-honey.webp",
+        "imageSize": ""
       },
       {
         "name": "فطيرة لبنة زعتر زيتون",
@@ -574,7 +579,9 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 26
           }
-        ]
+        ],
+        "image": "images/vegetable-pizza-large.webp",
+        "imageSize": "كبير"
       },
       {
         "name": "بيتزا شاورما",
@@ -1549,7 +1556,8 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 115
           }
-        ]
+        ],
+        "image": "hero-lamma.jpg"
       }
     ]
   }

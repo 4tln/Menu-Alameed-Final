@@ -505,7 +505,7 @@ function loadCart(){
     const merged = [];
     value.forEach(item => {
       const price = item.name === LAMMA_ITEM_NAME ? lammaPrice : Number(item.price || 0);
-      const key = `${item.name}|${item.size}|${price}`;
+      const key = cartItemKey(item.name,item.size,price,item.note || "");
       const existing = merged.find(row => row.key === key);
       if(existing) existing.qty += Number(item.qty || 0);
       else merged.push({...item,key,price,qty:Number(item.qty || 0)});
@@ -559,66 +559,48 @@ function renderMenu(){
     return;
   }
   menuArea.innerHTML = sections.map(section => `
-    <section class="${section.category === "العروض" ? "offers-section" : ""}">
-      ${section.category === "العروض" ? `
-        <div class="offer-photo" role="img" aria-label="صحن اللمة"></div>
-      ` : ""}
-      <div class="items-grid">
+    <section class="catalog-section">
+      <h2 class="catalog-title">${escapeHtml(section.category)}</h2>
+      <div class="items-grid catalog-grid">
         ${section.items.map(item => {
-          const offerItem = section.category === "العروض";
-          return `
-          <article class="item-card ${offerItem ? "offer-item-card" : ""}">
-            <div class="item-card-head">
-              <div class="item-name">${escapeHtml(item.name)}</div>
-              ${offerItem ? '<span class="offer-card-badge">عرض خاص</span>' : ''}
+          const min = Math.min(...item.variants.map(v => v.price));
+          return `<article class="item-card catalog-card">
+            <button class="product-open" type="button" data-product="${escapeHtml(item.name)}" aria-label="${escapeHtml(item.name)}">
+              ${productImage(item, 'catalog-photo')}
+              <span class="catalog-copy"><strong>${escapeHtml(item.name)}</strong>
+              <small>${item.variants.length > 1 ? 'اختر الحجم والكمية' : 'عرض التفاصيل'}</small></span>
+            </button>
+            <div class="catalog-bottom"><span class="catalog-price">${item.variants.length > 1 ? '<small>يبدأ من</small>' : ''}<b>${money(min)}</b>${sarIcon()}</span>
+              <button type="button" class="catalog-add" data-product="${escapeHtml(item.name)}" aria-label="إضافة ${escapeHtml(item.name)}">+</button>
             </div>
-            ${offerItem ? `
-              <div class="offer-components" aria-label="محتويات صحن اللمة">
-                <span>4 أسياخ كباب دجاج</span>
-                <span>2 سيخ أوصال دجاج</span>
-                <span>2 سيخ شيش دجاج</span>
-                <span>نصف دجاج فحم</span>
-                <span>نصف دجاج برست</span>
-                <span>مقبلات</span>
-                <span>رز</span>
-              </div>
-            ` : ""}
-            <div class="variant-grid variant-grid-${Math.max(1,Math.min(item.variants.length,3))}">
-              ${item.variants.map(variant => {
-                const discountedOffer = offerItem && item.name === LAMMA_ITEM_NAME && isNationalDayOfferActive();
-                return `
-                <button type="button" class="variant-btn"
-                  data-name="${escapeHtml(item.name)}"
-                  data-size="${escapeHtml(variant.size)}"
-                  data-price="${variant.price}">
-                  <span>${escapeHtml(variant.size)}</span>
-                  <span class="price${discountedOffer ? " offer-price" : ""}">
-                    ${discountedOffer ? `
-                      <span class="offer-old-price"><span>${money(LAMMA_REGULAR_PRICE)}</span>${sarIcon("sar-symbol-old")}</span>
-                      <span class="offer-new-price"><span>${money(variant.price)}</span>${sarIcon()}</span>
-                    ` : `<span>${money(variant.price)}</span>${sarIcon()}`}
-                  </span>
-                </button>
-              `}).join("")}
-            </div>
-          </article>
-        `}).join("")}
+          </article>`;
+        }).join('')}
       </div>
-    </section>
-  `).join("");
+    </section>`).join('');
 }
+function findProduct(name){
+  return window.MENU_DATA.flatMap(section => section.items).find(item => item.name === name);
+}
+function productImage(item, className){
+  if(item?.image) return `<img class="${className}" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" width="960" height="960" loading="lazy" decoding="async">`;
+  return `<div class="${className} product-placeholder" aria-hidden="true"><img src="brand-logo.png" alt="" width="96" height="96"><span>العميد</span></div>`;
+}
+
 menuArea.addEventListener("contextmenu", event => {
   if(event.target.closest(".offer-photo")) event.preventDefault();
 });
-function addToCart(name,size,price){
-  const key = `${name}|${size}|${price}`;
+function cartItemKey(name,size,price,note=''){
+  return JSON.stringify([name,size,Number(price),note.trim()]);
+}
+function addToCart(name,size,price,qty=1,note=''){
+  note = String(note).trim().slice(0,200);
+  const key = cartItemKey(name,size,price,note);
   const found = cart.find(item => item.key === key);
-  if(found) found.qty += 1;
-  else cart.push({key,name,size,price:Number(price),qty:1});
+  if(found) found.qty += qty;
+  else cart.push({key,name,size,price:Number(price),qty,note});
   saveCart();
   updateCartUI();
-  const depositMessage = requiresPlateDeposit(name) ? " + تأمين الصحن" : "";
-  showToast(`تمت إضافة ${isAlameedOffer(name) ? "عرض العميد" : name}${depositMessage}`);
+  showToast(`تمت إضافة ${name}`);
 }
 function changeQty(key,delta){
   const item = cart.find(row => row.key === key);
@@ -657,6 +639,7 @@ function totals(){
 }
 function updateCartUI(){
   const info = totals();
+  renderOrderSummary();
   cartCount.textContent = money(info.itemQty);
   cartTotal.textContent = money(info.total);
   sheetTotal.textContent = money(info.total);
@@ -683,16 +666,18 @@ function renderCart(){
       + (hasDeposit ? PLATE_DEPOSIT * Number(item.qty || 0) : 0);
     return `
       <article class="cart-item cart-row">
+        ${productImage(findProduct(item.name), "cart-product-photo")}
         <div class="cart-row-info">
           <div class="cart-row-heading">
             <h4>${escapeHtml(item.name)}</h4>
             <button class="remove-btn" type="button" data-remove="${escapeHtml(item.key)}" aria-label="حذف ${escapeHtml(item.name)}">حذف</button>
           </div>
           <div class="cart-row-meta">
-            <span class="size-badge">${escapeHtml(item.size || "عادي")}</span>
+            <span class="size-badge">${escapeHtml(item.size === "السعر" ? "حجم واحد" : (item.size || "عادي"))}</span>
             <span class="unit-price">سعر الوحدة: <strong>${money(item.price)}</strong>${sarIcon("sar-symbol-small")}</span>
           </div>
           ${depositLine}
+          ${item.note ? `<p class="item-note">${escapeHtml(item.note)}</p>` : ""}
         </div>
         <div class="cart-row-bottom">
           <div class="qty-controls" aria-label="تعديل الكمية">
@@ -737,7 +722,7 @@ function setCheckoutExpanded(expanded){
 }
 function openCart(){
   renderCart();
-  setCartItemsExpanded(false);
+  setCartItemsExpanded(true);
   setCheckoutExpanded(false);
   cartModal.classList.add("open");
   cartModal.setAttribute("aria-hidden","false");
@@ -899,6 +884,7 @@ function sendOrder(){
   }
   cart.forEach(item => {
     lines.push(orderQuantityLine(orderItemLabel(item), item.qty));
+    if(item.note) lines.push(`  ↳ ${item.note}`);
   });
   if(notes){
     lines.push("", "*📝 الملاحظات:*", notes);
@@ -925,9 +911,8 @@ categoryTabs.addEventListener("click", event => {
 });
 offersBadge?.addEventListener("click", () => selectCategory("العروض"));
 menuArea.addEventListener("click", event => {
-  const button = event.target.closest(".variant-btn");
-  if(!button) return;
-  addToCart(button.dataset.name,button.dataset.size,button.dataset.price);
+  const button = event.target.closest("[data-product]");
+  if(button) openProduct(button.dataset.product,button);
 });
 cartItems.addEventListener("click", event => {
   const qtyButton = event.target.closest("[data-change]");
