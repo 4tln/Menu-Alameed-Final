@@ -273,4 +273,13 @@ Object.assign(window.ALAMEED_EN, {
   'أضف المزيد من الأصناف':'Add more items',
   'حجم واحد':'One size',
   'إرسال الطلب للمطعم':'Send order to restaurant'
+  ,'المكونات:':'Ingredients:',
+  'إضافات البيتزا':'Pizza toppings',
+  'إزالة مكونات':'Remove ingredients',
+  'حدد عددًا يصل إلى':'Choose up to',
+  'لا توجد خيارات محددة لهذا الصنف حاليًا':'No options are currently set for this item',
+  'اختر الحجم أولًا':'Choose a size first',
+  'إضافات:':'Add-ons:',
+  'إزالة:':'Removed:',
+  'يمكن اختيار':'You can choose up to'
 });

@@ -581,7 +581,24 @@ window.MENU_DATA = [
           }
         ],
         "image": "vegetable-pizza-large.jpg",
-        "imageSize": "كبير"
+        "imageSize": "كبير",
+        "ingredients": [
+          "صلصة بيتزا",
+          "طماطم",
+          "فلفل أخضر",
+          "زيتون",
+          "جبنة موزريلا"
+        ],
+        "optionConfig": {
+          "addons": [],
+          "removals": [
+            "صلصة بيتزا",
+            "طماطم",
+            "فلفل أخضر",
+            "زيتون",
+            "جبنة موزريلا"
+          ]
+        }
       },
       {
         "name": "بيتزا شاورما",

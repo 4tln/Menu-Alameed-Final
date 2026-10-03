@@ -505,7 +505,7 @@ function loadCart(){
     const merged = [];
     value.forEach(item => {
       const price = item.name === LAMMA_ITEM_NAME ? lammaPrice : Number(item.price || 0);
-      const key = cartItemKey(item.name,item.size,price,item.note || "");
+      const key = cartItemKey(item.name,item.size,price,item.note || "",item.modifiers || {});
       const existing = merged.find(row => row.key === key);
       if(existing) existing.qty += Number(item.qty || 0);
       else merged.push({...item,key,price,qty:Number(item.qty || 0)});
@@ -589,15 +589,17 @@ function productImage(item, className){
 menuArea.addEventListener("contextmenu", event => {
   if(event.target.closest(".offer-photo")) event.preventDefault();
 });
-function cartItemKey(name,size,price,note=''){
-  return JSON.stringify([name,size,Number(price),note.trim()]);
+function cartItemKey(name,size,price,note='',modifiers={}){
+  const normalized = typeof normalizeModifiers === "function" ? normalizeModifiers(modifiers) : modifiers;
+  return JSON.stringify([name,size,Number(price),note.trim(),normalized]);
 }
-function addToCart(name,size,price,qty=1,note=''){
+function addToCart(name,size,price,qty=1,note='',modifiers={},basePrice=price){
   note = String(note).trim().slice(0,200);
-  const key = cartItemKey(name,size,price,note);
+  const normalizedModifiers = typeof normalizeModifiers === "function" ? normalizeModifiers(modifiers) : {addons:[],removals:[]};
+  const key = cartItemKey(name,size,price,note,normalizedModifiers);
   const found = cart.find(item => item.key === key);
   if(found) found.qty += qty;
-  else cart.push({key,name,size,price:Number(price),qty,note});
+  else cart.push({key,name,size,price:Number(price),basePrice:Number(basePrice),qty,note,modifiers:normalizedModifiers});
   saveCart();
   updateCartUI();
   showToast(`تمت إضافة ${name}`);
@@ -677,6 +679,7 @@ function renderCart(){
             <span class="unit-price">سعر الوحدة: <strong>${money(item.price)}</strong>${sarIcon("sar-symbol-small")}</span>
           </div>
           ${depositLine}
+          ${modifierSummaryHtml(item.modifiers)}
           ${item.note ? `<p class="item-note">${escapeHtml(item.note)}</p>` : ""}
         </div>
         <div class="cart-row-bottom">
@@ -884,6 +887,9 @@ function sendOrder(){
   }
   cart.forEach(item => {
     lines.push(orderQuantityLine(orderItemLabel(item), item.qty));
+    const modifiers = normalizeModifiers(item.modifiers);
+    if(modifiers.addons.length) lines.push(`  ↳ إضافات: ${modifiers.addons.map(option => option.name).join("، ")}`);
+    if(modifiers.removals.length) lines.push(`  ↳ إزالة: ${modifiers.removals.join("، ")}`);
     if(item.note) lines.push(`  ↳ ${item.note}`);
   });
   if(notes){

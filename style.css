@@ -4774,6 +4774,8 @@ html[lang="en"] .variant-btn>span:first-child{font-size:12px!important}
 .product-content{padding:18px 18px 22px}
 .product-content h2{font-size:23px;margin:0 0 6px;line-height:1.5}
 .photo-caption{font-size:12px;color:var(--muted);margin:0 0 20px}
+.product-ingredients{margin:0 0 18px;padding:0 0 16px;border-bottom:1px solid var(--line);color:var(--muted);font-size:15px;line-height:1.9}
+.product-ingredients .ingredients-label{color:var(--text);font-weight:800}
 .product-content fieldset{padding:16px 0;margin:0 0 16px;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .product-content legend{font-weight:700;font-size:16px;padding-inline-end:10px}
 .product-variants{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -4787,8 +4789,31 @@ html[lang="en"] .variant-btn>span:first-child{font-size:12px!important}
 .product-quantity button:disabled{opacity:.3}
 .product-quantity output{min-width:22px;text-align:center;font-weight:bold}
 #productAdd{flex:1;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;padding:12px 8px;background:var(--brand);color:white;border:0;border-radius:12px;font-size:14px;font-weight:700}
+#productAdd:disabled{opacity:.52;cursor:not-allowed;box-shadow:none}
 #productPrice{display:flex;gap:3px;align-items:center;white-space:nowrap}
 #productAdd .sar-symbol{filter:brightness(0) invert(1)}
+.product-options{margin:0 0 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.modifier-section{border-bottom:1px solid var(--line)}
+.modifier-section:last-child{border-bottom:0}
+.modifier-section-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;border:0;background:transparent;color:var(--text);text-align:right}
+.modifier-section-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.modifier-section-copy b{font-size:17px}
+.modifier-section-copy small{color:var(--muted);font-size:12px}
+.modifier-section-arrow{font-size:24px;line-height:1;transition:transform .18s ease}
+.modifier-section-toggle.expanded .modifier-section-arrow{transform:rotate(180deg)}
+.modifier-section-body{padding:0 0 14px}
+.modifier-list{display:grid;gap:10px}
+.modifier-option{position:relative;display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:9px;min-height:72px;padding:12px 13px;border:1px solid var(--line);border-radius:17px;background:var(--card);box-shadow:0 4px 12px rgba(76,45,22,.05);cursor:pointer}
+.modifier-option input{position:absolute;opacity:0;pointer-events:none}
+.modifier-check{width:24px;height:24px;border:2px solid #c9d1d9;border-radius:50%;background:transparent;transition:all .16s ease}
+.modifier-option:has(input:checked){border-color:var(--brand);background:var(--cream);box-shadow:0 4px 12px rgba(76,45,22,.10)}
+.modifier-option:has(input:checked) .modifier-check{border-color:var(--brand);background:var(--brand);box-shadow:inset 0 0 0 5px var(--card)}
+.modifier-option-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.modifier-option-copy b{font-size:15px;line-height:1.45}
+.modifier-option-copy strong{display:flex;align-items:center;gap:3px;color:var(--brand);font-size:14px}
+.modifier-option img{width:62px;height:50px;object-fit:contain}
+.modifier-empty{margin:0;padding:12px 0;color:var(--muted);font-size:13px;line-height:1.7}
+html[lang="en"] .modifier-section-toggle,html[lang="en"] .modifier-option{text-align:left}
 .continue-shopping{width:100%;padding:14px;margin-top:12px;border:1px solid var(--brand);border-radius:12px;background:transparent;color:var(--brand);font-weight:700}
 .order-summary{margin:24px 0 12px;padding:18px 4px 8px;border-top:1px solid var(--line);color:var(--text)}
 .order-summary h3{font-size:18px;margin:0 0 16px}
