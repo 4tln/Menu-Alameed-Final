@@ -114,10 +114,11 @@ function updateProductPrice(){
   if(!productSelection) return;
   const variant = productSelection.index >= 0 ? productSelection.item.variants[productSelection.index] : null;
   const photo = document.getElementById('productPhoto');
-  const photoSource = variant?.image || productSelection.item.image;
-  if(photoSource && photo.querySelector('img')?.getAttribute('src') !== photoSource){
+  const photoSource = productImageSource(productSelection.item,variant?.size);
+  if((photo.querySelector('img:not(.product-placeholder img)')?.getAttribute('src') || '') !== photoSource){
     photo.innerHTML = productImage(productSelection.item,'detail-photo',variant?.size);
-    photo.querySelector('img').loading = 'eager';
+    const image = photo.querySelector('img');
+    if(image) image.loading = 'eager';
   }
   productSelection.modifiers = selectedModifierState();
   const selected = Boolean(variant);

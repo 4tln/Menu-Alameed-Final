@@ -1409,7 +1409,7 @@ body.modal-open .offers-badge{
   overflow:hidden;
   border:1px solid rgba(255,255,255,.88);
   border-radius:22px;
-  background:url("lamma-light-20261004.jpg") center center/cover no-repeat;
+  background:url("lamma-sauces-v5.jpg") center center/cover no-repeat;
   box-shadow:0 14px 30px rgba(70,41,20,.20);
   -webkit-touch-callout:none;
   user-select:none;
@@ -4848,9 +4848,9 @@ img,.catalog-photo,.detail-photo,.cart-product-photo,.hero-slide,.offer-photo{
 }
 
 /* Show the whole Lamma platter, including its rim, at every product size. */
-.catalog-photo.food-photo[src*="lamma-light-20261004.jpg"],
-.detail-photo.food-photo[src*="lamma-light-20261004.jpg"],
-.cart-product-photo.food-photo[src*="lamma-light-20261004.jpg"] {
+.catalog-photo.food-photo[src*="lamma-sauces-v5.jpg"],
+.detail-photo.food-photo[src*="lamma-sauces-v5.jpg"],
+.cart-product-photo.food-photo[src*="lamma-sauces-v5.jpg"] {
   object-fit: contain;
   object-position: center;
   box-sizing: border-box;

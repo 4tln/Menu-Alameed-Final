@@ -10,7 +10,7 @@ window.MENU_DATA = [
             "price": 115
           }
         ],
-        "image": "lamma-light-20261004.jpg",
+        "image": "lamma-sauces-v5.jpg",
         "imageKind": "food"
       },
       {
@@ -18,19 +18,22 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 21
+            "price": 21,
+            "image": "kebab-small-sauces-v5.jpg"
           },
           {
             "size": "وسط",
-            "price": 43
+            "price": 43,
+            "image": "kebab-medium-sauces-v5.jpg"
           },
           {
             "size": "كبير",
             "price": 70
           }
         ],
-        "image": "kebab-small.jpg",
-        "imageSize": "صغير"
+        "image": "kebab-small-sauces-v5.jpg",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "صحن شيش دجاج",
@@ -71,7 +74,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 21
+            "price": 21,
+            "image": "mixed-small-sauces-v5.jpg"
           },
           {
             "size": "وسط",
@@ -81,7 +85,10 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 70
           }
-        ]
+        ],
+        "image": "mixed-small-sauces-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "صحن كباب دجاج حراق",
@@ -226,7 +233,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 8
+            "price": 8,
+            "image": "fatayer-muhammara-small-v5.jpg"
           },
           {
             "size": "وسط",
@@ -236,14 +244,18 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 25
           }
-        ]
+        ],
+        "image": "fatayer-muhammara-small-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "فطيرة محمرة جبن حراق",
         "variants": [
           {
             "size": "صغير",
-            "price": 9
+            "price": 9,
+            "image": "fatayer-muhammara-small-v5.jpg"
           },
           {
             "size": "وسط",
@@ -253,14 +265,18 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 26
           }
-        ]
+        ],
+        "image": "fatayer-muhammara-small-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "فطيرة عش البلبل",
         "variants": [
           {
             "size": "صغير",
-            "price": 8
+            "price": 8,
+            "image": "fatayer-honey-small-v5.jpg"
           },
           {
             "size": "وسط",
@@ -270,7 +286,10 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 29
           }
-        ]
+        ],
+        "image": "fatayer-honey-small-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "فطيرة جبن بيض",
@@ -883,26 +902,34 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 16
+            "price": 16,
+            "image": "arabi-small-v5.jpg"
           },
           {
             "size": "كبير",
             "price": 30
           }
-        ]
+        ],
+        "image": "arabi-small-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "عربي أحمر",
         "variants": [
           {
             "size": "صغير",
-            "price": 18
+            "price": 18,
+            "image": "arabi-red-v5.jpg"
           },
           {
             "size": "كبير",
             "price": 33
           }
-        ]
+        ],
+        "image": "arabi-red-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "صحن إسكندر",
@@ -1178,13 +1205,17 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "نصف",
-            "price": 20
+            "price": 20,
+            "image": "charcoal-half-v5.jpg"
           },
           {
             "size": "حبة",
             "price": 40
           }
-        ]
+        ],
+        "image": "charcoal-half-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "نصف"
       },
       {
         "name": "دجاج شواية",
@@ -1221,13 +1252,17 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "نصف",
-            "price": 18
+            "price": 18,
+            "image": "broast-half-v5.jpg"
           },
           {
             "size": "حبة",
             "price": 36
           }
-        ]
+        ],
+        "image": "broast-half-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "نصف"
       },
       {
         "name": "دجاج مسحب - 8 قطع",
@@ -1256,13 +1291,17 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "نصف",
-            "price": 18
+            "price": 18,
+            "image": "broast-half-v5.jpg"
           },
           {
             "size": "حبة",
             "price": 36
           }
-        ]
+        ],
+        "image": "broast-half-v5.jpg",
+        "imageKind": "food",
+        "imageSize": "نصف"
       },
       {
         "name": "دجاج مسحب حراق - 8 قطع",
@@ -1323,7 +1362,9 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 6
           }
-        ]
+        ],
+        "image": "rice-serving-v5.jpg",
+        "imageKind": "food"
       }
     ]
   },
@@ -1791,7 +1832,7 @@ window.MENU_DATA = [
             "price": 115
           }
         ],
-        "image": "lamma-light-20261004.jpg",
+        "image": "lamma-sauces-v5.jpg",
         "imageKind": "food"
       }
     ]

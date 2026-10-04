@@ -581,9 +581,14 @@ function renderMenu(){
 function findProduct(name){
   return window.MENU_DATA.flatMap(section => section.items).find(item => item.name === name);
 }
-function productImage(item, className, size){
+function productImageSource(item, size){
   const variant = item?.variants?.find(option => option.size === size);
-  if(variant?.image) item = {...item, image:variant.image};
+  if(variant?.image) return variant.image;
+  if(size && item?.imageSize && size !== item.imageSize) return '';
+  return item?.image || '';
+}
+function productImage(item, className, size){
+  item = {...item, image:productImageSource(item, size)};
   if(item?.imageKind === 'drink') className += ' drink-photo';
   if(item?.imageKind === 'food') className += ' food-photo';
   if(item?.image) return `<img class="${className}" src="${escapeHtml(item.image)}" draggable="false" alt="" width="960" height="960" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">`;
