@@ -10,7 +10,7 @@ window.MENU_DATA = [
             "price": 115
           }
         ],
-        "image": "lamma-sauces-v5.jpg",
+        "image": "lamma-light-20261004.jpg",
         "imageKind": "food"
       },
       {
@@ -1832,7 +1832,7 @@ window.MENU_DATA = [
             "price": 115
           }
         ],
-        "image": "lamma-sauces-v5.jpg",
+        "image": "lamma-light-20261004.jpg",
         "imageKind": "food"
       }
     ]

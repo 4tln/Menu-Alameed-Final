@@ -570,13 +570,24 @@ function renderMenu(){
               <span class="catalog-copy"><strong>${escapeHtml(item.name)}</strong>
               <small>${item.variants.length > 1 ? 'اختر الحجم والكمية' : 'عرض التفاصيل'}</small></span>
             </button>
-            <div class="catalog-bottom"><span class="catalog-price">${item.variants.length > 1 ? '<small>يبدأ من</small>' : ''}<b>${money(min)}</b>${sarIcon()}</span>
-              <button type="button" class="catalog-add" data-product="${escapeHtml(item.name)}" aria-label="إضافة ${escapeHtml(item.name)}">+</button>
+            <div class="catalog-bottom"><span class="catalog-price"><small${item.variants.length === 1 ? ' aria-hidden="true"' : ''}>${item.variants.length > 1 ? 'يبدأ من' : '&nbsp;'}</small><b>${money(min)}</b>${sarIcon()}</span>
+              ${item.variants.length === 1 ? `<div class="catalog-quantity" data-quick-name="${escapeHtml(item.name)}" role="group" aria-label="كمية ${escapeHtml(item.name)}"><button type="button" data-quick-delta="-1" aria-label="تقليل كمية ${escapeHtml(item.name)}">−</button><output aria-live="polite">0</output><button type="button" data-quick-delta="1" aria-label="إضافة ${escapeHtml(item.name)} للسلة">+</button></div>` : `<button type="button" class="catalog-add" data-product="${escapeHtml(item.name)}" aria-label="إضافة ${escapeHtml(item.name)}">+</button>`}
             </div>
           </article>`;
         }).join('')}
       </div>
     </section>`).join('');
+  syncQuickQuantities();
+}
+function quickCartRows(name){
+  return cart.filter(row => row.name === name);
+}
+function syncQuickQuantities(){
+  document.querySelectorAll('[data-quick-name]').forEach(control => {
+    const qty = quickCartRows(control.dataset.quickName).reduce((sum,row) => sum + Number(row.qty),0);
+    control.querySelector('output').textContent = money(qty);
+    control.querySelector('[data-quick-delta="-1"]').disabled = qty === 0;
+  });
 }
 function findProduct(name){
   return window.MENU_DATA.flatMap(section => section.items).find(item => item.name === name);
@@ -649,6 +660,7 @@ function totals(){
   };
 }
 function updateCartUI(){
+  syncQuickQuantities();
   const info = totals();
   renderOrderSummary();
   cartCount.textContent = money(info.itemQty);
@@ -926,6 +938,22 @@ categoryTabs.addEventListener("click", event => {
 });
 offersBadge?.addEventListener("click", () => selectCategory("العروض"));
 menuArea.addEventListener("click", event => {
+  const quick = event.target.closest('[data-quick-delta]');
+  if(quick){
+    const name = quick.closest('[data-quick-name]').dataset.quickName;
+    const item = findProduct(name);
+    if(!item || item.variants.length !== 1) return;
+    if(Number(quick.dataset.quickDelta) > 0){
+      const variant = item.variants[0];
+      addToCart(name,variant.size,variant.price);
+    } else {
+      const rows = quickCartRows(name);
+      // Prefer reducing the plain quick-add row; keep customized rows separate.
+      const row = rows.find(row => !row.note && !normalizeModifiers(row.modifiers).addons.length && !normalizeModifiers(row.modifiers).removals.length) || rows[rows.length-1];
+      if(row) changeQty(row.key,-1);
+    }
+    return;
+  }
   const button = event.target.closest("[data-product]");
   if(button) openProduct(button.dataset.product,button);
 });

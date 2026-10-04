@@ -76,7 +76,7 @@ function renderProductOptions(item){
 function openProduct(name, trigger){
   const item = findProduct(name);
   if(!item) return;
-  productReturnFocus = trigger;
+  productReturnFocus = trigger || productReturnFocus;
   const singleVariant = item.variants.length === 1;
   productSelection = {item,index:singleVariant ? 0 : -1,modifiers:emptyModifiers()};
   productQuantity = 1;
@@ -95,7 +95,10 @@ function openProduct(name, trigger){
   noteInput.disabled = hideItemNote;
   noteInput.value = '';
   updateProductPrice();
-  productDialog.showModal();
+  if(!productDialog.open){
+    productDialog.style.height = '';
+    productDialog.showModal();
+  }
   document.body.classList.add('modal-open');
   document.body.style.overflow = 'hidden';
   document.querySelector('.product-scroll').scrollTop = 0;
@@ -201,3 +204,68 @@ function renderOrderSummary(){
   ${info.depositTotal ? `<div class="summary-line"><span>تأمين الصحن</span><strong>${money(info.depositTotal)}${sarIcon()}</strong></div>` : ''}
   <div class="summary-total"><span>الإجمالي</span><strong>${money(info.total)}${sarIcon()}</strong></div>`;
 }
+
+/* Sheet gestures: scrolling stays native; only deliberate horizontal or edge drags take over. */
+(()=>{
+  const scroller = productDialog.querySelector('.product-scroll');
+  const handle = document.getElementById('closeProduct');
+  let gesture = null, suppressClickUntil = 0;
+  function adjacentProduct(direction){
+    const names = [...document.querySelectorAll('#menuArea .product-open[data-product]')].map(b=>b.dataset.product);
+    const index = names.indexOf(productSelection?.item.name);
+    const name = names[index + direction];
+    if(name) openProduct(name);
+  }
+  productDialog.addEventListener('touchstart',event=>{
+    if(event.touches.length !== 1 || event.target.closest('input,textarea,select,.product-footer,.product-variants,.product-options')) return;
+    const t=event.touches[0];
+    gesture={x:t.clientX,y:t.clientY,dx:0,dy:0,axis:null,top:scroller.scrollTop<=0,handle:handle.contains(event.target),height:productDialog.getBoundingClientRect().height};
+  },{passive:true});
+  productDialog.addEventListener('touchmove',event=>{
+    if(!gesture || event.touches.length!==1){gesture=null;return;}
+    const t=event.touches[0], g=gesture;
+    g.dx=t.clientX-g.x; g.dy=t.clientY-g.y;
+    if(!g.axis && Math.max(Math.abs(g.dx),Math.abs(g.dy))>10){
+      if(Math.abs(g.dx)>Math.abs(g.dy)*1.3) g.axis='x';
+      else if(g.handle || (g.top && g.dy>0)) g.axis='y';
+      else g.axis='scroll';
+    }
+    if(g.axis==='x' || g.axis==='y'){
+      event.preventDefault();
+      if(g.axis==='y'){
+        if(g.dy>=0) productDialog.style.transform=`translateY(${g.dy}px)`;
+        else productDialog.style.height=`${Math.min(innerHeight*.96,g.height-g.dy)}px`;
+      }
+    }
+  },{passive:false});
+  function finish(cancelled){
+    const g=gesture; gesture=null;
+    productDialog.style.transform='';
+    if(!g || !['x','y'].includes(g.axis)) return;
+    suppressClickUntil=Date.now()+400;
+    if(cancelled){productDialog.style.height=`${g.height}px`;return;}
+    if(g.axis==='x' && Math.abs(g.dx)>55) adjacentProduct(g.dx>0 ? 1 : -1);
+    if(g.axis==='y'){
+      if(g.dy>120) closeProduct();
+      else if(g.dy>45) productDialog.style.height='84dvh';
+      else if(g.dy< -35) productDialog.style.height='96dvh';
+    }
+  }
+  productDialog.addEventListener('touchend',()=>finish(false));
+  productDialog.addEventListener('touchcancel',()=>finish(true));
+  productDialog.addEventListener('click',event=>{
+    if(Date.now()<suppressClickUntil){event.preventDefault();event.stopImmediatePropagation();}
+  },true);
+  productDialog.addEventListener('keydown',event=>{
+    if(event.target.matches('input,textarea,select')) return;
+    if(event.key==='ArrowLeft' || event.key==='ArrowRight'){
+      event.preventDefault(); adjacentProduct(event.key==='ArrowRight'?1:-1);
+    }
+  });
+  productDialog.addEventListener('close',()=>{gesture=null;productDialog.style.transform='';productDialog.style.height='';});
+})();
+
+/* Disable pinch/double-tap magnification while keeping page scrolling. */
+for(const type of ['gesturestart','gesturechange']) document.addEventListener(type,e=>e.preventDefault(),{passive:false});
+document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault();},{passive:false});
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});

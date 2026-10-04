@@ -1409,7 +1409,7 @@ body.modal-open .offers-badge{
   overflow:hidden;
   border:1px solid rgba(255,255,255,.88);
   border-radius:22px;
-  background:url("lamma-sauces-v5.jpg") center center/cover no-repeat;
+  background:url("lamma-light-20261004.jpg") center center/cover no-repeat;
   box-shadow:0 14px 30px rgba(70,41,20,.20);
   -webkit-touch-callout:none;
   user-select:none;
@@ -4848,9 +4848,9 @@ img,.catalog-photo,.detail-photo,.cart-product-photo,.hero-slide,.offer-photo{
 }
 
 /* Show the whole Lamma platter, including its rim, at every product size. */
-.catalog-photo.food-photo[src*="lamma-sauces-v5.jpg"],
-.detail-photo.food-photo[src*="lamma-sauces-v5.jpg"],
-.cart-product-photo.food-photo[src*="lamma-sauces-v5.jpg"] {
+.catalog-photo.food-photo[src*="lamma-light-20261004.jpg"],
+.detail-photo.food-photo[src*="lamma-light-20261004.jpg"],
+.cart-product-photo.food-photo[src*="lamma-light-20261004.jpg"] {
   object-fit: contain;
   object-position: center;
   box-sizing: border-box;
@@ -4883,3 +4883,34 @@ img,.catalog-photo,.detail-photo,.cart-product-photo,.hero-slide,.offer-photo{
   #menuArea .catalog-bottom{padding-inline:5px}
   #menuArea .catalog-price{font-size:13px}
 }
+
+/* Mobile layout v6: stable prices, quick quantities, uncropped detail photos. */
+html,body{touch-action:pan-x pan-y}
+button,a{touch-action:manipulation}
+#menuArea .catalog-bottom{margin-top:auto;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:34px 36px;gap:5px;align-items:center}
+#menuArea .catalog-price{align-self:end;display:flex;flex-wrap:wrap;min-height:34px;align-content:end}
+#menuArea .catalog-price>small{height:12px;line-height:12px}
+#menuArea .catalog-add{margin:0;justify-self:end;height:34px}
+.catalog-quantity{display:flex;direction:ltr;align-items:center;justify-content:space-between;border:1px solid var(--brand);border-radius:9px;height:34px;width:100%;overflow:hidden;color:var(--brand)}
+.catalog-quantity button{border:0;background:transparent;color:inherit;width:32px;height:34px;padding:0;font-size:23px;flex:1}
+.catalog-quantity output{min-width:20px;text-align:center;font-size:13px;font-weight:700}
+.catalog-quantity button:disabled{opacity:.3}
+.product-dialog{height:84dvh;max-height:96dvh}
+.product-dialog-top{width:100%;padding:0;min-height:30px;flex-shrink:0;background:transparent;border:0;border-bottom:1px solid var(--line);cursor:grab;touch-action:none}
+.product-dialog-top:focus-visible{outline:2px solid var(--brand);outline-offset:-3px}
+#productPhoto{flex-shrink:0;background:#faf8f4}
+#productPhoto .detail-photo{width:100%;height:min(44dvh,480px);max-height:none;aspect-ratio:auto;object-fit:contain!important;object-position:center;padding:0!important;box-sizing:border-box}
+.product-content{padding:10px 12px 12px}
+.product-content h2{font-size:19px;margin:0 0 8px}
+.product-content fieldset{padding:8px 0;margin:0 0 8px}
+.product-content legend{font-size:13px}
+.product-variants{gap:5px}
+.product-variants button{padding:7px 4px;gap:3px;font-size:13px;min-height:48px}
+.product-variants button[aria-pressed="true"]{padding:6px 3px}
+.product-variants strong{font-size:13px}
+.product-footer{padding:8px 10px calc(8px + env(safe-area-inset-bottom));gap:7px}
+.product-quantity button{min-height:40px}
+#productAdd{padding:8px;font-size:13px}
+.product-ingredients{font-size:13px;margin-bottom:8px;padding-bottom:8px}
+.product-options{margin-bottom:8px}
+@media(prefers-reduced-motion:reduce){.product-dialog{scroll-behavior:auto}}
