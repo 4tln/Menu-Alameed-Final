@@ -10,7 +10,7 @@ window.MENU_DATA = [
             "price": 115
           }
         ],
-        "image": "hero-lamma.webp",
+        "image": "hero-lamma.jpg",
         "imageKind": "food"
       },
       {
@@ -29,7 +29,7 @@ window.MENU_DATA = [
             "price": 70
           }
         ],
-        "image": "kebab-small.webp",
+        "image": "kebab-small.jpg",
         "imageSize": "صغير"
       },
       {
@@ -444,7 +444,7 @@ window.MENU_DATA = [
             "price": 8
           }
         ],
-        "image": "labneh-honey.webp",
+        "image": "labneh-honey.jpg",
         "imageSize": ""
       },
       {
@@ -636,7 +636,7 @@ window.MENU_DATA = [
             "price": 26
           }
         ],
-        "image": "vegetable-pizza-large.webp",
+        "image": "vegetable-pizza-large.jpg",
         "imageSize": "كبير",
         "ingredients": [
           "صلصة بيتزا",
@@ -1444,7 +1444,7 @@ window.MENU_DATA = [
             "price": 5
           }
         ],
-        "image": "sauce-mix.webp",
+        "image": "sauce-mix.jpg",
         "imageKind": "food"
       },
       {
@@ -1459,7 +1459,7 @@ window.MENU_DATA = [
             "price": 5
           }
         ],
-        "image": "sauce-alameed.webp",
+        "image": "sauce-alameed.jpg",
         "imageKind": "food"
       },
       {
@@ -1483,7 +1483,7 @@ window.MENU_DATA = [
             "price": 5
           }
         ],
-        "image": "sauce-garlic.webp",
+        "image": "sauce-garlic.jpg",
         "imageKind": "food"
       },
       {
@@ -1494,7 +1494,7 @@ window.MENU_DATA = [
             "price": 5
           }
         ],
-        "image": "sauce-mayonnaise.webp",
+        "image": "sauce-mayonnaise.jpg",
         "imageKind": "food"
       },
       {
@@ -1509,7 +1509,7 @@ window.MENU_DATA = [
             "price": 5
           }
         ],
-        "image": "sauce-ketchup.webp",
+        "image": "sauce-ketchup.jpg",
         "imageKind": "food"
       }
     ]
@@ -1525,7 +1525,7 @@ window.MENU_DATA = [
             "price": 6
           }
         ],
-        "image": "food-musaqaa.webp",
+        "image": "food-musaqaa.jpg",
         "imageKind": "food"
       },
       {
@@ -1536,7 +1536,7 @@ window.MENU_DATA = [
             "price": 6
           }
         ],
-        "image": "food-molokhia.webp",
+        "image": "food-molokhia.jpg",
         "imageKind": "food"
       },
       {
@@ -1547,7 +1547,7 @@ window.MENU_DATA = [
             "price": 6
           }
         ],
-        "image": "food-oven-vegetables.webp",
+        "image": "food-oven-vegetables.jpg",
         "imageKind": "food"
       },
       {
@@ -1558,7 +1558,7 @@ window.MENU_DATA = [
             "price": 6
           }
         ],
-        "image": "food-mixed-vegetables.webp",
+        "image": "food-mixed-vegetables.jpg",
         "imageKind": "food"
       },
       {
@@ -1569,7 +1569,7 @@ window.MENU_DATA = [
             "price": 10
           }
         ],
-        "image": "food-chicken-stew.webp",
+        "image": "food-chicken-stew.jpg",
         "imageKind": "food"
       }
     ]
@@ -1791,7 +1791,7 @@ window.MENU_DATA = [
             "price": 115
           }
         ],
-        "image": "hero-lamma.webp",
+        "image": "hero-lamma.jpg",
         "imageKind": "food"
       }
     ]
