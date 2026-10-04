@@ -1,0 +1,73 @@
+{
+  "pepsi": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/pepsi-regular-carbonated-soft-drink-can-325-ml/p/1606288-ea",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/12/16/238779/d9b5039e-6657-4c0e-9b81-d8830e023b07.jpg",
+    "bytes": 60998
+  },
+  "citrus": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/mirinda-citrus-can-325-ml/p/1606290-ea",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/12/16/238813/0ff67c29-d980-43f4-b114-d7a7b33f7137.jpg",
+    "bytes": 140613
+  },
+  "orange": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/mirinda-orange-can-325-ml/p/1606681-ea",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/12/16/238738/909792fd-f253-4973-85d5-2d087cd17403.jpg",
+    "bytes": 88725
+  },
+  "dew": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/mountain-dew-carbonated-soft-drink-can-325-ml/p/1621891-ea",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/12/16/238782/bcba0e96-390e-436f-a74a-ab45502379ea.jpg",
+    "bytes": 84105
+  },
+  "sevenup": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/7up-carbonated-soft-drink-regular-can-325-ml/p/1606289-ea",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/12/16/238804/96a6f779-7b23-4348-a84c-2f30752ca0ca.jpg",
+    "bytes": 89383
+  },
+  "pepsi-medium": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/pepsi-carbonated-soft-drink-1-litre/p/162384",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/11/21/209970/f2f8fedd-ce73-4141-9711-8c7fff35858c.jpg",
+    "bytes": 117441
+  },
+  "pepsi-large": {
+    "image": "https://media.zid.store/3a3b6b8f-fcb5-45e3-9a9c-59dc20b95d45/896bcc55-e3ae-4a6f-97c9-8fdd5122a60c.jpg",
+    "source": "aeen.shop / 2.20 L"
+  },
+  "citrus-medium": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/mirinda-citrus-1-litre/p/491923-ea",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2025/01/28/239015/b2a47918-c3ac-438f-b6e5-125c854187f2.jpg",
+    "bytes": 120976
+  },
+  "citrus-large": {
+    "image": "https://media.zid.store/3a3b6b8f-fcb5-45e3-9a9c-59dc20b95d45/1b0225a6-910f-4015-8cd7-73104bfaf85c.jpg",
+    "source": "aeen.shop / 2.20 L"
+  },
+  "orange-medium": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/mirinda-orange-pet-bottle-1-litre/p/723648",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/09/07/66957/bdbde853-e4d2-49e0-9e77-4272a6424188.jpg",
+    "bytes": 61957
+  },
+  "orange-large": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/mirinda-orange-bottle-2-2-litre/p/1627717",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2025/01/22/331264/f53a26a6-e109-4aa7-b5f1-9adce0bd6f88.jpg",
+    "bytes": 56972
+  },
+  "dew-medium": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/mountain-dew-carbonated-soft-drink-plastic-bottle-1-litre/p/723649",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/09/11/66896/48d2180e-9f93-4eea-add6-0f5a0c1d218c.jpg",
+    "bytes": 151804
+  },
+  "dew-large": {
+    "image": "https://media.zid.store/3a3b6b8f-fcb5-45e3-9a9c-59dc20b95d45/b374572c-39dc-4f40-8054-d8c918e6db68.jpg",
+    "source": "aeen.shop / 2.20 L"
+  },
+  "sevenup-medium": {
+    "page": "https://gcc.luluhypermarket.com/en-sa/7up-carbonated-soft-drink-cans-1-litre/p/639332",
+    "image": "https://bf1af2.akinoncloudcdn.com/products/2024/09/10/66969/e54f5883-dd08-414e-b697-481166d68f19.jpg",
+    "bytes": 109145
+  },
+  "sevenup-large": {
+    "image": "https://media.zid.store/3a3b6b8f-fcb5-45e3-9a9c-59dc20b95d45/95579806-1e3c-4548-bb23-a9bd397b9878.jpg",
+    "source": "aeen.shop / 2.20 L"
+  }
+}
