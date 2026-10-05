@@ -4930,3 +4930,6 @@ html[data-theme="dark"] #productDialog{background:#1e1a17;color:#f3dfcc}
 .sar-symbol{background-image:none!important;background-color:currentColor!important;-webkit-mask:url('riyal.svg') center/contain no-repeat;mask:url('riyal.svg') center/contain no-repeat;filter:none!important;width:20px!important;height:22px!important;flex:0 0 20px!important}
 #productAdd .sar-symbol{color:#fff;width:22px!important;height:24px!important;flex-basis:22px!important;margin-inline-start:5px}
 #productPrice{line-height:1.5;gap:5px}
+
+/* Keep the original welcome logo; only skip its timed animation on reload. */
+html.fast-refresh .brand-splash,html.fast-refresh .brand-splash-logo{animation:none!important}

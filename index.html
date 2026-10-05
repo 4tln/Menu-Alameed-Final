@@ -9,6 +9,9 @@
   <meta name="color-scheme" content="light dark">
   <script>
     (() => {
+      if(performance.getEntriesByType('navigation')[0]?.type === 'reload'){
+        document.documentElement.classList.add('fast-refresh');
+      }
       let theme = window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       try {
         const savedTheme = localStorage.getItem("alameed_theme_v1");
@@ -37,13 +40,16 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="lamma-light-20261004.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20261005-fast-sheets-v1">
+  <link rel="stylesheet" href="style.css?v=20261005-items-checkout-v3">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="فطائر العميد">
 </head>
 <body>
+  <div id="brandSplash" class="brand-splash" aria-label="مطعم فطائر العميد">
+    <img class="brand-splash-logo" src="brand-logo.png" alt="مطعم فطائر العميد" draggable="false">
+  </div>
 <div class="sticky-stack">
     <div class="sticky-tools">
       <div class="language-row">
@@ -147,7 +153,6 @@
         <button id="clearCartBtn" class="danger-btn" type="button">حذف جميع الأصناف</button>
       </div>
       <button class="continue-shopping" type="button" data-close-modal>+ أضف المزيد من الأصناف</button>
-      <section id="orderSummary" class="order-summary" aria-label="ملخص الطلب"></section>
       <button id="toggleCheckoutBtn" class="checkout-toggle" type="button" aria-expanded="false" aria-controls="checkoutPanel">
         <span class="checkout-toggle-copy">
           <strong>إكمال الطلب</strong>
@@ -273,11 +278,11 @@
     <div class="product-footer"><div class="product-quantity"><button id="productMinus" type="button" aria-label="تقليل الكمية">−</button><output id="productQty" aria-live="polite">1</output><button id="productPlus" type="button" aria-label="زيادة الكمية">+</button></div><button id="productAdd" type="button"><span>إضافة إلى السلة</span><strong id="productPrice"></strong></button></div>
   </dialog>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
-  <script src="menu-data.js?v=20261005-fast-sheets-v1"></script>
+  <script src="menu-data.js?v=20261005-items-checkout-v3"></script>
   <script src="translations.js?v=20261004-lamma-light-v2"></script>
   <script src="language.js?v=20261002-language"></script>
-  <script src="catalog.js?v=20261005-fast-sheets-v1"></script>
-  <script src="script.js?v=20261005-fast-sheets-v1"></script>
+  <script src="catalog.js?v=20261005-items-checkout-v3"></script>
+  <script src="script.js?v=20261005-items-checkout-v3"></script>
   <script>AlameedLanguage.init();</script>
 </body>
 </html>

@@ -11,7 +11,16 @@ window.MENU_DATA = [
           }
         ],
         "image": "lamma-light-20261004.jpg",
-        "imageKind": "food"
+        "imageKind": "food",
+        "ingredients": [
+          "4 أسياخ كباب دجاج",
+          "2 سيخ شيش دجاج",
+          "2 سيخ أوصال دجاج بالعظم",
+          "نصف دجاج فحم",
+          "نصف دجاج بروست",
+          "مقبلات",
+          "3 نفر أرز"
+        ]
       },
       {
         "name": "صحن كباب دجاج",
@@ -95,17 +104,22 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 23
+            "price": 23,
+            "image": "kebab-small-sauces-v5.jpg"
           },
           {
             "size": "وسط",
-            "price": 45
+            "price": 45,
+            "image": "kebab-medium-sauces-v5.jpg"
           },
           {
             "size": "كبير",
             "price": 75
           }
-        ]
+        ],
+        "image": "kebab-small-sauces-v5.jpg",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "صحن شيش دجاج حراق",
@@ -146,7 +160,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 23
+            "price": 23,
+            "image": "mixed-small-sauces-v5.jpg"
           },
           {
             "size": "وسط",
@@ -156,7 +171,10 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 75
           }
-        ]
+        ],
+        "image": "mixed-small-sauces-v5.jpg",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "عربي كباب",
@@ -845,7 +863,9 @@ window.MENU_DATA = [
             "زيتون",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "vegetable-pizza-large.jpg",
+        "imageSize": "كبير"
       },
       {
         "name": "بيتزا شاورما حراق",
@@ -902,17 +922,13 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 16,
-            "image": "arabi-small-v5.jpg"
+            "price": 16
           },
           {
             "size": "كبير",
             "price": 30
           }
-        ],
-        "image": "arabi-small-v5.jpg",
-        "imageKind": "food",
-        "imageSize": "صغير"
+        ]
       },
       {
         "name": "عربي أحمر",
@@ -993,13 +1009,17 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 17
+            "price": 17,
+            "image": "arabi-small-v5.jpg"
           },
           {
             "size": "كبير",
             "price": 31
           }
-        ]
+        ],
+        "image": "arabi-small-v5.jpg",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "صحن إسكندر حراق",
@@ -1278,13 +1298,17 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "نصف",
-            "price": 21
+            "price": 21,
+            "image": "charcoal-half-v5.jpg"
           },
           {
             "size": "حبة",
             "price": 42
           }
-        ]
+        ],
+        "image": "charcoal-half-v5.jpg",
+        "imageSize": "نصف",
+        "imageKind": "food"
       },
       {
         "name": "دجاج برست حراق",
@@ -1833,7 +1857,16 @@ window.MENU_DATA = [
           }
         ],
         "image": "lamma-light-20261004.jpg",
-        "imageKind": "food"
+        "imageKind": "food",
+        "ingredients": [
+          "4 أسياخ كباب دجاج",
+          "2 سيخ شيش دجاج",
+          "2 سيخ أوصال دجاج بالعظم",
+          "نصف دجاج فحم",
+          "نصف دجاج بروست",
+          "مقبلات",
+          "3 نفر أرز"
+        ]
       }
     ]
   }

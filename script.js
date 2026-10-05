@@ -399,7 +399,19 @@ if(brandSplash){
     if(event.animationName === "brandSplashOut") removeBrandSplash();
   });
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  removeBrandSplash();
+  if(document.documentElement.classList.contains('fast-refresh')){
+    // Paint the original logo while the refreshed menu becomes ready.
+    const logo = brandSplash.querySelector('img');
+    const finishAfterPaint = () => requestAnimationFrame(() => requestAnimationFrame(removeBrandSplash));
+    if(logo?.complete) finishAfterPaint();
+    else{
+      logo?.addEventListener('load', finishAfterPaint, {once:true});
+      logo?.addEventListener('error', finishAfterPaint, {once:true});
+      window.setTimeout(removeBrandSplash, 1850);
+    }
+  }else{
+    window.setTimeout(removeBrandSplash, reducedMotion ? 250 : 1850);
+  }
 }else{
   startOffersBadgeWindow();
 }
@@ -662,7 +674,6 @@ function totals(){
 function updateCartUI(){
   syncQuickQuantities();
   const info = totals();
-  renderOrderSummary();
   cartCount.textContent = money(info.itemQty);
   cartTotal.textContent = money(info.total);
   sheetTotal.textContent = money(info.total);
@@ -729,7 +740,7 @@ function setCartItemsExpanded(expanded){
   const label = toggleCartItemsBtn.querySelector(".cart-items-toggle-copy strong");
   if(label) label.textContent = shouldExpand ? "إخفاء الأصناف المضافة" : "عرض الأصناف المضافة";
 }
-function setCheckoutExpanded(expanded){
+function setCheckoutExpanded(expanded, scrollToEnd = true){
   if(!checkoutPanel || !toggleCheckoutBtn) return;
   const shouldExpand = Boolean(expanded);
   checkoutPanel.hidden = !shouldExpand;
@@ -737,7 +748,7 @@ function setCheckoutExpanded(expanded){
   toggleCheckoutBtn.classList.toggle("expanded", shouldExpand);
   const label = toggleCheckoutBtn.querySelector(".checkout-toggle-copy strong");
   if(label) label.textContent = shouldExpand ? "إخفاء بيانات الطلب" : "إكمال الطلب";
-  if(shouldExpand){
+  if(shouldExpand && scrollToEnd){
     window.requestAnimationFrame(() => {
       const sheet = checkoutPanel.closest(".sheet");
       sheet?.scrollTo({top:sheet.scrollHeight,behavior:"smooth"});
@@ -747,7 +758,9 @@ function setCheckoutExpanded(expanded){
 function openCart(){
   renderCart();
   setCartItemsExpanded(false);
-  setCheckoutExpanded(false);
+  setCheckoutExpanded(true, false);
+  const sheet = cartModal.querySelector(".sheet");
+  if(sheet) sheet.scrollTop = 0;
   cartModal.classList.add("open");
   cartModal.setAttribute("aria-hidden","false");
   document.body.classList.add("modal-open");

@@ -194,17 +194,6 @@ function modifierSummaryText(modifiers){
   if(normalized.removals.length) parts.push(`إزالة: ${normalized.removals.join('، ')}`);
   return parts.join(' | ');
 }
-function renderOrderSummary(){
-  const target=document.getElementById('orderSummary');
-  if(!target) return;
-  target.hidden = cart.length === 0;
-  if(!cart.length){target.innerHTML='';return;}
-  const info=totals();
-  target.innerHTML=`<h3>ملخص الطلب</h3>${cart.map(item=>`<div class="summary-line"><div><span><b>${money(item.qty)} ×</b> ${escapeHtml(item.name)}${item.size && item.size !== 'السعر' ? ` — ${escapeHtml(item.size)}` : ''}</span>${modifierSummaryHtml(item.modifiers)}${item.note && !item.note.includes('إضافات:') && !item.note.includes('إزالة:') ? `<small>${escapeHtml(item.note)}</small>` : ''}</div><strong>${money(item.price*item.qty)}${sarIcon()}</strong></div>`).join('')}
-  ${info.depositTotal ? `<div class="summary-line"><span>تأمين الصحن</span><strong>${money(info.depositTotal)}${sarIcon()}</strong></div>` : ''}
-  <div class="summary-total"><span>الإجمالي</span><strong>${money(info.total)}${sarIcon()}</strong></div>`;
-}
-
 /* Sheet gestures: scrolling stays native; only deliberate horizontal or edge drags take over. */
 (()=>{
   const scroller = productDialog.querySelector('.product-scroll');
