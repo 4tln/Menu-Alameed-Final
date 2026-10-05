@@ -399,7 +399,7 @@ if(brandSplash){
     if(event.animationName === "brandSplashOut") removeBrandSplash();
   });
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  window.setTimeout(removeBrandSplash, reducedMotion ? 250 : 1850);
+  removeBrandSplash();
 }else{
   startOffersBadgeWindow();
 }
@@ -602,7 +602,7 @@ function productImage(item, className, size){
   item = {...item, image:productImageSource(item, size)};
   if(item?.imageKind === 'drink') className += ' drink-photo';
   if(item?.imageKind === 'food') className += ' food-photo';
-  if(item?.image) return `<img class="${className}" src="${escapeHtml(item.image)}" draggable="false" alt="" width="960" height="960" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">`;
+  if(item?.image) return `<img class="${className}" src="${escapeHtml(item.image)}" draggable="false" alt="" width="960" height="960" loading="eager" decoding="async" onerror="this.style.visibility='hidden'">`;
   return `<div class="${className} product-placeholder" aria-hidden="true"><img src="brand-logo.png" alt="" width="96" height="96"><span>العميد</span></div>`;
 }
 
@@ -746,7 +746,7 @@ function setCheckoutExpanded(expanded){
 }
 function openCart(){
   renderCart();
-  setCartItemsExpanded(true);
+  setCartItemsExpanded(false);
   setCheckoutExpanded(false);
   cartModal.classList.add("open");
   cartModal.setAttribute("aria-hidden","false");
@@ -1019,7 +1019,12 @@ shareBtn?.addEventListener("click", async () => {
     }
   }catch{}
 });
-refreshBtn?.addEventListener("click", () => location.reload());
+refreshBtn?.addEventListener("click", () => {
+  refreshBtn.disabled = true;
+  refreshBtn.setAttribute("aria-busy", "true");
+  refreshBtn.style.opacity = ".55";
+  location.reload();
+});
 themeToggleBtn?.addEventListener("click", toggleTheme);
 const systemThemePreference = window.matchMedia?.("(prefers-color-scheme: dark)");
 systemThemePreference?.addEventListener?.("change", event => {
@@ -1045,3 +1050,42 @@ updateCartUI();
     }
   });
 });
+
+/* Preload original, unmodified images. No cache-busting image URLs. */
+(() => {
+  const retained = new Map();
+  const sources = section => [...new Set(section.items.flatMap(item =>
+    [item.image, ...(item.variants || []).map(v => v.image)]).filter(Boolean))];
+  let queue = [];
+  let running = 0;
+  function pump(){
+    while(running < 4 && queue.length){
+      const src = queue.shift();
+      if(retained.has(src)) continue;
+      const img = new Image();
+      retained.set(src, img);
+      running++;
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+      let finished = false;
+      const done = () => { if(finished) return; finished = true; running--; pump(); };
+      img.onload = () => { img.decode?.().catch(() => {}); done(); };
+      img.onerror = () => { retained.delete(src); done(); };
+      img.src = src;
+    }
+  }
+  function prioritize(category){
+    const section = window.MENU_DATA.find(s => s.category === category);
+    if(!section) return;
+    const first = sources(section);
+    first.forEach(src => { const img = retained.get(src); if(img) img.fetchPriority = 'high'; });
+    queue = [...first.filter(src => !retained.has(src)), ...queue.filter(src => !first.includes(src))];
+    pump();
+  }
+  queue = [...new Set(window.MENU_DATA.flatMap(sources))];
+  requestAnimationFrame(() => prioritize(activeCategory));
+  ['pointerover', 'pointerdown', 'focusin'].forEach(type => categoryTabs.addEventListener(type, event => {
+    const tab = event.target.closest('[data-category]');
+    if(tab) prioritize(tab.dataset.category);
+  }, {passive:true}));
+})();
