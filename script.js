@@ -399,19 +399,7 @@ if(brandSplash){
     if(event.animationName === "brandSplashOut") removeBrandSplash();
   });
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(document.documentElement.classList.contains('fast-refresh')){
-    // Paint the original logo while the refreshed menu becomes ready.
-    const logo = brandSplash.querySelector('img');
-    const finishAfterPaint = () => requestAnimationFrame(() => requestAnimationFrame(removeBrandSplash));
-    if(logo?.complete) finishAfterPaint();
-    else{
-      logo?.addEventListener('load', finishAfterPaint, {once:true});
-      logo?.addEventListener('error', finishAfterPaint, {once:true});
-      window.setTimeout(removeBrandSplash, 1850);
-    }
-  }else{
-    window.setTimeout(removeBrandSplash, reducedMotion ? 250 : 1850);
-  }
+  window.setTimeout(removeBrandSplash, reducedMotion ? 250 : 1850);
 }else{
   startOffersBadgeWindow();
 }
