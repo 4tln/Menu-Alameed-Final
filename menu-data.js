@@ -1005,13 +1005,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 17
+            "price": 17,
+            "image": "arabi-regular-small-approved-20261007.png"
           },
           {
             "size": "كبير",
-            "price": 31
+            "price": 31,
+            "image": "arabi-double-approved-20261007.png"
           }
-        ]
+        ],
+        "image": "arabi-regular-small-approved-20261007.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "صحن إسكندر جبن",
@@ -1046,7 +1051,7 @@ window.MENU_DATA = [
           {
             "size": "كبير",
             "price": 31,
-            "image": "arabi-double-approved-20261007.png"
+            "image": "arabi-double-spicy-approved-20261007.png"
           }
         ],
         "image": "arabi-small-v5.jpg",
@@ -1080,13 +1085,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 18
+            "price": 18,
+            "image": "arabi-small-v5.jpg"
           },
           {
             "size": "كبير",
-            "price": 32
+            "price": 32,
+            "image": "arabi-double-spicy-approved-20261007.png"
           }
-        ]
+        ],
+        "image": "arabi-small-v5.jpg",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "صحن إسكندر جبن حراق",
@@ -1433,12 +1443,12 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 7,
-            "image": "appetizers-small-approved-20261007.png"
+            "image": "appetizers-small-scaled-20261007.png"
           },
           {
             "size": "وسط",
             "price": 11,
-            "image": "appetizers-medium-approved-20261007.png"
+            "image": "appetizers-medium-scaled-20261007.png"
           },
           {
             "size": "كبير",
@@ -1446,7 +1456,7 @@ window.MENU_DATA = [
             "image": "appetizers-large-approved-20261007.png"
           }
         ],
-        "image": "appetizers-small-approved-20261007.png",
+        "image": "appetizers-small-scaled-20261007.png",
         "imageSize": "صغير",
         "imageKind": "food"
       },
