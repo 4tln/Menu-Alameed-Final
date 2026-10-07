@@ -195,7 +195,10 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 38
           }
-        ]
+        ],
+        "image": "arabi-kebab-20261008.png",
+        "imageKind": "food",
+        "imageSize": ""
       }
     ]
   },
@@ -220,13 +223,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 13
+            "price": 13,
+            "image": "cheese-medium-20261008.png"
           },
           {
             "size": "كبير",
             "price": 25
           }
-        ]
+        ],
+        "image": "cheese-medium-20261008.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة زعتر",
@@ -237,7 +244,8 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 11
+            "price": 11,
+            "image": "zaatar-medium-20261008.png"
           },
           {
             "size": "كبير",
@@ -267,7 +275,8 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 15
+            "price": 15,
+            "image": "muhammara-cheese-medium-20261008.png"
           },
           {
             "size": "كبير",
@@ -288,7 +297,8 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 16
+            "price": 16,
+            "image": "muhammara-cheese-medium-20261008.png"
           },
           {
             "size": "كبير",
@@ -329,13 +339,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 16
+            "price": 16,
+            "image": "egg-cheese-medium-20261008.png"
           },
           {
             "size": "كبير",
             "price": 30
           }
-        ]
+        ],
+        "image": "egg-cheese-medium-20261008.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة شاورما",
@@ -1268,14 +1282,15 @@ window.MENU_DATA = [
           {
             "size": "نصف",
             "price": 20,
-            "image": "charcoal-half-v5.jpg"
+            "image": "charcoal-half-white-20261008.png"
           },
           {
             "size": "حبة",
-            "price": 40
+            "price": 40,
+            "image": "charcoal-whole-20261008.png"
           }
         ],
-        "image": "charcoal-half-v5.jpg",
+        "image": "charcoal-half-white-20261008.png",
         "imageKind": "food",
         "imageSize": "نصف"
       },
@@ -1284,17 +1299,23 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "ربع",
-            "price": 12
+            "price": 12,
+            "image": "rotisserie-quarter-20261008.png"
           },
           {
             "size": "نصف",
-            "price": 19
+            "price": 19,
+            "image": "rotisserie-half-20261008.png"
           },
           {
             "size": "حبة",
-            "price": 38
+            "price": 38,
+            "image": "rotisserie-whole-20261008.png"
           }
-        ]
+        ],
+        "image": "rotisserie-quarter-20261008.png",
+        "imageSize": "ربع",
+        "imageKind": "food"
       },
       {
         "name": "دجاج مضغوط",
@@ -1315,14 +1336,14 @@ window.MENU_DATA = [
           {
             "size": "نصف",
             "price": 18,
-            "image": "broast-half-v5.jpg"
+            "image": "broast-half-white-20261008.png"
           },
           {
             "size": "حبة",
             "price": 36
           }
         ],
-        "image": "broast-half-v5.jpg",
+        "image": "broast-half-white-20261008.png",
         "imageKind": "food",
         "imageSize": "نصف"
       },
@@ -1341,14 +1362,15 @@ window.MENU_DATA = [
           {
             "size": "نصف",
             "price": 21,
-            "image": "charcoal-half-v5.jpg"
+            "image": "charcoal-half-white-20261008.png"
           },
           {
             "size": "حبة",
-            "price": 42
+            "price": 42,
+            "image": "charcoal-whole-20261008.png"
           }
         ],
-        "image": "charcoal-half-v5.jpg",
+        "image": "charcoal-half-white-20261008.png",
         "imageSize": "نصف",
         "imageKind": "food"
       },
@@ -1358,14 +1380,14 @@ window.MENU_DATA = [
           {
             "size": "نصف",
             "price": 18,
-            "image": "broast-half-v5.jpg"
+            "image": "broast-half-white-20261008.png"
           },
           {
             "size": "حبة",
             "price": 36
           }
         ],
-        "image": "broast-half-v5.jpg",
+        "image": "broast-half-white-20261008.png",
         "imageKind": "food",
         "imageSize": "نصف"
       },
