@@ -4938,3 +4938,12 @@ html[data-theme="dark"] #productDialog{background:#1e1a17;color:#f3dfcc}
 #productDialog .pizza-removals-only .modifier-section-copy{align-items:center;text-align:center}
 #productDialog .pizza-removals-only .modifier-section-arrow{position:absolute;inset-inline-end:16px;top:50%;margin-top:-12px}
 #productDialog .pizza-removals-only .modifier-section-body{padding:0 14px 14px}
+
+/* Compact horizontal size choices leave more room for item notes. */
+#productDialog .product-variants{grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px}
+#productDialog .product-variants button{box-sizing:border-box;flex-direction:row;justify-content:center;align-items:center;min-height:44px;padding:6px 5px;gap:6px;border-radius:9px;font-size:12px;line-height:1.25}
+#productDialog .product-variants button[aria-pressed="true"]{padding:5px 4px}
+#productDialog .product-variants button>span,#productDialog .product-variants strong{white-space:nowrap}
+#productDialog .product-variants strong{font-size:13px;gap:3px}
+#productDialog .product-variants .sar-symbol{width:15px!important;height:17px!important;flex:0 0 15px!important}
+#productDialog #productSizes{padding:6px 0;margin-bottom:6px}

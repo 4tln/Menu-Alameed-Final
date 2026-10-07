@@ -267,7 +267,7 @@ Object.assign(window.ALAMEED_EN, {
   'إغلاق التفاصيل':'Close details',
   'اختر الحجم':'Choose a size',
   'ملاحظات الصنف':'Item notes',
-  'مثال: بدون بصل':'Example: no onions',
+  'مثال: بدون شطة':'Example: no hot sauce',
   'إضافة إلى السلة':'Add to cart',
   'ملخص الطلب':'Order summary',
   'أضف المزيد من الأصناف':'Add more items',
