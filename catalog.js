@@ -65,10 +65,12 @@ function renderProductOptions(item){
   ingredientsTarget.hidden = ingredients.length === 0;
   ingredientsTarget.innerHTML = ingredients.length ? ingredients.map(escapeHtml).join('، ') : '';
   const config = modifierConfig(item);
+  const isPizza = categoryForProduct(item.name) === 'البيتزا';
+  optionsTarget.classList.toggle('pizza-removals-only', isPizza);
   optionsTarget.hidden = !config;
   if(!config){ optionsTarget.innerHTML = ''; return; }
   optionsTarget.innerHTML = [
-    optionSectionHtml('addons','إضافات البيتزا',5,config.addons,true),
+    ...(isPizza ? [] : [optionSectionHtml('addons','إضافات البيتزا',5,config.addons,true)]),
     optionSectionHtml('removals','إزالة مكونات',8,config.removals,false)
   ].join('');
   productSelection.modifiers = emptyModifiers();
