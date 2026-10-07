@@ -70,13 +70,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 43
+            "price": 43,
+            "image": "awsal-medium-approved-20261007.png"
           },
           {
             "size": "كبير",
             "price": 70
           }
-        ]
+        ],
+        "image": "awsal-medium-approved-20261007.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "صحن مشكل دجاج",
@@ -147,13 +151,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 45
+            "price": 45,
+            "image": "awsal-medium-approved-20261007.png"
           },
           {
             "size": "كبير",
             "price": 75
           }
-        ]
+        ],
+        "image": "awsal-medium-approved-20261007.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "صحن مشكل دجاج حراق",
@@ -235,7 +243,10 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 22
           }
-        ]
+        ],
+        "image": "zaatar-pie-approved-20261007.png",
+        "imageSize": "",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة سبانخ",
@@ -471,7 +482,10 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 8
           }
-        ]
+        ],
+        "image": "labneh-zaatar-pie-approved-20261007.png",
+        "imageSize": "",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة لبنة عسل",
@@ -594,7 +608,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 30
+            "price": 30,
+            "image": "chicken-pizza-large-approved-20261007.png"
           }
         ],
         "ingredients": [
@@ -615,7 +630,10 @@ window.MENU_DATA = [
             "زيتون",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "chicken-pizza-large-approved-20261007.png",
+        "imageSize": "كبير",
+        "imageKind": "food"
       },
       {
         "name": "بيتزا مشكل",
@@ -662,7 +680,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 13
+            "price": 13,
+            "image": "vegetable-pizza-small-approved-20261007.png"
           },
           {
             "size": "وسط",
@@ -691,7 +710,8 @@ window.MENU_DATA = [
             "زيتون",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "imageKind": "food"
       },
       {
         "name": "بيتزا شاورما",
@@ -768,7 +788,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 31
+            "price": 31,
+            "image": "chicken-pizza-large-approved-20261007.png"
           }
         ],
         "ingredients": [
@@ -789,7 +810,10 @@ window.MENU_DATA = [
             "زيتون",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "chicken-pizza-large-approved-20261007.png",
+        "imageSize": "كبير",
+        "imageKind": "food"
       },
       {
         "name": "بيتزا مشكل حراق",
@@ -836,7 +860,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 14
+            "price": 14,
+            "image": "vegetable-pizza-small-approved-20261007.png"
           },
           {
             "size": "وسط",
@@ -865,7 +890,8 @@ window.MENU_DATA = [
           ]
         },
         "image": "vegetable-pizza-large.jpg",
-        "imageSize": "كبير"
+        "imageSize": "كبير",
+        "imageKind": "food"
       },
       {
         "name": "بيتزا شاورما حراق",
@@ -922,13 +948,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 16
+            "price": 16,
+            "image": "arabi-regular-small-approved-20261007.png"
           },
           {
             "size": "كبير",
-            "price": 30
+            "price": 30,
+            "image": "arabi-double-approved-20261007.png"
           }
-        ]
+        ],
+        "image": "arabi-regular-small-approved-20261007.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "عربي أحمر",
@@ -1014,7 +1045,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 31
+            "price": 31,
+            "image": "arabi-double-approved-20261007.png"
           }
         ],
         "image": "arabi-small-v5.jpg",
@@ -1400,17 +1432,23 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 7
+            "price": 7,
+            "image": "appetizers-small-approved-20261007.png"
           },
           {
             "size": "وسط",
-            "price": 11
+            "price": 11,
+            "image": "appetizers-medium-approved-20261007.png"
           },
           {
             "size": "كبير",
-            "price": 16
+            "price": 16,
+            "image": "appetizers-large-approved-20261007.png"
           }
-        ]
+        ],
+        "image": "appetizers-small-approved-20261007.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "تبولة",
@@ -1658,7 +1696,10 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 18
           }
-        ]
+        ],
+        "image": "areeka-royal-approved-20261007.png",
+        "imageSize": "",
+        "imageKind": "food"
       },
       {
         "name": "فتة تمر",
@@ -1667,7 +1708,10 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 12
           }
-        ]
+        ],
+        "image": "date-fatta-approved-20261007.png",
+        "imageSize": "",
+        "imageKind": "food"
       },
       {
         "name": "حلا بارد",
@@ -1694,7 +1738,10 @@ window.MENU_DATA = [
             "size": "السعر",
             "price": 15
           }
-        ]
+        ],
+        "image": "marsa-royal-approved-20261007.png",
+        "imageSize": "",
+        "imageKind": "food"
       }
     ]
   },
