@@ -240,7 +240,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 6
+            "price": 6,
+            "image": "zaatar-small-white-approved-20261008.png"
           },
           {
             "size": "وسط",
@@ -249,11 +250,12 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 22
+            "price": 22,
+            "image": "zaatar-pie-approved-20261007.png"
           }
         ],
-        "image": "zaatar-pie-approved-20261007.png",
-        "imageSize": "",
+        "image": "zaatar-small-white-approved-20261008.png",
+        "imageSize": "صغير",
         "imageKind": "food"
       },
       {
