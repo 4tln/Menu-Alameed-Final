@@ -283,3 +283,13 @@ Object.assign(window.ALAMEED_EN, {
   'إزالة:':'Removed:',
   'يمكن اختيار':'You can choose up to'
 });
+
+Object.assign(window.ALAMEED_EN, {
+  "المنيو كامل": "Full menu",
+  "إغلاق المنيو": "Close menu",
+  "تصغير المنيو": "Zoom out",
+  "تكبير المنيو": "Zoom in",
+  "جاري تحميل المنيو…": "Loading menu…",
+  "كبّر بإصبعين وحرّك الصورة لقراءة المنيو": "Pinch to zoom and drag to read the menu",
+  "منيو مطعم فطائر العميد الكامل والأسعار": "Alameed full menu and prices"
+});
