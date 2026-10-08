@@ -11,7 +11,7 @@
 .full-menu-dialog button:focus-visible,.full-menu-entry:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 .full-menu-viewport{height:min(63dvh,650px);min-height:180px;position:relative;overflow:hidden;background:#fff;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;direction:ltr}
 .full-menu-viewport:active{cursor:grabbing}
-.full-menu-image{position:absolute;top:0;left:0;max-width:none!important;max-height:none!important;transform-origin:0 0;will-change:transform;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.full-menu-image{position:absolute;top:0;left:0;max-width:none!important;max-height:none!important;transform-origin:0 0;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .full-menu-loading{position:absolute;inset:0;display:grid;place-items:center;color:#654324;font-size:14px;padding:20px;text-align:center;background:#fff}
 .full-menu-loading[hidden]{display:none}
 .full-menu-footer{padding:8px 12px 12px;text-align:center}
@@ -19,3 +19,14 @@
 .full-menu-zoom output{min-width:48px;font-size:13px;font-variant-numeric:tabular-nums}
 .full-menu-hint{margin:7px 0 0;font-size:12px;color:var(--muted)}
 @media(max-height:480px){.full-menu-viewport{height:48dvh;min-height:100px}.full-menu-hint{display:none}.full-menu-header,.full-menu-footer{padding:4px 10px}}
+
+/* Compact icon and a viewport matching the original page proportions. */
+.language-row{align-items:center;justify-content:space-between}
+.full-menu-entry{width:40px;min-height:36px;margin:0;padding:7px;flex-shrink:0;background:var(--card);border-color:var(--line);border-radius:10px}
+.full-menu-entry svg{width:21px;height:21px}
+.full-menu-dialog{width:min(960px,calc(100% - 16px),calc((100dvh - 84px) * 1.4142));border-radius:12px;max-height:calc(100dvh - 16px)}
+.full-menu-header{padding:3px 6px;min-height:44px;position:relative;justify-content:center}
+.full-menu-header #fullMenuClose{position:absolute;inset-inline-end:4px;top:3px}
+.full-menu-dialog button{min-height:38px;min-width:38px;font-size:21px}
+.full-menu-zoom{gap:9px}
+.full-menu-viewport{height:auto;min-height:0;aspect-ratio:841.92 / 595.32}

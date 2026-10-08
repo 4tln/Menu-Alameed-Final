@@ -10,7 +10,8 @@
     const w=baseW*zoom,h=baseH*zoom;
     x=w<=view.clientWidth?(view.clientWidth-w)/2:Math.min(0,Math.max(view.clientWidth-w,x));
     y=h<=view.clientHeight?(view.clientHeight-h)/2:Math.min(0,Math.max(view.clientHeight-h,y));
-    img.style.transform=`translate(${x}px,${y}px) scale(${zoom})`;
+    img.style.width=w+'px';img.style.height=h+'px';
+    img.style.transform=`translate(${x}px,${y}px)`;
     output.value=Math.round(zoom*100)+'%';minus.disabled=zoom<=1;plus.disabled=zoom>=5;
   }
   function fit(){
@@ -27,7 +28,7 @@
     if(dialog.open)return;
     previousOverflow=document.body.style.overflow;document.body.style.overflow='hidden';
     dialog.showModal();points.clear();
-    if(!loaded){status.hidden=false;img.src='full-menu.webp';}else fit();
+    if(!loaded){status.hidden=false;img.src='full-menu-hd.webp';}else fit();
     close.focus();
   });
   close.addEventListener('click',()=>dialog.close());

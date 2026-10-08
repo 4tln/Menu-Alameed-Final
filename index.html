@@ -40,7 +40,7 @@
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="lamma-light-20261004.jpg" fetchpriority="high">
   <link rel="stylesheet" href="style.css?v=20261007-compact-sizes-v9">
-  <link rel="stylesheet" href="full-menu.css?v=20261008-1">
+  <link rel="stylesheet" href="full-menu.css?v=20261008-2">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -56,6 +56,7 @@
         <button id="languageSwitch" class="language-switch" type="button" role="switch" aria-checked="false" aria-label="تغيير اللغة إلى الإنجليزية" dir="ltr">
           <span class="language-thumb" aria-hidden="true"></span><span class="language-option" lang="en">EN</span><span class="language-option" lang="ar">ع</span>
         </button>
+        <button id="fullMenuOpen" class="full-menu-entry" type="button" aria-label="المنيو كامل" title="المنيو كامل" aria-haspopup="dialog" aria-controls="fullMenuDialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v15M12 5C8 2 4 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-2-1-6-2-10 1Z"/></svg></button>
       </div>
       <label class="search-box">
         <span aria-hidden="true">⌕</span>
@@ -100,9 +101,7 @@
           <small>🕌 وقت الصلاة نستقبل طلبك، ويبدأ التجهيز بعد الصلاة.</small>
         </div>
       </div>
-      <button id="fullMenuOpen" class="full-menu-entry" type="button" aria-haspopup="dialog" aria-controls="fullMenuDialog">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v15M12 5C8 2 4 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-2-1-6-2-10 1Z"/></svg><span>المنيو كامل</span>
-      </button>
+
     </div>
     <div class="category-panel">
       <nav id="categoryTabs" class="category-tabs" aria-label="أقسام المنيو"></nav>
@@ -281,11 +280,10 @@
     <div class="product-footer"><div class="product-quantity"><button id="productMinus" type="button" aria-label="تقليل الكمية">−</button><output id="productQty" aria-live="polite">1</output><button id="productPlus" type="button" aria-label="زيادة الكمية">+</button></div><button id="productAdd" type="button"><span>إضافة إلى السلة</span><strong id="productPrice"></strong></button></div>
   </dialog>
   <dialog id="fullMenuDialog" class="full-menu-dialog" aria-labelledby="fullMenuTitle">
-    <header class="full-menu-header"><h2 id="fullMenuTitle">المنيو كامل</h2><button id="fullMenuClose" type="button" aria-label="إغلاق المنيو">×</button></header>
+    <header class="full-menu-header"><h2 id="fullMenuTitle" hidden>المنيو كامل</h2><div class="full-menu-zoom"><button id="fullMenuMinus" type="button" aria-label="تصغير المنيو">−</button><output id="fullMenuScale" aria-live="polite" translate="no">100%</output><button id="fullMenuPlus" type="button" aria-label="تكبير المنيو">+</button></div><button id="fullMenuClose" type="button" aria-label="إغلاق المنيو">×</button></header>
     <div id="fullMenuViewport" class="full-menu-viewport"><img id="fullMenuImage" class="full-menu-image" alt="منيو مطعم فطائر العميد الكامل والأسعار" draggable="false" decoding="async"><div id="fullMenuLoading" class="full-menu-loading" role="status">جاري تحميل المنيو…</div></div>
-    <footer class="full-menu-footer"><div class="full-menu-zoom"><button id="fullMenuMinus" type="button" aria-label="تصغير المنيو">−</button><output id="fullMenuScale" aria-live="polite" translate="no">100%</output><button id="fullMenuPlus" type="button" aria-label="تكبير المنيو">+</button></div><p class="full-menu-hint">كبّر بإصبعين وحرّك الصورة لقراءة المنيو</p></footer>
   </dialog>
-  <script src="full-menu.js?v=20261008-1"></script>
+  <script src="full-menu.js?v=20261008-2"></script>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20261008-arabi-plates-v13"></script>
   <script src="translations.js?v=20261008-full-menu-v1"></script>
