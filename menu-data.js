@@ -965,15 +965,15 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 16,
-            "image": "arabi-regular-small-approved-20261007.png"
+            "image": "arabi-small-ceramic-v13.png"
           },
           {
             "size": "كبير",
             "price": 30,
-            "image": "arabi-double-approved-20261007.png"
+            "image": "arabi-large-ceramic-v13.png"
           }
         ],
-        "image": "arabi-regular-small-approved-20261007.png",
+        "image": "arabi-small-ceramic-v13.png",
         "imageSize": "صغير",
         "imageKind": "food"
       },
@@ -1022,15 +1022,15 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 17,
-            "image": "arabi-regular-small-approved-20261007.png"
+            "image": "arabi-small-ceramic-v13.png"
           },
           {
             "size": "كبير",
             "price": 31,
-            "image": "arabi-double-approved-20261007.png"
+            "image": "arabi-large-ceramic-v13.png"
           }
         ],
-        "image": "arabi-regular-small-approved-20261007.png",
+        "image": "arabi-small-ceramic-v13.png",
         "imageSize": "صغير",
         "imageKind": "food"
       },
@@ -1062,15 +1062,15 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 17,
-            "image": "arabi-small-v5.jpg"
+            "image": "arabi-spicy-small-ceramic-v13.png"
           },
           {
             "size": "كبير",
             "price": 31,
-            "image": "arabi-double-spicy-approved-20261007.png"
+            "image": "arabi-spicy-large-ceramic-v13.png"
           }
         ],
-        "image": "arabi-small-v5.jpg",
+        "image": "arabi-spicy-small-ceramic-v13.png",
         "imageSize": "صغير",
         "imageKind": "food"
       },
@@ -1102,15 +1102,15 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 18,
-            "image": "arabi-small-v5.jpg"
+            "image": "arabi-spicy-small-ceramic-v13.png"
           },
           {
             "size": "كبير",
             "price": 32,
-            "image": "arabi-double-spicy-approved-20261007.png"
+            "image": "arabi-spicy-large-ceramic-v13.png"
           }
         ],
-        "image": "arabi-small-v5.jpg",
+        "image": "arabi-spicy-small-ceramic-v13.png",
         "imageSize": "صغير",
         "imageKind": "food"
       },
