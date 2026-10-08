@@ -250,8 +250,7 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 22,
-            "image": "zaatar-pie-approved-20261007.png"
+            "price": 22
           }
         ],
         "image": "zaatar-small-white-approved-20261008.png",
