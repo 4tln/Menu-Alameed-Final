@@ -1877,13 +1877,14 @@ window.MENU_DATA = [
       },
       {
         "name": "حمضيات",
-        "image": "drink-citrus.jpg",
+        "image": "drink-citrus-240ml.png",
         "imageKind": "drink",
         "variants": [
           {
             "size": "صغير",
             "price": 2,
-            "image": "drink-citrus.jpg"
+            "image": "drink-citrus-240ml.png",
+            "volume": "240 مل"
           },
           {
             "size": "وسط",
