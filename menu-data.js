@@ -1488,63 +1488,104 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 5
+            "price": 5,
+            "image": "tabbouleh-approved-20261011.png"
           }
-        ]
+        ],
+        "image": "tabbouleh-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "متبل",
         "variants": [
           {
             "size": "صغير",
-            "price": 5
+            "price": 5,
+            "image": "mutabbal-approved-20261011.png"
           }
-        ]
+        ],
+        "image": "mutabbal-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "حمص",
         "variants": [
           {
             "size": "صغير",
-            "price": 7
+            "price": 7,
+            "image": "hummus-approved-20261011.png"
           }
-        ]
+        ],
+        "image": "hummus-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "لبن جزر",
         "variants": [
           {
             "size": "صغير",
-            "price": 5
+            "price": 5,
+            "image": "carrot-yogurt-approved-20261011.png"
           }
-        ]
+        ],
+        "image": "carrot-yogurt-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "لبن خيار",
         "variants": [
           {
             "size": "صغير",
-            "price": 5
+            "price": 5,
+            "image": "cucumber-yogurt-approved-20261011.png"
           }
-        ]
+        ],
+        "image": "cucumber-yogurt-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "بابا غنوج",
         "variants": [
           {
             "size": "صغير",
-            "price": 5
+            "price": 5,
+            "image": "baba-ghanoush-approved-20261011.png"
           }
-        ]
+        ],
+        "image": "baba-ghanoush-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "سلطة مايونيز",
         "variants": [
           {
             "size": "صغير",
-            "price": 5
+            "price": 5,
+            "image": "mayonnaise-salad-approved-20261011.png"
           }
-        ]
+        ],
+        "image": "mayonnaise-salad-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
+      },
+      {
+        "name": "سلطة السماق",
+        "variants": [
+          {
+            "size": "صغير",
+            "price": 5,
+            "image": "sumac-salad-approved-20261011.png"
+          }
+        ],
+        "image": "sumac-salad-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       }
     ]
   },
@@ -1718,9 +1759,13 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 9
+            "price": 9,
+            "image": "kunafa-approved-20261011.png"
           }
-        ]
+        ],
+        "image": "kunafa-approved-20261011.png",
+        "imageKind": "food",
+        "imageSize": "السعر"
       },
       {
         "name": "عريكة",

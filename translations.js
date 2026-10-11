@@ -1,4 +1,5 @@
 window.ALAMEED_EN = {
+  "سلطة السماق": "Sumac Salad",
   "٪": "%",
   "المشاوي": "Grills",
   "صحن اللمة": "Al Lamma Platter",
