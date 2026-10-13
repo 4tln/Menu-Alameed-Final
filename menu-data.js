@@ -219,19 +219,20 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 7
+            "price": 7,
+            "image": "cheese-small-no-plate-20261013.png"
           },
           {
             "size": "وسط",
             "price": 13,
-            "image": "cheese-medium-20261008.png"
+            "image": "cheese-medium-no-plate-20261013.png"
           },
           {
             "size": "كبير",
             "price": 25
           }
         ],
-        "image": "cheese-medium-20261008.png",
+        "image": "cheese-medium-no-plate-20261013.png",
         "imageSize": "وسط",
         "imageKind": "food"
       },
@@ -241,19 +242,19 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 6,
-            "image": "zaatar-small-white-approved-20261008.png"
+            "image": "zaatar-small-no-plate-20261013.png"
           },
           {
             "size": "وسط",
             "price": 11,
-            "image": "zaatar-medium-20261008.png"
+            "image": "zaatar-medium-no-plate-20261013.png"
           },
           {
             "size": "كبير",
             "price": 22
           }
         ],
-        "image": "zaatar-small-white-approved-20261008.png",
+        "image": "zaatar-small-no-plate-20261013.png",
         "imageSize": "صغير",
         "imageKind": "food"
       },
@@ -272,19 +273,19 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 8,
-            "image": "fatayer-muhammara-small-v5.jpg"
+            "image": "muhammara-small-no-plate-20261013.png"
           },
           {
             "size": "وسط",
             "price": 15,
-            "image": "muhammara-cheese-medium-20261008.png"
+            "image": "muhammara-medium-no-plate-20261013.png"
           },
           {
             "size": "كبير",
             "price": 25
           }
         ],
-        "image": "fatayer-muhammara-small-v5.jpg",
+        "image": "muhammara-small-no-plate-20261013.png",
         "imageKind": "food",
         "imageSize": "صغير"
       },
@@ -294,19 +295,19 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 9,
-            "image": "fatayer-muhammara-small-v5.jpg"
+            "image": "muhammara-small-no-plate-20261013.png"
           },
           {
             "size": "وسط",
             "price": 16,
-            "image": "muhammara-cheese-medium-20261008.png"
+            "image": "muhammara-medium-no-plate-20261013.png"
           },
           {
             "size": "كبير",
             "price": 26
           }
         ],
-        "image": "fatayer-muhammara-small-v5.jpg",
+        "image": "muhammara-small-no-plate-20261013.png",
         "imageKind": "food",
         "imageSize": "صغير"
       },
@@ -316,7 +317,7 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 8,
-            "image": "fatayer-honey-small-v5.jpg"
+            "image": "honey-small-no-plate-20261013.png"
           },
           {
             "size": "وسط",
@@ -327,7 +328,7 @@ window.MENU_DATA = [
             "price": 29
           }
         ],
-        "image": "fatayer-honey-small-v5.jpg",
+        "image": "honey-small-no-plate-20261013.png",
         "imageKind": "food",
         "imageSize": "صغير"
       },
@@ -341,14 +342,14 @@ window.MENU_DATA = [
           {
             "size": "وسط",
             "price": 16,
-            "image": "egg-cheese-medium-20261008.png"
+            "image": "egg-cheese-medium-no-plate-20261013.png"
           },
           {
             "size": "كبير",
             "price": 30
           }
         ],
-        "image": "egg-cheese-medium-20261008.png",
+        "image": "egg-cheese-medium-no-plate-20261013.png",
         "imageSize": "وسط",
         "imageKind": "food"
       },
@@ -361,13 +362,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 18
+            "price": 18,
+            "image": "shawarma-medium-no-plate-20261013.png"
           },
           {
             "size": "كبير",
             "price": 36
           }
-        ]
+        ],
+        "image": "shawarma-medium-no-plate-20261013.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة شاورما حراق",
@@ -510,7 +515,7 @@ window.MENU_DATA = [
             "price": 8
           }
         ],
-        "image": "labneh-honey.jpg",
+        "image": "labneh-honey-no-plate-20261013.png",
         "imageSize": ""
       },
       {
