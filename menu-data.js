@@ -232,8 +232,8 @@ window.MENU_DATA = [
             "price": 25
           }
         ],
-        "image": "cheese-medium-no-plate-20261013.png",
-        "imageSize": "وسط",
+        "image": "cheese-small-no-plate-20261013.png",
+        "imageSize": "صغير",
         "imageKind": "food"
       },
       {
@@ -383,13 +383,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 19
+            "price": 19,
+            "image": "shawarma-medium-no-plate-20261013.png"
           },
           {
             "size": "كبير",
             "price": 37
           }
-        ]
+        ],
+        "image": "shawarma-medium-no-plate-20261013.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة دجاج",
@@ -532,13 +536,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 8
+            "price": 8,
+            "image": "cheese-honey-small-approved-20261013.jpeg"
           },
           {
             "size": "وسط",
-            "price": 15
+            "price": 15,
+            "image": "cheese-honey-medium-approved-20261013.jpeg"
           }
-        ]
+        ],
+        "image": "cheese-honey-small-approved-20261013.jpeg",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة جبن زعتر",
