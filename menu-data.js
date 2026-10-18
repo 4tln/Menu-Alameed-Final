@@ -1455,26 +1455,36 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "نصف",
-            "price": 15
+            "price": 15,
+            "image": "charcoal-plain-half-fries-20261018.png"
           },
           {
             "size": "حبة",
-            "price": 30
+            "price": 30,
+            "image": "charcoal-plain-whole-fries-20261018.png"
           }
-        ]
+        ],
+        "image": "charcoal-plain-half-fries-20261018.png",
+        "imageSize": "نصف",
+        "imageKind": "food"
       },
       {
         "name": "دجاج فحم سادة حراق",
         "variants": [
           {
             "size": "نصف",
-            "price": 16
+            "price": 16,
+            "image": "charcoal-plain-half-fries-20261018.png"
           },
           {
             "size": "حبة",
-            "price": 32
+            "price": 32,
+            "image": "charcoal-plain-whole-fries-20261018.png"
           }
-        ]
+        ],
+        "image": "charcoal-plain-half-fries-20261018.png",
+        "imageSize": "نصف",
+        "imageKind": "food"
       },
       {
         "name": "دجاج شواية سادة",
