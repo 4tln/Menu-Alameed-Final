@@ -1491,17 +1491,23 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "ربع",
-            "price": 6
+            "price": 6,
+            "image": "rotisserie-plain-quarter-20261018.png"
           },
           {
             "size": "نصف",
-            "price": 13
+            "price": 13,
+            "image": "rotisserie-plain-half-20261018.png"
           },
           {
             "size": "حبة",
-            "price": 25
+            "price": 25,
+            "image": "rotisserie-plain-whole-20261018.png"
           }
-        ]
+        ],
+        "image": "rotisserie-plain-quarter-20261018.png",
+        "imageSize": "ربع",
+        "imageKind": "food"
       },
       {
         "name": "رز سادة",
