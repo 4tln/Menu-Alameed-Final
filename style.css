@@ -4947,3 +4947,11 @@ html[data-theme="dark"] #productDialog{background:#1e1a17;color:#f3dfcc}
 #productDialog .product-variants strong{font-size:13px;gap:3px}
 #productDialog .product-variants .sar-symbol{width:15px!important;height:17px!important;flex:0 0 15px!important}
 #productDialog #productSizes{padding:6px 0;margin-bottom:6px}
+/* Keep the portrait plain Marsa tray fully visible in square menu images. */
+.catalog-photo.food-photo[src*="marsa-plain-approved-20261018.png"],
+.detail-photo.food-photo[src*="marsa-plain-approved-20261018.png"],
+.cart-product-photo.food-photo[src*="marsa-plain-approved-20261018.png"] {
+  object-fit: contain !important;
+  object-position: center;
+  background: #faf7f0;
+}
