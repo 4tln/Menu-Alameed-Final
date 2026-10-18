@@ -96,7 +96,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 70
+            "price": 70,
+            "image": "mixed-large-approved-20261018.png"
           }
         ],
         "image": "mixed-small-sauces-v5.jpg",
@@ -177,7 +178,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 75
+            "price": 75,
+            "image": "mixed-large-approved-20261018.png"
           }
         ],
         "image": "mixed-small-sauces-v5.jpg",
@@ -193,7 +195,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 38
+            "price": 38,
+            "image": "arabi-kebab-double-ceramic-20261018.png"
           }
         ],
         "image": "arabi-kebab-20261008.png",
@@ -263,9 +266,13 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 6
+            "price": 6,
+            "image": "spinach-approved-20261018.png"
           }
-        ]
+        ],
+        "image": "spinach-approved-20261018.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة محمرة جبن",
@@ -404,13 +411,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 17
+            "price": 17,
+            "image": "chicken-medium-round-approved-20261018.png"
           },
           {
             "size": "كبير",
             "price": 30
           }
-        ]
+        ],
+        "image": "chicken-medium-round-approved-20261018.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة دجاج حراق",
@@ -421,13 +432,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 18
+            "price": 18,
+            "image": "chicken-medium-round-approved-20261018.png"
           },
           {
             "size": "كبير",
             "price": 31
           }
-        ]
+        ],
+        "image": "chicken-medium-round-approved-20261018.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة دجاج جبن",
@@ -438,13 +453,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 18
+            "price": 18,
+            "image": "chicken-medium-round-approved-20261018.png"
           },
           {
             "size": "كبير",
             "price": 31
           }
-        ]
+        ],
+        "image": "chicken-medium-round-approved-20261018.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة دجاج جبن حراق",
@@ -455,13 +474,17 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 20
+            "price": 20,
+            "image": "chicken-medium-round-approved-20261018.png"
           },
           {
             "size": "كبير",
             "price": 34
           }
-        ]
+        ],
+        "image": "chicken-medium-round-approved-20261018.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "فطيرة لبنة سادة",
@@ -585,9 +608,13 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 10
+            "price": 10,
+            "image": "cheese-zaatar-olive-approved-20261018.png"
           }
-        ]
+        ],
+        "image": "cheese-zaatar-olive-approved-20261018.png",
+        "imageSize": "",
+        "imageKind": "food"
       }
     ]
   },
@@ -677,7 +704,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 34
+            "price": 34,
+            "image": "pizza-mixed-large-approved-20261018.png"
           }
         ],
         "ingredients": [
@@ -702,7 +730,10 @@ window.MENU_DATA = [
             "زعتر",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "pizza-mixed-large-approved-20261018.png",
+        "imageSize": "كبير",
+        "imageKind": "food"
       },
       {
         "name": "بيتزا خضار",
@@ -857,7 +888,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 35
+            "price": 35,
+            "image": "pizza-mixed-large-approved-20261018.png"
           }
         ],
         "ingredients": [
@@ -882,7 +914,10 @@ window.MENU_DATA = [
             "زعتر",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "pizza-mixed-large-approved-20261018.png",
+        "imageSize": "كبير",
+        "imageKind": "food"
       },
       {
         "name": "بيتزا خضار حراق",
@@ -1819,9 +1854,13 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 10
+            "price": 10,
+            "image": "marsa-plain-approved-20261018.png"
           }
-        ]
+        ],
+        "image": "marsa-plain-approved-20261018.png",
+        "imageSize": "",
+        "imageKind": "food"
       },
       {
         "name": "مرسى ملكي",
