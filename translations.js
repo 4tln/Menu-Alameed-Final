@@ -294,3 +294,37 @@ Object.assign(window.ALAMEED_EN, {
   "كبّر بإصبعين وحرّك الصورة لقراءة المنيو": "Pinch to zoom and drag to read the menu",
   "منيو مطعم فطائر العميد الكامل والأسعار": "Alameed full menu and prices"
 });
+
+Object.assign(window.ALAMEED_EN, {
+  "2 سيخ أوصال دجاج بالعظم": "2 bone-in chicken tikka skewers",
+  "نصف دجاج بروست": "Half broasted chicken",
+  "3 نفر أرز": "3 servings of rice",
+  "صلصة بيتزا": "Pizza sauce",
+  "جبنة سايل": "Liquid cheese",
+  "جبنة موزريلا": "Mozzarella cheese",
+  "دجاج شاورما": "Chicken shawarma",
+  "دجاج": "Chicken",
+  "طماطم": "Tomato",
+  "فلفل أخضر": "Green pepper",
+  "زيتون": "Olives",
+  "مكونات المحمرة": "Muhammara ingredients",
+  "زعتر": "Zaatar",
+  "1 لتر": "1 L",
+  "2.20 لتر": "2.20 L",
+  "240 مل": "240 ml",
+  "اسحب لرفع البطاقة أو خفضها، واضغط لإغلاق التفاصيل": "Drag to raise or lower the card; tap to close details",
+  "تقليل كمية": "Decrease quantity of",
+  "كمية": "Quantity of",
+  "إضافة": "Add",
+  "للسلة": "to cart",
+  "العميد": "Alameed",
+  "خيارات كحد أقصى": "options maximum",
+  "تعذّر تحميل المنيو. أغلق النافذة وحاول مرة أخرى.": "Could not load the menu. Close and try again.",
+  "الفجر": "Fajr",
+  "صلاة الجمعة": "Friday prayer",
+  "الظهر": "Dhuhr",
+  "العصر": "Asr",
+  "المغرب": "Maghrib",
+  "العشاء": "Isha",
+  "،": ","
+});
