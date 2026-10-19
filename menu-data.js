@@ -630,7 +630,8 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 15
+            "price": 15,
+            "image": "pizza-cheese-medium-no-plate-20261019.png"
           },
           {
             "size": "كبير",
@@ -649,7 +650,10 @@ window.MENU_DATA = [
             "جبنة سايل",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "pizza-cheese-medium-no-plate-20261019.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "بيتزا دجاج",
@@ -814,7 +818,8 @@ window.MENU_DATA = [
           },
           {
             "size": "وسط",
-            "price": 16
+            "price": 16,
+            "image": "pizza-cheese-medium-no-plate-20261019.png"
           },
           {
             "size": "كبير",
@@ -833,7 +838,10 @@ window.MENU_DATA = [
             "جبنة سايل",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "pizza-cheese-medium-no-plate-20261019.png",
+        "imageSize": "وسط",
+        "imageKind": "food"
       },
       {
         "name": "بيتزا دجاج حراق",
