@@ -71,14 +71,14 @@ window.MENU_DATA = [
           {
             "size": "وسط",
             "price": 43,
-            "image": "awsal-medium-approved-20261007.png"
+            "image": "awsal-medium-sauces-approved-20261018.png"
           },
           {
             "size": "كبير",
             "price": 70
           }
         ],
-        "image": "awsal-medium-approved-20261007.png",
+        "image": "awsal-medium-sauces-approved-20261018.png",
         "imageSize": "وسط",
         "imageKind": "food"
       },
@@ -153,14 +153,14 @@ window.MENU_DATA = [
           {
             "size": "وسط",
             "price": 45,
-            "image": "awsal-medium-approved-20261007.png"
+            "image": "awsal-medium-sauces-approved-20261018.png"
           },
           {
             "size": "كبير",
             "price": 75
           }
         ],
-        "image": "awsal-medium-approved-20261007.png",
+        "image": "awsal-medium-sauces-approved-20261018.png",
         "imageSize": "وسط",
         "imageKind": "food"
       },
