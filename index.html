@@ -39,7 +39,7 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="lamma-light-20261004.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20261021-cart-polish-v29">
+  <link rel="stylesheet" href="style.css?v=20261021-cart-repair-v30">
   <link rel="stylesheet" href="full-menu.css?v=20261008-2">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
@@ -126,12 +126,9 @@
   <div id="cartModal" class="modal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
     <section class="sheet cart-simple" role="dialog" aria-modal="true" aria-label="سلة الطلب">
-      <header class="sheet-header">
-        <div>
-          <h2>مراجعة طلبك</h2>
-          <p class="cart-count-badge"><span>عدد الأصناف:</span> <b id="sheetCount">0</b></p>
-        </div>
-        <button type="button" class="icon-btn" data-close-modal aria-label="إغلاق السلة">×</button>
+      <header class="cart-review-heading">
+        <button id="cartDragHandle" class="cart-drag-handle" type="button" aria-label="اسحب لرفع السلة أو خفضها، واضغط لإغلاقها"><span></span></button>
+        <div class="cart-heading-row"><h2>مراجعة طلبك</h2><div class="cart-quantity-badge"><span>عدد الأصناف:</span> <b id="sheetCount">0</b></div><span aria-hidden="true"></span></div>
       </header>
       <div class="cart-scroll">
       <button id="toggleCartItemsBtn" class="cart-items-toggle" type="button" aria-expanded="false" aria-controls="cartItemsPanel">
@@ -280,10 +277,10 @@
   <script src="full-menu.js?v=20261008-2"></script>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20261021-shawarma-kebab-v25"></script>
-  <script src="translations.js?v=20261021-cart-polish-v29"></script>
+  <script src="translations.js?v=20261021-cart-repair-v30"></script>
   <script src="language.js?v=20261002-language"></script>
   <script src="catalog.js?v=20261007-pizza-options-v8"></script>
-  <script src="script.js?v=20261021-cart-polish-v29"></script>
+  <script src="script.js?v=20261021-cart-repair-v30"></script>
   <script>AlameedLanguage.init();</script>
 </body>
 </html>

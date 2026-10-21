@@ -5084,3 +5084,34 @@ html[data-theme="dark"] #cartModal .cart-simple .size-badge,html[data-theme="dar
 #cartModal .cart-simple #cartItems .cart-row{border:1px solid #b99571!important;border-radius:12px!important;box-shadow:0 2px 5px #49311f14!important}
 html[data-theme="dark"] #cartModal .cart-simple #clearCartBtn,html[data-theme="dark"] #cartModal .cart-simple .remove-btn{color:#f18c92!important}
 html[data-theme="dark"] #cartModal .cart-simple #cartItems .cart-row{border-color:#947354!important}
+
+/* Repair sheet sizing and isolate the header from legacy header rules. */
+#cartModal .cart-simple{height:min(78dvh,610px)!important;max-height:88dvh!important;transform:translate(-50%,var(--cart-drag-y,0px))!important}
+#cartModal .cart-simple.cart-expanded{height:min(88dvh,710px)!important}
+#cartModal .cart-review-heading{flex:0 0 auto;padding:0 16px 10px;border-bottom:1px solid var(--cart-line);background:var(--cart-surface)}
+#cartModal .cart-drag-handle{display:flex;align-items:center;justify-content:center;width:100%;height:28px;padding:0;border:0;background:transparent;touch-action:none;cursor:grab}
+#cartModal .cart-drag-handle span{display:block;width:42px;height:5px;border-radius:10px;background:#8b684a;pointer-events:none}
+#cartModal .cart-heading-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:6px}
+#cartModal .cart-heading-row h2{margin:0!important;font-size:16px!important;line-height:1.5;font-weight:800;color:var(--cart-ink)!important;text-align:start;white-space:nowrap}
+#cartModal .cart-quantity-badge{position:static!important;display:flex;align-items:center;justify-content:center;gap:5px;padding:4px 8px;border:1px solid #cbb69e;border-radius:6px;background:var(--cart-soft);color:var(--cart-ink);font-size:10px;line-height:1.5;white-space:nowrap}
+#cartModal .cart-simple .cart-scroll{flex:1 1 auto!important;min-height:0!important}
+#cartModal .cart-simple .cart-items-panel{display:flex!important;flex:1 1 0!important;min-height:86px!important;margin:8px 0!important}
+#cartModal .cart-simple #cartItems{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;gap:7px!important;margin:0!important;padding:7px!important;border:1px solid #c8ae90!important;border-radius:13px!important;background:var(--cart-soft)!important}
+#cartModal .cart-simple #cartItems .cart-row{flex:0 0 auto!important;display:grid!important;grid-template-columns:68px minmax(0,1fr)!important;grid-template-rows:auto auto!important;height:auto!important;max-height:none!important;min-height:82px!important;overflow:visible!important;padding:7px!important;gap:3px 8px!important;align-items:start!important}
+#cartModal .cart-simple .cart-row-info{grid-column:2;grid-row:1;min-width:0}
+#cartModal .cart-simple #cartItems .cart-row-bottom{grid-column:2!important;grid-row:2!important;position:static!important;height:auto!important;min-height:28px!important;flex-shrink:0!important;margin:0!important;padding:0!important}
+#cartModal .cart-simple .cart-product-photo{grid-column:1!important;grid-row:1 / 3!important;align-self:center!important}
+#cartModal .cart-simple .deposit-note{display:flex!important;flex-wrap:wrap;gap:3px;padding:3px 5px!important;line-height:1.5!important;margin-top:3px!important}
+#cartModal .cart-simple #clearCartBtn[hidden]{display:none!important}
+#cartModal.cart-is-empty .cart-simple{height:auto!important;max-height:80dvh!important}
+#cartModal.cart-is-empty .cart-simple .cart-scroll{flex:0 1 auto!important;overflow-y:auto!important}
+#cartModal.cart-is-empty .cart-simple .cart-items-panel{flex:0 0 auto!important;min-height:0!important}
+#cartModal.cart-is-empty .cart-simple #cartItems{flex:0 0 auto!important}
+#cartModal .cart-simple #cartItems .cart-empty{min-height:0!important;padding:12px 5px!important;border:0!important;margin:0!important;gap:4px!important}
+#cartModal .cart-simple .cart-empty>span{font-size:25px!important;margin:0!important}
+#cartModal .cart-simple .cart-empty strong{font-size:15px!important}
+#cartModal .cart-simple .cart-empty small{font-size:11px!important}
+@media(max-width:380px){#cartModal .cart-heading-row h2{font-size:14px!important}#cartModal .cart-quantity-badge{padding-inline:5px;font-size:9px}}
+@media(max-height:580px){#cartModal .cart-simple .cart-scroll{overflow-y:auto!important}#cartModal .cart-simple .cart-items-panel{flex:0 0 100px!important}}
+html[lang="en"] #cartModal .cart-heading-row{grid-template-columns:1fr auto}
+html[lang="en"] #cartModal .cart-heading-row>span{display:none}

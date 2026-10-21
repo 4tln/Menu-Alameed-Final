@@ -666,8 +666,10 @@ function updateCartUI(){
   cartCount.textContent = money(info.itemQty);
   cartTotal.textContent = money(info.total);
   sheetTotal.textContent = money(info.total);
-  if(sheetCount) sheetCount.textContent = money(cart.length);
-  if(cartPreviewCount) cartPreviewCount.textContent = money(cart.length);
+  if(sheetCount) sheetCount.textContent = money(info.itemQty);
+  if(cartPreviewCount) cartPreviewCount.textContent = money(info.itemQty);
+  cartModal.classList.toggle("cart-is-empty", cart.length === 0);
+  clearCartBtn.hidden = cart.length === 0;
   if(toggleCartItemsBtn){
     toggleCartItemsBtn.disabled = cart.length === 0;
     toggleCartItemsBtn.classList.toggle("is-empty", cart.length === 0);
@@ -746,6 +748,7 @@ function setCheckoutExpanded(expanded, scrollToEnd = true){
   }
 }
 function openCart(){
+  cartModal.querySelector(".sheet")?.classList.remove("cart-expanded");
   renderCart();
   setCartItemsExpanded(false);
   setCheckoutExpanded(true, false);
@@ -1097,4 +1100,44 @@ updateCartUI();
     const tab = event.target.closest('[data-category]');
     if(tab) prioritize(tab.dataset.category);
   }, {passive:true}));
+})();
+
+// Restrict sheet dragging to its handle so scrolling items remains independent.
+(() => {
+  const handle = document.getElementById("cartDragHandle");
+  const sheet = cartModal.querySelector(".sheet");
+  if(!handle || !sheet) return;
+  let gesture = null;
+  let ignoreClick = false;
+  handle.addEventListener("pointerdown", event => {
+    if(event.button !== 0) return;
+    gesture = {id:event.pointerId, y:event.clientY, dy:0};
+    ignoreClick = false;
+    handle.setPointerCapture(event.pointerId);
+  });
+  handle.addEventListener("pointermove", event => {
+    if(!gesture || gesture.id !== event.pointerId) return;
+    gesture.dy = event.clientY - gesture.y;
+    if(Math.abs(gesture.dy)>5) ignoreClick = true;
+    sheet.style.setProperty("--cart-drag-y", Math.max(-24,gesture.dy)+"px");
+  });
+  const finish = (event, cancelled = false) => {
+    if(!gesture || gesture.id !== event.pointerId) return;
+    const dy = gesture.dy;
+    gesture = null;
+    sheet.style.removeProperty("--cart-drag-y");
+    if(!cancelled){
+      if(dy>65) closeCart();
+      else if(dy>24) sheet.classList.remove("cart-expanded");
+      else if(dy < -24) sheet.classList.add("cart-expanded");
+    }
+  };
+  handle.addEventListener("pointerup", event => finish(event));
+  handle.addEventListener("pointercancel", event => finish(event,true));
+  handle.addEventListener("lostpointercapture", event => finish(event,true));
+  handle.addEventListener("click", () => {if(ignoreClick){ignoreClick=false;return;}closeCart();});
+  handle.addEventListener("keydown", event => {
+    if(event.key === "ArrowUp"){event.preventDefault();sheet.classList.add("cart-expanded");}
+    if(event.key === "ArrowDown"){event.preventDefault();sheet.classList.remove("cart-expanded");}
+  });
 })();
