@@ -39,7 +39,7 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="lamma-light-20261004.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20261021-cart-simple-v26">
+  <link rel="stylesheet" href="style.css?v=20261021-cart-compact-v27">
   <link rel="stylesheet" href="full-menu.css?v=20261008-2">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
@@ -142,10 +142,9 @@
         <span class="cart-items-toggle-arrow" aria-hidden="true">⌄</span>
       </button>
       <div id="cartItemsPanel" class="cart-items-panel">
-        <div id="cartItems" class="cart-items"></div>
+        <div id="cartItems" class="cart-items" tabindex="0" role="region" aria-label="الأصناف المضافة"></div>
         <button id="clearCartBtn" class="danger-btn" type="button">حذف جميع الأصناف</button>
       </div>
-      <button class="continue-shopping" type="button" data-close-modal>+ أضف المزيد من الأصناف</button>
       <button id="toggleCheckoutBtn" class="checkout-toggle" type="button" aria-expanded="false" aria-controls="checkoutPanel">
         <span class="checkout-toggle-copy">
           <strong>إكمال الطلب</strong>
@@ -157,7 +156,7 @@
       <div class="order-box">
         <h3>نوع الطلب</h3>
         <div class="order-types">
-          <label><input type="radio" name="orderType" value="استلام" checked> استلام</label>
+          <label><input type="radio" name="orderType" value="استلام"> استلام</label>
           <label><input type="radio" name="orderType" value="محلي"> محلي</label>
           <label><input type="radio" name="orderType" value="توصيل"> توصيل</label>
         </div>
@@ -257,7 +256,7 @@
       </div>
       <footer class="cart-footer">
         <div class="cart-footer-total"><span>الإجمالي</span><strong><span id="sheetTotal">0</span><span class="sar-symbol" role="img" aria-label="ريال سعودي"></span></strong></div>
-        <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب للمطعم</button>
+        <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب</button>
       </footer>
     </section>
   </div>
@@ -281,10 +280,10 @@
   <script src="full-menu.js?v=20261008-2"></script>
   <script src="adhan.umd.min.js?v=4.4.4"></script>
   <script src="menu-data.js?v=20261021-shawarma-kebab-v25"></script>
-  <script src="translations.js?v=20261019-english-complete-v24"></script>
+  <script src="translations.js?v=20261021-cart-compact-v27"></script>
   <script src="language.js?v=20261002-language"></script>
   <script src="catalog.js?v=20261007-pizza-options-v8"></script>
-  <script src="script.js?v=20261021-cart-simple-v26"></script>
+  <script src="script.js?v=20261021-cart-compact-v27"></script>
   <script>AlameedLanguage.init();</script>
 </body>
 </html>

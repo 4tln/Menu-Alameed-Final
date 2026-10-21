@@ -328,3 +328,5 @@ Object.assign(window.ALAMEED_EN, {
   "العشاء": "Isha",
   "،": ","
 });
+
+Object.assign(window.ALAMEED_EN, {"يرجى اختيار نوع الطلب.": "Please choose an order type.", "الأصناف المضافة": "Items in your order"});

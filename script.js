@@ -696,7 +696,6 @@ function renderCart(){
           </div>
           <div class="cart-row-meta">
             <span class="size-badge">${escapeHtml(item.size === "السعر" ? "حجم واحد" : (item.size || "عادي"))}</span>
-            <span class="unit-price">سعر الوحدة: <strong>${money(item.price)}</strong>${sarIcon("sar-symbol-small")}</span>
           </div>
           ${depositLine}
           ${modifierSummaryHtml(item.modifiers)}
@@ -769,7 +768,7 @@ function showToast(message){
   showToast.timer = setTimeout(() => toast.classList.remove("show"),1700);
 }
 function selectedOrderType(){
-  return document.querySelector('input[name="orderType"]:checked')?.value || "استلام";
+  return document.querySelector('input[name="orderType"]:checked')?.value || "";
 }
 function selectedPaymentMethod(){
   return document.querySelector('input[name="paymentMethod"]:checked')?.value || "";
@@ -874,6 +873,11 @@ function sendOrder(){
     return;
   }
   const orderType = selectedOrderType();
+  if(!orderType){
+    alert(AlameedLanguage.translate("يرجى اختيار نوع الطلب."));
+    document.querySelector('.order-types input')?.focus();
+    return;
+  }
   const paymentMethod = selectedPaymentMethod();
   const notes = notesInput.value.trim();
   const placeName = placeNameInput.value.trim();
