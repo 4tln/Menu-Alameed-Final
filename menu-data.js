@@ -37,7 +37,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 70
+            "price": 70,
+            "image": "kebab-large-20261021.png"
           }
         ],
         "image": "kebab-small-sauces-v5.jpg",
@@ -119,7 +120,8 @@ window.MENU_DATA = [
           },
           {
             "size": "كبير",
-            "price": 75
+            "price": 75,
+            "image": "kebab-large-20261021.png"
           }
         ],
         "image": "kebab-small-sauces-v5.jpg",
@@ -782,7 +784,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 15
+            "price": 15,
+            "image": "pizza-shawarma-small-20261021.png"
           },
           {
             "size": "وسط",
@@ -807,7 +810,10 @@ window.MENU_DATA = [
             "دجاج شاورما",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "pizza-shawarma-small-20261021.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "بيتزا جبن حراق",
@@ -970,7 +976,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 16
+            "price": 16,
+            "image": "pizza-shawarma-small-20261021.png"
           },
           {
             "size": "وسط",
@@ -995,7 +1002,10 @@ window.MENU_DATA = [
             "دجاج شاورما",
             "جبنة موزريلا"
           ]
-        }
+        },
+        "image": "pizza-shawarma-small-20261021.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       }
     ]
   },
