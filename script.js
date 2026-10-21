@@ -47,7 +47,7 @@ function applyNationalDayOfferPrice(){
 }
 
 applyNationalDayOfferPrice();
-let activeCategory = window.MENU_DATA[0]?.category || "";
+let activeCategory = "";
 let searchTerm = "";
 let cart = loadCart();
 const categoryTabs = document.getElementById("categoryTabs");
@@ -541,7 +541,7 @@ function requiresPlateDeposit(name){
 function renderTabs(){
   categoryTabs.innerHTML = window.MENU_DATA.map(section => `
     <button type="button" class="tab-btn ${section.category === activeCategory ? "active" : ""}"
-      data-category="${escapeHtml(section.category)}">
+      data-category="${escapeHtml(section.category)}" aria-expanded="${section.category === activeCategory}" aria-controls="menuArea">
       ${escapeHtml(section.category)}
     </button>
   `).join("");
@@ -549,6 +549,8 @@ function renderTabs(){
 }
 function renderMenu(){
   const normalized = searchTerm.trim().toLowerCase();
+  menuArea.hidden = !activeCategory && !normalized;
+  if(menuArea.hidden){ menuArea.innerHTML = ""; return; }
   const sections = normalized
     ? window.MENU_DATA.map(section => ({
         ...section,
@@ -934,11 +936,12 @@ function sendOrder(){
 }
 function selectCategory(category){
   if(!window.MENU_DATA.some(section => section.category === category)) return;
-  activeCategory = category;
+  activeCategory = activeCategory === category ? "" : category;
   searchTerm = "";
   searchInput.value = "";
   renderTabs();
   renderMenu();
+  if(!activeCategory) return;
   const stickyHeight = document.querySelector(".sticky-stack")?.offsetHeight || 0;
   const menuTop = document.getElementById("menuArea").getBoundingClientRect().top + window.scrollY;
   window.scrollTo({top: Math.max(0, menuTop - stickyHeight - 8), behavior:"smooth"});

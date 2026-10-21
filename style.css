@@ -5115,3 +5115,7 @@ html[data-theme="dark"] #cartModal .cart-simple #cartItems .cart-row{border-colo
 @media(max-height:580px){#cartModal .cart-simple .cart-scroll{overflow-y:auto!important}#cartModal .cart-simple .cart-items-panel{flex:0 0 100px!important}}
 html[lang="en"] #cartModal .cart-heading-row{grid-template-columns:1fr auto}
 html[lang="en"] #cartModal .cart-heading-row>span{display:none}
+
+/* Category disclosure and full-width VAT note. */
+#menuArea[hidden]{display:none!important}
+.sticky-stack>.menu-vat-note{box-sizing:border-box;width:100%;margin:5px 0 0;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);text-align:center;font-size:12px;font-weight:600;line-height:1.5}

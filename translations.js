@@ -336,3 +336,5 @@ Object.assign(window.ALAMEED_EN, {"الحجم:": "Size:"});
 Object.assign(window.ALAMEED_EN, {"عدد الأصناف:": "Items:"});
 
 Object.assign(window.ALAMEED_EN, {"اسحب لرفع السلة أو خفضها، واضغط لإغلاقها":"Drag to expand or lower the cart; tap to close"});
+
+Object.assign(window.ALAMEED_EN, {"الأسعار شاملة ضريبة القيمة المضافة": "All prices include VAT"});
