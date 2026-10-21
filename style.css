@@ -5031,3 +5031,45 @@ html[lang="en"] #cartModal .cart-simple .cart-row{text-align:left!important}
 #cartModal .cart-simple .cart-footer-total strong{direction:rtl}
 html[lang="en"] #cartModal .cart-simple .cart-footer-total strong{direction:ltr}
 html[data-theme="dark"] #cartModal .cart-simple #cartItems .cart-row{border-color:var(--cart-line)!important;box-shadow:0 2px 6px #0003!important}
+
+/* Fit the standard checkout to the viewport; only its item list scrolls. */
+#cartModal .cart-simple{height:min(94dvh,780px)!important;max-height:94dvh!important}
+#cartModal .cart-simple .sheet-header{padding:20px 18px 10px!important}
+#cartModal .cart-simple .sheet-header h2{font-size:20px!important}
+#cartModal .cart-simple .sheet-header p{margin-top:2px!important;font-size:11px!important}
+#cartModal .cart-simple .cart-scroll{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;padding:0 16px 10px!important}
+#cartModal .cart-simple .cart-items-panel{display:flex!important;flex-direction:column!important;flex:1 1 0!important;min-height:84px!important;margin:0 0 8px!important}
+#cartModal .cart-simple #cartItems{flex:1 1 auto!important;min-height:0!important;max-height:none!important;gap:6px!important;padding:5px 3px!important;margin:5px 0 0!important}
+#cartModal .cart-simple #clearCartBtn{flex-shrink:0;margin:2px 0 0 auto!important;padding:4px 3px!important;font-size:10px!important;min-height:22px!important}
+#cartModal .cart-simple #cartItems .cart-row{grid-template-columns:68px minmax(0,1fr)!important;gap:0 8px!important;padding:6px 8px!important;min-height:80px!important;align-items:center!important}
+#cartModal .cart-simple .cart-product-photo{width:68px!important;height:68px!important;grid-row:1 / 3!important}
+#cartModal .cart-simple .cart-row-heading{align-items:center!important;gap:4px!important}
+#cartModal .cart-simple .cart-row-heading h4{font-size:12px!important;line-height:1.35!important}
+#cartModal .cart-simple .remove-btn{width:24px!important;height:24px!important}
+#cartModal .cart-simple .size-badge{font-size:11px!important;font-weight:600!important;color:#171717!important}
+#cartModal .cart-simple .cart-row-meta{margin:0!important}
+#cartModal .cart-simple .qty-btn{width:27px!important;min-width:27px!important;height:27px!important;line-height:27px!important}
+#cartModal .cart-simple .checkout-panel{flex:0 0 auto!important}
+#cartModal .cart-simple .order-box h3{font-size:13px!important;margin:0 0 6px!important}
+#cartModal .cart-simple .order-types{background:none!important;padding:0!important;gap:8px!important;margin:0 0 12px!important;border-radius:0!important}
+#cartModal .cart-simple .order-types label{border:1px solid #cbb69e!important;border-radius:10px!important;min-height:36px!important;padding:6px 4px!important;font-size:12px!important;background:transparent!important}
+#cartModal .cart-simple .order-types label:has(input:checked){border-color:var(--brand)!important;background:var(--cart-soft)!important;box-shadow:inset 0 0 0 1px var(--brand)!important}
+#cartModal .cart-simple .payment-box{margin-bottom:10px!important}
+#cartModal .cart-simple .payment-heading{margin:0!important;padding:0!important}
+#cartModal .cart-simple .payment-option{min-height:44px!important;flex-direction:row!important;padding:7px 4px!important;gap:5px!important}
+#cartModal .cart-simple .payment-option-icon{width:19px!important;height:19px!important}
+#cartModal .cart-simple .payment-option-copy b{font-size:11px!important}
+#cartModal .cart-simple .field-label{font-size:12px!important;margin:0 0 5px!important}
+#cartModal .cart-simple #notesInput{display:block;min-height:37px!important;height:37px!important;max-height:37px!important;padding:8px 10px!important;resize:none!important;margin:0!important;font-size:12px!important}
+#cartModal .cart-simple .cart-footer{padding:10px 16px max(10px,env(safe-area-inset-bottom))!important;gap:14px!important}
+#cartModal .cart-simple .cart-footer-total>span{color:#171717!important;font-weight:700!important;font-size:13px!important}
+#cartModal .cart-simple .cart-footer-total strong{font-size:21px!important}
+#cartModal .cart-simple #sendOrderBtn{min-height:44px!important;padding:9px!important}
+html[lang="en"] #cartModal .cart-simple .cart-footer{direction:rtl!important}
+html[lang="en"] #cartModal .cart-simple .cart-footer-total{align-items:flex-end!important}
+html[data-theme="dark"] #cartModal .cart-simple .size-badge,html[data-theme="dark"] #cartModal .cart-simple .cart-footer-total>span{color:#fff5eb!important}
+/* Extra delivery/bank details remain reachable without clipping. */
+#cartModal .cart-simple .cart-scroll:has(#locationWrap:not([hidden])),#cartModal .cart-simple .cart-scroll:has(#bankTransferPanel:not([hidden])){overflow-y:auto!important}
+#cartModal .cart-simple .cart-scroll:has(#locationWrap:not([hidden])) .cart-items-panel,#cartModal .cart-simple .cart-scroll:has(#bankTransferPanel:not([hidden])) .cart-items-panel{flex:0 0 110px!important}
+@media(max-height:520px){#cartModal .cart-simple .cart-scroll{overflow-y:auto!important}#cartModal .cart-simple .cart-items-panel{flex:0 0 90px!important}}
+@media(min-width:760px){#cartModal .cart-simple{bottom:3dvh!important}}

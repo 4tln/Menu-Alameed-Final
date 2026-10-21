@@ -680,6 +680,8 @@ function renderCart(){
     return;
   }
   cartItems.innerHTML = cart.map(item => {
+    const product = findProduct(item.name);
+    const showSize = product?.variants?.length > 1 && item.size && item.size !== "السعر" && item.size !== "حجم واحد";
     const hasDeposit = requiresPlateDeposit(item.name);
     const depositLine = hasDeposit
       ? `<div class="deposit-note"><span>تأمين الصحن ×${money(item.qty)}</span><strong>${money(PLATE_DEPOSIT * Number(item.qty || 0))}${sarIcon("sar-symbol-small")}</strong></div>`
@@ -694,9 +696,7 @@ function renderCart(){
             <h4>${escapeHtml(item.name)}</h4>
             <button class="remove-btn" type="button" data-remove="${escapeHtml(item.key)}" aria-label="حذف ${escapeHtml(item.name)}"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6M14 11v6"/></svg></button>
           </div>
-          <div class="cart-row-meta">
-            <span class="size-badge">${escapeHtml(item.size === "السعر" ? "حجم واحد" : (item.size || "عادي"))}</span>
-          </div>
+          ${showSize ? `<div class="cart-row-meta"><span class="size-badge">الحجم: ${escapeHtml(item.size)}</span></div>` : ""}
           ${depositLine}
           ${modifierSummaryHtml(item.modifiers)}
           ${item.note ? `<p class="item-note">${escapeHtml(item.note)}</p>` : ""}
