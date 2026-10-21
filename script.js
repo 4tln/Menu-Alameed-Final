@@ -407,6 +407,7 @@ function setLocationStatus(type, text){
   locationStatus.className = `location-status delivery-location-compact ${type}`;
   locationStatusIcon.textContent = type === "success" ? "✅" : type === "error" ? "❌" : "⏳";
   locationStatusText.textContent = text;
+  AlameedLanguage.refresh();
   retryLocationBtn.hidden = type !== "error";
 }
 function stopLocationWatcher(){
@@ -763,6 +764,7 @@ function closeCart(){
 }
 function showToast(message){
   toast.textContent = message;
+  AlameedLanguage.refresh();
   toast.classList.add("show");
   clearTimeout(showToast.timer);
   showToast.timer = setTimeout(() => toast.classList.remove("show"),1700);

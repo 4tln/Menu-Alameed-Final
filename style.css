@@ -5073,3 +5073,14 @@ html[data-theme="dark"] #cartModal .cart-simple .size-badge,html[data-theme="dar
 #cartModal .cart-simple .cart-scroll:has(#locationWrap:not([hidden])) .cart-items-panel,#cartModal .cart-simple .cart-scroll:has(#bankTransferPanel:not([hidden])) .cart-items-panel{flex:0 0 110px!important}
 @media(max-height:520px){#cartModal .cart-simple .cart-scroll{overflow-y:auto!important}#cartModal .cart-simple .cart-items-panel{flex:0 0 90px!important}}
 @media(min-width:760px){#cartModal .cart-simple{bottom:3dvh!important}}
+
+/* Clear cart actions and a centered item counter. */
+#cartModal .cart-simple .sheet-header{position:relative!important;justify-content:center!important;text-align:center!important}
+#cartModal .cart-simple .sheet-header>div{flex:1!important;text-align:center!important;padding-inline:32px}
+#cartModal .cart-simple .sheet-header .icon-btn{position:absolute!important;inset-inline-end:16px;top:20px}
+#cartModal .cart-simple .sheet-header .cart-count-badge{display:flex!important;align-items:center;justify-content:center;gap:6px;width:fit-content;margin:5px auto 0!important;padding:3px 10px!important;border:1px solid #cbb69e;border-radius:6px;background:var(--cart-soft);color:var(--cart-ink)!important;font-family:inherit;font-size:11px!important;line-height:1.5;font-weight:600}
+#cartModal .cart-simple #clearCartBtn{align-self:center!important;margin:3px auto 0!important;text-align:center!important;color:#8b2028!important;font-weight:750!important;font-size:11px!important}
+#cartModal .cart-simple .remove-btn{color:#8b2028!important}
+#cartModal .cart-simple #cartItems .cart-row{border:1px solid #b99571!important;border-radius:12px!important;box-shadow:0 2px 5px #49311f14!important}
+html[data-theme="dark"] #cartModal .cart-simple #clearCartBtn,html[data-theme="dark"] #cartModal .cart-simple .remove-btn{color:#f18c92!important}
+html[data-theme="dark"] #cartModal .cart-simple #cartItems .cart-row{border-color:#947354!important}
