@@ -1017,13 +1017,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 7
+            "price": 7,
+            "image": "shawarma-sandwich-small-20261021.png"
           },
           {
             "size": "كبير",
-            "price": 11
+            "price": 11,
+            "image": "shawarma-sandwich-large-20261021.png"
           }
-        ]
+        ],
+        "image": "shawarma-sandwich-small-20261021.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "عربي",
@@ -1074,13 +1079,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 8
+            "price": 8,
+            "image": "shawarma-sandwich-small-20261021.png"
           },
           {
             "size": "كبير",
-            "price": 12
+            "price": 12,
+            "image": "shawarma-sandwich-large-20261021.png"
           }
-        ]
+        ],
+        "image": "shawarma-sandwich-small-20261021.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "عربي جبن",
@@ -1114,13 +1124,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 8
+            "price": 8,
+            "image": "shawarma-sandwich-small-20261021.png"
           },
           {
             "size": "كبير",
-            "price": 12
+            "price": 12,
+            "image": "shawarma-sandwich-large-20261021.png"
           }
-        ]
+        ],
+        "image": "shawarma-sandwich-small-20261021.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "عربي حراق",
@@ -1154,13 +1169,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 9
+            "price": 9,
+            "image": "shawarma-sandwich-small-20261021.png"
           },
           {
             "size": "كبير",
-            "price": 13
+            "price": 13,
+            "image": "shawarma-sandwich-large-20261021.png"
           }
-        ]
+        ],
+        "image": "shawarma-sandwich-small-20261021.png",
+        "imageSize": "صغير",
+        "imageKind": "food"
       },
       {
         "name": "عربي جبن حراق",
