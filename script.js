@@ -692,7 +692,7 @@ function renderCart(){
         <div class="cart-row-info">
           <div class="cart-row-heading">
             <h4>${escapeHtml(item.name)}</h4>
-            <button class="remove-btn" type="button" data-remove="${escapeHtml(item.key)}" aria-label="حذف ${escapeHtml(item.name)}">حذف</button>
+            <button class="remove-btn" type="button" data-remove="${escapeHtml(item.key)}" aria-label="حذف ${escapeHtml(item.name)}"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6M14 11v6"/></svg></button>
           </div>
           <div class="cart-row-meta">
             <span class="size-badge">${escapeHtml(item.size === "السعر" ? "حجم واحد" : (item.size || "عادي"))}</span>
@@ -720,6 +720,7 @@ function renderCart(){
 }
 
 function setCartItemsExpanded(expanded){
+  if(cartModal.querySelector(".cart-simple")){ cartItemsPanel.hidden = false; return; }
   if(!cartItemsPanel || !toggleCartItemsBtn) return;
   const shouldExpand = Boolean(expanded) && cart.length > 0;
   cartItemsPanel.hidden = !shouldExpand;
@@ -729,6 +730,7 @@ function setCartItemsExpanded(expanded){
   if(label) label.textContent = shouldExpand ? "إخفاء الأصناف المضافة" : "عرض الأصناف المضافة";
 }
 function setCheckoutExpanded(expanded, scrollToEnd = true){
+  if(cartModal.querySelector(".cart-simple")){ checkoutPanel.hidden = false; return; }
   if(!checkoutPanel || !toggleCheckoutBtn) return;
   const shouldExpand = Boolean(expanded);
   checkoutPanel.hidden = !shouldExpand;
@@ -748,7 +750,7 @@ function openCart(){
   setCartItemsExpanded(false);
   setCheckoutExpanded(true, false);
   const sheet = cartModal.querySelector(".sheet");
-  if(sheet) sheet.scrollTop = 0;
+  if(sheet) { sheet.scrollTop = 0; const scroller = sheet.querySelector(".cart-scroll"); if(scroller) scroller.scrollTop = 0; }
   cartModal.classList.add("open");
   cartModal.setAttribute("aria-hidden","false");
   document.body.classList.add("modal-open");

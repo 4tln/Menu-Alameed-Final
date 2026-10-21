@@ -39,7 +39,7 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="lamma-light-20261004.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20261018-marsa-fit-v10">
+  <link rel="stylesheet" href="style.css?v=20261021-cart-simple-v26">
   <link rel="stylesheet" href="full-menu.css?v=20261008-2">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
@@ -125,24 +125,15 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <div id="cartModal" class="modal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
-    <section class="sheet" role="dialog" aria-modal="true" aria-label="سلة الطلب">
+    <section class="sheet cart-simple" role="dialog" aria-modal="true" aria-label="سلة الطلب">
       <header class="sheet-header">
         <div>
           <h2>مراجعة طلبك</h2>
-          <p>تأكد من الأصناف والكميات قبل الإرسال</p>
+          <p><b id="sheetCount">0</b> <span>صنف في الطلب</span></p>
         </div>
         <button type="button" class="icon-btn" data-close-modal aria-label="إغلاق السلة">×</button>
       </header>
-      <div class="cart-review-summary">
-        <div class="review-stat">
-          <span>عدد الأصناف</span>
-          <strong id="sheetCount">0</strong>
-        </div>
-        <div class="review-total">
-          <span>الإجمالي</span>
-          <strong class="review-total-value"><span id="sheetTotal">0</span><span class="sar-symbol" role="img" aria-label="ريال سعودي"></span></strong>
-        </div>
-      </div>
+      <div class="cart-scroll">
       <button id="toggleCartItemsBtn" class="cart-items-toggle" type="button" aria-expanded="false" aria-controls="cartItemsPanel">
         <span class="cart-items-toggle-copy">
           <strong>عرض الأصناف المضافة</strong>
@@ -150,7 +141,7 @@
         </span>
         <span class="cart-items-toggle-arrow" aria-hidden="true">⌄</span>
       </button>
-      <div id="cartItemsPanel" class="cart-items-panel" hidden>
+      <div id="cartItemsPanel" class="cart-items-panel">
         <div id="cartItems" class="cart-items"></div>
         <button id="clearCartBtn" class="danger-btn" type="button">حذف جميع الأصناف</button>
       </div>
@@ -162,7 +153,7 @@
         </span>
         <span class="checkout-toggle-arrow" aria-hidden="true">⌄</span>
       </button>
-      <div id="checkoutPanel" class="checkout-panel" hidden>
+      <div id="checkoutPanel" class="checkout-panel">
       <div class="order-box">
         <h3>نوع الطلب</h3>
         <div class="order-types">
@@ -182,8 +173,6 @@
           <label class="field-label" for="placeNameInput">اسم المكان *</label>
           <input id="placeNameInput" class="field" type="text" autocomplete="street-address" maxlength="80" required>
         </div>
-        <label class="field-label" for="notesInput">ملاحظات الطلب</label>
-        <textarea id="notesInput" class="field" rows="2" placeholder="مثال: بدون شطة"></textarea>
         <section class="payment-box" aria-labelledby="paymentTitle">
           <div class="payment-heading">
             <h3 id="paymentTitle">طريقة الدفع</h3>
@@ -261,9 +250,15 @@
             <p class="bank-transfer-note"><span aria-hidden="true">📎</span> بعد التحويل أرسل صورة الإيصال في واتساب</p>
           </div>
         </section>
+        <label class="field-label" for="notesInput">ملاحظات الطلب</label>
+        <textarea id="notesInput" class="field" rows="2" placeholder="مثال: بدون شطة"></textarea>
+      </div>
+      </div>
+      </div>
+      <footer class="cart-footer">
+        <div class="cart-footer-total"><span>الإجمالي</span><strong><span id="sheetTotal">0</span><span class="sar-symbol" role="img" aria-label="ريال سعودي"></span></strong></div>
         <button id="sendOrderBtn" class="whatsapp-btn" type="button">إرسال الطلب للمطعم</button>
-      </div>
-      </div>
+      </footer>
     </section>
   </div>
   <dialog id="productDialog" class="product-dialog" aria-labelledby="productTitle">
@@ -289,7 +284,7 @@
   <script src="translations.js?v=20261019-english-complete-v24"></script>
   <script src="language.js?v=20261002-language"></script>
   <script src="catalog.js?v=20261007-pizza-options-v8"></script>
-  <script src="script.js?v=20261005-original-intro-v4"></script>
+  <script src="script.js?v=20261021-cart-simple-v26"></script>
   <script>AlameedLanguage.init();</script>
 </body>
 </html>
