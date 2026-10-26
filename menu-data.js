@@ -137,7 +137,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 23
+            "price": 23,
+            "image": "shish-small-approved-20261026.png"
           },
           {
             "size": "وسط",
@@ -147,7 +148,10 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 75
           }
-        ]
+        ],
+        "image": "shish-small-approved-20261026.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "صحن أوصال دجاج حراق",
