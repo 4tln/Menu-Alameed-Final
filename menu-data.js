@@ -1070,9 +1070,12 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 23
+            "price": 23,
+            "image": "iskender-20261026.jpg"
           }
-        ]
+        ],
+        "image": "iskender-20261026.jpg",
+        "imageKind": "food"
       },
       {
         "name": "ساندويتش جبن",
@@ -1115,9 +1118,12 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 24
+            "price": 24,
+            "image": "iskender-cheese-20261026.jpg"
           }
-        ]
+        ],
+        "image": "iskender-cheese-20261026.jpg",
+        "imageKind": "food"
       },
       {
         "name": "ساندويتش حراق",
@@ -1205,9 +1211,12 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 25
+            "price": 25,
+            "image": "iskender-cheese-spicy-20261026.png"
           }
-        ]
+        ],
+        "image": "iskender-cheese-spicy-20261026.png",
+        "imageKind": "food"
       }
     ]
   },
