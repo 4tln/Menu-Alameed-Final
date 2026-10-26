@@ -5119,3 +5119,26 @@ html[lang="en"] #cartModal .cart-heading-row>span{display:none}
 /* Category disclosure and full-width VAT note. */
 #menuArea[hidden]{display:none!important}
 .sticky-stack>.menu-vat-note{box-sizing:border-box;width:100%;margin:5px 0 0;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--text);text-align:center;font-size:12px;font-weight:600;line-height:1.5}
+
+/* Keep the existing menu card bounded beneath the VAT note. */
+html { overflow:hidden; }
+body { height:100vh; height:100dvh; min-height:0; overflow:hidden; padding-bottom:0!important; }
+html #menuArea.menu-area {
+  position:fixed;
+  top:var(--menu-panel-top, 300px);
+  left:0;
+  right:0;
+  bottom:calc(8px + env(safe-area-inset-bottom, 0px));
+  margin:0 auto!important;
+  min-height:0;
+  border:2px solid #654324;
+  border-radius:20px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:90px;
+  scroll-padding-block:14px 90px;
+  background-clip:padding-box;
+}
+html[data-theme="dark"] #menuArea.menu-area { border-color:#b28a60; }

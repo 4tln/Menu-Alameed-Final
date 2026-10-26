@@ -942,9 +942,7 @@ function selectCategory(category){
   renderTabs();
   renderMenu();
   if(!activeCategory) return;
-  const stickyHeight = document.querySelector(".sticky-stack")?.offsetHeight || 0;
-  const menuTop = document.getElementById("menuArea").getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({top: Math.max(0, menuTop - stickyHeight - 8), behavior:"smooth"});
+  menuArea.scrollTop = 0;
 }
 categoryTabs.addEventListener("click", event => {
   const button = event.target.closest("[data-category]");
@@ -984,6 +982,7 @@ cartItems.addEventListener("click", event => {
 searchInput.addEventListener("input", () => {
   searchTerm = searchInput.value;
   renderMenu();
+  menuArea.scrollTop = 0;
 });
 cartBar.addEventListener("click",openCart);
 toggleCartItemsBtn?.addEventListener("click",() => {
@@ -1143,4 +1142,24 @@ updateCartUI();
     if(event.key === "ArrowUp"){event.preventDefault();sheet.classList.add("cart-expanded");}
     if(event.key === "ArrowDown"){event.preventDefault();sheet.classList.remove("cart-expanded");}
   });
+})();
+
+
+// Follow header height changes (language, store hours and orientation)
+// without allowing product scrolling to move the header or the card frame.
+(() => {
+  const stack = document.querySelector(".sticky-stack");
+  if (!stack) return;
+  const updateMenuPanelBounds = () => {
+    const top = Math.ceil(stack.getBoundingClientRect().bottom) + 8;
+    document.documentElement.style.setProperty("--menu-panel-top", `${top}px`);
+  };
+  updateMenuPanelBounds();
+  if (typeof ResizeObserver !== "undefined") {
+    const observer = new ResizeObserver(updateMenuPanelBounds);
+    observer.observe(stack);
+  }
+  window.addEventListener("resize", updateMenuPanelBounds);
+  window.visualViewport?.addEventListener("resize", updateMenuPanelBounds);
+  document.fonts?.ready.then(updateMenuPanelBounds);
 })();
