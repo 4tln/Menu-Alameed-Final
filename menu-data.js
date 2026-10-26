@@ -1344,18 +1344,24 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 9
+            "price": 9,
+            "image": "burger-cheese-approved-20261026.png"
           }
-        ]
+        ],
+        "image": "burger-cheese-approved-20261026.png",
+        "imageKind": "food"
       },
       {
         "name": "برجر دجاج جبن حراق",
         "variants": [
           {
             "size": "السعر",
-            "price": 10
+            "price": 10,
+            "image": "burger-cheese-approved-20261026.png"
           }
-        ]
+        ],
+        "image": "burger-cheese-approved-20261026.png",
+        "imageKind": "food"
       },
       {
         "name": "تورتيلا دجاج",
@@ -1430,13 +1436,18 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "نصف",
-            "price": 20
+            "price": 20,
+            "image": "madghout-half-round-approved-20261026.png"
           },
           {
             "size": "حبة",
-            "price": 40
+            "price": 40,
+            "image": "madghout-whole-round-approved-20261026.png"
           }
-        ]
+        ],
+        "image": "madghout-half-round-approved-20261026.png",
+        "imageKind": "food",
+        "imageSize": "نصف"
       },
       {
         "name": "دجاج برست",
@@ -1460,9 +1471,12 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 16
+            "price": 16,
+            "image": "musahab-eight-approved-20261026.png"
           }
-        ]
+        ],
+        "image": "musahab-eight-approved-20261026.png",
+        "imageKind": "food"
       },
       {
         "name": "دجاج فحم حراق",
@@ -1504,9 +1518,12 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 17
+            "price": 17,
+            "image": "musahab-eight-approved-20261026.png"
           }
-        ]
+        ],
+        "image": "musahab-eight-approved-20261026.png",
+        "imageKind": "food"
       },
       {
         "name": "دجاج فحم سادة",
