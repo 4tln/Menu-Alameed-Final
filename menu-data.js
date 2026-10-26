@@ -50,7 +50,8 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "صغير",
-            "price": 21
+            "price": 21,
+            "image": "shish-small-approved-20261026.png"
           },
           {
             "size": "وسط",
@@ -60,7 +61,10 @@ window.MENU_DATA = [
             "size": "كبير",
             "price": 70
           }
-        ]
+        ],
+        "image": "shish-small-approved-20261026.png",
+        "imageKind": "food",
+        "imageSize": "صغير"
       },
       {
         "name": "صحن أوصال دجاج",
@@ -1166,9 +1170,12 @@ window.MENU_DATA = [
         "variants": [
           {
             "size": "السعر",
-            "price": 24
+            "price": 24,
+            "image": "iskender-spicy-approved-20261026.png"
           }
-        ]
+        ],
+        "image": "iskender-spicy-approved-20261026.png",
+        "imageKind": "food"
       },
       {
         "name": "ساندويتش جبن حراق",
