@@ -538,18 +538,38 @@ function isAlameedOffer(name){
 function requiresPlateDeposit(name){
   return name === LAMMA_ITEM_NAME || isAlameedOffer(name);
 }
+const categoryCovers = [
+  {category:"الدجاج - الرز", image:"rotisserie-whole-20261008.png"},
+  {category:"المشاوي", image:"lamma-light-20261004.jpg"},
+  {category:"الشاورما", image:"arabi-spicy-small-ceramic-v13.png"},
+  {category:"البيتزا", image:"pizza-shawarma-small-20261021.png"},
+  {category:"الفطائر", image:"cheese-small-no-plate-20261013.png"},
+  {category:"السندوتشات", image:"burger-cheese-approved-20261026.png"},
+  {category:"المقبلات", image:"appetizers-large-approved-20261007.png"},
+  {category:"الإيدامات", image:"food-oven-vegetables.jpg"},
+  {category:"البطاط - الصوصات", image:""},
+  {category:"الحلا", image:"areeka-royal-approved-20261007.png"},
+  {category:"المشروبات", image:"category-drinks-approved-20261028.png"},
+  {category:"العروض", image:"lamma-light-20261004.jpg"}
+];
+const categoryHome = document.getElementById("categoryHome");
+const backToCategoriesMarkup = '<button type="button" class="back-to-categories" data-back-categories>رجوع للأقسام</button>';
 function renderTabs(){
-  categoryTabs.innerHTML = window.MENU_DATA.map(section => `
-    <button type="button" class="tab-btn ${section.category === activeCategory ? "active" : ""}"
-      data-category="${escapeHtml(section.category)}" aria-expanded="${section.category === activeCategory}" aria-controls="menuArea">
-      ${escapeHtml(section.category)}
-    </button>
-  `).join("");
+  // Keep the home DOM intact so scrolling back retains already loaded images.
+  if(!categoryTabs.children.length){
+    categoryTabs.innerHTML = categoryCovers.map((cover, index) => `
+      <button type="button" class="category-cover" data-category="${escapeHtml(cover.category)}" aria-controls="menuArea">
+        <span class="category-cover-photo" aria-hidden="true">${cover.image ? `<img src="${escapeHtml(cover.image)}" alt="" loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async" draggable="false">` : ''}</span>
+        <span class="category-cover-name">${escapeHtml(cover.category)}</span>
+      </button>`).join("");
+  }
+  categoryTabs.querySelectorAll('[data-category]').forEach(button => button.setAttribute('aria-expanded', String(button.dataset.category === activeCategory)));
   syncOffersBadgeVisibility();
 }
 function renderMenu(){
   const normalized = searchTerm.trim().toLowerCase();
   menuArea.hidden = !activeCategory && !normalized;
+  categoryHome.hidden = !menuArea.hidden;
   if(menuArea.hidden){ menuArea.innerHTML = ""; return; }
   const sections = normalized
     ? window.MENU_DATA.map(section => ({
@@ -558,10 +578,10 @@ function renderMenu(){
       })).filter(section => section.items.length)
     : window.MENU_DATA.filter(section => section.category === activeCategory);
   if(!sections.length){
-    menuArea.innerHTML = '<div class="empty-state">لم يتم العثور على صنف مطابق.</div>';
+    menuArea.innerHTML = backToCategoriesMarkup + '<div class="empty-state">لم يتم العثور على صنف مطابق.</div>';
     return;
   }
-  menuArea.innerHTML = sections.map(section => `
+  menuArea.innerHTML = backToCategoriesMarkup + sections.map(section => `
     <section class="catalog-section">
       <h2 class="catalog-title">${escapeHtml(section.category)}</h2>
       <div class="items-grid catalog-grid">
@@ -951,6 +971,15 @@ categoryTabs.addEventListener("click", event => {
 });
 offersBadge?.addEventListener("click", () => selectCategory("العروض"));
 menuArea.addEventListener("click", event => {
+  if(event.target.closest('[data-back-categories]')){
+    activeCategory = "";
+    searchTerm = "";
+    searchInput.value = "";
+    renderTabs();
+    renderMenu();
+    categoryTabs.querySelector('[data-category]')?.focus({preventScroll:true});
+    return;
+  }
   const quick = event.target.closest('[data-quick-delta]');
   if(quick){
     const name = quick.closest('[data-quick-name]').dataset.quickName;

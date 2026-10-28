@@ -5123,7 +5123,7 @@ html[lang="en"] #cartModal .cart-heading-row>span{display:none}
 /* Keep the existing menu card bounded beneath the VAT note. */
 html { overflow:hidden; }
 body { height:100vh; height:100dvh; min-height:0; overflow:hidden; padding-bottom:0!important; }
-html #menuArea.menu-area {
+html #menuArea.menu-area, html #categoryHome.menu-area {
   position:fixed;
   top:var(--menu-panel-top, 300px);
   left:0;
@@ -5141,4 +5141,20 @@ html #menuArea.menu-area {
   scroll-padding-block:14px 90px;
   background-clip:padding-box;
 }
-html[data-theme="dark"] #menuArea.menu-area { border-color:#b28a60; }
+html[data-theme="dark"] #menuArea.menu-area, html[data-theme="dark"] #categoryHome.menu-area { border-color:#b28a60; }
+
+/* Photo category home, using unchanged catalog assets. */
+#categoryHome[hidden]{display:none!important}
+html #categoryHome.menu-area{background:var(--cream);border:0;padding:10px 4px 96px;width:min(calc(100% - 24px),850px)}
+.category-home-title{margin:2px 0 14px;text-align:center;color:var(--text);font-size:22px}
+#categoryTabs.category-home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;margin:0;padding:0;overflow:visible}
+.category-cover{display:flex;flex-direction:column;min-width:0;padding:0;overflow:hidden;border:1.5px solid #795332;border-radius:20px;background:var(--card);color:var(--text);box-shadow:0 3px 10px rgba(70,40,15,.06);text-align:center}
+.category-cover-photo{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1.22;background:#fffaf3;overflow:hidden}
+.category-cover-photo img{display:block;width:100%;height:100%;object-fit:contain}
+.category-cover-name{display:block;padding:12px 4px;font-size:18px;font-weight:800;line-height:1.4}
+.category-cover:focus-visible,.back-to-categories:focus-visible{outline:3px solid #b88a54;outline-offset:2px}
+.category-cover:active{transform:scale(.985)}
+.back-to-categories{display:block;margin:0 0 12px;padding:9px 16px;border:1px solid #795332;border-radius:12px;background:var(--card);color:var(--text);font-weight:700}
+html[data-theme="dark"] #categoryHome.menu-area{background:transparent!important}
+html[data-theme="dark"] .category-cover,html[data-theme="dark"] .back-to-categories{border-color:#b28a60}
+@media(max-width:360px){.category-cover-name{font-size:16px}.category-home-grid{gap:8px!important}}

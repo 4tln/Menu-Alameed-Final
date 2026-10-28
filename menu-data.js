@@ -1982,6 +1982,17 @@ window.MENU_DATA = [
         "image": "drink-laban.jpg"
       },
       {
+        "name": "زبادي",
+        "variants": [
+          {
+            "size": "السعر",
+            "price": 2
+          }
+        ],
+        "image": "yogurt-almarai-170g-20261028.jpg",
+        "imageKind": "drink"
+      },
+      {
         "name": "ربيع",
         "variants": [
           {
