@@ -540,7 +540,7 @@ function requiresPlateDeposit(name){
 }
 const categoryCovers = [
   {category:"الدجاج - الرز", image:"rotisserie-whole-20261008.png"},
-  {category:"المشاوي", image:"lamma-light-20261004.jpg"},
+  {category:"المشاوي", image:"mixed-small-sauces-v5.jpg"},
   {category:"الشاورما", image:"arabi-spicy-small-ceramic-v13.png"},
   {category:"البيتزا", image:"pizza-shawarma-small-20261021.png"},
   {category:"الفطائر", image:"cheese-small-no-plate-20261013.png"},
@@ -548,18 +548,17 @@ const categoryCovers = [
   {category:"المقبلات", image:"appetizers-large-approved-20261007.png"},
   {category:"الإيدامات", image:"food-oven-vegetables.jpg"},
   {category:"البطاط - الصوصات", image:""},
-  {category:"الحلا", image:"areeka-royal-approved-20261007.png"},
-  {category:"المشروبات", image:"category-drinks-approved-20261028.png"},
-  {category:"العروض", image:"lamma-light-20261004.jpg"}
+  {category:"الحلا", image:"kunafa-approved-20261011.png"},
+  {category:"المشروبات", image:"category-drinks-approved-20261028.png"}
 ];
 const categoryHome = document.getElementById("categoryHome");
-const backToCategoriesMarkup = '<button type="button" class="back-to-categories" data-back-categories>رجوع للأقسام</button>';
+const backToCategoriesMarkup = '<button type="button" class="back-to-categories" data-back-categories aria-label="رجوع للأقسام" title="رجوع للأقسام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>';
 function renderTabs(){
   // Keep the home DOM intact so scrolling back retains already loaded images.
   if(!categoryTabs.children.length){
     categoryTabs.innerHTML = categoryCovers.map((cover, index) => `
       <button type="button" class="category-cover" data-category="${escapeHtml(cover.category)}" aria-controls="menuArea">
-        <span class="category-cover-photo" aria-hidden="true">${cover.image ? `<img src="${escapeHtml(cover.image)}" alt="" loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async" draggable="false">` : ''}</span>
+        <span class="category-cover-photo" aria-hidden="true">${cover.image ? `<img src="${escapeHtml(cover.image)}" alt="" loading="${index < 11 ? 'eager' : 'lazy'}" decoding="async" draggable="false">` : ''}</span>
         <span class="category-cover-name">${escapeHtml(cover.category)}</span>
       </button>`).join("");
   }

@@ -5166,8 +5166,57 @@ html #categoryHome.menu-area{padding:0 0 96px}
 .category-cover-photo img{mix-blend-mode:multiply;object-fit:contain;padding:3px}
 .category-cover-name{display:flex;align-items:center;justify-content:center;min-height:40px;padding:5px 2px;font-size:13px;font-weight:800;line-height:1.3}
 @media(max-width:360px){.category-cover-name{font-size:12px}}
-/* Home scrolls as one page; the bounded product panel is unchanged. */
-html.category-home-view{overflow-y:auto;overflow-x:hidden}
-html.category-home-view body{height:auto;min-height:100dvh;overflow:visible}
-html.category-home-view .sticky-stack{position:relative!important;top:auto!important}
-html.category-home-view #categoryHome.menu-area{position:relative;top:auto;bottom:auto;margin:8px auto 0!important;overflow:visible;border-radius:0}
+
+/* One fixed home screen, scaled to the available browser viewport. */
+html.category-home-view{overflow:hidden}
+html.category-home-view body{height:100dvh;overflow:hidden}
+html .sticky-stack>.sticky-tools{padding:6px 8px!important;border-radius:20px!important}
+html .sticky-stack>.sticky-tools::after{border-radius:18px!important}
+html .language-row{height:34px;min-height:0!important;margin:0 0 4px!important;align-items:center}
+html .language-switch{height:30px!important;min-height:0!important;width:80px!important;font-size:13px!important}
+html .full-menu-entry{width:34px!important;height:32px!important;min-height:0!important;padding:5px!important}
+html .full-menu-entry svg{width:22px!important;height:22px!important}
+html .search-box{height:34px!important;min-height:0!important;padding:3px 10px!important;margin:0 0 4px!important;border-radius:14px!important}
+html .search-box input{height:26px!important;min-height:0!important;padding:0!important;font-size:14px!important}
+html .quick-actions{margin:0!important;gap:5px!important}
+html .quick-action{height:30px!important;min-height:0!important;padding:3px 8px!important;font-size:11px!important;border-radius:10px!important}
+html .quick-action b{font-size:11px!important}
+html .quick-action>span{font-size:17px!important}
+html .theme-toggle-btn{width:34px!important;min-width:34px!important}
+html .theme-toggle-btn svg{width:19px!important;height:19px!important}
+html .store-status-wrap{margin-top:4px!important}
+html .store-status{padding:4px 8px!important;min-height:34px!important;border-radius:12px!important;gap:6px!important}
+html .store-status-icon{width:24px!important;height:24px!important;min-width:24px!important;font-size:14px!important}
+html .store-status-copy strong{font-size:11px!important;line-height:1.2!important}
+html .store-status-copy small{font-size:9px!important;line-height:1.2!important}
+html .sticky-stack>.menu-vat-note{padding:4px 8px;font-size:10px;line-height:1.5;margin-top:4px}
+html #categoryHome.menu-area{position:fixed;top:var(--menu-panel-top,200px);bottom:calc(50px + env(safe-area-inset-bottom,0px));margin:0 auto!important;padding:0!important;overflow:hidden;border:0;background:transparent!important;border-radius:0}
+#categoryTabs.category-home-grid{height:100%;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));gap:7px;align-content:stretch}
+.category-cover{height:100%;min-height:0;background:transparent!important;box-shadow:none!important;border-radius:12px}
+.category-cover-photo{flex:1 1 0;min-height:0;aspect-ratio:auto;background:transparent!important;padding:2px 2px 0}
+.category-cover-photo img{height:100%;padding:0;object-fit:contain;mix-blend-mode:normal}
+.category-cover-name{flex:0 0 auto;min-height:26px;padding:3px 1px;font-size:12px;line-height:1.2}
+html .category-cover-photo, html #menuArea .catalog-photo,html #productPhoto,html #productPhoto .detail-photo{background:transparent!important;border-bottom:0!important}
+html #menuArea.menu-area{padding:8px 8px 60px;background:transparent!important}
+.back-to-categories{width:32px;height:30px;display:flex;align-items:center;justify-content:center;padding:4px;margin:0 0 5px auto;border:1px solid var(--line);background:transparent;border-radius:10px;color:var(--text)}
+.back-to-categories svg{width:21px;height:21px}
+html[dir="ltr"] .back-to-categories{margin:0 auto 5px 0}
+html[dir="ltr"] .back-to-categories svg{transform:rotate(180deg)}
+#menuArea .catalog-title{font-size:17px;margin:0 0 7px;line-height:1.3}
+#menuArea .catalog-grid{gap:7px!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+#menuArea .catalog-card{background:transparent!important;border-radius:12px!important;box-shadow:none!important}
+#menuArea .product-open{padding:0!important}
+#menuArea .catalog-photo{height:clamp(50px,calc((100dvh - var(--menu-panel-top,200px) - 290px)/2),86px)!important;aspect-ratio:auto!important;object-fit:contain!important;padding:2px!important}
+#menuArea .catalog-copy{padding:2px 3px!important;gap:0!important}
+#menuArea .catalog-copy strong{font-size:11px;line-height:1.25;min-height:28px;display:flex;align-items:center;justify-content:center}
+#menuArea .catalog-copy small{display:none}
+#menuArea .catalog-bottom{padding:2px 4px 5px!important;grid-template-rows:23px 28px!important;gap:2px!important}
+#menuArea .catalog-price{min-height:23px!important;font-size:12px;line-height:1.1}
+#menuArea .catalog-price>small{height:9px!important;font-size:8px!important;line-height:9px!important}
+#menuArea .catalog-add{height:28px!important;width:29px!important;font-size:20px!important}
+#menuArea .catalog-quantity,#menuArea .catalog-quantity button{height:28px!important}
+#menuArea .catalog-quantity button{font-size:19px}
+html #cartBar{bottom:calc(6px + env(safe-area-inset-bottom,0px))!important;min-height:36px!important;padding:5px 10px!important;transform:scale(.88);transform-origin:bottom left}
+html #offersBadge{top:auto!important;bottom:calc(9px + env(safe-area-inset-bottom,0px))!important;left:auto!important;right:10px!important;transform:none!important;font-size:10px!important;padding:5px 8px!important;min-height:32px!important}
+@media(max-width:360px){.category-cover-name{font-size:10px}.category-home-grid{gap:5px!important}}
+@media(max-height:600px){html .store-status-copy small{display:none}.category-cover-name{min-height:23px;font-size:10px}html #categoryHome.menu-area{bottom:43px}#menuArea .catalog-photo{height:44px!important}}
