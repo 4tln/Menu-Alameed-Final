@@ -570,6 +570,12 @@ function renderMenu(){
   const normalized = searchTerm.trim().toLowerCase();
   menuArea.hidden = !activeCategory && !normalized;
   categoryHome.hidden = !menuArea.hidden;
+  const homeChanged = document.documentElement.classList.contains("category-home-view") !== menuArea.hidden;
+  document.documentElement.classList.toggle("category-home-view", menuArea.hidden);
+  if(homeChanged){
+    window.scrollTo({top:0, behavior:"instant"});
+    window.dispatchEvent(new Event("resize"));
+  }
   if(menuArea.hidden){ menuArea.innerHTML = ""; return; }
   const sections = normalized
     ? window.MENU_DATA.map(section => ({

@@ -5147,7 +5147,7 @@ html[data-theme="dark"] #menuArea.menu-area, html[data-theme="dark"] #categoryHo
 #categoryHome[hidden]{display:none!important}
 html #categoryHome.menu-area{background:var(--cream);border:0;padding:10px 4px 96px;width:min(calc(100% - 24px),850px)}
 .category-home-title{margin:2px 0 14px;text-align:center;color:var(--text);font-size:22px}
-#categoryTabs.category-home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;margin:0;padding:0;overflow:visible}
+#categoryTabs.category-home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;margin:0;padding:0;overflow:visible}
 .category-cover{display:flex;flex-direction:column;min-width:0;padding:0;overflow:hidden;border:1.5px solid #795332;border-radius:20px;background:var(--card);color:var(--text);box-shadow:0 3px 10px rgba(70,40,15,.06);text-align:center}
 .category-cover-photo{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1.22;background:#fffaf3;overflow:hidden}
 .category-cover-photo img{display:block;width:100%;height:100%;object-fit:contain}
@@ -5158,3 +5158,16 @@ html #categoryHome.menu-area{background:var(--cream);border:0;padding:10px 4px 9
 html[data-theme="dark"] #categoryHome.menu-area{background:transparent!important}
 html[data-theme="dark"] .category-cover,html[data-theme="dark"] .back-to-categories{border-color:#b28a60}
 @media(max-width:360px){.category-cover-name{font-size:16px}.category-home-grid{gap:8px!important}}
+
+/* Compact category cards; a single ivory photo surface in both themes. */
+html #categoryHome.menu-area{padding:0 0 96px}
+.category-cover{border-width:1px;border-radius:14px;box-shadow:none}
+.category-cover-photo{aspect-ratio:1.25;background:#fffaf3;isolation:isolate}
+.category-cover-photo img{mix-blend-mode:multiply;object-fit:contain;padding:3px}
+.category-cover-name{display:flex;align-items:center;justify-content:center;min-height:40px;padding:5px 2px;font-size:13px;font-weight:800;line-height:1.3}
+@media(max-width:360px){.category-cover-name{font-size:12px}}
+/* Home scrolls as one page; the bounded product panel is unchanged. */
+html.category-home-view{overflow-y:auto;overflow-x:hidden}
+html.category-home-view body{height:auto;min-height:100dvh;overflow:visible}
+html.category-home-view .sticky-stack{position:relative!important;top:auto!important}
+html.category-home-view #categoryHome.menu-area{position:relative;top:auto;bottom:auto;margin:8px auto 0!important;overflow:visible;border-radius:0}
