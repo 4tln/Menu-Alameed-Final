@@ -6,14 +6,10 @@
   <meta id="themeColorLight" name="theme-color" content="#efe3d3" media="all">
   <meta id="themeColorDark" name="theme-color" content="#101214" media="not all">
   <meta id="appleStatusBarMeta" name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
   <script>
     (() => {
-      let theme = window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      try {
-        const savedTheme = localStorage.getItem("alameed_theme_v1");
-        if(savedTheme === "dark" || savedTheme === "light") theme = savedTheme;
-      }catch{}
+      const theme = "light";
       const nationalThemeStart = Date.parse("2026-09-20T00:00:00+03:00");
       const nationalThemeEnd = Date.parse("2026-09-27T00:00:00+03:00");
       const nationalThemeActive = Date.now() >= nationalThemeStart && Date.now() < nationalThemeEnd;
@@ -39,7 +35,7 @@
   <title>مطعم فطائر العميد</title>
   <link rel="preload" as="image" href="brand-logo.png" fetchpriority="high">
   <link rel="preload" as="image" href="lamma-light-20261004.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=20261029-fit-menu-v39">
+  <link rel="stylesheet" href="style.css?v=20261112-stable-photos-v40">
   <link rel="stylesheet" href="full-menu.css?v=20261008-2">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
@@ -71,14 +67,6 @@
         </button>
         <button id="refreshBtn" class="quick-action" type="button" aria-label="تحديث الصفحة">
           <span aria-hidden="true">↻</span><b>تحديث</b>
-        </button>
-        <button id="themeToggleBtn" class="quick-action theme-toggle-btn" type="button" aria-label="التبديل إلى الوضع الليلي" title="الوضع الليلي">
-          <span class="theme-icon theme-icon-moon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" focusable="false"><path d="M20.2 15.2A8.4 8.4 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"></path></svg>
-          </span>
-          <span class="theme-icon theme-icon-sun" aria-hidden="true">
-            <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="3.6"></circle><path d="M12 2.2v2.1M12 19.7v2.1M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2.2 12h2.1M19.7 12h2.1M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"></path></svg>
-          </span>
         </button>
       </div>
       <div class="store-status-wrap">
@@ -275,7 +263,7 @@
   <script src="translations.js?v=20261028-approved-drinks-v37"></script>
   <script src="language.js?v=20261002-language"></script>
   <script src="catalog.js?v=20261007-pizza-options-v8"></script>
-  <script src="script.js?v=20261029-fit-menu-v39"></script>
+  <script src="script.js?v=20261112-swipe-v40"></script>
   <script>AlameedLanguage.init();</script>
 </body>
 </html>

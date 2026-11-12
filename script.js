@@ -163,7 +163,7 @@ function paintBrowserChrome(theme){
 }
 
 function applyTheme(theme, persist = false){
-  const nextTheme = theme === "dark" ? "dark" : "light";
+  const nextTheme = "light";
   document.documentElement.dataset.theme = nextTheme;
   paintBrowserChrome(nextTheme);
   if(themeToggleBtn){
@@ -1073,7 +1073,7 @@ refreshBtn?.addEventListener("click", () => {
   refreshBtn.style.opacity = ".55";
   location.reload();
 });
-themeToggleBtn?.addEventListener("click", toggleTheme);
+
 const systemThemePreference = window.matchMedia?.("(prefers-color-scheme: dark)");
 systemThemePreference?.addEventListener?.("change", event => {
   if(!savedTheme()) applyTheme(event.matches ? "dark" : "light");
@@ -1196,4 +1196,58 @@ updateCartUI();
   window.addEventListener("resize", updateMenuPanelBounds);
   window.visualViewport?.addEventListener("resize", updateMenuPanelBounds);
   document.fonts?.ready.then(updateMenuPanelBounds);
+})();
+
+
+/* Navigate categories only after an unambiguous horizontal gesture.
+   Vertical gestures, multi-touch, controls, search and dialogs stay independent. */
+(() => {
+  let gesture = null;
+  let suppressClickUntil = 0;
+  const interactive = 'button:not(.product-open), a, input, textarea, select, [data-quick-delta]';
+  function blocked() {
+    return !activeCategory || !!searchTerm.trim() || !!document.querySelector('dialog[open]');
+  }
+  menuArea.addEventListener('touchstart', event => {
+    gesture = null;
+    if (event.touches.length !== 1 || blocked() || event.target.closest(interactive)) return;
+    const touch = event.touches[0];
+    // Leave browser edge-navigation gestures alone.
+    if (touch.clientX < 24 || touch.clientX > window.innerWidth - 24) return;
+    gesture = {x: touch.clientX, y: touch.clientY, time: performance.now(), axis: ''};
+  }, {passive: true});
+  menuArea.addEventListener('touchmove', event => {
+    if (!gesture) return;
+    if (event.touches.length !== 1) { gesture = null; return; }
+    const dx = event.touches[0].clientX - gesture.x;
+    const dy = event.touches[0].clientY - gesture.y;
+    if (!gesture.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 12) {
+      gesture.axis = Math.abs(dx) > Math.abs(dy) * 1.5 ? 'horizontal' : 'vertical';
+    }
+    if (gesture.axis === 'vertical') { gesture = null; return; }
+    if (gesture.axis === 'horizontal' && event.cancelable) event.preventDefault();
+  }, {passive: false});
+  menuArea.addEventListener('touchend', event => {
+    const start = gesture;
+    gesture = null;
+    if (!start || blocked() || !event.changedTouches.length || event.touches.length) return;
+    const dx = event.changedTouches[0].clientX - start.x;
+    const dy = event.changedTouches[0].clientY - start.y;
+    if (Math.abs(dx) < 55 || Math.abs(dx) <= Math.abs(dy) * 1.5 || performance.now() - start.time > 1000) return;
+    const categories = categoryCovers.map(cover => cover.category)
+      .filter(category => window.MENU_DATA.some(section => section.category === category));
+    const index = categories.indexOf(activeCategory);
+    if (index < 0 || categories.length < 2) return;
+    const rtl = document.documentElement.dir !== 'ltr';
+    const direction = (rtl ? dx > 0 : dx < 0) ? 1 : -1;
+    suppressClickUntil = performance.now() + 500;
+    selectCategory(categories[(index + direction + categories.length) % categories.length]);
+  }, {passive: true});
+  menuArea.addEventListener('touchcancel', () => { gesture = null; }, {passive: true});
+  menuArea.addEventListener('click', event => {
+    if (performance.now() < suppressClickUntil) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, true);
 })();

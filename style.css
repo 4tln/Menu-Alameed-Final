@@ -5220,3 +5220,58 @@ html #cartBar{bottom:calc(6px + env(safe-area-inset-bottom,0px))!important;min-h
 html #offersBadge{top:auto!important;bottom:calc(9px + env(safe-area-inset-bottom,0px))!important;left:auto!important;right:10px!important;transform:none!important;font-size:10px!important;padding:5px 8px!important;min-height:32px!important}
 @media(max-width:360px){.category-cover-name{font-size:10px}.category-home-grid{gap:5px!important}}
 @media(max-height:600px){html .store-status-copy small{display:none}.category-cover-name{min-height:23px;font-size:10px}html #categoryHome.menu-area{bottom:43px}#menuArea .catalog-photo{height:44px!important}}
+
+
+/* Stable, light-only presentation from first paint. Original image pixels and
+   full image bounds stay intact; no canvas masks, cropped zoom, or source swaps. */
+:root { color-scheme: light; --photo-surface: #efe3d3; }
+html body { background-image: none !important; }
+html .quick-actions {
+  display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:6px!important; margin:6px 0!important;
+}
+html .quick-action {
+  width:100%!important; min-width:0!important; height:34px!important;
+  padding:5px 8px!important; display:flex; align-items:center; justify-content:center;
+}
+html .search-box { height:36px!important; min-height:36px!important; margin:0!important; }
+html .store-status-wrap { margin:0!important; }
+html .store-status { min-height:36px!important; padding:5px 8px!important; }
+html .category-cover, html #menuArea .catalog-card {
+  background:var(--photo-surface)!important;
+}
+html .category-cover-photo {
+  isolation:auto; overflow:visible; padding:1px!important;
+}
+html .category-cover-photo img,
+html #menuArea img.catalog-photo,
+html #productPhoto img.detail-photo {
+  object-fit:contain!important; object-position:center!important;
+  mix-blend-mode:darken!important; background:transparent!important;
+  transform:none!important; clip-path:none!important; mask:none!important;
+  border-radius:0!important; filter:none!important;
+}
+html .category-cover-photo img { width:100%; height:100%; padding:0!important; }
+html #menuArea img.catalog-photo {
+  width:100%!important;
+  height:clamp(88px,calc((100dvh - var(--menu-panel-top,200px) - 235px)/2),136px)!important;
+  padding:1px!important;
+}
+html #productDialog { background:var(--photo-surface)!important; }
+html #productPhoto { background:var(--photo-surface)!important; isolation:auto; }
+html #productPhoto img.detail-photo {
+  width:100%!important; height:min(44dvh,480px)!important;
+  padding:4px!important; max-width:100%!important;
+}
+html #menuArea { touch-action:pan-y; overscroll-behavior-x:contain; }
+@media(max-height:650px) {
+  html #menuArea img.catalog-photo {height:76px!important;}
+  html .category-cover-name {min-height:23px;padding:2px 1px;}
+}
+/* Static exposure compensation for the original off-white photo backgrounds.
+   Applied by the render-blocking stylesheet, never after image load. */
+html .category-cover-photo img,
+html #menuArea img.catalog-photo,
+html #productPhoto img.detail-photo { filter:brightness(1.06)!important; }
+html #menuArea img.catalog-photo[src*="shawarma-sandwich-"],
+html #productPhoto img.detail-photo[src*="shawarma-sandwich-"] { filter:brightness(1.14)!important; }
