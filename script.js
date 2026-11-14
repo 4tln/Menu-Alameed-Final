@@ -1,3 +1,13 @@
+let preparedPhotoSequence = 0;
+function preparedPhotoMarkup(source, className, label = '') {
+  const outline = window.ALAMEED_PHOTO_OUTLINES?.[source];
+  if (!outline) return `<img class="${className}" src="${escapeHtml(source)}" alt="${escapeHtml(label)}" draggable="false" decoding="async">`;
+  const clipId = `food-outline-${++preparedPhotoSequence}`;
+  return `<svg class="${className} prepared-photo" viewBox="${outline.box.join(' ')}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${escapeHtml(label)}" xmlns="http://www.w3.org/2000/svg">
+    <defs><clipPath id="${clipId}" clipPathUnits="userSpaceOnUse"><path d="${outline.path}"/></clipPath></defs>
+    <image href="${escapeHtml(source)}" x="0" y="0" width="${outline.w}" height="${outline.h}" preserveAspectRatio="none" clip-path="url(#${clipId})"/>
+  </svg>`;
+}
 const WHATSAPP_NUMBER = "966536261408";
 const CART_KEY = "alameed_cart_v2";
 const THEME_STORAGE_KEY = "alameed_theme_v1";
@@ -558,7 +568,7 @@ function renderTabs(){
   if(!categoryTabs.children.length){
     categoryTabs.innerHTML = categoryCovers.map((cover, index) => `
       <button type="button" class="category-cover" data-category="${escapeHtml(cover.category)}" aria-controls="menuArea">
-        <span class="category-cover-photo" aria-hidden="true">${cover.image ? `<img src="${escapeHtml(cover.image)}" alt="" loading="${index < 11 ? 'eager' : 'lazy'}" decoding="async" draggable="false">` : ''}</span>
+        <span class="category-cover-photo" aria-hidden="true">${cover.image ? preparedPhotoMarkup(cover.image, 'category-prepared-photo', cover.category) : ''}</span>
         <span class="category-cover-name">${escapeHtml(cover.category)}</span>
       </button>`).join("");
   }
@@ -630,6 +640,7 @@ function productImage(item, className, size){
   item = {...item, image:productImageSource(item, size)};
   if(item?.imageKind === 'drink') className += ' drink-photo';
   if(item?.imageKind === 'food') className += ' food-photo';
+  if(item?.image && !className.includes('cart-product-photo')) return preparedPhotoMarkup(item.image, className, item.name || '');
   if(item?.image) return `<img class="${className}" src="${escapeHtml(item.image)}" draggable="false" alt="" width="960" height="960" loading="eager" decoding="async" onerror="this.style.visibility='hidden'">`;
   return `<div class="${className} product-placeholder" aria-hidden="true"><img src="brand-logo.png" alt="" width="96" height="96"><span>العميد</span></div>`;
 }
