@@ -1,8 +1,26 @@
+const SOFT_FOOD_PHOTOS = new Set(["cheese-honey-medium-approved-20261013.jpeg", "cheese-honey-small-approved-20261013.jpeg", "cheese-medium-no-plate-20261013.png", "cheese-small-no-plate-20261013.png", "cheese-zaatar-olive-approved-20261018.png", "chicken-medium-round-approved-20261018.png", "chicken-pizza-large-approved-20261007.png", "egg-cheese-medium-no-plate-20261013.png", "honey-small-no-plate-20261013.png", "labneh-honey-no-plate-20261013.png", "labneh-zaatar-pie-approved-20261007.png", "muhammara-medium-no-plate-20261013.png", "muhammara-small-no-plate-20261013.png", "pizza-cheese-medium-no-plate-20261019.png", "pizza-mixed-large-approved-20261018.png", "pizza-shawarma-small-20261021.png", "shawarma-medium-no-plate-20261013.png", "spinach-approved-20261018.png", "vegetable-pizza-large.jpg", "vegetable-pizza-small-approved-20261007.png", "zaatar-medium-no-plate-20261013.png", "zaatar-small-no-plate-20261013.png"]);
 let preparedPhotoSequence = 0;
 function preparedPhotoMarkup(source, className, label = '') {
   const outline = window.ALAMEED_PHOTO_OUTLINES?.[source];
   if (!outline) return `<img class="${className}" src="${escapeHtml(source)}" alt="${escapeHtml(label)}" draggable="false" decoding="async">`;
   const clipId = `food-outline-${++preparedPhotoSequence}`;
+  // Feather only the silhouette; original food pixels are never blurred or recoloured.
+  if (SOFT_FOOD_PHOTOS.has(source)) {
+    const unit = Math.max(outline.w, outline.h) / 1254;
+    const [x, y, w, h] = outline.box;
+    const pad = 16 * unit;
+    const box = [x - pad, y - pad, w + pad * 2, h + pad * 2];
+    const region = `x="${box[0]}" y="${box[1]}" width="${box[2]}" height="${box[3]}"`;
+    return `<svg class="${className} prepared-photo" viewBox="${box.join(' ')}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${escapeHtml(label)}" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="${clipId}-edge" filterUnits="userSpaceOnUse" ${region} color-interpolation-filters="sRGB"><feMorphology operator="erode" radius="${1.0 * unit}"/><feGaussianBlur stdDeviation="${0.65 * unit}"/></filter>
+        <filter id="${clipId}-shadow" filterUnits="userSpaceOnUse" ${region} color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="${9 * unit}"/></filter>
+        <mask id="${clipId}-soft" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" ${region} style="mask-type:alpha"><path d="${outline.path}" fill="white" filter="url(#${clipId}-edge)"/></mask>
+      </defs>
+      <path d="${outline.path}" fill="#211208" opacity="0.40" transform="translate(0 ${7 * unit})" filter="url(#${clipId}-shadow)"/>
+      <image href="${escapeHtml(source)}" x="0" y="0" width="${outline.w}" height="${outline.h}" preserveAspectRatio="none" mask="url(#${clipId}-soft)"/>
+    </svg>`;
+  }
   return `<svg class="${className} prepared-photo" viewBox="${outline.box.join(' ')}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${escapeHtml(label)}" xmlns="http://www.w3.org/2000/svg">
     <defs><clipPath id="${clipId}" clipPathUnits="userSpaceOnUse"><path d="${outline.path}"/></clipPath></defs>
     <image href="${escapeHtml(source)}" x="0" y="0" width="${outline.w}" height="${outline.h}" preserveAspectRatio="none" clip-path="url(#${clipId})"/>
