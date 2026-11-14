@@ -5295,3 +5295,12 @@ html #productPhoto .detail-photo {
 html .prepared-photo image {filter:none!important;mix-blend-mode:normal!important;}
 @media(max-height:650px){html #menuArea .catalog-photo{height:76px!important;}}
 html .prepared-photo,html .prepared-photo image {pointer-events:none;-webkit-user-select:none;user-select:none;}
+
+/* Edited round pizza photographs include their own natural alpha shadow. */
+html #menuArea img.catalog-photo[src*="-round-20261114"],
+html #productPhoto img.detail-photo[src*="-round-20261114"] {
+  background:var(--food-brown)!important;
+  mix-blend-mode:normal!important;
+  filter:none!important;
+  object-fit:contain!important;
+}

@@ -641,7 +641,7 @@ window.MENU_DATA = [
           {
             "size": "وسط",
             "price": 15,
-            "image": "pizza-cheese-medium-no-plate-20261019.png"
+            "image": "pizza-cheese-round-20261114.png"
           },
           {
             "size": "كبير",
@@ -661,7 +661,7 @@ window.MENU_DATA = [
             "جبنة موزريلا"
           ]
         },
-        "image": "pizza-cheese-medium-no-plate-20261019.png",
+        "image": "pizza-cheese-round-20261114.png",
         "imageSize": "وسط",
         "imageKind": "food"
       },
@@ -679,7 +679,7 @@ window.MENU_DATA = [
           {
             "size": "كبير",
             "price": 30,
-            "image": "chicken-pizza-large-approved-20261007.png"
+            "image": "pizza-chicken-round-20261114.png"
           }
         ],
         "ingredients": [
@@ -701,7 +701,7 @@ window.MENU_DATA = [
             "جبنة موزريلا"
           ]
         },
-        "image": "chicken-pizza-large-approved-20261007.png",
+        "image": "pizza-chicken-round-20261114.png",
         "imageSize": "كبير",
         "imageKind": "food"
       },
@@ -719,7 +719,7 @@ window.MENU_DATA = [
           {
             "size": "كبير",
             "price": 34,
-            "image": "pizza-mixed-large-approved-20261018.png"
+            "image": "pizza-mixed-round-20261114.png"
           }
         ],
         "ingredients": [
@@ -745,7 +745,7 @@ window.MENU_DATA = [
             "جبنة موزريلا"
           ]
         },
-        "image": "pizza-mixed-large-approved-20261018.png",
+        "image": "pizza-mixed-round-20261114.png",
         "imageSize": "كبير",
         "imageKind": "food"
       },
@@ -755,7 +755,7 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 13,
-            "image": "vegetable-pizza-small-approved-20261007.png"
+            "image": "pizza-vegetable-small-round-20261114.png"
           },
           {
             "size": "وسط",
@@ -766,7 +766,7 @@ window.MENU_DATA = [
             "price": 26
           }
         ],
-        "image": "vegetable-pizza-large.jpg",
+        "image": "pizza-vegetable-large-round-20261114.png",
         "imageSize": "كبير",
         "ingredients": [
           "صلصة بيتزا",
@@ -833,7 +833,7 @@ window.MENU_DATA = [
           {
             "size": "وسط",
             "price": 16,
-            "image": "pizza-cheese-medium-no-plate-20261019.png"
+            "image": "pizza-cheese-round-20261114.png"
           },
           {
             "size": "كبير",
@@ -853,7 +853,7 @@ window.MENU_DATA = [
             "جبنة موزريلا"
           ]
         },
-        "image": "pizza-cheese-medium-no-plate-20261019.png",
+        "image": "pizza-cheese-round-20261114.png",
         "imageSize": "وسط",
         "imageKind": "food"
       },
@@ -871,7 +871,7 @@ window.MENU_DATA = [
           {
             "size": "كبير",
             "price": 31,
-            "image": "chicken-pizza-large-approved-20261007.png"
+            "image": "pizza-chicken-round-20261114.png"
           }
         ],
         "ingredients": [
@@ -893,7 +893,7 @@ window.MENU_DATA = [
             "جبنة موزريلا"
           ]
         },
-        "image": "chicken-pizza-large-approved-20261007.png",
+        "image": "pizza-chicken-round-20261114.png",
         "imageSize": "كبير",
         "imageKind": "food"
       },
@@ -911,7 +911,7 @@ window.MENU_DATA = [
           {
             "size": "كبير",
             "price": 35,
-            "image": "pizza-mixed-large-approved-20261018.png"
+            "image": "pizza-mixed-round-20261114.png"
           }
         ],
         "ingredients": [
@@ -937,7 +937,7 @@ window.MENU_DATA = [
             "جبنة موزريلا"
           ]
         },
-        "image": "pizza-mixed-large-approved-20261018.png",
+        "image": "pizza-mixed-round-20261114.png",
         "imageSize": "كبير",
         "imageKind": "food"
       },
@@ -947,7 +947,7 @@ window.MENU_DATA = [
           {
             "size": "صغير",
             "price": 14,
-            "image": "vegetable-pizza-small-approved-20261007.png"
+            "image": "pizza-vegetable-small-round-20261114.png"
           },
           {
             "size": "وسط",
@@ -975,7 +975,7 @@ window.MENU_DATA = [
             "جبنة موزريلا"
           ]
         },
-        "image": "vegetable-pizza-large.jpg",
+        "image": "pizza-vegetable-large-round-20261114.png",
         "imageSize": "كبير",
         "imageKind": "food"
       },
